@@ -1,0 +1,26 @@
+.bgImg {
+  background: url(../utils/images/backgroundImage2.jpg) no-repeat center/cover
+    fixed;
+}
+ion-content {
+  --background: none;
+}
+.main-container {
+  width: 350px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 5rem;
+  background-color: #fff;
+  padding: 2rem 1rem;
+  border-radius: 5px;
+  /* background-size: cover; */
+}
+.main-title {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  text-align: center;
+  font-weight: bold;
+}
+.center {
+  text-align: center;
+}
