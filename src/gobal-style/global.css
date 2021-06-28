@@ -8,8 +8,7 @@ ion-content {
 .main-container {
   width: 350px;
   height: 400px;
-  margin: 0 auto;
-  margin-top: 5rem;
+  margin: 5rem auto;
   background-color: #fff;
   padding: 2rem 1rem;
   border-radius: 5px;
@@ -23,4 +22,14 @@ ion-content {
 }
 .center {
   text-align: center;
+}
+
+.home-container {
+  width: 350px;
+  height: 220px;
+  margin: 0 auto;
+  margin-top: 0rem;
+  background-color: #fff;
+  padding: 2rem 1rem;
+  border-radius: 5px;
 }

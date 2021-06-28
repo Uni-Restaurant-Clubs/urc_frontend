@@ -12,14 +12,24 @@ import {
 import { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import { authActions } from "../redux/actions/authActions";
+import { useDispatch } from "react-redux";
+import { Router } from "workbox-routing";
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
   const [username, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
 
-  function loginUser() {
+  const loginUser = async () => {
     console.log(username, password);
-  }
+    let res = await dispatch(authActions.loginUser({ username, password }));
+    console.log(res.length);
+    if (res.length > 0) {
+      setUserName(null);
+      setPassword(null);
+    }
+  };
 
   return (
     <div className=" ">

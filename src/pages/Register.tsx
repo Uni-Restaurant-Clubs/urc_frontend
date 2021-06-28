@@ -23,9 +23,10 @@ const Register: React.FC = () => {
 
   const registerUser = async () => {
     console.log(username, password);
-    dispatch(authActions.registerUser({ test: "data" }));
+    let res = await dispatch(authActions.registerUser({ username, password }));
 
-    // console.log(res);
+    setUserName(null);
+    setPassword(null);
   };
 
   return (
