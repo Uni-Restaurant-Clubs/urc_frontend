@@ -13,10 +13,10 @@ import { useState } from "react";
 import "./Login.css";
 
 const ForgotPassword: React.FC = () => {
-  const [username, setUserName] = useState(null);
+  const [email, setEmail] = useState(null);
 
   function loginUser() {
-    console.log(username);
+    console.log(email);
   }
 
   return (
@@ -30,10 +30,10 @@ const ForgotPassword: React.FC = () => {
         <div className="home-container">
           <h2 className="main-title">Forgot Password</h2>
           <IonItem>
-            <IonLabel position="floating">Username</IonLabel>
+            <IonLabel position="floating">Email</IonLabel>
             <IonInput
               placeholder="User email"
-              onIonChange={(e: any) => setUserName(e.target.value)}
+              onIonChange={(e: any) => setEmail(e.target.value)}
             />
           </IonItem>
 

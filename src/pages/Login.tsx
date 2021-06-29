@@ -18,15 +18,15 @@ import { Router } from "workbox-routing";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const [username, setUserName] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
   const loginUser = async () => {
-    console.log(username, password);
-    let res = await dispatch(authActions.loginUser({ username, password }));
+    console.log(email, password);
+    let res = await dispatch(authActions.loginUser({ email, password }));
     console.log(res.length);
     if (res.length > 0) {
-      setUserName(null);
+      setEmail(null);
       setPassword(null);
     }
   };
@@ -43,10 +43,10 @@ const Login: React.FC = () => {
           <div className="main-container">
             <h2 className="main-title">Login</h2>
             <IonItem>
-              <IonLabel position="floating">Username</IonLabel>
+              <IonLabel position="floating">Email</IonLabel>
               <IonInput
-                placeholder="Username"
-                onIonChange={(e: any) => setUserName(e.target.value)}
+                placeholder="Email"
+                onIonChange={(e: any) => setEmail(e.target.value)}
               ></IonInput>
             </IonItem>
             <IonItem>

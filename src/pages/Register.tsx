@@ -18,14 +18,14 @@ import { authActions } from "../redux/actions/authActions";
 
 const Register: React.FC = () => {
   const dispatch = useDispatch();
-  const [username, setUserName] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
   const registerUser = async () => {
-    console.log(username, password);
-    let res = await dispatch(authActions.registerUser({ username, password }));
+    console.log(email, password);
+    let res = await dispatch(authActions.registerUser({ email, password }));
 
-    setUserName(null);
+    setEmail(null);
     setPassword(null);
   };
 
@@ -42,11 +42,11 @@ const Register: React.FC = () => {
             <h2 className="main-title">Register</h2>
 
             <IonItem>
-              <IonLabel position="floating">Username</IonLabel>
+              <IonLabel position="floating">Email</IonLabel>
               <IonInput
-                placeholder="Username"
-                value={username}
-                onIonChange={(e: any) => setUserName(e.target.value)}
+                placeholder="Email"
+                value={email}
+                onIonChange={(e: any) => setEmail(e.target.value)}
                 required
               ></IonInput>
             </IonItem>
