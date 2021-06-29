@@ -1,3 +1,15 @@
 ion-content {
   --background: none;
 }
+ion-content {
+  --background: none;
+}
+
+.spinnerStyle {
+  position: absolute;
+  top: 45%;
+  color: white;
+  /* width: 120%; */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

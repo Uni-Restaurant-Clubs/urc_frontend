@@ -21,7 +21,6 @@ const Home: React.FC = () => {
         <IonContent className="ion-padding bgImg ">
           <div className="home-container">
             <h2 className="main-title">Home Page</h2>
-
             <IonContent fullscreen>
               <IonHeader collapse="condense">
                 <IonToolbar>

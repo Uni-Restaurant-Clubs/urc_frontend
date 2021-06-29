@@ -26,6 +26,8 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "./gobal-style/global.css";
+import EmailConfirmation from "./pages/EmailConfirmation";
+import ResetPassword from "./pages/ResetPassword";
 
 const App: React.FC = () => (
   <IonApp>
@@ -38,10 +40,15 @@ const App: React.FC = () => (
           <Register />
         </Route>
 
+        <Route exact path="/resetPassword">
+          <ResetPassword />
+        </Route>
         <Route exact path="/forgotPassword">
           <ForgotPassword />
         </Route>
-
+        <Route exact path="/emailConfirmation">
+          <EmailConfirmation />
+        </Route>
         <Route exact path="/">
           <Home />
         </Route>

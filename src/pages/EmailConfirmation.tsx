@@ -13,18 +13,18 @@ import { useState } from "react";
 import "./Login.css";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch } from "react-redux";
-const ForgotPassword: React.FC = () => {
-  const dispatch = useDispatch();
-  const [username, setUserName] = useState(null);
 
-  const forgotPasswordEmail = async () => {
-    console.log(username);
-    if (username && username !== "") {
-      console.log(username);
-      let res: any = await dispatch(authActions.forgotPassword({ username }));
-      console.log(res.status);
+const EmailConfirmation: React.FC = () => {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState(null);
+
+  const handleEmailConfirmation = async () => {
+    console.log(email);
+    if (email && email !== "") {
+      console.log(email);
+      let res: any = await dispatch(authActions.emailConfirmation({ email }));
       if (res && res.status === 204) {
-        setUserName(null);
+        setEmail(null);
 
         // Redirect logic
       }
@@ -37,24 +37,24 @@ const ForgotPassword: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Forgot Password Page</IonTitle>
+          <IonTitle>Confirm Email Page</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding bgImg ">
         <div className="home-container">
-          <h2 className="main-title">Forgot Password</h2>
+          <h2 className="main-title">Confirm Email</h2>
           <IonItem>
-            <IonLabel position="floating">Username</IonLabel>
+            <IonLabel position="floating">Email</IonLabel>
             <IonInput
               placeholder="User email"
-              value={username}
-              onIonChange={(e: any) => setUserName(e.target.value)}
+              value={email}
+              onIonChange={(e: any) => setEmail(e.target.value)}
             />
           </IonItem>
 
           <IonButton
             expand="block"
-            onClick={forgotPasswordEmail}
+            onClick={handleEmailConfirmation}
             style={{ marginTop: "1rem" }}
           >
             Send Email
@@ -65,4 +65,4 @@ const ForgotPassword: React.FC = () => {
   );
 };
 
-export default ForgotPassword;
+export default EmailConfirmation;
