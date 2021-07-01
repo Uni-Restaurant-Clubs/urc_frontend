@@ -1,0 +1,2 @@
+(this["webpackJsonpionic-basics"]=this["webpackJsonpionic-basics"]||[]).push([[53],{174:function(n,t,i){"use strict";i.r(t),i.d(t,"startStatusTap",(function(){return o}));var e=i(20),c=i(16),o=function(){var n=window;n.addEventListener("statusTap",(function(){Object(e.h)((function(){var t=n.innerWidth,i=n.innerHeight,o=document.elementFromPoint(t/2,i/2);if(o){var s=o.closest("ion-content");s&&new Promise((function(n){return Object(c.c)(s,n)})).then((function(){Object(e.f)((function(){return s.scrollToTop(300)}))}))}}))}))}}}]);
+//# sourceMappingURL=53.ab3290cd.chunk.js.map
