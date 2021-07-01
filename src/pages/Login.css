@@ -5,11 +5,8 @@ ion-content {
   --background: none;
 }
 
-.spinnerStyle {
-  position: absolute;
-  top: 45%;
-  color: white;
-  /* width: 120%; */
-  left: 50%;
-  transform: translate(-50%, -50%);
+.loaderStyle{
+  height: 9%;
+  border-radius: 10px;
+  font-weight: bold;
 }

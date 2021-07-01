@@ -3,11 +3,11 @@ import "./ExploreContainer.css";
 
 interface ContainerProps {}
 
-const Header: React.FC<ContainerProps> = ({ headertitle = "Header" }: any) => {
+const Header: React.FC<any> = props => {
   return (
     <IonHeader>
       <IonToolbar>
-        <IonTitle>{headertitle}</IonTitle>
+        <IonTitle>{props.headertitle}</IonTitle>
       </IonToolbar>
     </IonHeader>
   );

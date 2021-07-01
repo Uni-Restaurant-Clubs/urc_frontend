@@ -1,5 +1,4 @@
-const baseUrl =
-  "https://virtserver.swaggerhub.com/Uni-Restaurant-Clubs/uni-restaurant-clubs-api/1.0.0/";
+const baseUrl = "https://urc-staging.herokuapp.com/api/v1/";
 
 export const userRegistrationUrl = baseUrl + "users";
 export const userLoginUrl = baseUrl + "sessions";

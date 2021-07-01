@@ -28,6 +28,7 @@ import "./theme/variables.css";
 import "./gobal-style/global.css";
 import EmailConfirmation from "./pages/EmailConfirmation";
 import ResetPassword from "./pages/ResetPassword";
+import Main from "./pages/Main";
 
 const App: React.FC = () => (
   <IonApp>
@@ -48,6 +49,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/emailConfirmation">
           <EmailConfirmation />
+        </Route>
+        <Route exact path="/main">
+          <Main />
         </Route>
         <Route exact path="/">
           <Home />
