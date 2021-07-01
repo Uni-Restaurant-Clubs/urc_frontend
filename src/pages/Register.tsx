@@ -79,6 +79,7 @@ const Register: React.FC = () => {
             buttons={[
               {
                 text: "Ok",
+                cssClass:"confirmButtonStyle",
                 handler: () => {
                   console.log("Confirm Okay");
                 },

@@ -9,9 +9,9 @@ import {
   IonTitle,
   IonToolbar,
   IonLoading,
-  IonAlert
+  IonAlert,
 } from "@ionic/react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Login.css";
 import { Link, useHistory } from "react-router-dom";
 import { authActions } from "../redux/actions/authActions";
@@ -33,8 +33,7 @@ const Login: React.FC = () => {
 
   const [password, setPassword] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-
+  const [alertMessage, setAlertMessage] = useState("");
 
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.signInFail);
@@ -48,21 +47,21 @@ const Login: React.FC = () => {
       router.push("/main");
       setEmail(null);
       setPassword(null);
-    } else if(apiError){
+    } else if (apiError) {
       console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message)
+      setAlertMessage(apiError.message);
       setShowAlert(true);
     }
   };
 
-  useEffect(()=>{
-    if(apiError){
+  useEffect(() => {
+    if (apiError) {
       console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message)
-      setShowAlert(true);    
+      setAlertMessage(apiError.message);
+      setShowAlert(true);
     }
-  },[apiError])
-  
+  }, [apiError]);
+
   return (
     <div className=" ">
       <IonPage>
@@ -79,30 +78,31 @@ const Login: React.FC = () => {
             isOpen={signupLoading}
           />
 
-<IonAlert
-          isOpen={showAlert}
-          onDidDismiss={() => setShowAlert(false)}
-          // cssClass='my-custom-class'
-          header={'Error'}
-          // subHeader={'Subtitle'}
-          message={alertMessage}
-          buttons={[
-            {
-              text: 'Register',
-              role: 'cancel',
-              cssClass: 'secondary',
-              handler: () => {
-                router.push("/register");
-              }
-            },
-            {
-              text: 'Retry',
-              handler: () => {
-                console.log('Confirm Okay');
-              }
-            }
-          ]}
-        />
+          <IonAlert
+            isOpen={showAlert}
+            onDidDismiss={() => setShowAlert(false)}
+            // cssClass='my-custom-class'
+            header={"Error"}
+            // subHeader={'Subtitle'}
+            message={alertMessage}
+            buttons={[
+              {
+                text: "Register",
+                role: "cancel",
+                cssClass: "confirmButtonStyle leftButton",
+                handler: () => {
+                  router.push("/register");
+                },
+              },
+              {
+                text: "Retry",
+                cssClass: "confirmButtonStyle rightButton",
+                handler: () => {
+                  console.log("Confirm Okay");
+                },
+              },
+            ]}
+          />
 
           <div className="main-container">
             <h2 className="main-title">Login</h2>

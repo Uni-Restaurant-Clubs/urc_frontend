@@ -9,7 +9,7 @@ import {
   IonTitle,
   IonToolbar,
   IonLoading,
-  IonAlert
+  IonAlert,
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import "./Login.css";
@@ -23,23 +23,25 @@ const ResetPassword: React.FC = () => {
 
   const [password, setPassword] = useState(null);
 
-
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-
+  const [alertMessage, setAlertMessage] = useState("");
+  // console.log(router);
 
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.updatePasswordFail);
 
   const resetPassword = async () => {
+    const queryToken = router?.location?.search?.split("=")[1];
     console.log(password);
     if (password && password !== "") {
       console.log(password);
-      let res: any = await dispatch(authActions.updatePassword({ password }));
+      let res: any = await dispatch(
+        authActions.updatePassword({ password, token: queryToken })
+      );
       console.log(res);
       if (res) {
         setPassword(null);
-        router.push('/login')
+        router.push("/login");
         // Redirect logic
       }
     } else {
@@ -47,14 +49,14 @@ const ResetPassword: React.FC = () => {
     }
   };
 
-  useEffect(()=>{
-    if(apiError){
+  useEffect(() => {
+    if (apiError) {
       console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message)
-      setShowAlert(true);    
+      setAlertMessage(apiError.message);
+      setShowAlert(true);
     }
-  },[apiError])
-  
+  }, [apiError]);
+
   return (
     <>
       <IonPage>
@@ -68,26 +70,32 @@ const ResetPassword: React.FC = () => {
           style={{ textAlign: "center", position: "relative" }}
         >
           {/* {signupLoading && ( */}
-            {/* <IonSpinner className="spinnerStyle" name="lines" color="white" /> */}
+          {/* <IonSpinner className="spinnerStyle" name="lines" color="white" /> */}
 
-            <IonLoading spinner="bubbles" message="Please wait ..."  duration={0} isOpen={signupLoading} />
-            <IonAlert
-          isOpen={showAlert}
-          onDidDismiss={() => setShowAlert(false)}
-          // cssClass='my-custom-class'
-          header={'Error'}
-          // subHeader={'Subtitle'}
-          message={alertMessage}
-          buttons={[
-            {
-              text: 'Ok',
-              handler: () => {
-                console.log('Confirm Okay');
-              }
-            }
-          ]}
-        />
-           {/* )} */}
+          <IonLoading
+            spinner="bubbles"
+            message="Please wait ..."
+            duration={0}
+            isOpen={signupLoading}
+          />
+          <IonAlert
+            isOpen={showAlert}
+            onDidDismiss={() => setShowAlert(false)}
+            // cssClass='my-custom-class'
+            header={"Error"}
+            // subHeader={'Subtitle'}
+            message={alertMessage}
+            buttons={[
+              {
+                text: "Ok",
+                cssClass: "confirmButtonStyle",
+                handler: () => {
+                  console.log("Confirm Okay");
+                },
+              },
+            ]}
+          />
+          {/* )} */}
 
           <div className="home-container">
             <h2 className="main-title">Reset Password</h2>

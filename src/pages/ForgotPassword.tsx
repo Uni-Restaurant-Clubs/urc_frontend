@@ -9,55 +9,54 @@ import {
   IonTitle,
   IonToolbar,
   IonLoading,
-  IonAlert
+  IonAlert,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
 import "./Login.css";
 import { authActions } from "../redux/actions/authActions";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
   const router = useHistory();
 
-  const [username, setUserName] = useState(null);
+  const [email, setEmail] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-
+  const [alertMessage, setAlertMessage] = useState("");
 
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.forgotPasswordFail);
 
   const forgotPasswordEmail = async () => {
-    console.log(username);
-    if (username && username !== "") {
-      console.log(username);
-      let res: any = await dispatch(authActions.forgotPassword({ username }));
+    console.log(email);
+    if (email && email !== "") {
+      console.log(email);
+      let res: any = await dispatch(authActions.forgotPassword({ email }));
       if (res && res.status === 204) {
-        setUserName(null);
+        setEmail(null);
 
         // Redirect logic
-      } 
+      }
       // else if(apiError){
       //   console.log("apiError = ", apiError.message, apiError);
       //   setAlertMessage(apiError.message)
 
       //       setShowAlert(true);
-        
+
       // }
     } else {
       return;
     }
   };
 
-  useEffect(()=>{
-    if(apiError){
+  useEffect(() => {
+    if (apiError) {
       console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message)
-      setShowAlert(true);    
+      setAlertMessage(apiError.message);
+      setShowAlert(true);
     }
-  },[apiError])
+  }, [apiError]);
 
   return (
     <IonPage>
@@ -67,39 +66,45 @@ const ForgotPassword: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding bgImg ">
-      <IonLoading spinner="bubbles" message="Please wait ..."  duration={0} isOpen={signupLoading} />
-      <IonAlert
+        <IonLoading
+          spinner="bubbles"
+          message="Please wait ..."
+          duration={0}
+          isOpen={signupLoading}
+        />
+        <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
           // cssClass='my-custom-class'
-          header={'Error'}
+          header={"Error"}
           // subHeader={'Subtitle'}
           message={alertMessage}
           buttons={[
             {
-              text: 'Register',
-              role: 'cancel',
-              cssClass: 'secondary',
+              text: "Register",
+              role: "cancel",
+              cssClass: "confirmButtonStyle leftButton",
               handler: () => {
                 router.push("/register");
-              }
+              },
             },
             {
-              text: 'Retry',
+              text: "Retry",
+              cssClass:"confirmButtonStyle rightButton",
               handler: () => {
-                console.log('Confirm Okay');
-              }
-            }
+                console.log("Confirm Okay");
+              },
+            },
           ]}
         />
         <div className="home-container">
           <h2 className="main-title">Forgot Password</h2>
           <IonItem>
-            <IonLabel position="floating">Username</IonLabel>
+            <IonLabel position="floating">Email</IonLabel>
             <IonInput
               placeholder="User email"
-              value={username}
-              onIonChange={(e: any) => setUserName(e.target.value)}
+              value={email}
+              onIonChange={(e: any) => setEmail(e.target.value)}
             />
           </IonItem>
 

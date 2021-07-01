@@ -41,7 +41,7 @@ const App: React.FC = () => (
           <Register />
         </Route>
 
-        <Route exact path="/resetPassword">
+        <Route exact path="/enter_new_password">
           <ResetPassword />
         </Route>
         <Route exact path="/forgotPassword">
