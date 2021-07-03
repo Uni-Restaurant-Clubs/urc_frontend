@@ -99,6 +99,7 @@ const emailConfirmation = (data: any) => async (dispatch: any) => {
       type: actionTypes.FORGOT_PASSWORD_FAIL,
       payload: error.response.data,
     });
+    return error.response.data;
   }
 };
 

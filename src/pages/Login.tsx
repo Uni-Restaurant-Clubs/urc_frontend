@@ -149,6 +149,9 @@ const Login: React.FC = () => {
               <p>
                 <Link to="/forgotPassword">Forgot Password?</Link>
               </p>
+              <p>
+                <Link to="/emailConfirmation">Resend Confirmation mail ?</Link>
+              </p>
             </div>
           </div>
         </IonContent>

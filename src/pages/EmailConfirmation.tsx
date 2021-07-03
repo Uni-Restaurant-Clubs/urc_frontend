@@ -8,30 +8,39 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonLoading
+  IonLoading,
+  IonAlert,
 } from "@ionic/react";
 import { useState } from "react";
 import "./Login.css";
 import { authActions } from "../redux/actions/authActions";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const EmailConfirmation: React.FC = () => {
   const dispatch = useDispatch();
+  const router = useHistory();
   const [email, setEmail] = useState(null);
   const signupLoading = useSelector((state: any) => state.signupLoading);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleEmailConfirmation = async () => {
     console.log(email);
     if (email && email !== "") {
       console.log(email);
       let res: any = await dispatch(authActions.emailConfirmation({ email }));
-      if (res && res.status === 204) {
-        setEmail(null);
-
-        // Redirect logic
+      console.log(res);
+      if (res && res.error) {
+        setAlertMessage(res.message);
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(true);
+        }, 2000);
       }
     } else {
-      return;
+      setEmail(null);
     }
   };
 
@@ -43,8 +52,38 @@ const EmailConfirmation: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding bgImg ">
-      <IonLoading spinner="bubbles" message="Please wait ..."  duration={0} isOpen={signupLoading} />
-        <div className="home-container">
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          // cssClass='my-custom-class'
+          header={"Error"}
+          // subHeader={'Subtitle'}
+          message={alertMessage}
+          buttons={[
+            {
+              text: "Login",
+              role: "cancel",
+              cssClass: "confirmButtonStyle leftButton",
+              handler: () => {
+                router.push("/login");
+              },
+            },
+            {
+              text: "Ok",
+              cssClass: "confirmButtonStyle rightButton",
+              handler: () => {
+                console.log("Confirm Okay");
+              },
+            },
+          ]}
+        />
+        <IonLoading
+          spinner="bubbles"
+          message="Please wait ..."
+          duration={0}
+          isOpen={signupLoading}
+        />
+        <div className="main-container">
           <h2 className="main-title">Confirm Email</h2>
           <IonItem>
             <IonLabel position="floating">Email</IonLabel>
@@ -62,6 +101,14 @@ const EmailConfirmation: React.FC = () => {
           >
             Send Email
           </IonButton>
+          <div className="center">
+            <p>
+              New here? <Link to="/register">Register</Link>
+            </p>
+            <p>
+              Already Registered ? <Link to="/login">Login</Link>
+            </p>
+          </div>
         </div>
       </IonContent>
     </IonPage>

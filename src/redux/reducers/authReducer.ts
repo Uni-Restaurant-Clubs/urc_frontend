@@ -20,6 +20,8 @@ const reducer = (state = initialState, action: any): any => {
         signupLoading: action.payload,
         signUpFail: "",
         signInFail: "",
+        forgotPasswordFail: "",
+        updatePasswordFail: "",
       };
     case actionTypes.REGISTER_USER_SUCCESS:
       return {

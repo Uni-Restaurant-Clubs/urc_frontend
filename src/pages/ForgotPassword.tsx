@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import "./Login.css";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
@@ -90,14 +90,14 @@ const ForgotPassword: React.FC = () => {
             },
             {
               text: "Retry",
-              cssClass:"confirmButtonStyle rightButton",
+              cssClass: "confirmButtonStyle rightButton",
               handler: () => {
                 console.log("Confirm Okay");
               },
             },
           ]}
         />
-        <div className="home-container">
+        <div className="main-container">
           <h2 className="main-title">Forgot Password</h2>
           <IonItem>
             <IonLabel position="floating">Email</IonLabel>
@@ -115,6 +115,14 @@ const ForgotPassword: React.FC = () => {
           >
             Send Email
           </IonButton>
+          <div className="center">
+            <p>
+              New here? <Link to="/register">Register</Link>
+            </p>
+            <p>
+              Already Registered? <Link to="/login">Login</Link>
+            </p>
+          </div>
         </div>
       </IonContent>
     </IonPage>

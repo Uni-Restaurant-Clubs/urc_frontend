@@ -97,7 +97,7 @@ const ResetPassword: React.FC = () => {
           />
           {/* )} */}
 
-          <div className="home-container">
+          <div className="main-container">
             <h2 className="main-title">Reset Password</h2>
             <IonItem>
               <IonLabel position="floating">New Password</IonLabel>
