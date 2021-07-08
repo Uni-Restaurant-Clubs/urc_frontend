@@ -1,5 +1,4 @@
-const baseUrl = "https://urc-staging.herokuapp.com/api/v1/";
-
+const baseUrl = process.env.REACT_APP_BASE_URL;
 export const userRegistrationUrl = baseUrl + "users";
 export const userLoginUrl = baseUrl + "sessions";
 export const forgotPasswordUrl = baseUrl + "users/send_password_reset_email";

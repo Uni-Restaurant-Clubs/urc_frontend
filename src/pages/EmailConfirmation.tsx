@@ -25,19 +25,22 @@ const EmailConfirmation: React.FC = () => {
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [emailConfirmLoading, setEmailConfirmLoading] = useState(false);
 
   const handleEmailConfirmation = async () => {
     console.log(email);
     if (email && email !== "") {
       console.log(email);
+      setEmailConfirmLoading(true);
       let res: any = await dispatch(authActions.emailConfirmation({ email }));
       console.log(res);
+      setEmailConfirmLoading(false);
       if (res && res.error) {
-        setAlertMessage(res.message);
+        setAlertMessage("A verification email has been resent to you");
         setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(true);
-        }, 2000);
+        // setTimeout(() => {
+        //   setShowAlert(true);
+        // }, 2000);
       }
     } else {
       setEmail(null);
@@ -52,6 +55,12 @@ const EmailConfirmation: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding bgImg ">
+        <IonLoading
+          spinner="bubbles"
+          message="Please wait ..."
+          duration={0}
+          isOpen={emailConfirmLoading}
+        />
         <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
@@ -66,6 +75,7 @@ const EmailConfirmation: React.FC = () => {
               cssClass: "confirmButtonStyle leftButton",
               handler: () => {
                 router.push("/login");
+                setAlertMessage("");
               },
             },
             {
@@ -73,6 +83,7 @@ const EmailConfirmation: React.FC = () => {
               cssClass: "confirmButtonStyle rightButton",
               handler: () => {
                 console.log("Confirm Okay");
+                setAlertMessage("");
               },
             },
           ]}
@@ -82,6 +93,27 @@ const EmailConfirmation: React.FC = () => {
           message="Please wait ..."
           duration={0}
           isOpen={signupLoading}
+        />
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => {
+            setShowAlert(false);
+            setAlertMessage("");
+          }}
+          // cssClass='my-custom-class'
+          header={"Alert"}
+          // subHeader={'Subtitle'}
+          message={alertMessage}
+          buttons={[
+            {
+              text: "Ok",
+              cssClass: "confirmButtonStyle rightButton",
+              handler: () => {
+                console.log("Confirm Okay");
+                setAlertMessage("");
+              },
+            },
+          ]}
         />
         <div className="main-container">
           <h2 className="main-title">Confirm Email</h2>

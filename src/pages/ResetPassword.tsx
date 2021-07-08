@@ -16,6 +16,7 @@ import "./Login.css";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { parseQuery } from "../utils/utils";
 
 const ResetPassword: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,19 @@ const ResetPassword: React.FC = () => {
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.updatePasswordFail);
 
+  useEffect(() => {
+    let queryParams: any = parseQuery(window.location.search);
+    console.log(queryParams);
+    if (queryParams.error) {
+      console.log(queryParams.error);
+      setAlertMessage(queryParams.error);
+      setShowAlert(true);
+    } else if (queryParams.token) {
+      setAlertMessage("Email is now verified. You can now reset password");
+      setShowAlert(true);
+    }
+  }, []);
+
   const resetPassword = async () => {
     const queryToken = router?.location?.search?.split("=")[1];
     console.log(password);
@@ -41,8 +55,12 @@ const ResetPassword: React.FC = () => {
       console.log(res);
       if (res) {
         setPassword(null);
-        router.push("/login");
-        // Redirect logic
+        setAlertMessage("Password reset successfully.");
+        setShowAlert(true);
+        setTimeout(() => {
+          // Redirect logic
+          router.push("/login");
+        }, 3000);
       }
     } else {
       return;
@@ -51,9 +69,17 @@ const ResetPassword: React.FC = () => {
 
   useEffect(() => {
     if (apiError) {
-      console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message);
-      setShowAlert(true);
+      if(Array.isArray(apiError.message)){
+        let outputError  = apiError.message.map((errMsg:any)=>{
+          return(`<li>${errMsg}</li>`)
+        })
+  
+        setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
+        setShowAlert(true);
+      } else{
+        setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
+        setShowAlert(true);
+      }
     }
   }, [apiError]);
 
@@ -82,7 +108,7 @@ const ResetPassword: React.FC = () => {
             isOpen={showAlert}
             onDidDismiss={() => setShowAlert(false)}
             // cssClass='my-custom-class'
-            header={"Error"}
+            header={"Alert"}
             // subHeader={'Subtitle'}
             message={alertMessage}
             buttons={[
@@ -91,6 +117,7 @@ const ResetPassword: React.FC = () => {
                 cssClass: "confirmButtonStyle",
                 handler: () => {
                   console.log("Confirm Okay");
+                  setAlertMessage("");
                 },
               },
             ]}

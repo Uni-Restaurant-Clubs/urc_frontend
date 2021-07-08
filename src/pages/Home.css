@@ -9,7 +9,10 @@
     right: 46px !important;
   }
   
-  
+  .errorMessageStyle{
+    margin-left: -10%;
+  }
+
   .rightButton{
     right: 3px !important;
   }

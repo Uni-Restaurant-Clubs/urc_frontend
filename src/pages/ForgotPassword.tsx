@@ -16,6 +16,7 @@ import "./Login.css";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { parseQuery } from "../utils/utils";
 
 const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
@@ -35,16 +36,14 @@ const ForgotPassword: React.FC = () => {
       let res: any = await dispatch(authActions.forgotPassword({ email }));
       if (res && res.status === 204) {
         setEmail(null);
-
+        setAlertMessage("A verification email has been sent to you");
+        setShowAlert(true);
         // Redirect logic
+      } else if (apiError) {
+        console.log("apiError = ", apiError.message, apiError);
+        setAlertMessage(apiError.message);
+        setShowAlert(true);
       }
-      // else if(apiError){
-      //   console.log("apiError = ", apiError.message, apiError);
-      //   setAlertMessage(apiError.message)
-
-      //       setShowAlert(true);
-
-      // }
     } else {
       return;
     }
@@ -52,9 +51,17 @@ const ForgotPassword: React.FC = () => {
 
   useEffect(() => {
     if (apiError) {
-      console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message);
-      setShowAlert(true);
+      if(Array.isArray(apiError.message)){
+        let outputError  = apiError.message.map((errMsg:any)=>{
+          return(`<li>${errMsg}</li>`)
+        })
+  
+        setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
+        setShowAlert(true);
+      } else{
+        setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
+        setShowAlert(true);
+      }
     }
   }, [apiError]);
 
@@ -76,20 +83,12 @@ const ForgotPassword: React.FC = () => {
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
           // cssClass='my-custom-class'
-          header={"Error"}
+          header={"Alert"}
           // subHeader={'Subtitle'}
           message={alertMessage}
           buttons={[
             {
-              text: "Register",
-              role: "cancel",
-              cssClass: "confirmButtonStyle leftButton",
-              handler: () => {
-                router.push("/register");
-              },
-            },
-            {
-              text: "Retry",
+              text: "Ok",
               cssClass: "confirmButtonStyle rightButton",
               handler: () => {
                 console.log("Confirm Okay");

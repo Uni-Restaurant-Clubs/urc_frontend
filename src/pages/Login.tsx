@@ -16,6 +16,7 @@ import "./Login.css";
 import { Link, useHistory } from "react-router-dom";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import { parseQuery } from "../utils/utils";
 // import { Router } from "workbox-routing";
 
 interface errorHandling {
@@ -38,6 +39,23 @@ const Login: React.FC = () => {
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.signInFail);
 
+  useEffect(() => {
+    let queryParams: any = parseQuery(window.location.search);
+    console.log(queryParams);
+    if (queryParams.error) {
+      console.log(queryParams.error);
+      setAlertMessage(queryParams.error);
+      setShowAlert(true);
+
+      // setTimeout(() => {
+      //   setShowAlert(false);
+      // }, 3000);
+    } else if (queryParams.email_confirmed) {
+      setAlertMessage("Email is now verified. You can now log in");
+      setShowAlert(true);
+    }
+  }, []);
+
   const loginUser = async () => {
     console.log(email, password);
     // setUserNameError(true)
@@ -48,17 +66,24 @@ const Login: React.FC = () => {
       setEmail(null);
       setPassword(null);
     } else if (apiError) {
-      console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message);
-      setShowAlert(true);
+      
     }
   };
 
   useEffect(() => {
     if (apiError) {
-      console.log("apiError = ", apiError.message, apiError);
-      setAlertMessage(apiError.message);
-      setShowAlert(true);
+      if(Array.isArray(apiError.message)){
+        let outputError  = apiError.message.map((errMsg:any)=>{
+          return(`<li>${errMsg}</li>`)
+        })
+  
+        setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
+        setShowAlert(true);
+      } else{
+        setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
+        setShowAlert(true);
+
+      }
     }
   }, [apiError]);
 
@@ -80,9 +105,12 @@ const Login: React.FC = () => {
 
           <IonAlert
             isOpen={showAlert}
-            onDidDismiss={() => setShowAlert(false)}
+            onDidDismiss={() => {
+              setShowAlert(false);
+              setAlertMessage("");
+            }}
             // cssClass='my-custom-class'
-            header={"Error"}
+            header={"Alert"}
             // subHeader={'Subtitle'}
             message={alertMessage}
             buttons={[
@@ -92,13 +120,15 @@ const Login: React.FC = () => {
                 cssClass: "confirmButtonStyle leftButton",
                 handler: () => {
                   router.push("/register");
+                  setAlertMessage("");
                 },
               },
               {
-                text: "Retry",
+                text: "Ok",
                 cssClass: "confirmButtonStyle rightButton",
                 handler: () => {
                   console.log("Confirm Okay");
+                  setAlertMessage("");
                 },
               },
             ]}
