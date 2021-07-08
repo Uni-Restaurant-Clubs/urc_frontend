@@ -30,17 +30,13 @@ const ForgotPassword: React.FC = () => {
   const apiError = useSelector((state: any) => state.forgotPasswordFail);
 
   const forgotPasswordEmail = async () => {
-    console.log(email);
     if (email && email !== "") {
-      console.log(email);
       let res: any = await dispatch(authActions.forgotPassword({ email }));
       if (res && res.status === 204) {
         setEmail(null);
         setAlertMessage("A verification email has been sent to you");
         setShowAlert(true);
-        // Redirect logic
       } else if (apiError) {
-        console.log("apiError = ", apiError.message, apiError);
         setAlertMessage(apiError.message);
         setShowAlert(true);
       }
@@ -51,15 +47,19 @@ const ForgotPassword: React.FC = () => {
 
   useEffect(() => {
     if (apiError) {
-      if(Array.isArray(apiError.message)){
-        let outputError  = apiError.message.map((errMsg:any)=>{
-          return(`<li>${errMsg}</li>`)
-        })
-  
-        setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
+      if (Array.isArray(apiError.message)) {
+        let outputError = apiError.message.map((errMsg: any) => {
+          return `<li>${errMsg}</li>`;
+        });
+
+        setAlertMessage(
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+        );
         setShowAlert(true);
-      } else{
-        setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
+      } else {
+        setAlertMessage(
+          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+        );
         setShowAlert(true);
       }
     }
@@ -91,7 +91,7 @@ const ForgotPassword: React.FC = () => {
               text: "Ok",
               cssClass: "confirmButtonStyle rightButton",
               handler: () => {
-                console.log("Confirm Okay");
+                setAlertMessage("");
               },
             },
           ]}

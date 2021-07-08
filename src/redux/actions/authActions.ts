@@ -16,11 +16,9 @@ const setUserState = (payload: any) => {
 };
 
 const registerUser = (data: any) => async (dispatch: any) => {
-  console.log(data);
   try {
     dispatch({ type: actionTypes.REGISTER_USER_REQUEST, payload: true });
     let res = await axios.post(userRegistrationUrl, data);
-    console.log("res1 = ", res);
     dispatch({ type: actionTypes.REGISTER_USER_SUCCESS, payload: res.data });
     return res;
   } catch (error) {
@@ -33,11 +31,9 @@ const registerUser = (data: any) => async (dispatch: any) => {
 
 const loginUser = (data: any) => async (dispatch: any) => {
   let res;
-  console.log(data);
   try {
     dispatch({ type: actionTypes.REGISTER_USER_REQUEST, payload: true });
     res = await axios.post(userLoginUrl, data);
-    console.log("res = ", res);
 
     dispatch({ type: actionTypes.LOGIN_USER_SUCCESS, payload: res.data });
 
@@ -45,7 +41,6 @@ const loginUser = (data: any) => async (dispatch: any) => {
 
     return res.data.session_token;
   } catch (error) {
-    console.log("error = ", error, error.message);
     dispatch({
       type: actionTypes.LOGIN_USER_FAIL,
       payload: error.response.data,
@@ -54,11 +49,9 @@ const loginUser = (data: any) => async (dispatch: any) => {
 };
 
 const forgotPassword = (data: any) => async (dispatch: any) => {
-  console.log(data);
   try {
     dispatch({ type: actionTypes.REGISTER_USER_REQUEST, payload: true });
     let res = await axios.post(forgotPasswordUrl, data);
-    console.log("here", res);
 
     dispatch({ type: actionTypes.FORGOT_PASSWORD_SUCCESS, payload: res.data });
 
@@ -73,7 +66,6 @@ const forgotPassword = (data: any) => async (dispatch: any) => {
 };
 
 const updatePassword = (data: any) => async (dispatch: any) => {
-  console.log(data);
   try {
     dispatch({ type: actionTypes.REGISTER_USER_REQUEST, payload: true });
     let res = await axios.post(updatePasswordUrl, data);
@@ -90,10 +82,9 @@ const updatePassword = (data: any) => async (dispatch: any) => {
 };
 
 const emailConfirmation = (data: any) => async (dispatch: any) => {
-  console.log(data);
   try {
     let res = await axios.post(emailConfirmationUrl, data);
-    console.log(res);
+    return res;
   } catch (error) {
     dispatch({
       type: actionTypes.FORGOT_PASSWORD_FAIL,

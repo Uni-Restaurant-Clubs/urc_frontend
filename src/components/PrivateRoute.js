@@ -5,8 +5,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   let isAuthenticated = localStorage.getItem("accessToken");
 
   return (
-    // Show the component only when the user is logged in
-    // Otherwise, redirect the user to /signin page
     <Route
       {...rest}
       render={(props) =>

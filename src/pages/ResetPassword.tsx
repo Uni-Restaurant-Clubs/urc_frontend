@@ -26,16 +26,13 @@ const ResetPassword: React.FC = () => {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  // console.log(router);
 
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.updatePasswordFail);
 
   useEffect(() => {
     let queryParams: any = parseQuery(window.location.search);
-    console.log(queryParams);
     if (queryParams.error) {
-      console.log(queryParams.error);
       setAlertMessage(queryParams.error);
       setShowAlert(true);
     } else if (queryParams.token) {
@@ -46,13 +43,10 @@ const ResetPassword: React.FC = () => {
 
   const resetPassword = async () => {
     const queryToken = router?.location?.search?.split("=")[1];
-    console.log(password);
     if (password && password !== "") {
-      console.log(password);
       let res: any = await dispatch(
         authActions.updatePassword({ password, token: queryToken })
       );
-      console.log(res);
       if (res) {
         setPassword(null);
         setAlertMessage("Password reset successfully.");
@@ -69,15 +63,19 @@ const ResetPassword: React.FC = () => {
 
   useEffect(() => {
     if (apiError) {
-      if(Array.isArray(apiError.message)){
-        let outputError  = apiError.message.map((errMsg:any)=>{
-          return(`<li>${errMsg}</li>`)
-        })
-  
-        setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
+      if (Array.isArray(apiError.message)) {
+        let outputError = apiError.message.map((errMsg: any) => {
+          return `<li>${errMsg}</li>`;
+        });
+
+        setAlertMessage(
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+        );
         setShowAlert(true);
-      } else{
-        setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
+      } else {
+        setAlertMessage(
+          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+        );
         setShowAlert(true);
       }
     }
@@ -116,7 +114,6 @@ const ResetPassword: React.FC = () => {
                 text: "Ok",
                 cssClass: "confirmButtonStyle",
                 handler: () => {
-                  console.log("Confirm Okay");
                   setAlertMessage("");
                 },
               },

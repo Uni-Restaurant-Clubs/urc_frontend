@@ -28,19 +28,13 @@ const EmailConfirmation: React.FC = () => {
   const [emailConfirmLoading, setEmailConfirmLoading] = useState(false);
 
   const handleEmailConfirmation = async () => {
-    console.log(email);
     if (email && email !== "") {
-      console.log(email);
       setEmailConfirmLoading(true);
       let res: any = await dispatch(authActions.emailConfirmation({ email }));
-      console.log(res);
       setEmailConfirmLoading(false);
       if (res && res.error) {
         setAlertMessage("A verification email has been resent to you");
         setShowAlert(true);
-        // setTimeout(() => {
-        //   setShowAlert(true);
-        // }, 2000);
       }
     } else {
       setEmail(null);
@@ -64,9 +58,7 @@ const EmailConfirmation: React.FC = () => {
         <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
-          // cssClass='my-custom-class'
           header={"Error"}
-          // subHeader={'Subtitle'}
           message={alertMessage}
           buttons={[
             {
@@ -82,7 +74,6 @@ const EmailConfirmation: React.FC = () => {
               text: "Ok",
               cssClass: "confirmButtonStyle rightButton",
               handler: () => {
-                console.log("Confirm Okay");
                 setAlertMessage("");
               },
             },
@@ -100,16 +91,13 @@ const EmailConfirmation: React.FC = () => {
             setShowAlert(false);
             setAlertMessage("");
           }}
-          // cssClass='my-custom-class'
           header={"Alert"}
-          // subHeader={'Subtitle'}
           message={alertMessage}
           buttons={[
             {
               text: "Ok",
               cssClass: "confirmButtonStyle rightButton",
               handler: () => {
-                console.log("Confirm Okay");
                 setAlertMessage("");
               },
             },

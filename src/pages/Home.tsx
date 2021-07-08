@@ -8,7 +8,6 @@ import {
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-// import ExploreContainer from "../components/Header";
 import "./Home.css";
 
 const Home: React.FC = () => {

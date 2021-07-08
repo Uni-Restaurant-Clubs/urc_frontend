@@ -17,7 +17,6 @@ import { Link, useHistory } from "react-router-dom";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../utils/utils";
-// import { Router } from "workbox-routing";
 
 interface errorHandling {
   userNameError: null;
@@ -41,15 +40,9 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     let queryParams: any = parseQuery(window.location.search);
-    console.log(queryParams);
     if (queryParams.error) {
-      console.log(queryParams.error);
       setAlertMessage(queryParams.error);
       setShowAlert(true);
-
-      // setTimeout(() => {
-      //   setShowAlert(false);
-      // }, 3000);
     } else if (queryParams.email_confirmed) {
       setAlertMessage("Email is now verified. You can now log in");
       setShowAlert(true);
@@ -57,32 +50,31 @@ const Login: React.FC = () => {
   }, []);
 
   const loginUser = async () => {
-    console.log(email, password);
-    // setUserNameError(true)
     let res = await dispatch(authActions.loginUser({ email, password }));
-    console.log(res);
     if (res && res.length > 0) {
       router.push("/main");
       setEmail(null);
       setPassword(null);
     } else if (apiError) {
-      
     }
   };
 
   useEffect(() => {
     if (apiError) {
-      if(Array.isArray(apiError.message)){
-        let outputError  = apiError.message.map((errMsg:any)=>{
-          return(`<li>${errMsg}</li>`)
-        })
-  
-        setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
-        setShowAlert(true);
-      } else{
-        setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
-        setShowAlert(true);
+      if (Array.isArray(apiError.message)) {
+        let outputError = apiError.message.map((errMsg: any) => {
+          return `<li>${errMsg}</li>`;
+        });
 
+        setAlertMessage(
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+        );
+        setShowAlert(true);
+      } else {
+        setAlertMessage(
+          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+        );
+        setShowAlert(true);
       }
     }
   }, [apiError]);
@@ -127,7 +119,6 @@ const Login: React.FC = () => {
                 text: "Ok",
                 cssClass: "confirmButtonStyle rightButton",
                 handler: () => {
-                  console.log("Confirm Okay");
                   setAlertMessage("");
                 },
               },

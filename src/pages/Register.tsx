@@ -14,7 +14,6 @@ import {
 import { useState, useEffect } from "react";
 import "./Home.css";
 import { Link, useHistory } from "react-router-dom";
-// import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux/actions/authActions";
 
@@ -31,9 +30,7 @@ const Register: React.FC = () => {
   const apiError = useSelector((state: any) => state.signUpFail);
 
   const registerUser = async () => {
-    console.log(email, password);
     let res = await dispatch(authActions.registerUser({ email, password }));
-    console.log("res = ", res, apiError);
     if (res && Object.keys(res).length > 0) {
       setEmail(null);
       setPassword(null);
@@ -41,19 +38,22 @@ const Register: React.FC = () => {
       setShowAlert(true);
       dispatch(authActions.emailConfirmation({ email }));
       setTimeout(() => {
-        // router.push("/login");
         setShowAlert(false);
       }, 3000);
     } else if (apiError) {
-      if(Array.isArray(apiError.message)){
-        let outputError  = apiError.message.map((errMsg:any)=>{
-          return(`<li>${errMsg}</li>`)
-        })
-  
-        setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
+      if (Array.isArray(apiError.message)) {
+        let outputError = apiError.message.map((errMsg: any) => {
+          return `<li>${errMsg}</li>`;
+        });
+
+        setAlertMessage(
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+        );
         setShowAlert(true);
-      } else{
-        setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
+      } else {
+        setAlertMessage(
+          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+        );
         setShowAlert(true);
       }
     }
@@ -61,17 +61,21 @@ const Register: React.FC = () => {
 
   useEffect(() => {
     if (apiError) {
-      if(Array.isArray(apiError.message)){
-      let outputError  = apiError.message.map((errMsg:any)=>{
-        return(`<li>${errMsg}</li>`)
-      })
+      if (Array.isArray(apiError.message)) {
+        let outputError = apiError.message.map((errMsg: any) => {
+          return `<li>${errMsg}</li>`;
+        });
 
-      setAlertMessage(`<ul class="errorMessageStyle">${outputError.join('')}</ul`);
-      setShowAlert(true);
-    } else{
-      setAlertMessage(`<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`);
-      setShowAlert(true);
-    }
+        setAlertMessage(
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+        );
+        setShowAlert(true);
+      } else {
+        setAlertMessage(
+          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+        );
+        setShowAlert(true);
+      }
       setShowAlert(true);
     }
   }, [apiError]);
@@ -94,16 +98,14 @@ const Register: React.FC = () => {
           <IonAlert
             isOpen={showAlert}
             onDidDismiss={() => setShowAlert(false)}
-            // cssClass='my-custom-class'
             header={"Alert"}
-            // subHeader={'Subtitle'}
             message={alertMessage}
             buttons={[
               {
                 text: "Ok",
                 cssClass: "confirmButtonStyle",
                 handler: () => {
-                  console.log("Confirm Okay");
+                  setAlertMessage("");
                 },
               },
             ]}
