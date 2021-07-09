@@ -74,7 +74,10 @@ const ResetPassword: React.FC = () => {
         setShowAlert(true);
       } else {
         setAlertMessage(
-          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+          `<ul class="errorMessageStyle"><li>${
+            apiError.message ||
+            "Oops looks like something went wrong. Please try again soon"
+          }</li></ul`
         );
         setShowAlert(true);
       }

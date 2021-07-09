@@ -24,7 +24,9 @@ const registerUser = (data: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: actionTypes.REGISTER_USER_FAIL,
-      payload: error.response.data,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
     });
   }
 };
@@ -41,9 +43,12 @@ const loginUser = (data: any) => async (dispatch: any) => {
 
     return res.data.session_token;
   } catch (error) {
+    console.log(error.response);
     dispatch({
       type: actionTypes.LOGIN_USER_FAIL,
-      payload: error.response.data,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
     });
   }
 };
@@ -59,9 +64,15 @@ const forgotPassword = (data: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: actionTypes.FORGOT_PASSWORD_FAIL,
-      payload: error.response.data,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
     });
-    return error.response.data;
+    return (
+      error.response.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      }
+    );
   }
 };
 
@@ -76,7 +87,9 @@ const updatePassword = (data: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: actionTypes.UPDATE_PASSWORD_FAIL,
-      payload: error.response.data,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
     });
   }
 };
@@ -88,9 +101,15 @@ const emailConfirmation = (data: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: actionTypes.FORGOT_PASSWORD_FAIL,
-      payload: error.response.data,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
     });
-    return error.response.data;
+    return (
+      error.response.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      }
+    );
   }
 };
 

@@ -36,7 +36,7 @@ const Register: React.FC = () => {
       setPassword(null);
       setAlertMessage("Verification link has been sent to your mail");
       setShowAlert(true);
-      dispatch(authActions.emailConfirmation({ email }));
+      // dispatch(authActions.emailConfirmation({ email }));
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
@@ -52,7 +52,10 @@ const Register: React.FC = () => {
         setShowAlert(true);
       } else {
         setAlertMessage(
-          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+          `<ul class="errorMessageStyle"><li>${
+            apiError.message ||
+            "Oops looks like something went wrong. Please try again soon"
+          }</li></ul`
         );
         setShowAlert(true);
       }
@@ -72,7 +75,10 @@ const Register: React.FC = () => {
         setShowAlert(true);
       } else {
         setAlertMessage(
-          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+          `<ul class="errorMessageStyle"><li>${
+            apiError.message ||
+            "Oops looks like something went wrong. Please try again soon"
+          }</li></ul`
         );
         setShowAlert(true);
       }

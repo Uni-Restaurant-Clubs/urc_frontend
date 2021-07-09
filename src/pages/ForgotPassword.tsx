@@ -37,7 +37,10 @@ const ForgotPassword: React.FC = () => {
         setAlertMessage("A verification email has been sent to you");
         setShowAlert(true);
       } else if (apiError) {
-        setAlertMessage(apiError.message);
+        setAlertMessage(
+          apiError.message ||
+            "Oops looks like something went wrong. Please try again soon"
+        );
         setShowAlert(true);
       }
     } else {
@@ -58,7 +61,10 @@ const ForgotPassword: React.FC = () => {
         setShowAlert(true);
       } else {
         setAlertMessage(
-          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+          `<ul class="errorMessageStyle"><li>${
+            apiError.message ||
+            "Oops looks like something went wrong. Please try again soon"
+          }</li></ul`
         );
         setShowAlert(true);
       }

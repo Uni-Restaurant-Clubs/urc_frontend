@@ -51,6 +51,7 @@ const Login: React.FC = () => {
 
   const loginUser = async () => {
     let res = await dispatch(authActions.loginUser({ email, password }));
+    console.log(res);
     if (res && res.length > 0) {
       router.push("/main");
       setEmail(null);
@@ -60,6 +61,7 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(apiError);
     if (apiError) {
       if (Array.isArray(apiError.message)) {
         let outputError = apiError.message.map((errMsg: any) => {
@@ -72,10 +74,14 @@ const Login: React.FC = () => {
         setShowAlert(true);
       } else {
         setAlertMessage(
-          `<ul class="errorMessageStyle"><li>${apiError.message}</li></ul`
+          `<ul class="errorMessageStyle"><li>${
+            apiError.message ||
+            "Oops looks like something went wrong. Please try again soon"
+          }</li></ul`
         );
         setShowAlert(true);
       }
+    } else {
     }
   }, [apiError]);
 
@@ -106,15 +112,6 @@ const Login: React.FC = () => {
             // subHeader={'Subtitle'}
             message={alertMessage}
             buttons={[
-              {
-                text: "Register",
-                role: "cancel",
-                cssClass: "confirmButtonStyle leftButton",
-                handler: () => {
-                  router.push("/register");
-                  setAlertMessage("");
-                },
-              },
               {
                 text: "Ok",
                 cssClass: "confirmButtonStyle rightButton",

@@ -34,6 +34,5 @@ serviceWorkerRegistration.register();
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-// https://urc-frontend.ngrok.io/login?email_confirmed=true
-
-// https://urc-frontend.ngrok.io/login/?error=token%20invalid
+// ngrok authtoken 2NMvMfcwPSgKimzdqvyzm_7BdrvBTmG9CrWhSJKmANv
+// ngrok http --region=us --hostname=urc-frontend.ngrok.io 3000
