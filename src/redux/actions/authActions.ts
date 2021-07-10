@@ -107,7 +107,7 @@ const emailConfirmation = (data: any) => async (dispatch: any) => {
       },
     });
     return (
-      error.response.data || {
+      error?.response?.data || {
         message: "Oops looks like something went wrong. Please try again soon",
       }
     );

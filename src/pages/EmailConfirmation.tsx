@@ -28,17 +28,23 @@ const EmailConfirmation: React.FC = () => {
   const [emailConfirmLoading, setEmailConfirmLoading] = useState(false);
 
   const handleEmailConfirmation = async () => {
-    if (email && email !== "") {
-      setEmailConfirmLoading(true);
-      let res: any = await dispatch(authActions.emailConfirmation({ email }));
-      setEmailConfirmLoading(false);
-      if (res && res.error) {
-        setAlertMessage("A verification email has been resent to you");
-        setShowAlert(true);
-      }
+    // if (email && email !== "") {
+    setEmailConfirmLoading(true);
+    let res: any = await dispatch(authActions.emailConfirmation({ email }));
+    setEmailConfirmLoading(false);
+    if (res && !res.error && !res.message) {
+      setAlertMessage("A verification email has been resent to you");
+      setShowAlert(true);
     } else {
-      setEmail(null);
+      setAlertMessage(
+        res.message ||
+          "Oops looks like something went wrong. Please try again soon"
+      );
+      setShowAlert(true);
     }
+    // } else {
+    //   setEmail(null);
+    // }
   };
 
   return (
