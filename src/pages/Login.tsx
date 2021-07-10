@@ -51,8 +51,8 @@ const Login: React.FC = () => {
 
   const loginUser = async () => {
     let res = await dispatch(authActions.loginUser({ email, password }));
-    console.log(res);
     if (res && res.length > 0) {
+      window.location.reload();
       router.push("/main");
       setEmail(null);
       setPassword(null);
@@ -61,7 +61,6 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(apiError);
     if (apiError) {
       if (Array.isArray(apiError.message)) {
         let outputError = apiError.message.map((errMsg: any) => {

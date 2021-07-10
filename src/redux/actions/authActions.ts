@@ -7,6 +7,7 @@ import {
   updatePasswordUrl,
   emailConfirmationUrl,
 } from "../../config/authConfig";
+import { Storage } from "@capacitor/storage";
 
 const setUserState = (payload: any) => {
   return {
@@ -38,12 +39,12 @@ const loginUser = (data: any) => async (dispatch: any) => {
     res = await axios.post(userLoginUrl, data);
 
     dispatch({ type: actionTypes.LOGIN_USER_SUCCESS, payload: res.data });
-
-    localStorage.setItem("accessToken", res.data.session_token);
-
+    await Storage.set({
+      key: "accessToken",
+      value: res.data.session_token,
+    });
     return res.data.session_token;
   } catch (error) {
-    console.log(error.response);
     dispatch({
       type: actionTypes.LOGIN_USER_FAIL,
       payload: error?.response?.data || {
