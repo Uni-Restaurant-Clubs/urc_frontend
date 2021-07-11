@@ -1,0 +1,18 @@
+.confirmButtonStyle{
+    border-radius: 10px !important;
+      color: white !important;
+      background-color: grey !important;
+      border: 1px solid grey !important;
+  }
+  
+  .leftButton{
+    right: 46px !important;
+  }
+  
+  .errorMessageStyle{
+    margin-left: -10%;
+  }
+
+  .rightButton{
+    right: 3px !important;
+  }

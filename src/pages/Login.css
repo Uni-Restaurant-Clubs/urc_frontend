@@ -1,0 +1,28 @@
+ion-content {
+  --background: none;
+}
+ion-content {
+  --background: none;
+}
+
+.loaderStyle{
+  height: 9%;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.confirmButtonStyle{
+  border-radius: 10px !important;
+    color: white !important;
+    background-color: grey !important;
+    border: 1px solid grey !important;
+}
+
+.leftButton{
+  right: 46px !important;
+}
+
+
+.rightButton{
+  right: 3px !important;
+}
