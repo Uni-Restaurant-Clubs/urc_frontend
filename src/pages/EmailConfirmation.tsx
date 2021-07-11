@@ -36,7 +36,8 @@ const EmailConfirmation: React.FC = () => {
     setEmailConfirmLoading(true);
     let res: any = await dispatch(authActions.emailConfirmation({ email }));
     setEmailConfirmLoading(false);
-    if (res && !res.error && res.status === 200) {
+    console.log(res);
+    if (res && !res.error && res.status === 204) {
       setAlertMessage(`<li>A verification email has been resent to you</li>`);
       setShowAlert(true);
     } else {
