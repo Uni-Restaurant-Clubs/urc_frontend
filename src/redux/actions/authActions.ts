@@ -70,7 +70,7 @@ const forgotPassword = (data: any) => async (dispatch: any) => {
       },
     });
     return (
-      error.response.data || {
+      error?.response?.data || {
         message: "Oops looks like something went wrong. Please try again soon",
       }
     );
@@ -100,12 +100,10 @@ const emailConfirmation = (data: any) => async (dispatch: any) => {
     let res = await axios.post(emailConfirmationUrl, data);
     return res;
   } catch (error) {
-    dispatch({
-      type: actionTypes.FORGOT_PASSWORD_FAIL,
-      payload: error?.response?.data || {
-        message: "Oops looks like something went wrong. Please try again soon",
-      },
-    });
+    // dispatch({
+    //   type: actionTypes.FORGOT_PASSWORD_FAIL,
+    //   payload: error?.response?.data,
+    // });
     return (
       error?.response?.data || {
         message: "Oops looks like something went wrong. Please try again soon",

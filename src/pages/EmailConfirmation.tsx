@@ -11,7 +11,7 @@ import {
   IonLoading,
   IonAlert,
 } from "@ionic/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Login.css";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,24 +21,31 @@ import { Link } from "react-router-dom";
 const EmailConfirmation: React.FC = () => {
   const dispatch = useDispatch();
   const router = useHistory();
-  const [email, setEmail] = useState(null);
   const signupLoading = useSelector((state: any) => state.signupLoading);
+  const [email, setEmail] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [emailConfirmLoading, setEmailConfirmLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(alertMessage);
+  }, [showAlert]);
 
   const handleEmailConfirmation = async () => {
     // if (email && email !== "") {
     setEmailConfirmLoading(true);
     let res: any = await dispatch(authActions.emailConfirmation({ email }));
     setEmailConfirmLoading(false);
-    if (res && !res.error && !res.message) {
-      setAlertMessage("A verification email has been resent to you");
+    if (res && !res.error && res.status === 200) {
+      setAlertMessage(`<li>A verification email has been resent to you</li>`);
       setShowAlert(true);
     } else {
+      console.log(res);
       setAlertMessage(
-        res.message ||
+        `<li> ${
+          res.message ||
           "Oops looks like something went wrong. Please try again soon"
+        }</li>`
       );
       setShowAlert(true);
     }
@@ -60,30 +67,6 @@ const EmailConfirmation: React.FC = () => {
           message="Please wait ..."
           duration={0}
           isOpen={emailConfirmLoading}
-        />
-        <IonAlert
-          isOpen={showAlert}
-          onDidDismiss={() => setShowAlert(false)}
-          header={"Error"}
-          message={alertMessage}
-          buttons={[
-            {
-              text: "Login",
-              role: "cancel",
-              cssClass: "confirmButtonStyle leftButton",
-              handler: () => {
-                router.push("/login");
-                setAlertMessage("");
-              },
-            },
-            {
-              text: "Ok",
-              cssClass: "confirmButtonStyle rightButton",
-              handler: () => {
-                setAlertMessage("");
-              },
-            },
-          ]}
         />
         <IonLoading
           spinner="bubbles"

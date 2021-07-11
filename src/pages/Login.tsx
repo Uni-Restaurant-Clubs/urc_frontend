@@ -53,9 +53,9 @@ const Login: React.FC = () => {
     let res = await dispatch(authActions.loginUser({ email, password }));
     if (res && res.length > 0) {
       window.location.reload();
-      router.push("/main");
       setEmail(null);
       setPassword(null);
+      router.push("/main");
     } else if (apiError) {
     }
   };

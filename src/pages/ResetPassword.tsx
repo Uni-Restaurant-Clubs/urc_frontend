@@ -43,21 +43,17 @@ const ResetPassword: React.FC = () => {
 
   const resetPassword = async () => {
     const queryToken = router?.location?.search?.split("=")[1];
-    if (password && password !== "") {
-      let res: any = await dispatch(
-        authActions.updatePassword({ password, token: queryToken })
-      );
-      if (res) {
-        setPassword(null);
-        setAlertMessage("Password reset successfully.");
-        setShowAlert(true);
-        setTimeout(() => {
-          // Redirect logic
-          router.push("/login");
-        }, 3000);
-      }
-    } else {
-      return;
+    let res: any = await dispatch(
+      authActions.updatePassword({ password, token: queryToken })
+    );
+    if (res) {
+      setPassword(null);
+      setAlertMessage("Password reset successfully.");
+      setShowAlert(true);
+      setTimeout(() => {
+        // Redirect logic
+        router.push("/login");
+      }, 3000);
     }
   };
 

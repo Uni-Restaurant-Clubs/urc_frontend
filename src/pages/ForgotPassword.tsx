@@ -22,7 +22,7 @@ const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
   const router = useHistory();
 
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -30,21 +30,17 @@ const ForgotPassword: React.FC = () => {
   const apiError = useSelector((state: any) => state.forgotPasswordFail);
 
   const forgotPasswordEmail = async () => {
-    if (email && email !== "") {
-      let res: any = await dispatch(authActions.forgotPassword({ email }));
-      if (res && res.status === 204) {
-        setEmail(null);
-        setAlertMessage("A verification email has been sent to you");
-        setShowAlert(true);
-      } else if (apiError) {
-        setAlertMessage(
-          apiError.message ||
-            "Oops looks like something went wrong. Please try again soon"
-        );
-        setShowAlert(true);
-      }
-    } else {
-      return;
+    let res: any = await dispatch(authActions.forgotPassword({ email }));
+    if (res && res.status === 204) {
+      setEmail("");
+      setAlertMessage("A verification email has been sent to you");
+      setShowAlert(true);
+    } else if (apiError) {
+      setAlertMessage(
+        apiError.message ||
+          "Oops looks like something went wrong. Please try again soon"
+      );
+      setShowAlert(true);
     }
   };
 
