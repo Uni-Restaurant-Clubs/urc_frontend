@@ -36,7 +36,6 @@ const Register: React.FC = () => {
       setPassword(null);
       setAlertMessage("Verification link has been sent to your mail");
       setShowAlert(true);
-      // dispatch(authActions.emailConfirmation({ email }));
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
