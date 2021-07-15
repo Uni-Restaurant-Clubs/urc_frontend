@@ -1,6 +1,6 @@
 .bgImg {
-  background: url(../utils/images/backgroundImage2.jpg) no-repeat center/cover
-    fixed;
+  /* background: url(../utils/images/backgroundImage2.jpg) no-repeat center/cover
+    fixed; */
 }
 ion-content {
   --background: none;
