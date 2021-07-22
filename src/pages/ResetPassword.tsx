@@ -51,7 +51,6 @@ const ResetPassword: React.FC = () => {
       setAlertMessage("Password reset successfully.");
       setShowAlert(true);
       setTimeout(() => {
-        // Redirect logic
         router.push("/login");
       }, 3000);
     }
@@ -92,9 +91,6 @@ const ResetPassword: React.FC = () => {
           className="ion-padding bgImg "
           style={{ textAlign: "center", position: "relative" }}
         >
-          {/* {signupLoading && ( */}
-          {/* <IonSpinner className="spinnerStyle" name="lines" color="white" /> */}
-
           <IonLoading
             spinner="bubbles"
             message="Please wait ..."
@@ -104,9 +100,7 @@ const ResetPassword: React.FC = () => {
           <IonAlert
             isOpen={showAlert}
             onDidDismiss={() => setShowAlert(false)}
-            // cssClass='my-custom-class'
             header={"Alert"}
-            // subHeader={'Subtitle'}
             message={alertMessage}
             buttons={[
               {
@@ -118,7 +112,6 @@ const ResetPassword: React.FC = () => {
               },
             ]}
           />
-          {/* )} */}
 
           <div className="main-container">
             <h2 className="main-title">Reset Password</h2>
