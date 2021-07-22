@@ -38,24 +38,18 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <IonRouterOutlet>
-          <AuthRoute exact path="/register" component={Register} />
-          <AuthRoute exact path="/login" component={Login} />
-          <AuthRoute
-            exact
-            path="/enter_new_password"
-            component={ResetPassword}
-          />
-          <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
-          <AuthRoute
-            exact
-            path="/emailConfirmation"
-            component={EmailConfirmation}
-          ></AuthRoute>
-          <AuthRoute exact path="/" component={Home} />
+        <AuthRoute exact path="/register" component={Register} />
+        <AuthRoute exact path="/login" component={Login} />
+        <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
+        <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
+        <AuthRoute
+          exact
+          path="/emailConfirmation"
+          component={EmailConfirmation}
+        ></AuthRoute>
+        <AuthRoute exact path="/" component={Home} />
 
-          <PrivateRoute component={Main} exact path="/main" />
-        </IonRouterOutlet>
+        <PrivateRoute component={Main} exact path="/main" />
       </IonReactRouter>
     </IonApp>
   );
