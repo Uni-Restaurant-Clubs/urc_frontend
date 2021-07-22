@@ -84,9 +84,7 @@ const ForgotPassword: React.FC = () => {
         <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
-          // cssClass='my-custom-class'
           header={"Alert"}
-          // subHeader={'Subtitle'}
           message={alertMessage}
           buttons={[
             {

@@ -106,9 +106,7 @@ const Login: React.FC = () => {
               setShowAlert(false);
               setAlertMessage("");
             }}
-            // cssClass='my-custom-class'
             header={"Alert"}
-            // subHeader={'Subtitle'}
             message={alertMessage}
             buttons={[
               {
@@ -133,7 +131,6 @@ const Login: React.FC = () => {
               <IonInput
                 placeholder="Email"
                 required={true}
-                // color="danger"
                 onIonChange={(e: any) => setEmail(e.target.value)}
               ></IonInput>
             </IonItem>
