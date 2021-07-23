@@ -2,5 +2,14 @@
 	"appId": "io.ionic.starter",
 	"appName": "ionic-basics",
 	"webDir": "build",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		"GoogleAuth": {
+		"scopes": ["profile","email"],
+		"serverClientId": "620110100045-pfrun4e2ipllo5vrd5ro1cv7rks1sf50.apps.googleusercontent.com",
+		"forceCodeForRefreshToken" : true
+
+		
+		}
+	}
 }
