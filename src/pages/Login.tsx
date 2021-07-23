@@ -20,7 +20,7 @@ import { parseQuery } from "../utils/utils";
 import { Plugins,registerWebPlugin } from '@capacitor/core';
 import "@codetrix-studio/capacitor-google-auth";
 import { FacebookLogin } from '@capacitor-community/facebook-login';
-registerWebPlugin(FacebookLogin);
+
 interface errorHandling {
   userNameError: null;
   passwordError: null;
