@@ -85,23 +85,23 @@ const Login: React.FC = () => {
     }
   }, [apiError]);
   //login with facebook user
-  // const fbloginUser = async () => { 
-  //   const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+  const fbloginUser = async () => { 
+    const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
     
-  //   const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
-  //   var token =result.accessToken.token
-  //   const response = await fetch(`https://graph.facebook.com/${result.accessToken.userId}?fields=id,name,gender,link,email,picture&type=large&access_token=${result.accessToken.token}`);
-  //   const myJson = await response.json();
-  //   let res = await dispatch(authActions.loginWithSocialUser('facebook',{ "token":token }));
-  //   if (res && res.length > 0) {
-  //     //setEmail(null);
-  //     //setPassword(null);
-  //     router.push("/main");
-  //   }
+    const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    var token =result.accessToken.token
+    const response = await fetch(`https://graph.facebook.com/${result.accessToken.userId}?fields=id,name,gender,link,email,picture&type=large&access_token=${result.accessToken.token}`);
+    const myJson = await response.json();
+    let res = await dispatch(authActions.loginWithSocialUser('facebook',{ "token":token }));
+    if (res && res.length > 0) {
+      //setEmail(null);
+      //setPassword(null);
+      router.push("/main");
+    }
     
-  //  // alert(myJson)
-  //   //console.log(myJson);
-  // };
+   // alert(myJson)
+    //console.log(myJson);
+  };
 //End fb login
   //login with google user
   const gmailLoginUser = async () => { 
@@ -189,13 +189,13 @@ const Login: React.FC = () => {
               Login
             </IonButton>
             
-            {/* <IonButton
+            <IonButton
               expand="block"
               onClick={fbloginUser }
               style={{ marginTop: "1rem" }}
             >
               Login With Facebook
-            </IonButton> */}
+            </IonButton>
 
             <IonButton
               expand="block"
@@ -204,20 +204,7 @@ const Login: React.FC = () => {
             >
               Login With Google
             </IonButton>
-
-            <IonButton expand="block"
-              onClick={gmailLoginUser}
-              style={{ marginTop: "1rem" }}
-            >
-              Login With Google
-            </IonButton>
-
-            <IonButton expand="block"
-              onClick={gmailLoginUser}
-              style={{ marginTop: "1rem" }}
-            >
-              Login With Google
-            </IonButton>
+ 
 
 
             <div className="center">
