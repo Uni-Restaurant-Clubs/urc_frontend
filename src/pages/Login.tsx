@@ -17,9 +17,10 @@ import { Link, useHistory } from "react-router-dom";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../utils/utils";
-import { Plugins } from '@capacitor/core';
+import { Plugins,registerWebPlugin } from '@capacitor/core';
 import "@codetrix-studio/capacitor-google-auth";
-import {FacebookLogin} from "@capacitor-community/facebook-login" 
+import { FacebookLogin } from '@capacitor-community/facebook-login';
+registerWebPlugin(FacebookLogin);
 interface errorHandling {
   userNameError: null;
   passwordError: null;
@@ -103,15 +104,7 @@ const Login: React.FC = () => {
         router.push("/main");
       }
      } catch (error) {
-      const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
-      console.log(FacebookLogin);
-    
-      const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
       
-      
-      // var token =result.accessToken.token
-      // const response = await fetch(`https://graph.facebook.com/${result.accessToken.userId}?fields=id,name,gender,link,email,picture&type=large&access_token=${result.accessToken.token}`);
-      // const myJson = await response.json();
      }
    
     
