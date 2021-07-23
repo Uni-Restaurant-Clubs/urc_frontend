@@ -58,11 +58,11 @@ const loginUser = (data: any) => async (dispatch: any) => {
 
 //Login With Facebook URL
 
-const loginWithSocialUser = (data: any) => async (dispatch: any) => {
+const loginWithSocialUser = (provider:any,data: any) => async (dispatch: any) => {
   let res;
   try {
     dispatch({ type: actionTypes.REGISTER_USER_REQUEST, payload: true });
-    res = await axios.post(userLoginWithSocialUrl, data);
+    res = await axios.post(userLoginWithSocialUrl+provider, data);
 
     dispatch({ type: actionTypes.LOGIN_USER_SUCCESS, payload: res.data });
     await Storage.set({

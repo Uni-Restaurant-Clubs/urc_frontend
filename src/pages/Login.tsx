@@ -189,13 +189,13 @@ const Login: React.FC = () => {
               Login
             </IonButton>
             
-            <IonButton
+            {/* <IonButton
               expand="block"
               onClick={fbloginUser }
               style={{ marginTop: "1rem" }}
             >
               Login With Facebook
-            </IonButton>
+            </IonButton> */}
 
             <IonButton
               expand="block"

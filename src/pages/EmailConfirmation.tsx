@@ -28,20 +28,16 @@ const EmailConfirmation: React.FC = () => {
   const [emailConfirmLoading, setEmailConfirmLoading] = useState(false);
 
   useEffect(() => {
-    console.log(alertMessage);
   }, [showAlert]);
 
   const handleEmailConfirmation = async () => {
-    // if (email && email !== "") {
     setEmailConfirmLoading(true);
     let res: any = await dispatch(authActions.emailConfirmation({ email }));
     setEmailConfirmLoading(false);
-    // console.log(res);
     if (res && !res.error && res.status === 204) {
       setAlertMessage(`<li>A verification email has been resent to you</li>`);
       setShowAlert(true);
     } else {
-      console.log(res);
       setAlertMessage(
         `<li> ${
           res.message ||
@@ -50,9 +46,6 @@ const EmailConfirmation: React.FC = () => {
       );
       setShowAlert(true);
     }
-    // } else {
-    //   setEmail(null);
-    // }
   };
 
   return (
