@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "620110100045",
+    "project_id": "fourth-silo-320508",
+    "storage_bucket": "fourth-silo-320508.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620110100045:android:8d35703956d0a550ac4e04",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620110100045-jr0ginopb98tdme2mftkd4upqlcjnn71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ionic.starter",
+            "certificate_hash": "8ca1198423abd4ac8979470f1a90e7ee6da63e35"
+          }
+        },
+        {
+          "client_id": "620110100045-dsild2uo72np7i290cvcop2t16u2f4m2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlxEp8lXp_zne_--_geqUrWWZgrJx23C8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620110100045-dsild2uo72np7i290cvcop2t16u2f4m2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

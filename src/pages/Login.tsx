@@ -18,7 +18,8 @@ import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../utils/utils";
 import { Plugins } from '@capacitor/core';
- 
+import "@codetrix-studio/capacitor-google-auth";
+import {FacebookLogin} from "@capacitor-community/facebook-login" 
 interface errorHandling {
   userNameError: null;
   passwordError: null;
@@ -38,6 +39,8 @@ const Login: React.FC = () => {
 
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.signInFail);
+  
+
   
   useEffect(() => {
     let queryParams: any = parseQuery(window.location.search);
@@ -86,18 +89,31 @@ const Login: React.FC = () => {
   }, [apiError]);
   //login with facebook user
   const fbloginUser = async () => { 
-    const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+     try {
+      const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
     
-    const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
-    var token =result.accessToken.token
-    const response = await fetch(`https://graph.facebook.com/${result.accessToken.userId}?fields=id,name,gender,link,email,picture&type=large&access_token=${result.accessToken.token}`);
-    const myJson = await response.json();
-    let res = await dispatch(authActions.loginWithSocialUser('facebook',{ "token":token }));
-    if (res && res.length > 0) {
-      //setEmail(null);
-      //setPassword(null);
-      router.push("/main");
-    }
+      const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+      var token =result.accessToken.token
+      const response = await fetch(`https://graph.facebook.com/${result.accessToken.userId}?fields=id,name,gender,link,email,picture&type=large&access_token=${result.accessToken.token}`);
+      const myJson = await response.json();
+      let res = await dispatch(authActions.loginWithSocialUser('facebook',{ "token":token }));
+      if (res && res.length > 0) {
+        //setEmail(null);
+        //setPassword(null);
+        router.push("/main");
+      }
+     } catch (error) {
+      const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+      console.log(FacebookLogin);
+    
+      const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+      
+      
+      // var token =result.accessToken.token
+      // const response = await fetch(`https://graph.facebook.com/${result.accessToken.userId}?fields=id,name,gender,link,email,picture&type=large&access_token=${result.accessToken.token}`);
+      // const myJson = await response.json();
+     }
+   
     
    // alert(myJson)
     //console.log(myJson);
@@ -105,16 +121,40 @@ const Login: React.FC = () => {
 //End fb login
   //login with google user
   const gmailLoginUser = async () => { 
-  // await Plugins.GoogleAuth.init();
-   const result = await Plugins.GoogleAuth.signIn();
-   var token=result.serverAuthCode
-   // console.info('result', result); 
-    let res = await dispatch(authActions.loginWithSocialUser('google',{ "authorization_code":token }));
-    if (res && res.length > 0) {
-      //setEmail(null);
-      //setPassword(null);
-      router.push("/main");
-    }
+   ;
+  
+ // const per = await Plugins.GoogleAuth.checkPermissions();
+  //console.log(per);`
+  //
+  try {
+    const result = await Plugins.GoogleAuth.signIn();
+     
+   
+    var token=result.serverAuthCode
+    
+     let res = await dispatch(authActions.loginWithSocialUser('google',{ "authorization_code":token }));
+     if (res && res.length > 0) {
+       //setEmail(null);
+       //setPassword(null);
+       router.push("/main");
+     }
+  } catch (error) {
+    await Plugins.GoogleAuth.init()
+    setTimeout(async() => {
+      const result = await Plugins.GoogleAuth.signIn();
+     
+   
+    var token=result.serverAuthCode
+    
+     let res = await dispatch(authActions.loginWithSocialUser('google',{ "authorization_code":token }));
+     if (res && res.length > 0) {
+       //setEmail(null);
+       //setPassword(null);
+       router.push("/main");
+     }
+    }, 1000);
+  }
+    
     //alert("name : "+ result.displayName)
   };
   return (
@@ -208,6 +248,7 @@ const Login: React.FC = () => {
 
 
             <div className="center">
+            {/* <div className="g-signin2" data-onsuccess="onSignIn"></div> */}
               <p>
                 New here? <Link to="/register">Register</Link>
               </p>
