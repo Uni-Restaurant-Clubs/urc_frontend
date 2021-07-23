@@ -6,6 +6,8 @@ import {
   forgotPasswordUrl,
   updatePasswordUrl,
   emailConfirmationUrl,
+  userLoginWithSocialUrl,
+  
 } from "../../config/authConfig";
 import { Storage } from "@capacitor/storage";
 
@@ -37,6 +39,30 @@ const loginUser = (data: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.REGISTER_USER_REQUEST, payload: true });
     res = await axios.post(userLoginUrl, data);
+
+    dispatch({ type: actionTypes.LOGIN_USER_SUCCESS, payload: res.data });
+    await Storage.set({
+      key: "accessToken",
+      value: res.data.session_token,
+    });
+    return res.data.session_token;
+  } catch (error) {
+    dispatch({
+      type: actionTypes.LOGIN_USER_FAIL,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
+    });
+  }
+};
+
+//Login With Facebook URL
+
+const loginWithSocialUser = (data: any) => async (dispatch: any) => {
+  let res;
+  try {
+    dispatch({ type: actionTypes.REGISTER_USER_REQUEST, payload: true });
+    res = await axios.post(userLoginWithSocialUrl, data);
 
     dispatch({ type: actionTypes.LOGIN_USER_SUCCESS, payload: res.data });
     await Storage.set({
@@ -100,10 +126,6 @@ const emailConfirmation = (data: any) => async (dispatch: any) => {
     let res = await axios.post(emailConfirmationUrl, data);
     return res;
   } catch (error) {
-    // dispatch({
-    //   type: actionTypes.FORGOT_PASSWORD_FAIL,
-    //   payload: error?.response?.data,
-    // });
     return (
       error?.response?.data || {
         message: "Oops looks like something went wrong. Please try again soon",
@@ -119,4 +141,5 @@ export const authActions = {
   forgotPassword,
   updatePassword,
   emailConfirmation,
+  loginWithSocialUser
 };

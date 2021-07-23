@@ -17,7 +17,8 @@ import { Link, useHistory } from "react-router-dom";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../utils/utils";
-
+import { Plugins } from '@capacitor/core';
+ 
 interface errorHandling {
   userNameError: null;
   passwordError: null;
@@ -37,7 +38,7 @@ const Login: React.FC = () => {
 
   const signupLoading = useSelector((state: any) => state.signupLoading);
   const apiError = useSelector((state: any) => state.signInFail);
-
+  
   useEffect(() => {
     let queryParams: any = parseQuery(window.location.search);
     if (queryParams.error) {
@@ -47,6 +48,7 @@ const Login: React.FC = () => {
       setAlertMessage("Email is now verified. You can now log in");
       setShowAlert(true);
     }
+    
   }, []);
 
   const loginUser = async () => {
@@ -73,9 +75,8 @@ const Login: React.FC = () => {
         setShowAlert(true);
       } else {
         setAlertMessage(
-          `<ul class="errorMessageStyle"><li>${
-            apiError.message ||
-            "Oops looks like something went wrong. Please try again soon"
+          `<ul class="errorMessageStyle"><li>${apiError.message ||
+          "Oops looks like something went wrong. Please try again soon"
           }</li></ul`
         );
         setShowAlert(true);
@@ -83,7 +84,39 @@ const Login: React.FC = () => {
     } else {
     }
   }, [apiError]);
-
+  //login with facebook user
+  // const fbloginUser = async () => { 
+  //   const FACEBOOK_PERMISSIONS = ['email', 'user_birthday', 'user_photos', 'user_gender'];
+    
+  //   const result = await Plugins.FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+  //   var token =result.accessToken.token
+  //   const response = await fetch(`https://graph.facebook.com/${result.accessToken.userId}?fields=id,name,gender,link,email,picture&type=large&access_token=${result.accessToken.token}`);
+  //   const myJson = await response.json();
+  //   let res = await dispatch(authActions.loginWithSocialUser('facebook',{ "token":token }));
+  //   if (res && res.length > 0) {
+  //     //setEmail(null);
+  //     //setPassword(null);
+  //     router.push("/main");
+  //   }
+    
+  //  // alert(myJson)
+  //   //console.log(myJson);
+  // };
+//End fb login
+  //login with google user
+  const gmailLoginUser = async () => { 
+  // await Plugins.GoogleAuth.init();
+   const result = await Plugins.GoogleAuth.signIn();
+   var token=result.serverAuthCode
+   // console.info('result', result); 
+    let res = await dispatch(authActions.loginWithSocialUser('google',{ "authorization_code":token }));
+    if (res && res.length > 0) {
+      //setEmail(null);
+      //setPassword(null);
+      router.push("/main");
+    }
+    //alert("name : "+ result.displayName)
+  };
   return (
     <div className=" ">
       <IonPage>
@@ -106,9 +139,7 @@ const Login: React.FC = () => {
               setShowAlert(false);
               setAlertMessage("");
             }}
-            // cssClass='my-custom-class'
             header={"Alert"}
-            // subHeader={'Subtitle'}
             message={alertMessage}
             buttons={[
               {
@@ -133,7 +164,6 @@ const Login: React.FC = () => {
               <IonInput
                 placeholder="Email"
                 required={true}
-                // color="danger"
                 onIonChange={(e: any) => setEmail(e.target.value)}
               ></IonInput>
             </IonItem>
@@ -158,6 +188,37 @@ const Login: React.FC = () => {
             >
               Login
             </IonButton>
+            
+            <IonButton
+              expand="block"
+              onClick={fbloginUser }
+              style={{ marginTop: "1rem" }}
+            >
+              Login With Facebook
+            </IonButton>
+
+            <IonButton
+              expand="block"
+              onClick={gmailLoginUser}
+              style={{ marginTop: "1rem" }}
+            >
+              Login With Google
+            </IonButton>
+
+            <IonButton expand="block"
+              onClick={gmailLoginUser}
+              style={{ marginTop: "1rem" }}
+            >
+              Login With Google
+            </IonButton>
+
+            <IonButton expand="block"
+              onClick={gmailLoginUser}
+              style={{ marginTop: "1rem" }}
+            >
+              Login With Google
+            </IonButton>
+
 
             <div className="center">
               <p>
