@@ -11,7 +11,7 @@ const Header: React.FC<any> = props => {
         <IonButtons slot="start">
           <IonMenuButton></IonMenuButton>
         </IonButtons>
-        <IonTitle>{props.headertitle}</IonTitle>
+        <IonTitle>Uni Restaurant Club</IonTitle>
       </IonToolbar>
     </IonHeader>
   );
