@@ -42,7 +42,7 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <Menu />
-          <IonRouterOutlet id="main">
+          <IonRouterOutlet animated={false} id="main">
         		<AuthRoute exact path="/register" component={Register} />
         		<AuthRoute exact path="/login" component={Login} />
         		<AuthRoute exact path="/enter_new_password" component={ResetPassword} />

@@ -155,13 +155,13 @@ const Login: React.FC = () => {
 
             <div className="center">
               <p>
-                New here? <Link to="/register">Register</Link>
+                New? <Link to="/register">Register</Link>
               </p>
               <p>
                 <Link to="/forgotPassword">Forgot Password?</Link>
               </p>
               <p>
-                <Link to="/emailConfirmation">Resend Confirmation mail ?</Link>
+                <Link to="/emailConfirmation">Resend Confirmation Email?</Link>
               </p>
             </div>
           </div>

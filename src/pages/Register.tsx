@@ -144,7 +144,7 @@ const Register: React.FC = () => {
             </IonButton>
 
             <p className="center">
-              Already have account ? <Link to="/login">Login</Link>
+              Have an account? <Link to="/login">Login</Link>
             </p>
           </div>
         </IonContent>
