@@ -32,6 +32,17 @@ const registerUser = (data: any) => async (dispatch: any) => {
   }
 };
 
+const logoutUser = () => async (dispatch: any) => {
+  let res;
+  try {
+    dispatch({ type: actionTypes.LOGOUT_USER_REQUEST });
+
+    await Storage.remove({key: "accessToken"});
+    return true;
+  } catch (error) {
+  }
+};
+
 const loginUser = (data: any) => async (dispatch: any) => {
   let res;
   try {
@@ -112,6 +123,7 @@ export const authActions = {
   setUserState,
   registerUser,
   loginUser,
+  logoutUser,
   forgotPassword,
   updatePassword,
   emailConfirmation,

@@ -38,6 +38,14 @@ const reducer = (state = initialState, action: any): any => {
         signInFail: "",
       };
 
+    case actionTypes.LOGOUT_USER_SUCCESS:
+      return {
+        ...state,
+        signinData: null,
+        logoutLoading: false,
+        logoutFail: "",
+      };
+
     case actionTypes.LOGIN_USER_SUCCESS:
       return {
         ...state,
