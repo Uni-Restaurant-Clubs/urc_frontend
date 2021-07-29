@@ -1,8 +1,6 @@
 /node_modules
 .env
 build/*
-android/*
-ios/*
 /build/*
 /build/static
 /.firebase
