@@ -17,6 +17,7 @@ import { Link, useHistory } from "react-router-dom";
 import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../utils/utils";
+import Header from "../components/Header";
 
 interface errorHandling {
   userNameError: null;
@@ -87,11 +88,7 @@ const Login: React.FC = () => {
   return (
     <div className=" ">
       <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Login Page</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <Header headertitle="Login" />
         <IonContent className="ion-padding bgImg ">
           <IonLoading
             spinner="bubbles"

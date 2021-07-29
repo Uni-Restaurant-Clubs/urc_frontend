@@ -7,14 +7,14 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
 import "./Home.css";
+import Header from "../components/Header";
 
 const Home: React.FC = () => {
   return (
     <>
       <IonPage>
-        <Header headertitle="Header" />
+        <Header headertitle="Hello" />
         <IonContent className="ion-padding bgImg ">
           <div className="home-container">
             <h2 className="main-title">Home Page</h2>

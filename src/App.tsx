@@ -1,5 +1,5 @@
 import { Route, useHistory } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
+import { IonApp, IonRouterOutlet, IonSplitPane} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -7,6 +7,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
+import Menu from './components/Menu';
+import Header from "./components/Header";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -38,18 +40,24 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <AuthRoute exact path="/register" component={Register} />
-        <AuthRoute exact path="/login" component={Login} />
-        <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
-        <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
-        <AuthRoute
-          exact
-          path="/emailConfirmation"
-          component={EmailConfirmation}
-        ></AuthRoute>
-        <AuthRoute exact path="/" component={Home} />
+        <IonSplitPane contentId="main">
+          <Menu />
+          <IonRouterOutlet id="main">
+        		<AuthRoute exact path="/register" component={Register} />
+        		<AuthRoute exact path="/login" component={Login} />
+        		<AuthRoute exact path="/enter_new_password" component={ResetPassword} />
+        		<AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
+        		<AuthRoute
+          		exact
+          		path="/emailConfirmation"
+          		component={EmailConfirmation}
+        		></AuthRoute>
+        		<AuthRoute exact path="/" component={Home} />
 
-        <PrivateRoute component={Main} exact path="/main" />
+        		<PrivateRoute component={Main} exact path="/main" />
+          </IonRouterOutlet>
+        </IonSplitPane>
+
       </IonReactRouter>
     </IonApp>
   );

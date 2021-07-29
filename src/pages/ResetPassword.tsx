@@ -17,6 +17,7 @@ import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { parseQuery } from "../utils/utils";
+import Header from "../components/Header";
 
 const ResetPassword: React.FC = () => {
   const dispatch = useDispatch();
@@ -82,11 +83,7 @@ const ResetPassword: React.FC = () => {
   return (
     <>
       <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Reset Password Page</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <Header headertitle="Reset Password" />
         <IonContent
           className="ion-padding bgImg "
           style={{ textAlign: "center", position: "relative" }}

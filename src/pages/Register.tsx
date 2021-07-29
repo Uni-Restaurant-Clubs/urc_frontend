@@ -16,6 +16,7 @@ import "./Home.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux/actions/authActions";
+import Header from "../components/Header";
 
 const Register: React.FC = () => {
   const dispatch = useDispatch();
@@ -88,11 +89,7 @@ const Register: React.FC = () => {
   return (
     <div className="">
       <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Register Page</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <Header headertitle="Register" />
         <IonContent className="ion-padding bgImg ">
           <IonLoading
             spinner="bubbles"

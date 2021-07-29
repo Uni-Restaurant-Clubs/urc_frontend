@@ -17,6 +17,7 @@ import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const EmailConfirmation: React.FC = () => {
   const dispatch = useDispatch();
@@ -50,11 +51,7 @@ const EmailConfirmation: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Confirm Email Page</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header headertitle="Confirm Email" />
       <IonContent className="ion-padding bgImg ">
         <IonLoading
           spinner="bubbles"

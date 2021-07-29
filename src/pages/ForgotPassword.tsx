@@ -1,7 +1,6 @@
 import {
   IonButton,
   IonContent,
-  IonHeader,
   IonInput,
   IonItem,
   IonLabel,
@@ -17,6 +16,7 @@ import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { parseQuery } from "../utils/utils";
+import Header from "../components/Header";
 
 const ForgotPassword: React.FC = () => {
   const dispatch = useDispatch();
@@ -69,11 +69,7 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Forgot Password Page</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header headertitle="Forgot Password" />
       <IonContent className="ion-padding bgImg ">
         <IonLoading
           spinner="bubbles"

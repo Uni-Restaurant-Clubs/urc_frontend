@@ -14,7 +14,7 @@ const Main: React.FC = () => {
   return (
     <>
       <IonPage>
-        <Header headertitle="Header" />
+        <Header headertitle="Home" />
         <IonContent className="ion-padding bgImg ">
           <div className="home-container">
             <h2 className="main-title">Welcome to Uni Restuarant</h2>
