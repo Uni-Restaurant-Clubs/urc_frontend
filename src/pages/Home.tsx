@@ -17,7 +17,7 @@ const Home: React.FC = () => {
         <Header headertitle="Header" />
         <IonContent className="ion-padding bgImg ">
           <div className="home-container">
-            <h2 className="main-title">Home Page</h2>
+            <h2 className="main-title">Test Home Page</h2>
             <IonContent fullscreen>
               <IonHeader collapse="condense">
                 <IonToolbar>
