@@ -96,17 +96,11 @@ const Menu: React.FC = () => {
             ? appPages.map((appPage, index) => {
               return (
                 <IonMenuToggle key={index} autoHide={false}>
-                  { appPage.targetBlank ?
-                    <IonItem href={appPage.url} target="_blank" routerDirection="none" lines="none" detail={false}>
+                  { !appPage.targetBlank &&
+                    <IonItem href={appPage.url} routerDirection="none" lines="none" detail={false}>
                       <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
                       <IonLabel>{appPage.title}</IonLabel>
                     </IonItem>
-                    :
-                    <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                      <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                      <IonLabel>{appPage.title}</IonLabel>
-                    </IonItem>
-
                   }
 
                 </IonMenuToggle>
@@ -115,6 +109,19 @@ const Menu: React.FC = () => {
             :
             <LogoutButton />
           }
+          {appPages.map((appPage, index) => {
+              return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  { appPage.targetBlank &&
+                    <IonItem href={appPage.url} target="_blank" routerDirection="none" lines="none" detail={false}>
+                      <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                      <IonLabel>{appPage.title}</IonLabel>
+                    </IonItem>
+                  }
+                </IonMenuToggle>
+              );
+            })}
+
         </IonList>
       </IonContent>
     </IonMenu>

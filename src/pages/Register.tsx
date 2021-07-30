@@ -134,7 +134,9 @@ const Register: React.FC = () => {
                 onIonChange={(e: any) => setPassword(e.target.value)}
               />
             </IonItem>
-
+            <p className="center">
+              Note: by registering you are agreeing to our <a target="_blank" href="https://www.iubenda.com/terms-and-conditions/25768068">terms and conditions</a>
+            </p>
             <IonButton
               onClick={registerUser}
               expand="block"
@@ -142,7 +144,6 @@ const Register: React.FC = () => {
             >
               Register
             </IonButton>
-
             <p className="center">
               Have an account? <Link to="/login">Login</Link>
             </p>

@@ -158,10 +158,10 @@ const Login: React.FC = () => {
                 New? <Link to="/register">Register</Link>
               </p>
               <p>
-                <Link to="/forgotPassword">Forgot Password?</Link>
+                <Link to="/forgotPassword">Forgot Password</Link>
               </p>
               <p>
-                <Link to="/emailConfirmation">Resend Confirmation Email?</Link>
+                <Link to="/emailConfirmation">Resend Confirmation Email</Link>
               </p>
             </div>
           </div>
