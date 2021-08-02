@@ -18,6 +18,8 @@ import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../utils/utils";
 import Header from "../components/Header";
+import { Plugins,registerWebPlugin } from '@capacitor/core';
+import "@codetrix-studio/capacitor-google-auth";
 
 interface errorHandling {
   userNameError: null;
@@ -84,6 +86,39 @@ const Login: React.FC = () => {
     } else {
     }
   }, [apiError]);
+
+
+  //login with google 
+
+  const gmailLoginUser = async () => { 
+   
+    try {
+      const result = await Plugins.GoogleAuth.signIn();
+      var token=result.serverAuthCode
+      console.log("update");
+      let res = await dispatch(authActions.loginWithSocialUser('google',{ "authorization_code":token }));
+       if (res && res.length > 0) {
+         //setEmail(null);
+         //setPassword(null);
+         router.push("/main");
+       }
+    } catch (error) {
+      await Plugins.GoogleAuth.init()
+      console.log("update data");
+      setTimeout(async() => {
+       const result = await Plugins.GoogleAuth.signIn();
+       console.log(result);
+       
+       var token=result.serverAuthCode
+       let res = await dispatch(authActions.loginWithSocialUser('google',{ "authorization_code":token }));
+       if (res && res.length > 0) {
+         //setEmail(null);
+         //setPassword(null);
+         router.push("/main");
+       }
+      }, 1000);
+    }
+    };
 
   return (
     <div className=" ">
@@ -152,7 +187,13 @@ const Login: React.FC = () => {
             >
               Login
             </IonButton>
-
+            <IonButton
+              expand="block"
+              onClick={gmailLoginUser}
+              style={{ marginTop: "1rem" }}
+            >
+              Login With Google
+            </IonButton>
             <div className="center">
               <p>
                 New? <Link to="/register">Register</Link>

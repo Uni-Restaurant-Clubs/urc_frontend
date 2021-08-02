@@ -3,7 +3,13 @@
 	"appName": "ionic-basics",
 	"webDir": "build",
 	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://192.168.1.92:8101"
+	"plugins": {
+		"GoogleAuth": {
+			"scopes": [
+				"profile",
+				"email"
+			],
+			"serverClientId": "967850399084-4dasppls10n49k1s5ld0leuerv1uec5g.apps.googleusercontent.com"
+		}
 	}
 }

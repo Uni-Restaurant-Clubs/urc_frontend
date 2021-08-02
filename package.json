@@ -11,6 +11,7 @@
     "@capacitor/keyboard": "1.0.1",
     "@capacitor/status-bar": "1.0.1",
     "@capacitor/storage": "^1.0.3",
+    "@codetrix-studio/capacitor-google-auth": "^3.0.2",
     "@ionic/pwa-elements": "^3.0.2",
     "@ionic/react": "^5.6.10",
     "@ionic/react-router": "^5.5.0",
