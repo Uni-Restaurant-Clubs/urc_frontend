@@ -88,10 +88,10 @@ const Login: React.FC = () => {
   }, [apiError]);
 
 
-  //login with google 
+  //login with google
 
-  const gmailLoginUser = async () => { 
-   
+  const gmailLoginUser = async () => {
+
     try {
       const result = await Plugins.GoogleAuth.signIn();
       var token=result.serverAuthCode
@@ -108,7 +108,7 @@ const Login: React.FC = () => {
       setTimeout(async() => {
        const result = await Plugins.GoogleAuth.signIn();
        console.log(result);
-       
+
        var token=result.serverAuthCode
        let res = await dispatch(authActions.loginWithSocialUser('google',{ "authorization_code":token }));
        if (res && res.length > 0) {

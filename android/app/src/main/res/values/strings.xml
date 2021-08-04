@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">ionic-basics</string>
-    <string name="title_activity_main">ionic-basics</string>
+    <string name="app_name">Uni Restaurant Club</string>
+    <string name="title_activity_main">Uni Restaurant Club</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
     <string name="server_client_id">967850399084-4dasppls10n49k1s5ld0leuerv1uec5g.apps.googleusercontent.com</string>
