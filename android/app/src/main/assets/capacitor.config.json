@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "ionic-basics",
+	"appId": "com.unirestaurantclub",
+	"appName": "Uni Restaurant Club",
 	"webDir": "build",
 	"bundledWebRuntime": false,
 	"plugins": {
@@ -10,6 +10,8 @@
 				"email"
 			],
 			"serverClientId": "967850399084-4dasppls10n49k1s5ld0leuerv1uec5g.apps.googleusercontent.com"
-		}
+		},
+	"ios": {
+		"scheme": "Uni Restaurant Club"
 	}
 }
