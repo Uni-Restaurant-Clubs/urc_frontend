@@ -1,6 +1,9 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "ionic-basics",
+	"appId": "com.unirestaurantclub",
+	"appName": "Uni Restaurant Club",
 	"webDir": "build",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+  "ios": {
+    "scheme": "Uni Restaurant Club"
+  }
 }
