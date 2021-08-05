@@ -5,8 +5,5 @@
 	"bundledWebRuntime": false,
 	"ios": {
 		"scheme": "Uni Restaurant Club"
-	},
-	"server": {
-		"url": "http://192.168.1.92:8100"
 	}
 }
