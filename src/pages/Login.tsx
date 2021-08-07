@@ -36,8 +36,8 @@ const Login: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const signupLoading = useSelector((state: any) => state.signupLoading);
-  const apiError = useSelector((state: any) => state.signInFail);
+  const signupLoading = useSelector((state: any) => state.auth.signupLoading);
+  const apiError = useSelector((state: any) => state.auth.signInFail);
 
   useEffect(() => {
     let queryParams: any = parseQuery(window.location.search);

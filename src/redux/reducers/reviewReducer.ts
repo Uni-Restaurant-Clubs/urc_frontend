@@ -1,7 +1,7 @@
 import * as actionTypes from "../types/reviewType";
 
 const initialState = {
-  reviews: "",
+  reviews: {},
   getReviewFail: "",
   getReviewLoading: false
 };
@@ -17,7 +17,10 @@ const reviewReducer = (state = initialState, action: any): any => {
     case actionTypes.GET_REVIEW_SUCCESS:
       return {
         ...state,
-        reviews: action.payload,
+        reviews: {
+          ...state.reviews,
+          [action.payload.id]: action.payload
+        },
         getReviewLoading: false,
         getReviewFail: "",
       };

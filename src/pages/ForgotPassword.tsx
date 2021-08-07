@@ -26,8 +26,8 @@ const ForgotPassword: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const signupLoading = useSelector((state: any) => state.signupLoading);
-  const apiError = useSelector((state: any) => state.forgotPasswordFail);
+  const signupLoading = useSelector((state: any) => state.auth.signupLoading);
+  const apiError = useSelector((state: any) => state.auth.forgotPasswordFail);
 
   const forgotPasswordEmail = async () => {
     let res: any = await dispatch(authActions.forgotPassword({ email }));

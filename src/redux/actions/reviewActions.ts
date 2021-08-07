@@ -9,9 +9,11 @@ const getReview = (data: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.GET_REVIEW_REQUEST, payload: true });
     let res = await axios.get(getReviewUrl + data.id);
+    debugger;
     dispatch({ type: actionTypes.GET_REVIEW_SUCCESS, payload: res.data });
     return res;
   } catch (error) {
+    debugger;
     dispatch({
       type: actionTypes.GET_REVIEW_FAIL,
       payload: error?.response?.data || {
