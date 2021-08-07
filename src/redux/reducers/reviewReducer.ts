@@ -1,11 +1,11 @@
 import * as actionTypes from "../types/reviewType";
 
 const initialState = {
-  reviews: {},
+  reviews: "",
   getReviewFail: "",
 };
 
-const reducer = (state = initialState, action: any): any => {
+const reviewReducer = (state = initialState, action: any): any => {
   switch (action.type) {
     case actionTypes.GET_REVIEW_REQUEST:
       return {
@@ -30,4 +30,4 @@ const reducer = (state = initialState, action: any): any => {
   }
 };
 
-export default reducer;
+export default reviewReducer;

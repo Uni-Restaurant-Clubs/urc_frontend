@@ -17,6 +17,7 @@ import Header from "../../../components/Header";
 const Home: React.FC = () => {
 
   const dispatch = useDispatch();
+  //const review = useSelector((state: any) => state.);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {

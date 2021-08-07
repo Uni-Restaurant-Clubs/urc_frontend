@@ -12,7 +12,7 @@ const initialState = {
   forgotPasswordFail: "",
 };
 
-const reducer = (state = initialState, action: any): any => {
+const authReducer = (state = initialState, action: any): any => {
   switch (action.type) {
     case actionTypes.REGISTER_USER_REQUEST:
       return {
@@ -90,4 +90,4 @@ const reducer = (state = initialState, action: any): any => {
   }
 };
 
-export default reducer;
+export default authReducer;
