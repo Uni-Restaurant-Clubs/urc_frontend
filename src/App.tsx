@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 
 import Home from "./pages/Home";
+import ReviewDetails from "./pages/reviews/details";
 import PrivateRoute from "./components/PrivateRoute";
 import Menu from './components/Menu';
 import Header from "./components/Header";
@@ -43,6 +44,7 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet animated={false} id="main">
+        		<Route exact path="/reviews/:id" component={ReviewDetails} />
         		<AuthRoute exact path="/register" component={Register} />
         		<AuthRoute exact path="/login" component={Login} />
         		<AuthRoute exact path="/enter_new_password" component={ResetPassword} />
