@@ -21,7 +21,7 @@ const ReviewPage: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
   const [showModal, setShowModal] = useState(false);
-  const review = useSelector((state: any) => state.reviews[id]);
+  const review = useSelector((state: any) => state.reviews.reviews[id]);
 
 
   useEffect(() => {
