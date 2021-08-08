@@ -4,6 +4,9 @@ import { IonSlides,
          IonImg,
          IonButton,
          IonThumbnail,
+         IonGrid,
+         IonRow,
+         IonCol,
          IonLabel,
          IonContent } from '@ionic/react';
 
@@ -49,30 +52,39 @@ const ImageSlider: React.FC<{photos: Image[];}> = ({ photos }) => {
   };
   const slides = photos.map((image, i) =>
     <IonSlide key={i}>
-      <IonImg src={image.photo} />
-      <div>
-        <IonLabel>{image.name}</IonLabel>
-      </div>
+      <IonGrid>
+        <IonRow>
+          <IonCol>
+            <IonImg src={image.photo} />
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            <IonLabel>{image.name}</IonLabel>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
     </IonSlide>
   )
   return (
     <>
       <IonContent>
+        <div style={{ textAlign: "center", paddingTop: 12 }}>
+          <IonButton
+            onClick={() => onBtnClicked("prev")}
+          >
+            PREV
+          </IonButton>
+          <IonButton
+            onClick={() => onBtnClicked("next")}
+          >
+            NEXT
+          </IonButton>
+        </div>
         <IonSlides onIonSlidesDidLoad={init} ref={mySlides} pager={true} options={slideOpts}>
           {slides}
         </IonSlides>
-<div style={{ textAlign: "center", paddingTop: 12 }}>
-        <IonButton
-          onClick={() => onBtnClicked("prev")}
-        >
-          PREV
-        </IonButton>
-        <IonButton
-          onClick={() => onBtnClicked("next")}
-        >
-          NEXT
-        </IonButton>
-      </div>      </IonContent>
+      </IonContent>
     </>
   );
 };
