@@ -13,6 +13,10 @@ import {
          IonLabel,
          IonModal,
          IonButton,
+         IonHeader,
+         IonToolbar,
+         IonTitle,
+         IonButtons,
          IonContent } from '@ionic/react';
 import ImageSlider from "./ImageSlider";
 
@@ -59,8 +63,16 @@ const ReviewImageThumbnails: React.FC<{photos: Image[];}> = ({ photos }) => {
           </IonGrid>
         </IonCardContent>
       </IonCard>
-      <IonModal isOpen={showModal} cssClass='my-custom-class' onDidDismiss={()=>setShowModal(false)}>
-        <IonButton onClick={() => setShowModal(false)} color="light">Close</IonButton>
+      <IonModal isOpen={showModal} cssClass='imageSlider' onDidDismiss={()=>setShowModal(false)}>
+        <IonHeader className="imageSliderHeader" translucent>
+          <IonToolbar>
+            <IonTitle>
+            </IonTitle>
+            <IonButtons slot="end">
+              <IonButton onClick={() => setShowModal(false)}>Close</IonButton>
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
         <ImageSlider photos={photos} selectedImage={selectedImage}/>
       </IonModal>
     </>

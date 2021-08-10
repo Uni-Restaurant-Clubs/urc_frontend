@@ -9,6 +9,7 @@ import { IonSlides,
          IonCol,
          IonLabel,
          IonContent } from '@ionic/react';
+import "./ImageSlider.css"
 
 interface Image {
   name: string,
@@ -39,9 +40,17 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
   const onBtnClicked = async (direction: string) => {
     if (swiper) {
       if (direction === "next") {
-        swiper.slideNext();
+        if (swiper.isEnd) {
+          swiper.slideTo(0);
+        } else {
+          swiper.slideNext();
+        }
       } else if (direction === "prev") {
-        swiper.slidePrev();
+        if (swiper.isBeginning) {
+          swiper.slideTo(photos.length - 1);
+        } else {
+          swiper.slidePrev();
+        }
       }
     }
   };
@@ -50,12 +59,11 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
       <IonGrid>
         <IonRow>
           <IonCol>
-            <IonImg src={image.photo} />
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol>
-            <IonLabel>{image.name}</IonLabel>
+            <br/>
+            <IonLabel>"{image.name}"</IonLabel>
+            <br/>
+            <br/>
+            <IonImg className="sliderSingleImage" src={image.photo} />
           </IonCol>
         </IonRow>
       </IonGrid>
@@ -64,21 +72,26 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
   return (
     <>
       <IonContent>
-        <div style={{ textAlign: "center", paddingTop: 12 }}>
-          <IonButton
-            onClick={() => onBtnClicked("prev")}
-          >
-            PREV
-          </IonButton>
-          <IonButton
-            onClick={() => onBtnClicked("next")}
-          >
-            NEXT
-          </IonButton>
-        </div>
-        <IonSlides onIonSlidesDidLoad={init} ref={mySlides} pager={true} options={slideOpts}>
+        <IonSlides
+          className="imageSlider"
+          onIonSlidesDidLoad={init}
+          ref={mySlides}
+          options={slideOpts}>
           {slides}
         </IonSlides>
+        <div style={{ textAlign: "center", paddingTop: 12 }}>
+          <IonButton className="imagePrevButton" color="light"
+            onClick={() => onBtnClicked("prev")}
+          >
+           {"<"}
+          </IonButton>
+          <IonButton className="imageNextButton" color="light"
+            onClick={() => onBtnClicked("next")}
+          >
+           {">"}
+          </IonButton>
+        </div>
+
       </IonContent>
     </>
   );

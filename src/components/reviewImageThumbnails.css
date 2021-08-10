@@ -1,3 +1,12 @@
+.sliderSingleImage {
+
+}
+
+.imageSlider {
+  --width: 900px;
+  --height: 100%;
+}
+
 .reviewPhotoThumbnail {
   --size: 250px;
   cursor: pointer;
