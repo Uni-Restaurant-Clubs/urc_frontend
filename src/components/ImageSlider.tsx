@@ -19,7 +19,7 @@ interface Props {
   photos: Image[]
 }
 
-const ImageSlider: React.FC<{photos: Image[], selectedImage: string;}> = (
+const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
   { photos, selectedImage }) => {
   photos = photos || [];
 

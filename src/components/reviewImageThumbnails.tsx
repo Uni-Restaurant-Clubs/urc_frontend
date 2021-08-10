@@ -31,7 +31,7 @@ const ReviewImageThumbnails: React.FC<{photos: Image[];}> = ({ photos }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  const handleImageClick = (e, imageId) => {
+  const handleImageClick = (e: object, imageId: number) => {
     setSelectedImage(imageId);
     setShowModal(true)
   }
