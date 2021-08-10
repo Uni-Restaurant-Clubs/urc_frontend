@@ -10,13 +10,6 @@ import { IonSlides,
          IonLabel,
          IonContent } from '@ionic/react';
 
-// Optional parameters to pass to the swiper instance.
-// See http://idangero.us/swiper/api/ for valid options.
-const slideOpts = {
-  initialSlide: 1,
-  speed: 400
-};
-
 interface Image {
   name: string,
   photo: string
@@ -26,13 +19,15 @@ interface Props {
   photos: Image[]
 }
 
-const ImageSlider: React.FC<{photos: Image[];}> = ({ photos }) => {
+const ImageSlider: React.FC<{photos: Image[], selectedImage: string;}> = (
+  { photos, selectedImage }) => {
   photos = photos || [];
 
   const slideOpts = {
-    initialSlide: 1,
+    initialSlide: selectedImage,
     speed: 400
   };
+
 
   const mySlides = useRef(null);
   const [swiper, setSwiper] = useState<any>({});
@@ -51,7 +46,7 @@ const ImageSlider: React.FC<{photos: Image[];}> = ({ photos }) => {
     }
   };
   const slides = photos.map((image, i) =>
-    <IonSlide key={i}>
+    <IonSlide>
       <IonGrid>
         <IonRow>
           <IonCol>
