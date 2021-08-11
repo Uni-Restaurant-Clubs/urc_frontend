@@ -18,19 +18,11 @@ const ReviewRestaurantInfo: React.FC<{restaurant: object}> = ({ restaurant }) =>
 
   return (
     <>
-      <IonCard className="articleCard">
-        <IonCardHeader>
-          <IonCardTitle className="articleTitle">
-            {restaurant.name}
-          </IonCardTitle>
-        </IonCardHeader>
-        <IonCardContent>
-          <IonGrid>
-            <IonRow>
-            </IonRow>
-          </IonGrid>
-        </IonCardContent>
-      </IonCard>
+      <IonCardHeader>
+        <IonCardTitle className="articleTitle">
+          {restaurant.name}
+        </IonCardTitle>
+      </IonCardHeader>
     </>
   );
 };

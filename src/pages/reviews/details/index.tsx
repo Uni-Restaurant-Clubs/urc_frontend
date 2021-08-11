@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import {
   IonButton,
   IonContent,
+  IonCard,
   IonHeader,
   IonPage,
   IonTitle,
@@ -15,6 +16,7 @@ import Header from "../../../components/Header";
 import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
 import ReviewArticle from "../../../components/ReviewArticle";
 import ReviewRestaurantInfo from "../../../components/ReviewRestaurantInfo";
+import "./index.css"
 
 
 const ReviewPage: React.FC = () => {
@@ -36,9 +38,13 @@ const ReviewPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Review" />
         <IonContent fullscreen>
-          <ReviewRestaurantInfo restaurant={review?.restaurant}/>
-          <ReviewImageThumbnails photos={review?.photos} />
-          <ReviewArticle title={review?.article_title} article={review?.article} />
+          <IonCard className="reviewCard">
+            <ReviewRestaurantInfo restaurant={review?.restaurant}/>
+            <ReviewImageThumbnails
+              title={review?.article_title}
+              photos={review?.photos} />
+            <ReviewArticle article={review?.article} />
+          </IonCard>
         </IonContent>
       </IonPage>
     </>

@@ -1,0 +1,39 @@
+.reviewCard {
+  padding: 20px 80px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .reviewCard {
+    padding: 20px 40px;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+  .reviewCard {
+    padding: 20px 40px;
+  }
+
+}
+
+@media only screen and (max-width: 740px) {
+  .reviewCard {
+    padding: 20px 10px;
+  }
+
+}
+
+@media only screen and (max-width: 640px) {
+  .reviewCard {
+    padding: 20px 0;
+  }
+
+}
+
+@media only screen and (max-width: 490px) {
+  .reviewCard {
+    padding: 20px 0;
+  }
+
+}
+

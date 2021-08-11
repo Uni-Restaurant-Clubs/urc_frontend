@@ -29,8 +29,10 @@ interface Props {
   photos: Image[]
 }
 
-const ReviewImageThumbnails: React.FC<{photos: Image[];}> = ({ photos }) => {
+const ReviewImageThumbnails: React.FC<{photos: Image[], title: string;}> = (
+  { photos, title }) => {
   photos = photos || [];
+  title = title || "";
 
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -47,20 +49,19 @@ const ReviewImageThumbnails: React.FC<{photos: Image[];}> = ({ photos }) => {
   )
   return (
     <>
-      <IonCard className="photosCard">
-        <IonCardHeader>
-          <IonCardTitle>
-            Photos
-          </IonCardTitle>
-        </IonCardHeader>
-        <IonCardContent>
-          <IonGrid>
-            <IonRow>
-              {pics}
-            </IonRow>
-          </IonGrid>
-        </IonCardContent>
-      </IonCard>
+      <IonCardHeader>
+        <IonCardTitle className="articleTitle">
+          {title}
+        </IonCardTitle>
+      </IonCardHeader>
+      <br/>
+      <IonCardContent>
+        <IonGrid>
+          <IonRow>
+            {pics}
+          </IonRow>
+        </IonGrid>
+      </IonCardContent>
       <IonModal isOpen={showModal} cssClass='imageSlider' onDidDismiss={()=>setShowModal(false)}>
         <IonHeader className="imageSliderHeader" translucent>
           <IonToolbar>
