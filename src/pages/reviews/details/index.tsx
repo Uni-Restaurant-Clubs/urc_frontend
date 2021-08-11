@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
 import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
 import ReviewArticle from "../../../components/ReviewArticle";
+import ReviewRestaurantInfo from "../../../components/ReviewRestaurantInfo";
 
 
 const ReviewPage: React.FC = () => {
@@ -35,6 +36,7 @@ const ReviewPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Review" />
         <IonContent fullscreen>
+          <ReviewRestaurantInfo restaurant={review?.restaurant}/>
           <ReviewImageThumbnails photos={review?.photos} />
           <ReviewArticle title={review?.article_title} article={review?.article} />
         </IonContent>
