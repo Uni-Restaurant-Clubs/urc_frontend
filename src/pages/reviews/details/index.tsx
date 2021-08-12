@@ -12,7 +12,6 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
 import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
 import ReviewArticle from "../../../components/ReviewArticle";

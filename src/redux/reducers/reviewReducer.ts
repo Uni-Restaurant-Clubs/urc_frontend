@@ -3,7 +3,9 @@ import * as actionTypes from "../types/reviewType";
 const initialState = {
   reviews: {},
   getReviewFail: "",
-  getReviewLoading: false
+  getReviewLoading: false,
+  getReviewsFail: "",
+  getReviewsLoading: false,
 };
 
 const reviewReducer = (state = initialState, action: any): any => {
@@ -30,6 +32,26 @@ const reviewReducer = (state = initialState, action: any): any => {
         getReviewFail: action.payload,
         getReviewLoading: false,
       };
+    case actionTypes.GET_REVIEWS_REQUEST:
+      return {
+        ...state,
+        getReviewsLoading: action.payload,
+        getReviewsFail: "",
+      };
+    case actionTypes.GET_REVIEWS_SUCCESS:
+      return {
+        ...state,
+        reviews: action.payload,
+        getReviewsLoading: false,
+        getReviewsFail: "",
+      };
+    case actionTypes.GET_REVIEWS_FAIL:
+      return {
+        ...state,
+        getReviewsFail: action.payload,
+        getReviewsLoading: false,
+      };
+
     default:
       return state;
   }
