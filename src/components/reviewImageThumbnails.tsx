@@ -48,13 +48,11 @@ const ReviewImageThumbnails: React.FC<{photos: Image[], title: string;}> = (
   )
   return (
     <>
-      <IonCardContent>
-        <IonGrid>
-          <IonRow>
-            {pics}
-          </IonRow>
-        </IonGrid>
-      </IonCardContent>
+      <IonGrid>
+        <IonRow>
+          {pics}
+        </IonRow>
+      </IonGrid>
       <IonModal isOpen={showModal} cssClass='imageSlider' onDidDismiss={()=>setShowModal(false)}>
         <IonHeader className="imageSliderHeader" translucent>
           <IonToolbar>

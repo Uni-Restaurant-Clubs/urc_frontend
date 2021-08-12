@@ -7,6 +7,7 @@ import {
   IonContent,
   IonCard,
   IonHeader,
+  IonCardContent,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -37,14 +38,16 @@ const ReviewPage: React.FC = () => {
     <>
       <IonPage>
         <Header headertitle="Review" />
-          <IonCard className="reviewCard">
-            <ReviewRestaurantInfo restaurant={review?.restaurant}/>
-            <br />
+        <IonCard className="reviewCard">
+          <ReviewRestaurantInfo restaurant={review?.restaurant}/>
+          <br />
+          <IonCardContent>
             <ReviewImageThumbnails
               title={review?.article_title}
               photos={review?.photos} />
             <ReviewArticle title={review?.article_title} article={review?.article} />
-          </IonCard>
+          </IonCardContent>
+        </IonCard>
       </IonPage>
     </>
   );

@@ -24,13 +24,11 @@ const ReviewArticle: React.FC<{article: string, title: string;}> = ({ article, t
           {title}
         </IonCardTitle>
       </IonCardHeader>
-      <IonCardContent>
-        <IonGrid>
-          <IonRow>
-            <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: article }} />
-          </IonRow>
-        </IonGrid>
-      </IonCardContent>
+      <IonGrid>
+        <IonRow>
+          <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: article }} />
+        </IonRow>
+      </IonGrid>
     </>
   );
 };
