@@ -21,6 +21,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file("main.keystore")
+            storePassword 'abc123'
+            keyAlias 'restaurantclub'
+            keyPassword 'abc123'
+        }
+        debug {
+            storeFile file("main.keystore")
+            storePassword 'abc123'
+            keyAlias 'restaurantclub'
+            keyPassword 'abc123'
+        }
+    }
 }
 
 repositories {

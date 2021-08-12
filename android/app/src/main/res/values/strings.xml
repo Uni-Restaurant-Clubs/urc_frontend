@@ -3,5 +3,6 @@
     <string name="app_name">Uni Restaurant Club</string>
     <string name="title_activity_main">Uni Restaurant Club</string>
     <string name="package_name">com.unirestaurantclub</string>
-    <string name="custom_url_scheme">com.unirestaurantclub</string>
+    <string name="custom_url_scheme">com.unirestaurantclub</string> 
+    <string name="server_client_id">695551314101-61pl5mcuhhi9vq3hmrmmen3at33ptmv5.apps.googleusercontent.com</string>
 </resources>

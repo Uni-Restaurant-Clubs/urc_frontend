@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import "@codetrix-studio/capacitor-google-auth";
 
 import reducer from "./redux/reducers/authReducer";
 import { composeWithDevTools } from "redux-devtools-extension";

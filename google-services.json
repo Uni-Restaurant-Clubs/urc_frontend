@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "460846473196",
+    "project_id": "uni-restaurant-club",
+    "storage_bucket": "uni-restaurant-club.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460846473196:android:1d8d1538a269f332b6aac9",
+        "android_client_info": {
+          "package_name": "com.unirestaurantclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460846473196-btf97l7n621vbssi7ejba7v26g7gjpr4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaoMPQIl5gZ3l94UeMi0VO64O2iaoIHPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460846473196-btf97l7n621vbssi7ejba7v26g7gjpr4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

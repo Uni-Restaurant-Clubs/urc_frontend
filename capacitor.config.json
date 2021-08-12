@@ -1,9 +1,15 @@
 {
-	"appId": "com.unirestaurantclub",
-	"appName": "Uni Restaurant Club",
-	"webDir": "build",
-	"bundledWebRuntime": false,
+  "appId": "com.unirestaurantclub",
+  "appName": "Uni Restaurant Club",
+  "webDir": "build",
+  "bundledWebRuntime": false,
   "ios": {
     "scheme": "Uni Restaurant Club"
-  }
+  },
+  "plugins": {
+    "GoogleAuth": {
+    "scopes": ["profile","email"], 
+    "serverClientId": "695551314101-61pl5mcuhhi9vq3hmrmmen3at33ptmv5.apps.googleusercontent.com"
+    }
+    }
 }
