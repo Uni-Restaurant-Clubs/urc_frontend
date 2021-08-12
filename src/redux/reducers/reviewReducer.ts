@@ -39,9 +39,22 @@ const reviewReducer = (state = initialState, action: any): any => {
         getReviewsFail: "",
       };
     case actionTypes.GET_REVIEWS_SUCCESS:
+      interface LooseObject {
+        [key: number]: any
+      }
+
+      interface Review {
+        id: number,
+      }
+
+      var reviews: LooseObject = {};
+      action.payload.forEach((review: Review) => {
+        reviews[review.id] = review;
+      })
+
       return {
         ...state,
-        reviews: action.payload,
+        reviews: reviews,
         getReviewsLoading: false,
         getReviewsFail: "",
       };
