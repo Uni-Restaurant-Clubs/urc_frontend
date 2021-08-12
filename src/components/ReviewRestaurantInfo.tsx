@@ -13,7 +13,11 @@ import {
          IonContent } from '@ionic/react';
 import './ReviewArticle.css';
 
-const ReviewRestaurantInfo: React.FC<{restaurant: object}> = ({ restaurant }) => {
+interface Restaurant {
+  name: string,
+}
+
+const ReviewRestaurantInfo: React.FC<{restaurant: Restaurant}> = ({ restaurant }) => {
   restaurant = restaurant || { name: "" };
 
   return (

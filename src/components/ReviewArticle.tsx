@@ -15,9 +15,15 @@ import './ReviewArticle.css';
 
 const ReviewArticle: React.FC<{article: string, title: string;}> = ({ article, title }) => {
   article = article || "";
+  title = title || "";
 
   return (
     <>
+      <IonCardHeader>
+        <IonCardTitle className="articleTitle">
+          {title}
+        </IonCardTitle>
+      </IonCardHeader>
       <IonCardContent>
         <IonGrid>
           <IonRow>

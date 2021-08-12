@@ -32,7 +32,6 @@ interface Props {
 const ReviewImageThumbnails: React.FC<{photos: Image[], title: string;}> = (
   { photos, title }) => {
   photos = photos || [];
-  title = title || "";
 
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -49,12 +48,6 @@ const ReviewImageThumbnails: React.FC<{photos: Image[], title: string;}> = (
   )
   return (
     <>
-      <IonCardHeader>
-        <IonCardTitle className="articleTitle">
-          {title}
-        </IonCardTitle>
-      </IonCardHeader>
-      <br/>
       <IonCardContent>
         <IonGrid>
           <IonRow>

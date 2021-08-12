@@ -37,15 +37,14 @@ const ReviewPage: React.FC = () => {
     <>
       <IonPage>
         <Header headertitle="Review" />
-        <IonContent fullscreen>
           <IonCard className="reviewCard">
             <ReviewRestaurantInfo restaurant={review?.restaurant}/>
+            <br />
             <ReviewImageThumbnails
               title={review?.article_title}
               photos={review?.photos} />
-            <ReviewArticle article={review?.article} />
+            <ReviewArticle title={review?.article_title} article={review?.article} />
           </IonCard>
-        </IonContent>
       </IonPage>
     </>
   );
