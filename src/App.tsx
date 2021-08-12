@@ -32,6 +32,7 @@ import "./theme/variables.css";
 import "./gobal-style/global.css";
 import EmailConfirmation from "./pages/EmailConfirmation";
 import ResetPassword from "./pages/ResetPassword";
+import Reviews from "./pages/reviews/list";
 import Main from "./pages/Main";
 import AuthRoute from "./components/AuthRoute";
 
@@ -54,7 +55,7 @@ const App: React.FC = () => {
           		path="/emailConfirmation"
           		component={EmailConfirmation}
         		></AuthRoute>
-        		<AuthRoute exact path="/" component={Home} />
+        		<AuthRoute exact path="/" component={Reviews} />
 
         		<PrivateRoute component={Main} exact path="/main" />
           </IonRouterOutlet>

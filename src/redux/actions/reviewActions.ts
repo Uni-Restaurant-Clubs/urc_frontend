@@ -22,7 +22,7 @@ const getReview = (data: any) => async (dispatch: any) => {
   }
 };
 
-const getReviews = (data: any) => async (dispatch: any) => {
+const getReviews = () => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.GET_REVIEWS_REQUEST, payload: true });
     let res = await axios.get(getReviewsUrl);
