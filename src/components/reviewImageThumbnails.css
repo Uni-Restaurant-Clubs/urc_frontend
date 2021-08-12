@@ -21,13 +21,13 @@
 }
 @media only screen and (max-width: 900px) {
   .reviewPhotoThumbnail {
-    --size: 80px;
+    --size: 125px;
   }
 }
 
 @media only screen and (max-width: 426px) {
   .reviewPhotoThumbnail {
-    --size: 50px;
+    --size: 100px;
   }
 }
 

@@ -45,6 +45,8 @@ const ReviewPage: React.FC = () => {
             <ReviewImageThumbnails
               title={review?.article_title}
               photos={review?.photos} />
+            <br />
+            <br />
             <ReviewArticle title={review?.article_title} article={review?.article} />
           </IonCardContent>
         </IonCard>

@@ -19,16 +19,10 @@ const ReviewArticle: React.FC<{article: string, title: string;}> = ({ article, t
 
   return (
     <>
-      <IonCardHeader>
-        <IonCardTitle className="articleTitle">
-          {title}
-        </IonCardTitle>
-      </IonCardHeader>
-      <IonGrid>
-        <IonRow>
-          <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: article }} />
-        </IonRow>
-      </IonGrid>
+      <IonCardTitle className="articleTitle">
+        {title}
+      </IonCardTitle>
+      <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: article }} />
     </>
   );
 };
