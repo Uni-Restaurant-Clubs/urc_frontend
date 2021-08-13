@@ -42,7 +42,9 @@ const ReviewImageThumbnails: React.FC<{photos: Image[], title: string;}> = (
   }
 
   const pics = photos.map((image, i) =>
-    <IonThumbnail onClick={(e) => handleImageClick(e, i) } className="reviewPhotoThumbnail">
+    <IonThumbnail key={i}
+                  onClick={(e) => handleImageClick(e, i)}
+                  className="reviewPhotoThumbnail">
       <IonImg src={image.photo} />
     </IonThumbnail>
   )

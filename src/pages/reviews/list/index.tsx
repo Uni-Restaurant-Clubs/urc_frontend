@@ -3,6 +3,7 @@ import { reviewActions } from "../../../redux/actions/reviewActions";
 import { useDispatch, useSelector } from "react-redux";
 import {
   IonButton,
+  IonText,
   IonLabel,
   IonThumbnail,
   IonImg,
@@ -44,21 +45,22 @@ const ReviewsPage: React.FC = () => {
     getReviews();
   }, []);
 
-
-  const handleReviewClick = (e: object, reviewId: number) => {
-
-  }
-
   const reviewItems = Object.keys(reviews).map((key, i) => {
     let review = reviews[key as keyof Review];
     return (
-      <Link to={"/reviews/" + key}>
-        <IonItem key={i} onClick={(e) => handleReviewClick(e, i) }>
-          <IonThumbnail  className="reviewPhotoThumbnail">
-            <IonImg src={review?.featured_photo?.photo} />
-          </IonThumbnail>
-          <IonLabel>
-            {review.restaurant.name}
+      <Link className="reviewItemLink" key={i} to={"/reviews/" + key}>
+        <IonItem className="reviewItem" key={i}>
+          <div>
+            <IonThumbnail key={i} className="reviewsPhotoThumbnail">
+              <IonImg src={review?.featured_photo?.photo} />
+            </IonThumbnail>
+         </div>
+          <IonLabel className="reviewItemLabel">
+            <h2>{review?.restaurant?.name}</h2>
+            <p>{review?.article_title}</p>
+            <IonText color="danger">
+              <p>40% off</p>
+            </IonText>
           </IonLabel>
         </IonItem>
       </Link>
