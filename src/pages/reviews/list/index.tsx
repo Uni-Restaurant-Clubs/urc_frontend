@@ -49,7 +49,7 @@ const ReviewsPage: React.FC = () => {
     let review = reviews[key as keyof Review];
     return (
       <Link className="reviewItemLink" key={i} to={"/reviews/" + key}>
-        <IonItem className="reviewItem" key={i}>
+        <IonItem href="#" className="reviewItem" key={i}>
           <div>
             <IonThumbnail key={i} className="reviewsPhotoThumbnail">
               <IonImg src={review?.featured_photo?.photo} />
