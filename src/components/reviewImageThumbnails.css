@@ -1,0 +1,68 @@
+.imageSlider {
+  --width: 900px;
+  --height: 100%;
+}
+
+.photosCard {
+  padding: 20px 80px;
+}
+
+.reviewPhotoThumbnail {
+  --size: 150px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1440px) {
+  .reviewPhotoThumbnail {
+    --size: 125px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .reviewPhotoThumbnail {
+    --size: 125px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .reviewPhotoThumbnail {
+    --size: 100px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .photosCard {
+    padding: 20px 40px;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+  .photosCard {
+    padding: 20px 40px;
+  }
+
+}
+
+@media only screen and (max-width: 740px) {
+  .photosCard {
+    padding: 20px 10px;
+  }
+
+}
+
+@media only screen and (max-width: 640px) {
+  .photosCard {
+    padding: 20px 0;
+  }
+
+}
+
+@media only screen and (max-width: 490px) {
+  .photosCard {
+    padding: 20px 0;
+  }
+
+}
+

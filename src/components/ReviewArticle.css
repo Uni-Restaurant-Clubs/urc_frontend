@@ -1,0 +1,46 @@
+.articleCard {
+  padding: 20px 80px;
+}
+
+.reviewArticle  p {
+  line-height: 35px;
+  font-size: 17.2px;
+  padding: 20px 0px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .articleCard {
+    padding: 20px 40px;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+  .articleCard {
+    padding: 20px 40px;
+  }
+
+}
+
+@media only screen and (max-width: 740px) {
+  .articleCard {
+    padding: 20px 10px;
+  }
+
+}
+
+@media only screen and (max-width: 640px) {
+  .articleCard {
+    padding: 20px 0;
+  }
+
+}
+
+@media only screen and (max-width: 490px) {
+  .articleCard {
+    padding: 20px 0;
+  }
+
+}
+

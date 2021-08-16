@@ -24,11 +24,11 @@ const Register: React.FC = () => {
 
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const signupLoading = useSelector((state: any) => state.signupLoading);
+  const signupLoading = useSelector((state: any) => state.auth.signupLoading);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const apiError = useSelector((state: any) => state.signUpFail);
+  const apiError = useSelector((state: any) => state.auth.signUpFail);
 
   const registerUser = async () => {
     let res = await dispatch(authActions.registerUser({ email, password }));

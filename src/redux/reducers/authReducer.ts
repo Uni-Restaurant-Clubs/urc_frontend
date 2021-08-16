@@ -15,7 +15,7 @@ const initialState = {
   connectGoogleLoading: false
 };
 
-const reducer = (state = initialState, action: any): any => {
+const authReducer = (state = initialState, action: any): any => {
   switch (action.type) {
     case actionTypes.CONNECT_GOOGLE_REQUEST:
       return {
@@ -113,4 +113,4 @@ const reducer = (state = initialState, action: any): any => {
   }
 };
 
-export default reducer;
+export default authReducer;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   IonContent,
   IonIcon,
@@ -14,7 +15,7 @@ import {
 import { Storage } from "@capacitor/storage";
 import { useLocation } from 'react-router-dom';
 import { logInOutline, eyeOutline, speedometerOutline, newspaperOutline,
-         personAddOutline
+         personAddOutline, restaurantOutline
        } from 'ionicons/icons';
 import './Menu.css';
 import LogoutButton from "./LogoutButton";
@@ -41,6 +42,13 @@ const appPages: AppPage[] = [
     targetBlank: false,
     iosIcon: logInOutline,
     mdIcon: logInOutline
+  },
+  {
+    title: 'Reviews',
+    url: '/',
+    targetBlank: false,
+    iosIcon: restaurantOutline,
+    mdIcon: restaurantOutline
   },
   {
     title: 'Privacy Policy',
@@ -97,10 +105,12 @@ const Menu: React.FC = () => {
               return (
                 <IonMenuToggle key={index} autoHide={false}>
                   { !appPage.targetBlank &&
-                    <IonItem href={appPage.url} routerDirection="none" lines="none" detail={false}>
-                      <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                      <IonLabel>{appPage.title}</IonLabel>
-                    </IonItem>
+                    <Link className="menuListItem" key={index} to={appPage.url}>
+                      <IonItem href={appPage.url} routerDirection="none" lines="none" detail={false}>
+                        <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                        <IonLabel>{appPage.title}</IonLabel>
+                      </IonItem>
+                    </Link>
                   }
 
                 </IonMenuToggle>
@@ -113,10 +123,12 @@ const Menu: React.FC = () => {
               return (
                 <IonMenuToggle key={index} autoHide={false}>
                   { appPage.targetBlank &&
-                    <IonItem href={appPage.url} target="_blank" routerDirection="none" lines="none" detail={false}>
-                      <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                      <IonLabel>{appPage.title}</IonLabel>
-                    </IonItem>
+                    <Link className="menuListItem" key={index} target="_blank" to={appPage.url}>
+                      <IonItem  href={appPage.url} target="_blank" routerDirection="none" lines="none" detail={false}>
+                        <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                        <IonLabel>{appPage.title}</IonLabel>
+                      </IonItem>
+                    </Link>
                   }
                 </IonMenuToggle>
               );

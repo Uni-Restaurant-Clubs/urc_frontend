@@ -1,0 +1,10 @@
+.sliderSingleImage {
+  height: 500px !important;
+}
+
+.imagePrevButton {
+  margin-right: 20px;
+}
+.imageNextButton {
+  margin-left: 20px;
+}

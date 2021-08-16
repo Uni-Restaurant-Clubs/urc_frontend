@@ -8,11 +8,11 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import "@codetrix-studio/capacitor-google-auth";
 
-import reducer from "./redux/reducers/authReducer";
+import reducers from "./redux/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const ourStore = createStore(
-  reducer,
+  reducers,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
@@ -28,7 +28,7 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

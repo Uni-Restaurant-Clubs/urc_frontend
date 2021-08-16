@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 
 import Home from "./pages/Home";
+import ReviewDetails from "./pages/reviews/details";
 import PrivateRoute from "./components/PrivateRoute";
 import Menu from './components/Menu';
 import Header from "./components/Header";
@@ -31,6 +32,7 @@ import "./theme/variables.css";
 import "./gobal-style/global.css";
 import EmailConfirmation from "./pages/EmailConfirmation";
 import ResetPassword from "./pages/ResetPassword";
+import Reviews from "./pages/reviews/list";
 import Main from "./pages/Main";
 import AuthRoute from "./components/AuthRoute";
 
@@ -43,6 +45,7 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet animated={false} id="main">
+        		<Route exact path="/reviews/:id" component={ReviewDetails} />
         		<AuthRoute exact path="/register" component={Register} />
         		<AuthRoute exact path="/login" component={Login} />
         		<AuthRoute exact path="/enter_new_password" component={ResetPassword} />
@@ -52,7 +55,7 @@ const App: React.FC = () => {
           		path="/emailConfirmation"
           		component={EmailConfirmation}
         		></AuthRoute>
-        		<AuthRoute exact path="/" component={Home} />
+        		<AuthRoute exact path="/" component={Reviews} />
 
         		<PrivateRoute component={Main} exact path="/main" />
           </IonRouterOutlet>

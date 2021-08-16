@@ -79,7 +79,7 @@ const loginUser = (data: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: actionTypes.LOGIN_USER_FAIL,
-      payload: error?.response?.data || {
+      payload: error?.response?.data?.message || {
         message: "Oops looks like something went wrong. Please try again soon",
       },
     });

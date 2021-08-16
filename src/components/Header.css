@@ -1,0 +1,12 @@
+.urcHeader {
+  height: 50px;
+  padding: 5px 0 5px 15px;
+  text-align: left;
+  float: left;
+}
+
+@media only screen and (max-width: 991px) {
+  .urcHeader {
+    padding: 5px 0 5px 0px;
+  }
+}
