@@ -2,6 +2,7 @@ import axios from "axios";
 import * as actionTypes from "../types/authType";
 import {
   userLoginUrl,
+  googleConnectUrl,
   userRegistrationUrl,
   forgotPasswordUrl,
   updatePasswordUrl,
@@ -14,6 +15,26 @@ const setUserState = (payload: any) => {
     type: actionTypes.ADD_ARTICLE,
     payload,
   };
+};
+
+const connectGoogle = (data: any) => async (dispatch: any) => {
+  try {
+    dispatch({ type: actionTypes.CONNECT_GOOGLE_REQUEST, payload: true });
+    let res = await axios.post(googleConnectUrl, data);
+    dispatch({ type: actionTypes.CONNECT_GOOGLE_SUCCESS, payload: res.data });
+    await Storage.set({
+      key: "accessToken",
+      value: res.data.session_token,
+    });
+    return res.data.session_token;
+  } catch (error) {
+    dispatch({
+      type: actionTypes.CONNECT_GOOGLE_FAIL,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
+    });
+  }
 };
 
 const registerUser = (data: any) => async (dispatch: any) => {
@@ -120,6 +141,7 @@ const emailConfirmation = (data: any) => async (dispatch: any) => {
 };
 
 export const authActions = {
+  connectGoogle,
   setUserState,
   registerUser,
   loginUser,

@@ -10,10 +10,33 @@ const initialState = {
   updatePasswordData: "",
   updatePasswordFail: "",
   forgotPasswordFail: "",
+  connectGoogleData: "",
+  connectGoogleFail: "",
+  connectGoogleLoading: false
 };
 
 const reducer = (state = initialState, action: any): any => {
   switch (action.type) {
+    case actionTypes.CONNECT_GOOGLE_REQUEST:
+      return {
+        ...state,
+        connectGoogleLoading: true,
+        connectGoogleFail: "",
+      };
+    case actionTypes.CONNECT_GOOGLE_SUCCESS:
+      return {
+        ...state,
+        signinData: action.payload,
+        connectGoogleLoading: false,
+        connectGoogleFail: "",
+      };
+    case actionTypes.CONNECT_GOOGLE_FAIL:
+      return {
+        ...state,
+        connectGoogleFail: action.payload,
+        connectGoogleLoading: false,
+      };
+
     case actionTypes.REGISTER_USER_REQUEST:
       return {
         ...state,

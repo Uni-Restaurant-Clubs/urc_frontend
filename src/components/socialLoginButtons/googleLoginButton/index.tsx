@@ -4,9 +4,17 @@ import {
 import { Plugins } from '@capacitor/core';
 import "@codetrix-studio/capacitor-google-auth";
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { useHistory } from "react-router-dom";
+import { authActions } from "../../../redux/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 const GoogleLoginButton: React.FC = () => {
+  const dispatch = useDispatch();
+  const router = useHistory();
+
+  const connectGoogleLoading = useSelector((state: any) => state.connectGoogleLoading);
+  const apiError = useSelector((state: any) => state.connectGoogleFail);
 
   useEffect(() => {
     GoogleAuth.init()
@@ -16,10 +24,14 @@ const GoogleLoginButton: React.FC = () => {
     try {
       console.log("Signin");
       const result = await GoogleAuth.signIn();
-      debugger;
-      console.info('result', result);
-      if (result) {
-        console.log("res =>", result);
+      if (result && result.serverAuthCode) {
+        let res = await dispatch(authActions.connectGoogle(
+          {authorization_code: result.serverAuthCode}));
+        if (res && res.length > 0) {
+          window.location.reload();
+          router.push("/reviews");
+        } else if (apiError) {
+        }
       }
     } catch (error) {
       console.log("error gpi =>", error);
