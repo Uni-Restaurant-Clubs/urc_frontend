@@ -24,9 +24,12 @@ const GoogleLoginButton: React.FC = () => {
     } catch (error) {
       console.log("error gpi =>", error);
     }
+  }
 
   return (
-    <IonButton>Connect with Google</IonButton>
+    <IonButton onClick={() => signIn()}>
+      Connect with Google
+    </IonButton>
   );
 };
 

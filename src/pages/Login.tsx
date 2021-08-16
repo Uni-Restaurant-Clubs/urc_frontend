@@ -90,7 +90,6 @@ const Login: React.FC = () => {
     <div className=" ">
       <IonPage>
         <Header headertitle="Login" />
-        <SocialLoginButtons />
         <IonContent className="ion-padding bgImg ">
           <IonLoading
             spinner="bubbles"
@@ -120,6 +119,7 @@ const Login: React.FC = () => {
 
           <div className="main-container">
             <h2 className="main-title">Login</h2>
+            <SocialLoginButtons />
             <IonItem>
               <IonLabel
                 color={userNameError ? "danger" : ""}

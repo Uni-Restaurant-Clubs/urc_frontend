@@ -130,7 +130,6 @@ class Home extends Component {
                   <IonButton>Login</IonButton>
                 </Link>
                 <IonButton color="primary" onClick={ () => 
-                  // console.log("Clicked")
                   this.signIn() 
                   }>Google Login</IonButton>
               </div>
