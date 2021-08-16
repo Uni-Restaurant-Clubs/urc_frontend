@@ -18,6 +18,7 @@ import { authActions } from "../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../utils/utils";
 import Header from "../components/Header";
+import SocialLoginButtons from "../components/socialLoginButtons"
 
 interface errorHandling {
   userNameError: null;
@@ -89,6 +90,7 @@ const Login: React.FC = () => {
     <div className=" ">
       <IonPage>
         <Header headertitle="Login" />
+        <SocialLoginButtons />
         <IonContent className="ion-padding bgImg ">
           <IonLoading
             spinner="bubbles"
