@@ -10,31 +10,48 @@ const initialState = {
   updatePasswordData: "",
   updatePasswordFail: "",
   forgotPasswordFail: "",
-  connectGoogleData: "",
-  connectGoogleFail: "",
-  connectGoogleLoading: false
+  oauthFail: false,
+  oauthLoading: false
 };
 
 const authReducer = (state = initialState, action: any): any => {
   switch (action.type) {
-    case actionTypes.CONNECT_GOOGLE_REQUEST:
+    case actionTypes.OAUTH_INITIAL_REQUEST:
       return {
         ...state,
-        connectGoogleLoading: true,
-        connectGoogleFail: "",
+        oauthLoading: true,
+        oauthFail: false,
       };
-    case actionTypes.CONNECT_GOOGLE_SUCCESS:
+    case actionTypes.OAUTH_INITIAL_SUCCESS:
+      return {
+        ...state,
+        oauthFail: false,
+      };
+    case actionTypes.OAUTH_INITIAL_FAIL:
+      return {
+        ...state,
+        oauthFail: action.payload,
+        oauthLoading: false,
+      };
+
+    case actionTypes.OAUTH_CONNECT_REQUEST:
+      return {
+        ...state,
+        oauthFail: false,
+        oauthLoading: true,
+      };
+    case actionTypes.OAUTH_CONNECT_SUCCESS:
       return {
         ...state,
         signinData: action.payload,
-        connectGoogleLoading: false,
-        connectGoogleFail: "",
+        oauthLoading: false,
+        oauthFail: false,
       };
-    case actionTypes.CONNECT_GOOGLE_FAIL:
+    case actionTypes.OAUTH_CONNECT_FAIL:
       return {
         ...state,
-        connectGoogleFail: action.payload,
-        connectGoogleLoading: false,
+        oauthFail: action.payload,
+        oauthLoading: false,
       };
 
     case actionTypes.REGISTER_USER_REQUEST:

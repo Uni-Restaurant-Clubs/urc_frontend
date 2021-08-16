@@ -2,13 +2,17 @@ import axios from "axios";
 import * as actionTypes from "../types/authType";
 import {
   userLoginUrl,
-  googleConnectUrl,
+  oauthConnectUrl,
   userRegistrationUrl,
   forgotPasswordUrl,
   updatePasswordUrl,
   emailConfirmationUrl,
 } from "../../config/authConfig";
 import { Storage } from "@capacitor/storage";
+import { Plugins } from '@capacitor/core';
+import "@codetrix-studio/capacitor-google-auth";
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+
 
 const setUserState = (payload: any) => {
   return {
@@ -17,11 +21,53 @@ const setUserState = (payload: any) => {
   };
 };
 
-const connectGoogle = (data: any) => async (dispatch: any) => {
+const initiateOauth = (provider: string) => async (dispatch: any) => {
   try {
-    dispatch({ type: actionTypes.CONNECT_GOOGLE_REQUEST, payload: true });
-    let res = await axios.post(googleConnectUrl, data);
-    dispatch({ type: actionTypes.CONNECT_GOOGLE_SUCCESS, payload: res.data });
+    dispatch({ type: actionTypes.OAUTH_INITIAL_REQUEST, payload: true });
+    let result;
+    if (provider === "google") {
+      result = await GoogleAuth.signIn();
+    }
+    if (result && result.serverAuthCode) {
+      dispatch({ type: actionTypes.OAUTH_INITIAL_SUCCESS });
+      return result.serverAuthCode;
+    } else {
+      dispatch({
+        type: actionTypes.OAUTH_INITIAL_FAIL,
+        payload: result || {
+          message: "Oops looks like something went wrong. Please try again soon",
+        },
+      });
+      return null;
+    }
+  } catch (error) {
+    let fullError = null;
+    if (error?.error === "popup_closed_by_user") {
+     error = "Looks like you closed the popup window. Please click connect again to start over.";
+    } else {
+      error = null;
+    }
+
+    if (error) {
+      fullError = { message: error }
+    } else {
+      fullError = null;
+    }
+    dispatch({
+      type: actionTypes.OAUTH_INITIAL_FAIL,
+      payload: fullError || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
+    });
+  }
+};
+
+const connectOauth = (data: any) => async (dispatch: any) => {
+  try {
+    dispatch({ type: actionTypes.OAUTH_CONNECT_REQUEST, payload: true });
+    const oauthUrl = oauthConnectUrl + data.provider
+    let res = await axios.post(oauthUrl, data);
+    dispatch({ type: actionTypes.OAUTH_CONNECT_SUCCESS, payload: res.data });
     await Storage.set({
       key: "accessToken",
       value: res.data.session_token,
@@ -29,7 +75,7 @@ const connectGoogle = (data: any) => async (dispatch: any) => {
     return res.data.session_token;
   } catch (error) {
     dispatch({
-      type: actionTypes.CONNECT_GOOGLE_FAIL,
+      type: actionTypes.OAUTH_CONNECT_FAIL,
       payload: error?.response?.data || {
         message: "Oops looks like something went wrong. Please try again soon",
       },
@@ -141,7 +187,8 @@ const emailConfirmation = (data: any) => async (dispatch: any) => {
 };
 
 export const authActions = {
-  connectGoogle,
+  initiateOauth,
+  connectOauth,
   setUserState,
   registerUser,
   loginUser,
