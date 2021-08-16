@@ -3,6 +3,7 @@ import {
   IonContent,
   IonLoading,
   IonAlert,
+  IonImg,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { authActions } from "../../../redux/actions/authActions";
@@ -11,6 +12,7 @@ import { useState, useEffect } from "react";
 import { Plugins } from '@capacitor/core';
 import "@codetrix-studio/capacitor-google-auth";
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import "./index.css"
 
 const GoogleLoginButton: React.FC = () => {
   const dispatch = useDispatch();
@@ -71,7 +73,14 @@ const GoogleLoginButton: React.FC = () => {
         ]}
       />
 
-      <IonButton onClick={() => signIn()}>
+      <br/>
+      <IonButton
+        fill="outline"
+        expand="block"
+        color="medium"
+        onClick={() => signIn()}>
+        <IonImg className="googleIcon"
+          src="https://urc-public-images.s3.us-east-2.amazonaws.com/google-logo-9827.png"/>
         Connect with Google
       </IonButton>
     </>
