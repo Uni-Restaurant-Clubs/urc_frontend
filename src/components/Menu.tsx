@@ -74,6 +74,16 @@ const appPages: AppPage[] = [
 ];
 
 
+const loggedInAppPages: AppPage[] = [
+  {
+    title: 'Reviews',
+    url: '/',
+    targetBlank: false,
+    iosIcon: restaurantOutline,
+    mdIcon: restaurantOutline
+  }
+]
+
 const Menu: React.FC = () => {
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState("");
@@ -117,6 +127,22 @@ const Menu: React.FC = () => {
               );
             })
             :
+            loggedInAppPages.map((appPage, index) => {
+              return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  { !appPage.targetBlank &&
+                    <Link className="menuListItem" key={index} to={appPage.url}>
+                      <IonItem href={appPage.url} routerDirection="none" lines="none" detail={false}>
+                        <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                        <IonLabel>{appPage.title}</IonLabel>
+                      </IonItem>
+                    </Link>
+                  }
+                </IonMenuToggle>
+              );
+            })
+          }
+          { isAuthenticated &&
             <LogoutButton />
           }
           {appPages.map((appPage, index) => {

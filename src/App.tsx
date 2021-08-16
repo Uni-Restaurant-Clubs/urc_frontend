@@ -55,9 +55,7 @@ const App: React.FC = () => {
           		path="/emailConfirmation"
           		component={EmailConfirmation}
         		></AuthRoute>
-        		<AuthRoute exact path="/" component={Reviews} />
-
-        		<PrivateRoute component={Main} exact path="/main" />
+        		<Route exact path="/" component={Reviews} />
           </IonRouterOutlet>
         </IonSplitPane>
 

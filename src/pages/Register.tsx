@@ -17,6 +17,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux/actions/authActions";
 import Header from "../components/Header";
+import SocialLoginButtons from "../components/socialLoginButtons"
 
 const Register: React.FC = () => {
   const dispatch = useDispatch();
@@ -114,6 +115,7 @@ const Register: React.FC = () => {
           />
           <div className="main-container">
             <h2 className="main-title">Register</h2>
+            <SocialLoginButtons />
 
             <IonItem>
               <IonLabel position="floating">Email</IonLabel>

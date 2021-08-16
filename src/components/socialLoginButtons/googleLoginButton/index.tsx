@@ -29,7 +29,6 @@ const GoogleLoginButton: React.FC = () => {
           {authorization_code: result.serverAuthCode}));
         if (res && res.length > 0) {
           window.location.reload();
-          router.push("/reviews");
         } else if (apiError) {
         }
       }
