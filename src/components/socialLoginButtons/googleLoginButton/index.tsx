@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { authActions } from "../../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { isPlatform, getPlatforms } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
 import "@codetrix-studio/capacitor-google-auth";
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
@@ -25,9 +26,12 @@ const GoogleLoginButton: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
-    GoogleAuth.init()
+    if (!isPlatform('android') && !isPlatform('ios')) {
+      GoogleAuth.init()
+    }
   }, []);
 
+  // 500 from server is showing blank alert popup
   const signIn = async () => {
     try {
       let authCode = await dispatch(authActions.initiateOauth("google"));
@@ -75,6 +79,7 @@ const GoogleLoginButton: React.FC = () => {
 
       <br/>
       <IonButton
+        className="ios"
         fill="outline"
         expand="block"
         color="medium"

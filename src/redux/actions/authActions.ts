@@ -27,6 +27,7 @@ const initiateOauth = (provider: string) => async (dispatch: any) => {
     let result;
     if (provider === "google") {
       result = await GoogleAuth.signIn();
+      console.log("result", result);
     }
     if (result && result.serverAuthCode) {
       dispatch({ type: actionTypes.OAUTH_INITIAL_SUCCESS });
@@ -41,6 +42,7 @@ const initiateOauth = (provider: string) => async (dispatch: any) => {
       return null;
     }
   } catch (error) {
+    console.log("error", error);
     let fullError = null;
     if (error?.error === "popup_closed_by_user") {
      error = "Looks like you closed the popup window. Please click connect again to start over.";
@@ -76,7 +78,7 @@ const connectOauth = (data: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: actionTypes.OAUTH_CONNECT_FAIL,
-      payload: error?.response?.data || {
+      payload: {
         message: "Oops looks like something went wrong. Please try again soon",
       },
     });
