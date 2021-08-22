@@ -11,7 +11,9 @@ const initialState = {
   updatePasswordFail: "",
   forgotPasswordFail: "",
   oauthFail: false,
-  oauthLoading: false
+  oauthLoading: false,
+  startPasswordlessLoginLoading: false,
+  startPasswordlessLoginFail: false,
 };
 
 const authReducer = (state = initialState, action: any): any => {

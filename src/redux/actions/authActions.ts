@@ -2,6 +2,8 @@ import axios from "axios";
 import * as actionTypes from "../types/authType";
 import {
   userLoginUrl,
+  startPasswordlessLoginUrl,
+  finishPasswordlessLoginUrl,
   oauthConnectUrl,
   userRegistrationUrl,
   forgotPasswordUrl,
@@ -19,6 +21,33 @@ const setUserState = (payload: any) => {
     type: actionTypes.ADD_ARTICLE,
     payload,
   };
+};
+
+const startPasswordlessLogin = (email: any) => async (dispatch: any) => {
+  try {
+    dispatch({ type: actionTypes.START_PASSWORDLESS_REQUEST, payload: true });
+    let result = await axios.post(startPasswordlessLoginUrl, { email });
+
+    if (result && result.data.confirmation_token) {
+      dispatch({ type: actionTypes.START_PASSWORDLESS_SUCCESS });
+      return result.data.confirmation_token;
+    } else {
+      dispatch({
+        type: actionTypes.START_PASSWORDLESS_FAIL,
+        payload: result.data.message || {
+          message: "Oops looks like something went wrong. Please try again soon",
+        },
+      });
+      return null;
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.START_PASSWORDLESS_FAIL,
+      payload: error || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
+    });
+  }
 };
 
 const initiateOauth = (provider: string) => async (dispatch: any) => {
@@ -198,4 +227,5 @@ export const authActions = {
   forgotPassword,
   updatePassword,
   emailConfirmation,
+  startPasswordlessLogin
 };

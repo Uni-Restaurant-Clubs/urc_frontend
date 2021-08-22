@@ -5,3 +5,6 @@ export const forgotPasswordUrl = baseUrl + "users/send_password_reset_email";
 export const updatePasswordUrl = baseUrl + "users/update_password";
 export const emailConfirmationUrl = baseUrl + "users/resend_confirm_email";
 export const oauthConnectUrl = baseUrl + "oauth/";
+export const startPasswordlessLoginUrl = baseUrl + "users/passwordless_signin_email";
+export const finishPasswordlessLoginUrl = baseUrl + "users/passwordless_signin_confirm";
+

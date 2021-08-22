@@ -46,7 +46,7 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet animated={false} id="main">
         		<Route exact path="/reviews/:id" component={ReviewDetails} />
-        		<AuthRoute exact path="/register" component={Register} />
+        		<AuthRoute exact path="/register" component={Login} />
         		<AuthRoute exact path="/login" component={Login} />
         		<AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		<AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
