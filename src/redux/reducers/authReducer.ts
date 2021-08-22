@@ -14,7 +14,7 @@ const initialState = {
   oauthLoading: false,
   startPasswordlessLoginLoading: false,
   startPasswordlessLoginFail: false,
-  startPasswordlessData: {},
+  passwordlessLoginToken: {},
 };
 
 const authReducer = (state = initialState, action: any): any => {
@@ -30,7 +30,7 @@ const authReducer = (state = initialState, action: any): any => {
         ...state,
         startPasswordlessLoginLoading: false,
         startPasswordlessLoginFail: false,
-        startPasswordlessData: action.payload,
+        passwordlessLoginToken: action.payload,
       };
     case actionTypes.START_PASSWORDLESS_FAIL:
       return {

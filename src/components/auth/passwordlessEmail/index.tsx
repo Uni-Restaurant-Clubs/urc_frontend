@@ -18,6 +18,7 @@ import { authActions } from "../../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../../../utils/utils";
 import Header from "../../Header";
+import PasswordlessLoginConfirm from "../passwordlessLoginConfirm";
 
 interface errorHandling {
   emailError: null;
@@ -30,19 +31,24 @@ const PasswordlessLogin: React.FC = () => {
   const [email, setEmail] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const startPasswordlessLoginLoading = useSelector((state: any) => {
     return state.auth.startPasswordlessLoginLoading;
+  });
+  const passwordlessLoginToken = useSelector((state: any) => {
+    return state.auth.passwordlessLoginToken;
   });
   const apiError = useSelector((state: any) => {
     return state.auth.startPasswordlessLoginFail;
   });
 
   const sendPasswordlessEmail = async () => {
+    debugger;
     let res = await dispatch(authActions.startPasswordlessLogin(email));
     if (res && res.length > 0) {
       setEmail("");
-      //TODO go to next step
+      setShowModal(true)
     } else if (apiError) {
     }
   };
@@ -123,6 +129,11 @@ const PasswordlessLogin: React.FC = () => {
       >
         Next
       </IonButton>
+      <PasswordlessLoginConfirm
+        sendPasswordlessEmail={sendPasswordlessEmail}
+        showModal={showModal}
+        token={passwordlessLoginToken}
+      />
     </IonContent>
   );
 };
