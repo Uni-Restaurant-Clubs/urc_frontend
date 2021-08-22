@@ -12,13 +12,12 @@ import {
   IonAlert,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
-import "./Login.css";
+import "./index.css";
 import { Link, useHistory } from "react-router-dom";
 import { authActions } from "../../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { parseQuery } from "../../../utils/utils";
 import Header from "../../Header";
-import SocialLoginButtons from "../../socialLoginButtons"
 
 interface errorHandling {
   emailError: null;
@@ -40,7 +39,7 @@ const PasswordlessLogin: React.FC = () => {
   });
 
   const sendPasswordlessEmail = async () => {
-    let res = await dispatch(authActions.startPasswordlessLogin({ email }));
+    let res = await dispatch(authActions.startPasswordlessLogin(email));
     if (res && res.length > 0) {
       setEmail("");
       //TODO go to next step
@@ -62,7 +61,7 @@ const PasswordlessLogin: React.FC = () => {
       } else {
         setAlertMessage(
           `<ul class="errorMessageStyle"><li>${
-            apiError.message ||
+            apiError ||
             "Oops looks like something went wrong. Please try again soon"
           }</li></ul`
         );
@@ -99,33 +98,31 @@ const PasswordlessLogin: React.FC = () => {
           },
         ]}
       />
-
-      <div className="main-container">
-        <h2 className="main-title">Connect with email</h2>
-        <SocialLoginButtons />
-        <IonItem>
-          <IonLabel
-            color={emailError ? "danger" : ""}
-            position="floating"
-          >
-            Email
-          </IonLabel>
-          <IonInput
-            placeholder="Email"
-            required={true}
-            onIonChange={(e: any) => setEmail(e.target.value)}
-          ></IonInput>
-        </IonItem>
-
-        <IonButton
-          expand="block"
-          onClick={sendPasswordlessEmail}
-          style={{ marginTop: "1rem" }}
+      <IonItem>
+        <IonLabel
+          color={emailError ? "danger" : ""}
+          position="floating"
         >
-          Login
-        </IonButton>
-
-      </div>
+          Email
+        </IonLabel>
+        <IonInput
+          autofocus={true}
+          pattern="email"
+          inputMode="email"
+          placeholder="Enter email"
+          minlength={3}
+          required={true}
+          onIonChange={(e: any) => setEmail(e.target.value)}
+        ></IonInput>
+      </IonItem>
+      <IonButton
+        expand="block"
+        type="submit"
+        onClick={sendPasswordlessEmail}
+        style={{ marginTop: "1rem" }}
+      >
+        Next
+      </IonButton>
     </IonContent>
   );
 };

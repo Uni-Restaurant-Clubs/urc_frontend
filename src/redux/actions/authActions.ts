@@ -41,6 +41,11 @@ const startPasswordlessLogin = (email: any) => async (dispatch: any) => {
       return null;
     }
   } catch (error) {
+    if (error.response.status === 400) {
+      error = "You must enter a valid email address."
+    } else {
+      error = null;
+    }
     dispatch({
       type: actionTypes.START_PASSWORDLESS_FAIL,
       payload: error || {

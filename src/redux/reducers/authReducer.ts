@@ -14,10 +14,30 @@ const initialState = {
   oauthLoading: false,
   startPasswordlessLoginLoading: false,
   startPasswordlessLoginFail: false,
+  startPasswordlessData: {},
 };
 
 const authReducer = (state = initialState, action: any): any => {
   switch (action.type) {
+    case actionTypes.START_PASSWORDLESS_REQUEST:
+      return {
+        ...state,
+        startPasswordlessLoginLoading: true,
+        startPasswordlessLoginFail: false,
+      };
+    case actionTypes.START_PASSWORDLESS_SUCCESS:
+      return {
+        ...state,
+        startPasswordlessLoginLoading: false,
+        startPasswordlessLoginFail: false,
+        startPasswordlessData: action.payload,
+      };
+    case actionTypes.START_PASSWORDLESS_FAIL:
+      return {
+        ...state,
+        startPasswordlessLoginLoading: false,
+        startPasswordlessLoginFail: action.payload,
+      };
     case actionTypes.OAUTH_INITIAL_REQUEST:
       return {
         ...state,
