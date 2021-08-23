@@ -43,6 +43,11 @@ const PasswordlessLogin: React.FC = () => {
     return state.auth.startPasswordlessLoginFail;
   });
 
+  const closeModal = () => {
+    setEmail("");
+    setShowModal(false);
+  }
+
   const sendPasswordlessEmail = async () => {
     let res = await dispatch(authActions.startPasswordlessLogin(email));
     if (res && res.length > 0) {
@@ -112,6 +117,7 @@ const PasswordlessLogin: React.FC = () => {
         </IonLabel>
         <IonInput
           autofocus={true}
+          value={email}
           pattern="email"
           inputMode="email"
           placeholder="Enter email"
@@ -133,7 +139,7 @@ const PasswordlessLogin: React.FC = () => {
         showModal={showModal}
         token={passwordlessLoginToken}
         email={email}
-        setShowModal={setShowModal}
+        closeModal={closeModal}
       />
     </>
   );

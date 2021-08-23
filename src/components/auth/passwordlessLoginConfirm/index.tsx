@@ -36,11 +36,11 @@ interface Props {
   showModal: boolean;
   token: string;
   email: string;
-  setShowModal: (arg: boolean) => void;
+  closeModal: () => void;
 }
 
 const PasswordlessLoginConfirm: React.FC<Props> = (
-  { sendPasswordlessEmail, showModal, token, email, setShowModal }) => {
+  { sendPasswordlessEmail, showModal, token, email, closeModal }) => {
 
   const dispatch = useDispatch();
   const router = useHistory();
@@ -77,7 +77,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
         <IonToolbar>
           <IonImg className="passwordlessHeader" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools.png" />
           <IonButtons slot="end">
-            <IonButton onClick={() => setShowModal(false)}>Cancel</IonButton>
+            <IonButton onClick={() => closeModal()}>Cancel</IonButton>
           </IonButtons>
 
         </IonToolbar>
