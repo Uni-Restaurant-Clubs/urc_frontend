@@ -78,7 +78,7 @@ const PasswordlessLogin: React.FC = () => {
   }, [apiError]);
 
   return (
-    <IonContent className="ion-padding bgImg ">
+    <>
       <IonLoading
         spinner="bubbles"
         message="Please wait ..."
@@ -136,7 +136,7 @@ const PasswordlessLogin: React.FC = () => {
         email={email}
         setShowModal={setShowModal}
       />
-    </IonContent>
+    </>
   );
 };
 

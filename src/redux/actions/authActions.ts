@@ -23,10 +23,11 @@ const setUserState = (payload: any) => {
   };
 };
 
-const passwordlessLoginConfirm = (code: any) => async (dispatch: any) => {
+const passwordlessLoginConfirm = (data: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.FINISH_PASSWORDLESS_REQUEST, payload: true });
-    let res = await axios.post(finishPasswordlessLoginUrl, { code });
+    let res = await axios.post(finishPasswordlessLoginUrl,
+                               { code: data.code, confirmation_token: data.token });
 
     if (res && res.data.token_session) {
       dispatch({ type: actionTypes.FINISH_PASSWORDLESS_SUCCESS });

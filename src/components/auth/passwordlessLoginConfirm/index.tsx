@@ -61,11 +61,14 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
   }
 
   const confirmCode = async () => {
-    let res = await dispatch(authActions.passwordlessLoginConfirm(code));
+    let res = await dispatch(authActions.passwordlessLoginConfirm(
+      { code, token }));
     if (res && res.length > 0) {
       setCode("");
+      debugger;
       //TODO handle success
     } else if (apiError) {
+      debugger;
     }
   };
 

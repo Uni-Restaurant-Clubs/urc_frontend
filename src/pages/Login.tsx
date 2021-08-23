@@ -1,5 +1,9 @@
 import {
   IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
   IonHeader,
   IonPage,
 } from "@ionic/react";
@@ -9,18 +13,27 @@ import PasswordlessLogin from "../components/auth/passwordlessEmail";
 
 const Login: React.FC = () => {
   return (
-    <div className=" ">
-      <IonPage>
-        <Header headertitle="Connect" />
-        <IonContent className="ion-padding bgImg ">
-          <div className="main-container">
-            <h2 className="main-title">Connect</h2>
+    <IonPage>
+      <Header />
+      <IonContent className="ion-padding bgImg ">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <IonCard className="loginCard">
+          <IonCardHeader>
+            <IonCardTitle>
+              Connect using a method below
+            </IonCardTitle>
+          </IonCardHeader>
+
+          <IonCardContent>
             <SocialLoginButtons />
             <PasswordlessLogin />
-          </div>
-        </IonContent>
-      </IonPage>
-    </div>
+          </IonCardContent>
+        </IonCard>
+      </IonContent>
+    </IonPage>
   );
 
 };
