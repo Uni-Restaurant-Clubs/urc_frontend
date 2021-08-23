@@ -65,8 +65,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
       { code, token }));
     if (res && res.length > 0) {
       setCode("");
-      debugger;
-      //TODO handle success
+      window.location.reload();
     } else if (apiError) {
       debugger;
     }

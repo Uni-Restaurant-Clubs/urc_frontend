@@ -31,7 +31,7 @@ const PasswordlessLogin: React.FC = () => {
   const [email, setEmail] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const startPasswordlessLoginLoading = useSelector((state: any) => {
     return state.auth.startPasswordlessLoginLoading;
@@ -44,7 +44,6 @@ const PasswordlessLogin: React.FC = () => {
   });
 
   const sendPasswordlessEmail = async () => {
-    debugger;
     let res = await dispatch(authActions.startPasswordlessLogin(email));
     if (res && res.length > 0) {
       setEmail("");
@@ -132,7 +131,7 @@ const PasswordlessLogin: React.FC = () => {
       <PasswordlessLoginConfirm
         sendPasswordlessEmail={sendPasswordlessEmail}
         showModal={showModal}
-        token="asdf" //{passwordlessLoginToken}
+        token={passwordlessLoginToken}
         email={email}
         setShowModal={setShowModal}
       />

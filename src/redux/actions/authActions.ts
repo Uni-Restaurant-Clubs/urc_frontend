@@ -27,9 +27,9 @@ const passwordlessLoginConfirm = (data: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.FINISH_PASSWORDLESS_REQUEST, payload: true });
     let res = await axios.post(finishPasswordlessLoginUrl,
-                               { code: data.code, confirmation_token: data.token });
+                           { code: data.code, confirmation_token: data.token });
 
-    if (res && res.data.token_session) {
+    if (res?.data?.session_token) {
       dispatch({ type: actionTypes.FINISH_PASSWORDLESS_SUCCESS });
       dispatch({ type: actionTypes.OAUTH_CONNECT_SUCCESS, payload: res.data });
       await Storage.set({
@@ -67,7 +67,8 @@ const startPasswordlessLogin = (email: any) => async (dispatch: any) => {
     let result = await axios.post(startPasswordlessLoginUrl, { email });
 
     if (result && result.data.confirmation_token) {
-      dispatch({ type: actionTypes.START_PASSWORDLESS_SUCCESS });
+      dispatch({ type: actionTypes.START_PASSWORDLESS_SUCCESS,
+        payload: result?.data?.confirmation_token });
       return result.data.confirmation_token;
     } else {
       dispatch({

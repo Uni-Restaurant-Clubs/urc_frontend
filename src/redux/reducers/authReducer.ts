@@ -15,6 +15,8 @@ const initialState = {
   startPasswordlessLoginLoading: false,
   startPasswordlessLoginFail: false,
   passwordlessLoginToken: {},
+  confirmPasswordlessLoginLoading: false,
+  confirmPasswordlessLoginFail: false,
 };
 
 const authReducer = (state = initialState, action: any): any => {
