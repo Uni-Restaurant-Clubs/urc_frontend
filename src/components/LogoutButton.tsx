@@ -21,8 +21,7 @@ const LogoutButton: React.FC = () => {
 
   const logoutUser = async () => {
     await dispatch(authActions.logoutUser());
-    window.location.reload();
-    router.push("/register");
+    window.location = "/login";
   };
 
   return (

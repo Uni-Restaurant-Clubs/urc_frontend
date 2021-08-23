@@ -56,6 +56,30 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
     return state.auth.confirmPasswordlessLoginFail;
   });
 
+  useEffect(() => {
+    if (apiError) {
+      if (Array.isArray(apiError.message)) {
+        let outputError = apiError.message.map((errMsg: any) => {
+          return `<li>${errMsg}</li>`;
+        });
+
+        setAlertMessage(
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+        );
+        setShowAlert(true);
+      } else {
+        setAlertMessage(
+          `<ul class="errorMessageStyle"><li>${
+            apiError ||
+            "Oops looks like something went wrong. Please try again soon"
+          }</li></ul`
+        );
+        setShowAlert(true);
+      }
+    } else {
+    }
+  }, [apiError]);
+
   const handleResendClick = () => {
     sendPasswordlessEmail();
   }
@@ -66,8 +90,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
     if (res && res.length > 0) {
       setCode("");
       window.location.reload();
-    } else if (apiError) {
-      debugger;
+    } else {
     }
   };
 

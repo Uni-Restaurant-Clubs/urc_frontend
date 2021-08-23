@@ -38,25 +38,26 @@ const passwordlessLoginConfirm = (data: any) => async (dispatch: any) => {
       });
       return res.data.session_token;
     } else {
+      debugger;
       dispatch({
         type: actionTypes.FINISH_PASSWORDLESS_FAIL,
-        payload: res.data.message || {
+        payload: res?.data?.message || {
           message: "Oops looks like something went wrong. Please try again soon",
         },
       });
       return null;
     }
   } catch (error) {
-    if (error.response.status === 400) {
-      error = "You must enter a valid email address."
+    if (error?.response?.status === 400) {
+      error = "The code you entered is not valid. Please make sure you are using the last code received."
+    } else if (error?.response?.status === 401) {
+      error = "The code you entered has expired. Please make sure you are using the last code received."
     } else {
       error = null;
     }
     dispatch({
       type: actionTypes.FINISH_PASSWORDLESS_FAIL,
-      payload: error || {
-        message: "Oops looks like something went wrong. Please try again soon",
-      },
+      payload: error || "Oops looks like something went wrong. Please try again soon"
     });
   }
 };
@@ -73,23 +74,19 @@ const startPasswordlessLogin = (email: any) => async (dispatch: any) => {
     } else {
       dispatch({
         type: actionTypes.START_PASSWORDLESS_FAIL,
-        payload: result.data.message || {
-          message: "Oops looks like something went wrong. Please try again soon",
-        },
+        payload: error || "Oops looks like something went wrong. Please try again soon"
       });
       return null;
     }
   } catch (error) {
-    if (error.response.status === 400) {
+    if (error?.response?.status === 400) {
       error = "You must enter a valid email address."
     } else {
       error = null;
     }
     dispatch({
       type: actionTypes.START_PASSWORDLESS_FAIL,
-      payload: error || {
-        message: "Oops looks like something went wrong. Please try again soon",
-      },
+      payload: error || "Oops looks like something went wrong. Please try again soon"
     });
   }
 };
