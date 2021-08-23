@@ -23,6 +23,43 @@ const setUserState = (payload: any) => {
   };
 };
 
+const passwordlessLoginConfirm = (code: any) => async (dispatch: any) => {
+  try {
+    dispatch({ type: actionTypes.FINISH_PASSWORDLESS_REQUEST, payload: true });
+    let res = await axios.post(finishPasswordlessLoginUrl, { code });
+
+    if (res && res.data.token_session) {
+      dispatch({ type: actionTypes.FINISH_PASSWORDLESS_SUCCESS });
+      dispatch({ type: actionTypes.OAUTH_CONNECT_SUCCESS, payload: res.data });
+      await Storage.set({
+        key: "accessToken",
+        value: res.data.session_token,
+      });
+      return res.data.session_token;
+    } else {
+      dispatch({
+        type: actionTypes.FINISH_PASSWORDLESS_FAIL,
+        payload: res.data.message || {
+          message: "Oops looks like something went wrong. Please try again soon",
+        },
+      });
+      return null;
+    }
+  } catch (error) {
+    if (error.response.status === 400) {
+      error = "You must enter a valid email address."
+    } else {
+      error = null;
+    }
+    dispatch({
+      type: actionTypes.FINISH_PASSWORDLESS_FAIL,
+      payload: error || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
+    });
+  }
+};
+
 const startPasswordlessLogin = (email: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.START_PASSWORDLESS_REQUEST, payload: true });
@@ -232,5 +269,6 @@ export const authActions = {
   forgotPassword,
   updatePassword,
   emailConfirmation,
-  startPasswordlessLogin
+  startPasswordlessLogin,
+  passwordlessLoginConfirm
 };

@@ -19,6 +19,24 @@ const initialState = {
 
 const authReducer = (state = initialState, action: any): any => {
   switch (action.type) {
+    case actionTypes.FINISH_PASSWORDLESS_REQUEST:
+      return {
+        ...state,
+        confirmPasswordlessLoginLoading: true,
+        confirmPasswordlessLoginFail: false,
+      };
+    case actionTypes.FINISH_PASSWORDLESS_SUCCESS:
+      return {
+        ...state,
+        confirmPasswordlessLoginLoading: false,
+        confirmPasswordlessLoginFail: false,
+      };
+    case actionTypes.FINISH_PASSWORDLESS_FAIL:
+      return {
+        ...state,
+        confirmPasswordlessLoginLoading: false,
+        confirmPasswordlessLoginFail: action.payload,
+      };
     case actionTypes.START_PASSWORDLESS_REQUEST:
       return {
         ...state,

@@ -31,7 +31,7 @@ const PasswordlessLogin: React.FC = () => {
   const [email, setEmail] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const startPasswordlessLoginLoading = useSelector((state: any) => {
     return state.auth.startPasswordlessLoginLoading;
@@ -132,7 +132,8 @@ const PasswordlessLogin: React.FC = () => {
       <PasswordlessLoginConfirm
         sendPasswordlessEmail={sendPasswordlessEmail}
         showModal={showModal}
-        token={passwordlessLoginToken}
+        token="asdf" //{passwordlessLoginToken}
+        email={email}
       />
     </IonContent>
   );

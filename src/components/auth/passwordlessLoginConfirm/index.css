@@ -1,0 +1,64 @@
+.confirmCodeCard {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+}
+
+.spamText {
+  max-width: 260px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.confirmCodeModal .modal-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.confirmCodeCard a {
+  text-decoration: none;
+  color: #737373;
+  margin: 0 auto;
+}
+
+.mailIcons {
+  padding: 20px;
+}
+
+.mailImage {
+  margin-right: 5px;
+}
+
+.outlookIcon {
+  float: right;
+}
+
+@media only screen and (max-width: 400px) {
+  .mailIcons {
+    margin: 0px auto;
+    padding: 30px 0;
+  }
+  .gmailIcon {
+    margin: 0 auto;
+    padding: 0;
+  }
+  .outlookIcon {
+    float: none;
+    padding: 0;
+  }
+
+
+}
+
+@media only screen and (max-width: 410px) {
+  .gmailIcon {
+    padding-right: 9px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .gmailIcon {
+    padding-right: 4px;
+  }
+}
