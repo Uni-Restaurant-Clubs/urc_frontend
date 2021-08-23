@@ -134,6 +134,7 @@ const PasswordlessLogin: React.FC = () => {
         showModal={showModal}
         token="asdf" //{passwordlessLoginToken}
         email={email}
+        setShowModal={setShowModal}
       />
     </IonContent>
   );
