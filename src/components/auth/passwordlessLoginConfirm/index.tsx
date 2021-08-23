@@ -89,7 +89,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
       { code, token }));
     if (res && res.length > 0) {
       setCode("");
-      window.location.reload();
+      window.location.href="/";
     } else {
     }
   };
@@ -144,7 +144,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
          </IonCardHeader>
          <br/>
           <IonCardContent>
-            <p>We’ve sent a 6-number code to montylennie@gmail.com. The code expires shortly, so please enter it soon.</p>
+            <p>We’ve sent a 6-number code to {email}. The code expires shortly, so please enter it soon.</p>
             <br/>
             <IonItem>
               <div>

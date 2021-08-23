@@ -21,7 +21,7 @@ const LogoutButton: React.FC = () => {
 
   const logoutUser = async () => {
     await dispatch(authActions.logoutUser());
-    window.location = "/login";
+    window.location.href = "/login";
   };
 
   return (

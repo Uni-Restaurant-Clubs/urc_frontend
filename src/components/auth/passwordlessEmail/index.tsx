@@ -44,14 +44,12 @@ const PasswordlessLogin: React.FC = () => {
   });
 
   const closeModal = () => {
-    setEmail("");
     setShowModal(false);
   }
 
   const sendPasswordlessEmail = async () => {
     let res = await dispatch(authActions.startPasswordlessLogin(email));
     if (res && res.length > 0) {
-      setEmail("");
       setShowModal(true)
     } else if (apiError) {
     }

@@ -47,7 +47,7 @@ const passwordlessLoginConfirm = (data: any) => async (dispatch: any) => {
       });
       return null;
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error?.response?.status === 400) {
       error = "The code you entered is not valid. Please make sure you are using the last code received."
     } else if (error?.response?.status === 401) {
@@ -74,11 +74,11 @@ const startPasswordlessLogin = (email: any) => async (dispatch: any) => {
     } else {
       dispatch({
         type: actionTypes.START_PASSWORDLESS_FAIL,
-        payload: error || "Oops looks like something went wrong. Please try again soon"
+        payload: "Oops looks like something went wrong. Please try again soon"
       });
       return null;
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error?.response?.status === 400) {
       error = "You must enter a valid email address."
     } else {
