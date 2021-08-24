@@ -16,6 +16,7 @@ import Header from "../../../components/Header";
 import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
 import ReviewArticle from "../../../components/ReviewArticle";
 import ReviewRestaurantInfo from "../../../components/ReviewRestaurantInfo";
+import WPCredits from "../../../components/reviews/writerPhotographerCredits";
 import "./index.css"
 
 
@@ -46,6 +47,10 @@ const ReviewPage: React.FC = () => {
               photos={review?.photos} />
             <br />
             <br />
+            <WPCredits
+              writer={review?.writer}
+              photographer={review?.photographer}
+            />
             <ReviewArticle title={review?.article_title} article={review?.article} />
           </IonCardContent>
         </IonCard>
