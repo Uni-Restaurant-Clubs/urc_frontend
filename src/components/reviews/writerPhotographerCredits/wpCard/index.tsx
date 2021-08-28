@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   IonButton,
   IonRow,
@@ -24,7 +24,8 @@ import "./index.css"
 interface Person {
   first_name: string,
   last_name: string,
-  photo: string
+  photo: string,
+  public_unique_username: string,
 }
 
 const WPCard: React.FC<{person: Person, contentType: string;}> = (
@@ -38,29 +39,38 @@ const WPCard: React.FC<{person: Person, contentType: string;}> = (
     }
   }
 
-  return (
-    <IonCard className="wpCreditsCard">
-      <IonRow>
-        <IonCol className="wpCreditsImageCol">
-          <IonThumbnail className="wpCreditsImage">
-            <IonImg src={person?.photo} />
-          </IonThumbnail>
-        </IonCol>
-        <IonCol>
-          <IonCardHeader className="wpCreditsHeader">
-            <IonCardTitle className="wpCreditsTitle">
-              {contentType}
-            </IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent className="wpCreditsContent">
-            {fullName()}
-          </IonCardContent>
-          <IonButton className="wpProfileButton" fill="clear"
-                     size="small">View Profile</IonButton>
-        </IonCol>
-      </IonRow>
+  const url = () => {
+    return "/" + person?.public_unique_username;
+  }
 
-    </IonCard>
+  return (
+    <>
+      { person &&
+        <Link className="menuListItem" replace to={url}>
+          <IonCard className="wpCreditsCard">
+            <IonRow>
+              <IonCol className="wpCreditsImageCol">
+                <IonThumbnail className="wpCreditsImage">
+                  <IonImg src={person?.photo} />
+                </IonThumbnail>
+              </IonCol>
+              <IonCol>
+                <IonCardHeader className="wpCreditsHeader">
+                  <IonCardTitle className="wpCreditsTitle">
+                    {contentType}
+                  </IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent className="wpCreditsContent">
+                  {fullName()}
+                </IonCardContent>
+                <IonButton className="wpProfileButton" fill="clear"
+                           size="small">View Profile</IonButton>
+              </IonCol>
+            </IonRow>
+          </IonCard>
+        </Link>
+      }
+    </>
   );
 };
 

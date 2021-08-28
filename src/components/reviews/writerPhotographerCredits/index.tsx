@@ -17,19 +17,14 @@ import {
 import "./index.css"
 import WPCard from "./wpCard"
 
-interface Writer {
+interface Creator {
   first_name: string,
   last_name: string,
-  photo: string
+  photo: string,
+  public_unique_username: string,
 }
 
-interface Photographer {
-  first_name: string,
-  last_name: string,
-  photo: string
-}
-
-const WPCredits: React.FC<{writer: Writer, photographer: Photographer;}> = (
+const WPCredits: React.FC<{writer: Creator, photographer: Creator;}> = (
   { writer, photographer }) => {
 
   return (

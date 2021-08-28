@@ -32,7 +32,7 @@ const ReviewPage: React.FC = () => {
     }
     getReview(id);
     // if id != id in state, then refetch
-  }, []);
+  }, [id]);
 
   return (
     <>

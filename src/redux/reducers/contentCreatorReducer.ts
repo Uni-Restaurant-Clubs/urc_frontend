@@ -50,7 +50,7 @@ const contentCreatorReducer = (state = initialState, action: any): any => {
         id: number,
       }
 
-      var ContentCreators: LooseObject = {};
+      var contentCreators: LooseObject = {};
       action.payload.forEach((contentCreator: ContentCreator) => {
         contentCreators[contentCreator.id] = contentCreator;
       })
