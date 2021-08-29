@@ -42,9 +42,9 @@ const ContentCreatorPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Review" />
         <IonContent>
-          <div className="contentCreatorPage">
-            { creator &&
-              <div className="contentCreatorContainer">
+          <IonGrid className="contentCreatorPage">
+            <IonRow>
+              <IonCol sizeXs="12" sizeSm="12" sizeMd="4" sizeLg="4">
                 <IonCard className="creatorInfoCard">
                   <IonCardContent>
                     <IonThumbnail className="creatorProfileImage">
@@ -56,15 +56,18 @@ const ContentCreatorPage: React.FC = () => {
                     <SocialMediaIcons creator={creator} />
                   </IonCardContent>
                 </IonCard>
+              </IonCol>
+              <IonCol sizeXs="12" sizeSm="12" sizeMd="8" sizeLg="8">
                 <IonCard className="creatorBioCard">
                   <IonCardContent>
                     <IonCardTitle>About:</IonCardTitle>
-                    <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
+                    <br/>
+                    <div className="creatorBioText" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
                   </IonCardContent>
                 </IonCard>
-              </div>
-            }
-          </div>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
         </IonContent>
       </IonPage>
     </>
