@@ -61,7 +61,6 @@ const ContentCreatorPage: React.FC = () => {
                 <IonCard className="creatorBioCard">
                   <IonCardContent>
                     <IonCardTitle>About:</IonCardTitle>
-                    <br/>
                     <div className="creatorBioText" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
                   </IonCardContent>
                 </IonCard>

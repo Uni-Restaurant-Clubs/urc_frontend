@@ -42,3 +42,10 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.creatorBioText p {
+  line-height: 25px;
+  font-size: 15px;
+  padding: 20px 0px;
+}
+
