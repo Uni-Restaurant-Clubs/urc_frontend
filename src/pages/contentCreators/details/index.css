@@ -12,15 +12,33 @@
 }
 
 .creatorProfileImage {
-  width: 250px;
-  height: 250px;
+  width: 100% !important;
+  height: auto !important;
   margin-bottom: 25px;
-  margin-right: 20px;
 }
 
 .creatorInfoCard {
-  width: 350px;
+  width: 300px;
+  margin: auto;
+  flex: 0 0 30%;
+  height: 450px;
   margin-left: 0;
   margin-top: 0;
   padding: 10px;
+}
+
+.creatorBioCard {
+  margin: auto;
+  width: 700px;
+  padding: 20px;
+  height: 450px;
+}
+
+.contentCreatorPage {
+  padding: 20px;
+}
+
+.contentCreatorContainer {
+  display: flex;
+  flex-wrap: wrap;
 }

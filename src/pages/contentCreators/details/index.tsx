@@ -42,42 +42,29 @@ const ContentCreatorPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Review" />
         <IonContent>
-          <IonCard>
-            <IonCardContent>
-              { creator &&
-                <IonGrid>
-                  <IonRow>
-                    <IonCol>
-                      <IonThumbnail className="creatorProfileImage">
-                        <IonImg src={creator?.photo}/>
-                      </IonThumbnail>
-                    </IonCol>
-                    <IonCol>
-                      <IonCard className="creatorInfoCard">
-                        <IonCardContent>
-                          <IonCardTitle>{creator?.name}</IonCardTitle>
-                          <p>{creator?.creator_type}</p>
-                          <br />
-                          <SocialMediaIcons creator={creator} />
-                        </IonCardContent>
-                      </IonCard>
-                    </IonCol>
-                  </IonRow>
-                  <IonRow>
-                    <IonCol>
-                      { creator?.bio &&
-                        <>
-                          <br />
-                          <IonCardTitle>About:</IonCardTitle>
-                          <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
-                        </>
-                      }
-                    </IonCol>
-                  </IonRow>
-                </IonGrid>
-              }
-            </IonCardContent>
-          </IonCard>
+          <div className="contentCreatorPage">
+            { creator &&
+              <div className="contentCreatorContainer">
+                <IonCard className="creatorInfoCard">
+                  <IonCardContent>
+                    <IonThumbnail className="creatorProfileImage">
+                      <IonImg src={creator?.photo}/>
+                    </IonThumbnail>
+                    <IonCardTitle>{creator?.name}</IonCardTitle>
+                    <p>{creator?.creator_type}</p>
+                    <br />
+                    <SocialMediaIcons creator={creator} />
+                  </IonCardContent>
+                </IonCard>
+                <IonCard className="creatorBioCard">
+                  <IonCardContent>
+                    <IonCardTitle>About:</IonCardTitle>
+                    <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
+                  </IonCardContent>
+                </IonCard>
+              </div>
+            }
+          </div>
         </IonContent>
       </IonPage>
     </>
