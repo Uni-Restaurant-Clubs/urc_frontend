@@ -4,7 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   IonButton,
+  IonImg,
+  IonThumbnail,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonIcon,
   IonContent,
+  IonCardTitle,
   IonCard,
   IonHeader,
   IonCardContent,
@@ -13,34 +20,65 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import Header from "../../../components/Header";
+import SocialMediaIcons from "../../../components/contentCreators/socialMediaIcons";
 import "./index.css"
 
 
 const ContentCreatorPage: React.FC = () => {
 
   const dispatch = useDispatch();
-  const { id } = useParams<{ id: string }>();
-  const contentCreator = useSelector((state: any) => state.contentCreators[id]);
-  //const [creatorType, setCreatorType] = useState("");
+  const { public_unique_username } = useParams<{ public_unique_username: string }>();
+  const creator = useSelector((state: any) => state.contentCreators.contentCreators[public_unique_username]);
 
   useEffect(() => {
-    const creatorType = window.location.pathname.split("/")[1];
-    async function getContentCreator(id: string, creatorType: string) {
-      let res = await dispatch(contentCreatorActions.getContentCreator({ id, creatorType }));
+    async function getContentCreator(public_unique_username: string) {
+      let res = await dispatch(contentCreatorActions.getContentCreator({ public_unique_username }));
     }
-    getContentCreator(id, creatorType);
-    // if id != id in state, then refetch
-  }, []);
+    getContentCreator(public_unique_username);
+  }, [public_unique_username]);
 
   return (
     <>
       <IonPage>
         <Header headertitle="Review" />
-        <IonCard className="reviewCard">
-          <IonCardContent>
-            Content Creator
-          </IonCardContent>
-        </IonCard>
+        <IonContent>
+          <IonCard>
+            <IonCardContent>
+              { creator &&
+                <IonGrid>
+                  <IonRow>
+                    <IonCol>
+                      <IonThumbnail className="creatorProfileImage">
+                        <IonImg src={creator?.photo}/>
+                      </IonThumbnail>
+                    </IonCol>
+                    <IonCol>
+                      <IonCard className="creatorInfoCard">
+                        <IonCardContent>
+                          <IonCardTitle>{creator?.name}</IonCardTitle>
+                          <p>{creator?.creator_type}</p>
+                          <br />
+                          <SocialMediaIcons creator={creator} />
+                        </IonCardContent>
+                      </IonCard>
+                    </IonCol>
+                  </IonRow>
+                  <IonRow>
+                    <IonCol>
+                      { creator?.bio &&
+                        <>
+                          <br />
+                          <IonCardTitle>About:</IonCardTitle>
+                          <div className="reviewArticle" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
+                        </>
+                      }
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+              }
+            </IonCardContent>
+          </IonCard>
+        </IonContent>
       </IonPage>
     </>
   );

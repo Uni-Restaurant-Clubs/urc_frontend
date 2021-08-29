@@ -24,36 +24,38 @@ const ReviewPage: React.FC = () => {
 
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
-  const review = useSelector((state: any) => state.reviews.reviews[id]);
+  let review = useSelector((state: any) => state.reviews.reviews[id]);
 
   useEffect(() => {
-    async function getReview(id: string) {
-      let res = await dispatch(reviewActions.getReview({ id }));
+    const getReview = async (id: string) => {
+      return await dispatch(reviewActions.getReview({ id }));
     }
+
     getReview(id);
-    // if id != id in state, then refetch
   }, [id]);
 
   return (
     <>
       <IonPage>
         <Header headertitle="Review" />
-        <IonCard className="reviewCard">
-          <ReviewRestaurantInfo restaurant={review?.restaurant}/>
-          <br />
-          <IonCardContent>
-            <ReviewImageThumbnails
-              title={review?.article_title}
-              photos={review?.photos} />
+        { review &&
+          <IonCard className="reviewCard">
+            <ReviewRestaurantInfo restaurant={review?.restaurant}/>
             <br />
-            <br />
-            <WPCredits
-              writer={review?.writer}
-              photographer={review?.photographer}
-            />
-            <ReviewArticle title={review?.article_title} article={review?.article} />
-          </IonCardContent>
-        </IonCard>
+            <IonCardContent>
+              <ReviewImageThumbnails
+                title={review?.article_title}
+                photos={review?.photos} />
+              <br />
+              <br />
+              <WPCredits
+                writer={review?.writer}
+                photographer={review?.photographer}
+              />
+              <ReviewArticle title={review?.article_title} article={review?.article} />
+            </IonCardContent>
+          </IonCard>
+        }
       </IonPage>
     </>
   );

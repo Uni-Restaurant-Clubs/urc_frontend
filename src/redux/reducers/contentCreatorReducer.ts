@@ -1,10 +1,7 @@
 import * as actionTypes from "../types/contentCreatorType";
 
 const initialState = {
-  contentCreators: {
-    writers: {},
-    photographers: {}
-  },
+  contentCreators: {},
   getContentCreatorFail: "",
   getContentCreatorLoading: false,
   getContentCreatorsFail: "",
@@ -24,7 +21,7 @@ const contentCreatorReducer = (state = initialState, action: any): any => {
         ...state,
         contentCreators: {
           ...state.contentCreators,
-          [action.payload.id]: action.payload
+          [action.payload.public_unique_username]: action.payload
         },
         getContentCreatorLoading: false,
         getContentCreatorFail: "",

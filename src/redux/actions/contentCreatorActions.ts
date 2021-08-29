@@ -9,7 +9,7 @@ import { Storage } from "@capacitor/storage";
 const getContentCreator = (data: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.GET_CONTENT_CREATOR_REQUEST, payload: true });
-    const url = getContentCreatorUrl + data.id + "?creator_type=" + data.creatorType;
+    const url = getContentCreatorUrl + data.public_unique_username;
     let res = await axios.get(url);
     dispatch({ type: actionTypes.GET_CONTENT_CREATOR_SUCCESS, payload: res.data });
     return res;
