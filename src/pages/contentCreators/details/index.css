@@ -7,6 +7,9 @@
   display: flex;
 }
 
+.creatorReviewsTitle {
+  padding: 30px 0 0 18px;
+}
 
 .socialIcon {
   width: 40px !important;
@@ -23,6 +26,7 @@
 
 .creatorBioCard {
   height: 100%;
+  max-height: 400px;
   padding: 20px;
 }
 
@@ -45,7 +49,6 @@
   .creatorProfileImageCard {
     margin-right: 40px;
   }
-
 }
 
 @media only screen and (max-width: 1500px) {
@@ -64,21 +67,45 @@
   .creatorProfileImage {
     width: 90% !important;
   }
+  .creatorBioCard {
+    max-height: 500px;
+  }
 }
 
 @media only screen and (max-width: 575px) {
   .creatorProfileImage {
     width: 50% !important;
   }
+  .creatorBioCard {
+    max-height: 550px;
+    padding: 5px;
+  }
+
+  .creatorReviewsCard {
+    padding: 0 !important;
+  }
+
+  .creatorReviewsContent {
+    padding: 0 !important;
+  }
+
 }
 
 @media only screen and (max-width: 475px) {
   .creatorProfileImage {
     width: 80% !important;
   }
+  .creatorBioCard {
+    max-height: 600px;
+  }
 }
 @media only screen and (max-width: 400px) {
   .creatorProfileImage {
     width: 100% !important;
   }
+  .creatorBioCard {
+    height: 800px;
+    max-height: 800px;
+  }
+
 }

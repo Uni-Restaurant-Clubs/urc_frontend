@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   IonButton,
+  IonList,
   IonImg,
   IonThumbnail,
   IonGrid,
@@ -21,6 +22,7 @@ import {
 } from "@ionic/react";
 import Header from "../../../components/Header";
 import SocialMediaIcons from "../../../components/contentCreators/socialMediaIcons";
+import ReviewListItem from "../../../components/reviews/listItem";
 import "./index.css"
 
 
@@ -36,6 +38,18 @@ const ContentCreatorPage: React.FC = () => {
     }
     getContentCreator(public_unique_username);
   }, [public_unique_username]);
+
+  const reviewItems = creator?.reviews?.map((item: any) => {
+    return (
+      <ReviewListItem
+        key={item?.id}
+        id={item?.id}
+        name={item?.restaurant_name}
+        title={item?.article_title}
+        photo={item?.photo}
+      />
+    )
+  })
 
   return (
     <>
@@ -71,6 +85,15 @@ const ContentCreatorPage: React.FC = () => {
                   </IonCol>
                 </IonRow>
               </IonGrid>
+            </IonCardContent>
+          </IonCard>
+          <IonCard className="creatorReviewsCard">
+            <IonCardContent className="creatorReviewsContent">
+              <IonCardTitle className="creatorReviewsTitle">Reviews Made</IonCardTitle>
+              <br />
+              <IonList>
+                {reviewItems}
+              </IonList>
             </IonCardContent>
           </IonCard>
         </IonContent>
