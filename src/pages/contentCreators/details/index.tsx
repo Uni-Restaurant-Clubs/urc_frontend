@@ -42,31 +42,37 @@ const ContentCreatorPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Review" />
         <IonContent>
-          <IonGrid className="contentCreatorPage">
-            <IonRow>
-              <IonCol sizeXs="12" sizeSm="12" sizeMd="4" sizeLg="4">
-                <IonCard className="creatorInfoCard">
-                  <IonCardContent>
+          <IonCard className="creatorInfoCard">
+            <IonCardContent>
+              <IonGrid>
+                <IonRow>
+                  <IonCol className="creatorProfileImageCard" sizeXs="12" sizeSm="4" sizeMd="4" sizeLg="4">
                     <IonThumbnail className="creatorProfileImage">
                       <IonImg src={creator?.photo}/>
                     </IonThumbnail>
+                  </IonCol>
+                  <IonCol sizeXs="12" sizeSm="6" sizeMd="6" sizeLg="6">
                     <IonCardTitle>{creator?.name}</IonCardTitle>
                     <p>{creator?.creator_type}</p>
                     <br />
                     <SocialMediaIcons creator={creator} />
-                  </IonCardContent>
-                </IonCard>
-              </IonCol>
-              <IonCol sizeXs="12" sizeSm="12" sizeMd="8" sizeLg="8">
-                <IonCard className="creatorBioCard">
-                  <IonCardContent>
-                    <IonCardTitle>About:</IonCardTitle>
-                    <div className="creatorBioText" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
-                  </IonCardContent>
-                </IonCard>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
+            </IonCardContent>
+          </IonCard>
+          <IonCard className="creatorBioCard">
+            <IonCardContent>
+              <IonGrid>
+                <IonRow>
+                  <IonCol sizeXs="12" sizeSm="12" sizeMd="12" sizeLg="12">
+                      <IonCardTitle>About:</IonCardTitle>
+                      <div className="creatorBioText" dangerouslySetInnerHTML={{ __html: creator?.bio }} />
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
+            </IonCardContent>
+          </IonCard>
         </IonContent>
       </IonPage>
     </>
