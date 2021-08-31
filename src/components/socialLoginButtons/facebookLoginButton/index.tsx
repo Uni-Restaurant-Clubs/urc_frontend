@@ -7,9 +7,8 @@ declare global {
     }
 }
 
-class FacebookLoginButton extends Component {
-  
-  async signIn(): Promise<void> {
+const FacebookLoginButton: React.FC = () => {
+  const signIn = async () => {
     window.FB.login(function(response:any) {
       console.log("auth response", response);
         if (response.authResponse) {
@@ -26,12 +25,11 @@ class FacebookLoginButton extends Component {
     });
   }
 
-  render() {
-    return (
-        <IonButton className="login-button" onClick={() => this.signIn()} expand="full" fill="solid" color="primary">
-        Login with Facebook
-      </IonButton>
-    )
-  }
-}
+  return (    
+      <IonButton className="login-button" onClick={() => signIn()} expand="full" fill="solid" color="primary">
+      Login with Facebook
+    </IonButton> 
+  )
+};
+
 export default FacebookLoginButton;
