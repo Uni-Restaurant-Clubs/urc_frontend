@@ -55,7 +55,7 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
     }
   };
   const slides = photos.map((image, i) =>
-    <IonSlide>
+    <IonSlide key={i}>
       <IonGrid>
         <IonRow>
           <IonCol>

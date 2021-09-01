@@ -19,6 +19,7 @@ import {
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
+import ReviewListItem from "../../../components/reviews/listItem";
 import "./index.css"
 
 const ReviewsPage: React.FC = () => {
@@ -48,22 +49,12 @@ const ReviewsPage: React.FC = () => {
   const reviewItems = Object.keys(reviews).map((key, i) => {
     let review = reviews[key as keyof Review];
     return (
-      <Link className="reviewItemLink" key={i} to={"/reviews/" + key}>
-        <IonItem href="#" className="reviewItem" key={i}>
-          <div>
-            <IonThumbnail key={i} className="reviewsPhotoThumbnail">
-              <IonImg src={review?.featured_photo?.photo} />
-            </IonThumbnail>
-         </div>
-          <IonLabel className="reviewItemLabel">
-            <h2>{review?.restaurant?.name}</h2>
-            <p>{review?.article_title}</p>
-            <IonText color="danger">
-              <p>40% off</p>
-            </IonText>
-          </IonLabel>
-        </IonItem>
-      </Link>
+      <ReviewListItem
+        id={key}
+        name={review?.restaurant?.name}
+        title={review?.article_title}
+        photo={review?.featured_photo?.photo}
+      />
     )
   })
 

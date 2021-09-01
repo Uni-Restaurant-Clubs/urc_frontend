@@ -8,7 +8,7 @@
 }
 
 .reviewPhotoThumbnail {
-  --size: 150px;
+  --size: 80px;
   margin-right: 5px;
   margin-bottom: 5px;
   cursor: pointer;
@@ -16,18 +16,18 @@
 
 @media only screen and (max-width: 1440px) {
   .reviewPhotoThumbnail {
-    --size: 125px;
+    --size: 70px;
   }
 }
 @media only screen and (max-width: 900px) {
   .reviewPhotoThumbnail {
-    --size: 125px;
+    --size: 70px;
   }
 }
 
 @media only screen and (max-width: 426px) {
   .reviewPhotoThumbnail {
-    --size: 100px;
+    --size: 50px;
   }
 }
 

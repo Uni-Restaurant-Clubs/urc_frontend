@@ -3,6 +3,10 @@
   overflow: scroll;
 }
 
+.photoThumbnails {
+  margin-top: 10px;
+}
+
 @media only screen and (max-width: 1200px) {
   .reviewCard {
     padding: 20px 40px;

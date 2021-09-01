@@ -1,16 +1,6 @@
 import { Route, useHistory } from "react-router-dom";
 import { IonApp, IonRouterOutlet, IonSplitPane} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ForgotPassword from "./pages/ForgotPassword";
-
-import Home from "./pages/Home";
-import ReviewDetails from "./pages/reviews/details";
-import PrivateRoute from "./components/PrivateRoute";
-import Menu from './components/Menu';
-import Header from "./components/Header";
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -35,6 +25,16 @@ import ResetPassword from "./pages/ResetPassword";
 import Reviews from "./pages/reviews/list";
 import Main from "./pages/Main";
 import AuthRoute from "./components/AuthRoute";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+
+import Home from "./pages/Home";
+import ReviewDetails from "./pages/reviews/details";
+import ContentCreatorDetails from "./pages/contentCreators/details";
+import PrivateRoute from "./components/PrivateRoute";
+import Menu from './components/Menu';
+import Header from "./components/Header";
 
 const App: React.FC = () => {
   const history = useHistory();
@@ -46,6 +46,7 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet animated={false} id="main">
         		<Route exact path="/reviews/:id" component={ReviewDetails} />
+        		<Route exact path="/:public_unique_username" component={ContentCreatorDetails} />
         		<AuthRoute exact path="/register" component={Login} />
         		<AuthRoute exact path="/login" component={Login} />
         		<AuthRoute exact path="/enter_new_password" component={ResetPassword} />
