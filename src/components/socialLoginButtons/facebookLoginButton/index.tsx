@@ -20,15 +20,15 @@ const FacebookLoginButton: React.FC = () => {
          console.log('User cancelled login or did not fully authorize.');
         }
     }, {
-        scope: 'email', 
+        scope: 'email',
         return_scopes: true
     });
   }
 
-  return (    
+  return (
       <IonButton className="login-button" onClick={() => signIn()} expand="full" fill="solid" color="primary">
       Login with Facebook
-    </IonButton> 
+    </IonButton>
   )
 };
 

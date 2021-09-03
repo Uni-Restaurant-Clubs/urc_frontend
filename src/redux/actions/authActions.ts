@@ -15,6 +15,13 @@ import { Plugins } from '@capacitor/core';
 import "@codetrix-studio/capacitor-google-auth";
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
+declare global {
+  interface Window {
+    FB:any;
+  }
+}
+
+const FB = window.FB;
 
 const setUserState = (payload: any) => {
   return {
@@ -38,7 +45,6 @@ const passwordlessLoginConfirm = (data: any) => async (dispatch: any) => {
       });
       return res.data.session_token;
     } else {
-      debugger;
       dispatch({
         type: actionTypes.FINISH_PASSWORDLESS_FAIL,
         payload: res?.data?.message || {
@@ -91,14 +97,29 @@ const startPasswordlessLogin = (email: any) => async (dispatch: any) => {
   }
 };
 
-const initiateOauth = (provider: string) => async (dispatch: any) => {
+const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) => {
+  const _cb = cb;
   try {
     dispatch({ type: actionTypes.OAUTH_INITIAL_REQUEST, payload: true });
     let result;
     if (provider === "google") {
       result = await GoogleAuth.signIn();
-      console.log("result", result);
+
+    } else if (provider === "facebook") {
+      FB.login(function(response:any) {
+
+          if (response.authResponse) {
+            _cb(response?.authResponse);
+
+          } else {
+           console.log('User cancelled login or did not fully authorize.');
+          }
+      }, {
+        scope: 'email',
+        return_scopes: true
+      });
     }
+
     if (result && result.serverAuthCode) {
       dispatch({ type: actionTypes.OAUTH_INITIAL_SUCCESS });
       return result.serverAuthCode;

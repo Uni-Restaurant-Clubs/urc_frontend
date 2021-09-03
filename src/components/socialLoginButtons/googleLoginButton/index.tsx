@@ -32,23 +32,29 @@ const GoogleLoginButton: React.FC = () => {
   }, []);
 
   // 500 from server is showing blank alert popup
-  const signIn = async () => {
+  const signIn = async (provider: string) => {
+    const tokenField = provider == "facebook" ? "token" : "authorization_code";
     try {
-      let authCode = await dispatch(authActions.initiateOauth("google"));
-      if (authCode) {
-        let res = await dispatch(authActions.connectOauth(
-          {provider: "google", authorization_code: authCode}));
-        if (res && res.length > 0) {
-          window.location.reload();
+      dispatch(authActions.initiateOauth(provider, async (authCode: string) => {
+        if (authCode) {
+          let res = await dispatch(authActions.connectOauth(
+            {provider: provider, tokenField: authCode}));
+          if (res && res.length > 0) {
+            window.location.reload();
+          } else {
+            setShowAlert(true);
+          }
         } else {
           setShowAlert(true);
         }
-      } else {
-        setShowAlert(true);
-      }
+      }));
     } catch (error) {
       setShowAlert(true);
     }
+  }
+
+  const signInFacebook = async () => {
+
   }
 
   return (
@@ -83,10 +89,13 @@ const GoogleLoginButton: React.FC = () => {
         fill="outline"
         expand="block"
         color="medium"
-        onClick={() => signIn()}>
+        onClick={() => signIn("google")}>
         <IonImg className="googleIcon"
           src="https://urc-public-images.s3.us-east-2.amazonaws.com/google-logo-9827.png"/>
         Connect with Google
+      </IonButton>
+      <IonButton className="login-button" onClick={() => signIn("facebook")} expand="full" fill="solid" color="primary">
+        Login with Facebook
       </IonButton>
     </>
   );
