@@ -33,12 +33,12 @@ const GoogleLoginButton: React.FC = () => {
 
   // 500 from server is showing blank alert popup
   const signIn = async (provider: string) => {
-    const tokenField = provider == "facebook" ? "token" : "authorization_code";
+    const tokenField = provider === "facebook" ? "token" : "authorization_code";
     try {
-      dispatch(authActions.initiateOauth(provider, async (authCode: string) => {
+      dispatch(authActions.initiateOauth(provider, async (authCode: any) => {
         if (authCode) {
           let res = await dispatch(authActions.connectOauth(
-            {provider: provider, tokenField: authCode}));
+            {provider: provider, [tokenField]: authCode}));
           if (res && res.length > 0) {
             window.location.reload();
           } else {

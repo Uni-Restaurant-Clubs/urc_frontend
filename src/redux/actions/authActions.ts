@@ -101,9 +101,22 @@ const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) 
   const _cb = cb;
   try {
     dispatch({ type: actionTypes.OAUTH_INITIAL_REQUEST, payload: true });
-    let result;
+    let result: any = {};
     if (provider === "google") {
       result = await GoogleAuth.signIn();
+      if (result && result.serverAuthCode) {
+        dispatch({ type: actionTypes.OAUTH_INITIAL_SUCCESS });
+        _cb(result.serverAuthCode);
+      } else {
+        debugger;
+        dispatch({
+          type: actionTypes.OAUTH_INITIAL_FAIL,
+          payload: result || {
+            message: "Oops looks like something went wrong. Please try again soon",
+          },
+        });
+        _cb("");
+      }
 
     } else if (provider === "facebook") {
       FB.login(function(response:any) {
@@ -112,7 +125,13 @@ const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) 
             _cb(response?.authResponse);
 
           } else {
-           console.log('User cancelled login or did not fully authorize.');
+            dispatch({
+              type: actionTypes.OAUTH_INITIAL_FAIL,
+              payload: result || {
+                message: "Oops looks like something went wrong. Please try again soon",
+              },
+            });
+            _cb("");
           }
       }, {
         scope: 'email',
@@ -120,19 +139,8 @@ const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) 
       });
     }
 
-    if (result && result.serverAuthCode) {
-      dispatch({ type: actionTypes.OAUTH_INITIAL_SUCCESS });
-      return result.serverAuthCode;
-    } else {
-      dispatch({
-        type: actionTypes.OAUTH_INITIAL_FAIL,
-        payload: result || {
-          message: "Oops looks like something went wrong. Please try again soon",
-        },
-      });
-      return null;
-    }
   } catch (error) {
+    debugger;
     console.log("error", error);
     let fullError = null;
     if (error?.error === "popup_closed_by_user") {
