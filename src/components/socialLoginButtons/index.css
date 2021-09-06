@@ -1,3 +1,17 @@
 .socialButtonsText {
   text-align: center;
 }
+
+.googleIcon {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.googleLoginButton {
+  margin-bottom: 10px;
+}
+
+.facebookIcon {
+  height: 27px;
+  margin-right: 10px;
+}

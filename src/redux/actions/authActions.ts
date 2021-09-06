@@ -108,7 +108,6 @@ const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) 
         dispatch({ type: actionTypes.OAUTH_INITIAL_SUCCESS });
         _cb(result.serverAuthCode);
       } else {
-        debugger;
         dispatch({
           type: actionTypes.OAUTH_INITIAL_FAIL,
           payload: result || {
@@ -140,8 +139,6 @@ const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) 
     }
 
   } catch (error) {
-    debugger;
-    console.log("error", error);
     let fullError = null;
     if (error?.error === "popup_closed_by_user") {
      error = "Looks like you closed the popup window. Please click connect again to start over.";
@@ -160,6 +157,7 @@ const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) 
         message: "Oops looks like something went wrong. Please try again soon",
       },
     });
+    _cb("");
   }
 };
 
