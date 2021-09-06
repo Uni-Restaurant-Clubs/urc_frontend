@@ -44,7 +44,9 @@ const ReviewPage: React.FC = () => {
             <IonCardContent className="photoThumbnails">
               <ReviewImageThumbnails
                 title={review?.article_title}
-                photos={review?.photos} />
+                photos={review?.photos}
+                featuredPhoto={review?.featured_photo}
+              />
               <br />
               <br />
               <WPCredits

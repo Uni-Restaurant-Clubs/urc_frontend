@@ -7,6 +7,11 @@
   padding: 20px 80px;
 }
 
+.reviewFeaturePhoto {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
 .reviewPhotoThumbnail {
   --size: 80px;
   margin-right: 5px;

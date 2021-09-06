@@ -20,7 +20,7 @@ interface Props {
   photos: Image[]
 }
 
-const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
+const ImageSlider: React.FC<{photos: Image[], selectedImage: any;}> = (
   { photos, selectedImage }) => {
   photos = photos || [];
 
@@ -28,7 +28,6 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
     initialSlide: selectedImage,
     speed: 400
   };
-
 
   const mySlides = useRef(null);
   const [swiper, setSwiper] = useState<any>({});
@@ -55,15 +54,15 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
     }
   };
   const slides = photos.map((image, i) =>
-    <IonSlide key={i}>
+    <IonSlide key={image.id}>
       <IonGrid>
         <IonRow>
           <IonCol>
             <br/>
-            <IonLabel>"{image.name}"</IonLabel>
+            <IonLabel>{image.name}</IonLabel>
             <br/>
             <br/>
-            <IonImg className="sliderSingleImage" src={image.photo} />
+            <IonImg key={image.id} className="sliderSingleImage" src={image.photo} />
           </IonCol>
         </IonRow>
       </IonGrid>
@@ -72,13 +71,15 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
   return (
     <>
       <IonContent>
-        <IonSlides
-          className="imageSlider"
-          onIonSlidesDidLoad={init}
-          ref={mySlides}
-          options={slideOpts}>
-          {slides}
-        </IonSlides>
+        { selectedImage !== null &&
+          <IonSlides
+            className="imageSlider"
+            onIonSlidesDidLoad={init}
+            ref={mySlides}
+            options={slideOpts}>
+            {slides}
+          </IonSlides>
+        }
         <div style={{ textAlign: "center", paddingTop: 12 }}>
           <IonButton className="imagePrevButton" color="light"
             onClick={() => onBtnClicked("prev")}
