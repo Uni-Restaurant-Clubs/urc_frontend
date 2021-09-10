@@ -27,7 +27,6 @@
     <meta name="apple-mobile-web-app-title" content="Ionic App" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   </head>
-
   <body>
     <div id="root"></div>
     <script>
@@ -36,10 +35,10 @@
           appId      : '411960920126681',
           cookie     : true,
           xfbml      : true
-        });          
-        FB.AppEvents.logPageView();          
+        });
+        window.FB.AppEvents.logPageView();
       };
-    
+
       (function(d, s, id){
          var js, fjs = d.getElementsByTagName(s)[0];
          if (d.getElementById(id)) {return;}

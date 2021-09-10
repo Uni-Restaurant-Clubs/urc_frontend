@@ -52,7 +52,7 @@ const App: React.FC = () => {
         		  <Route exact path="/:public_unique_username" component={ContentCreatorDetails} />
         		  <AuthRoute exact path="/register" component={Login} />
         		  <AuthRoute exact path="/login" component={Login} />
-        		  <AuthRoute exact path="/contact" component={Contact} />
+        		  <Route exact path="/contact" component={Contact} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
         		  <AuthRoute

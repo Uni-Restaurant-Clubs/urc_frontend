@@ -22,6 +22,7 @@ import { contactActions } from "../../redux/actions/contactActions";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
 import airbrake from "../../utils/airbrake";
+import useScript from '../../hooks/useScript';
 
 interface errorHandling {
   nameError: null;
@@ -30,6 +31,7 @@ interface errorHandling {
 }
 
 const Login: React.FC = () => {
+  useScript("https://www.google.com/recaptcha/api.js?render=6LfcS1gcAAAAAKV85afud4ix3GSw_dNyUzoJaQhH");
   const dispatch = useDispatch();
 
   const [nameError, setNameError] = useState<errorHandling | any>(null);
