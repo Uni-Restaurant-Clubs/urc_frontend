@@ -49,22 +49,24 @@ const Login: React.FC = () => {
   const apiError = useSelector((state: any) => state.contact.fail);
 
   const sendEmail = async () => {
-    let res = await dispatch(contactActions.sendEmail({ email, name, text }));
-    if (res && res.length > 0) {
-      setName(null);
-      setEmail(null);
-      setText(null);
-      setAlertMessage("Email Sent! Thank you for contacting us");
-      setShowAlert(true);
-    } else if (apiError) {
-      setAlertMessage("Oops looks like there was an issue. Please try again soon");
-      setShowAlert(true);
-      airbrake.notify({
-        error: apiError,
-        params: { name, email, text }
-      });
-
-    }
+    grecaptcha.ready(async () => {
+      let recaptchaToken = await grecaptcha.execute("6LfcS1gcAAAAAKV85afud4ix3GSw_dNyUzoJaQhH", { action: 'submit' });
+      let res = await dispatch(contactActions.sendEmail({ email, name, text, recaptchaToken }));
+      if (res && res.length > 0) {
+        setName(null);
+        setEmail(null);
+        setText(null);
+        setAlertMessage("Email Sent! Thank you for contacting us");
+        setShowAlert(true);
+      } else if (apiError) {
+        setAlertMessage("Oops looks like there was an issue. Please try again soon");
+        setShowAlert(true);
+        airbrake.notify({
+          error: apiError,
+          params: { name, email, text }
+        });
+      }
+    });
   };
 
   useEffect(() => {
@@ -164,7 +166,7 @@ const Login: React.FC = () => {
                     Email text
                   </IonLabel>
                   <IonTextarea
-                    rows="5"
+                    rows={5}
                     placeholder="Enter text here...."
                     onIonChange={(e: any) => setText(e.target.value)}
                   />

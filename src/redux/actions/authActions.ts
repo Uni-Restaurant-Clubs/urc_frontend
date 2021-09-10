@@ -21,8 +21,6 @@ declare global {
   }
 }
 
-const FB = window.FB;
-
 const setUserState = (payload: any) => {
   return {
     type: actionTypes.ADD_ARTICLE,
@@ -118,6 +116,7 @@ const initiateOauth = (provider: string, cb: Function) => async (dispatch: any) 
       }
 
     } else if (provider === "facebook") {
+      const FB = window.FB;
       FB.login(function(response:any) {
 
           if (response.authResponse) {
