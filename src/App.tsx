@@ -28,6 +28,7 @@ import AuthRoute from "./components/AuthRoute";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
+import Contact from "./pages/contact";
 
 import Home from "./pages/Home";
 import ReviewDetails from "./pages/reviews/details";
@@ -51,6 +52,7 @@ const App: React.FC = () => {
         		  <Route exact path="/:public_unique_username" component={ContentCreatorDetails} />
         		  <AuthRoute exact path="/register" component={Login} />
         		  <AuthRoute exact path="/login" component={Login} />
+        		  <AuthRoute exact path="/contact" component={Contact} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
         		  <AuthRoute

@@ -15,7 +15,7 @@ import {
 import { Storage } from "@capacitor/storage";
 import { useLocation } from 'react-router-dom';
 import { logInOutline, eyeOutline, speedometerOutline, newspaperOutline,
-         personAddOutline, restaurantOutline
+         personAddOutline, restaurantOutline, mailOutline
        } from 'ionicons/icons';
 import './Menu.css';
 import LogoutButton from "./LogoutButton";
@@ -51,6 +51,13 @@ const appPages: AppPage[] = [
     mdIcon: restaurantOutline
   },
   {
+    title: 'Contact',
+    url: '/contact',
+    targetBlank: false,
+    iosIcon: mailOutline,
+    mdIcon: mailOutline
+  },
+  {
     title: 'Privacy Policy',
     url: 'https://www.iubenda.com/privacy-policy/25768068/full-legal',
     targetBlank: true,
@@ -81,7 +88,15 @@ const loggedInAppPages: AppPage[] = [
     targetBlank: false,
     iosIcon: restaurantOutline,
     mdIcon: restaurantOutline
-  }
+  },
+  {
+    title: 'Contact',
+    url: '/contact',
+    targetBlank: false,
+    iosIcon: mailOutline,
+    mdIcon: mailOutline
+  },
+
 ]
 
 const Menu: React.FC = () => {
