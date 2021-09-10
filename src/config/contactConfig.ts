@@ -1,2 +1,2 @@
 const baseUrl = process.env.REACT_APP_BASE_URL;
-export const sendEmailUrl = "contact";
+export const sendEmailUrl = baseUrl + "contact";

@@ -135,6 +135,18 @@ const Login: React.FC = () => {
               <div className="">
                 <IonItem>
                   <IonLabel
+                    color={nameError ? "danger" : ""}
+                    position="floating"
+                  >
+                    Name
+                  </IonLabel>
+                  <IonInput
+                    placeholder="Your Name"
+                    onIonChange={(e: any) => setName(e.target.value)}
+                  />
+                </IonItem>
+                <IonItem>
+                  <IonLabel
                     color={emailError ? "danger" : ""}
                     position="floating"
                   >
@@ -148,22 +160,10 @@ const Login: React.FC = () => {
                 </IonItem>
                 <IonItem>
                   <IonLabel
-                    color={nameError ? "danger" : ""}
-                    position="floating"
-                  >
-                    Name
-                  </IonLabel>
-                  <IonInput
-                    placeholder="Your Name"
-                    onIonChange={(e: any) => setName(e.target.value)}
-                  />
-                </IonItem>
-                <IonItem>
-                  <IonLabel
                     color={textError ? "danger" : ""}
                     position="floating"
                   >
-                    Email text
+                    Email Text
                   </IonLabel>
                   <IonTextarea
                     rows={5}

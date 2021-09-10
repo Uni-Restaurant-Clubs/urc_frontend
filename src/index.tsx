@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
@@ -7,9 +8,19 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import "@codetrix-studio/capacitor-google-auth";
+import { Storage } from "@capacitor/storage";
 
 import reducers from "./redux/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
+
+axios.interceptors.request.use(async (config) => {
+  const tokenObject = await Storage.get({
+    key: "accessToken",
+  });
+  const token = tokenObject?.value;
+  config.headers.Authorization =  "Bearer " + token;
+  return config;
+});
 
 const ourStore = createStore(
   reducers,
