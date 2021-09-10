@@ -48,11 +48,15 @@ const Login: React.FC = () => {
   const contactLoading = useSelector((state: any) => state.contact.loading);
   const apiError = useSelector((state: any) => state.contact.fail);
 
+  interface Response {
+    status?: number,
+  }
+
   const sendEmail = async () => {
     grecaptcha.ready(async () => {
       let recaptchaToken = await grecaptcha.execute("6LfcS1gcAAAAAKV85afud4ix3GSw_dNyUzoJaQhH", { action: 'submit' });
-      let res = await dispatch(contactActions.sendEmail({ email, name, text, recaptchaToken }));
-      if (res && res.length > 0) {
+      let res: any = await dispatch(contactActions.sendEmail({ email, name, text, recaptchaToken }));
+      if (res?.status === 200) {
         setName(null);
         setEmail(null);
         setText(null);
@@ -142,6 +146,7 @@ const Login: React.FC = () => {
                   </IonLabel>
                   <IonInput
                     placeholder="Your Name"
+                    value={name}
                     onIonChange={(e: any) => setName(e.target.value)}
                   />
                 </IonItem>
@@ -154,6 +159,7 @@ const Login: React.FC = () => {
                   </IonLabel>
                   <IonInput
                     placeholder="Email Address"
+                    value={email}
                     required={true}
                     onIonChange={(e: any) => setEmail(e.target.value)}
                   ></IonInput>
@@ -167,6 +173,7 @@ const Login: React.FC = () => {
                   </IonLabel>
                   <IonTextarea
                     rows={5}
+                    value={text}
                     placeholder="Enter text here...."
                     onIonChange={(e: any) => setText(e.target.value)}
                   />

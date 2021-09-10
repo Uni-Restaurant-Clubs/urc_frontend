@@ -5,10 +5,10 @@
   text-align: center;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
   .contactCard {
     margin: 0;
-    padding: 0px;
+    padding: 50px 0px;
   }
 }
 
