@@ -35,33 +35,36 @@ import ContentCreatorDetails from "./pages/contentCreators/details";
 import PrivateRoute from "./components/PrivateRoute";
 import Menu from './components/Menu';
 import Header from "./components/Header";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const App: React.FC = () => {
   const history = useHistory();
 
   return (
-    <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu />
-          <IonRouterOutlet animated={false} id="main">
-        		<Route exact path="/reviews/:id" component={ReviewDetails} />
-        		<Route exact path="/:public_unique_username" component={ContentCreatorDetails} />
-        		<AuthRoute exact path="/register" component={Login} />
-        		<AuthRoute exact path="/login" component={Login} />
-        		<AuthRoute exact path="/enter_new_password" component={ResetPassword} />
-        		<AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
-        		<AuthRoute
-          		exact
-          		path="/emailConfirmation"
-          		component={EmailConfirmation}
-        		></AuthRoute>
-        		<Route exact path="/" component={Reviews} />
-          </IonRouterOutlet>
-        </IonSplitPane>
+    <ErrorBoundary>
+      <IonApp>
+        <IonReactRouter>
+          <IonSplitPane contentId="main">
+            <Menu />
+            <IonRouterOutlet animated={false} id="main">
+        		  <Route exact path="/reviews/:id" component={ReviewDetails} />
+        		  <Route exact path="/:public_unique_username" component={ContentCreatorDetails} />
+        		  <AuthRoute exact path="/register" component={Login} />
+        		  <AuthRoute exact path="/login" component={Login} />
+        		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
+        		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
+        		  <AuthRoute
+          		  exact
+          		  path="/emailConfirmation"
+          		  component={EmailConfirmation}
+        		  ></AuthRoute>
+        		  <Route exact path="/" component={Reviews} />
+            </IonRouterOutlet>
+          </IonSplitPane>
 
-      </IonReactRouter>
-    </IonApp>
+        </IonReactRouter>
+      </IonApp>
+    </ErrorBoundary>
   );
 };
 

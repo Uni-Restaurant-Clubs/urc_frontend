@@ -30,13 +30,13 @@ interface Props {
   photos: Image[]
 }
 
-const ReviewImageThumbnails: React.FC<{featuredPhoto: object,
+const ReviewImageThumbnails: React.FC<{featuredPhoto: Image,
    photos: Image[], title: string;}> = (
   { featuredPhoto, photos, title }) => {
   photos = photos || [];
 
   const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const handleImageClick = (e: object, imageId: number) => {
     setSelectedImage(imageId);
@@ -44,9 +44,9 @@ const ReviewImageThumbnails: React.FC<{featuredPhoto: object,
   }
 
   const handleFeatureImageClick = () => {
-    Object.keys(photos).forEach(function(key) {
+    Object.keys(photos).forEach((key: string) => {
       if (photos[key].id === featuredPhoto?.id) {
-        setSelectedImage(key);
+        setSelectedImage(parseInt(key));
         setShowModal(true);
       }
     })

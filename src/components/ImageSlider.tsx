@@ -12,6 +12,7 @@ import { IonSlides,
 import "./ImageSlider.css"
 
 interface Image {
+  id: string,
   name: string,
   photo: string
 }
@@ -20,7 +21,7 @@ interface Props {
   photos: Image[]
 }
 
-const ImageSlider: React.FC<{photos: Image[], selectedImage: any;}> = (
+const ImageSlider: React.FC<{photos: Image[], selectedImage: number;}> = (
   { photos, selectedImage }) => {
   photos = photos || [];
 
@@ -71,15 +72,13 @@ const ImageSlider: React.FC<{photos: Image[], selectedImage: any;}> = (
   return (
     <>
       <IonContent>
-        { selectedImage !== null &&
-          <IonSlides
-            className="imageSlider"
-            onIonSlidesDidLoad={init}
-            ref={mySlides}
-            options={slideOpts}>
-            {slides}
-          </IonSlides>
-        }
+        <IonSlides
+          className="imageSlider"
+          onIonSlidesDidLoad={init}
+          ref={mySlides}
+          options={slideOpts}>
+          {slides}
+        </IonSlides>
         <div style={{ textAlign: "center", paddingTop: 12 }}>
           <IonButton className="imagePrevButton" color="light"
             onClick={() => onBtnClicked("prev")}
