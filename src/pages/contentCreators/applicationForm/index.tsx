@@ -18,57 +18,72 @@ import {
 } from "@ionic/react";
 import { useState, useEffect } from "react";
 import "./index.css";
-import { contactActions } from "../../redux/actions/contactActions";
+import { contentCreatorActions } from "../../../redux/actions/contentCreatorActions";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../../components/Header";
-import airbrake from "../../utils/airbrake";
-import useScript from '../../hooks/useScript';
+import Header from "../../../components/Header";
+import airbrake from "../../../utils/airbrake";
+import useScript from '../../../hooks/useScript';
 
 interface errorHandling {
-  nameError: null;
+  firstNameError: null;
+  lastNameError: null;
   emailError: null;
-  textError: null;
 }
 
-const Login: React.FC = () => {
+const CreatorApplicationForm: React.FC = () => {
   useScript(process.env.REACT_APP_RECAPTCHA_URL);
   const dispatch = useDispatch();
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY
 
-  const [nameError, setNameError] = useState<errorHandling | any>(null);
+  const [firstNameError, setfirstNameError] = useState<errorHandling | any>(null);
+  const [lastNameError, setLastNameError] = useState<errorHandling | any>(null);
   const [emailError, setEmailError] = useState<errorHandling | any>(null);
-  const [textError, setTextError] = useState<errorHandling | any>(null);
 
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
-  const [name, setName] = useState(null);
-  const [text, setText] = useState(null);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const contactLoading = useSelector((state: any) => state.contact.loading);
-  const apiError = useSelector((state: any) => state.contact.fail);
+  const loading = useSelector((state: any) => {
+    return state.contentCreators?.application?.loading;
+  });
+  const apiError = useSelector((state: any) => {
+    return state.contentCreators?.application?.fail;
+  });
 
   interface Response {
     status?: number,
   }
 
-  const sendEmail = async () => {
+  const submitCreatorsApplication = async () => {
+    const recaptchaToken = await grecaptcha.execute(recaptchaKey,
+                                                  { action: 'submit' });
+
+    const formData = {
+      firstName,
+      lastName,
+      email,
+      recaptchaToken
+    };
+
     grecaptcha.ready(async () => {
-      let recaptchaToken = await grecaptcha.execute(recaptchaKey, { action: 'submit' });
-      let res: any = await dispatch(contactActions.sendEmail({ email, name, text, recaptchaToken }));
+      let res: any = await dispatch(
+        contentCreatorActions.submitApplication(formData)
+      );
       if (res?.status === 200) {
-        setName(null);
+        setFirstName(null);
+        setLastName(null);
         setEmail(null);
-        setText(null);
-        setAlertMessage("Message Sent! Thank you for contacting us. We will get back to you soon.");
+        setAlertMessage("Application Sent! Thank you for applying!. We will get back to you soon.");
         setShowAlert(true);
       } else if (apiError) {
         setAlertMessage("Oops looks like there was an issue. Please try again soon");
         setShowAlert(true);
         airbrake.notify({
           error: apiError,
-          params: { name, email, text }
+          params: { firstName, lastName, email }
         });
       }
     });
@@ -101,21 +116,29 @@ const Login: React.FC = () => {
   return (
     <div className=" ">
       <IonPage>
-        <Header headertitle="Contact" />
+        <Header headertitle="Creator Application" />
         <IonContent>
-          <IonCard className="contactCard">
+          <IonCard className="applicationCard">
             <IonCardContent>
               <IonCardHeader>
                 <IonCardTitle>
-                  Contact Us
+                  Application Form
+                </IonCardTitle>
+                <IonCardTitle>
+                  Writers/Photographers
                 </IonCardTitle>
               </IonCardHeader>
+              <br/>
+              <p>Thank you for your interest!</p>
+              <p>Please fill out the following fields and submit the form.</p>
+              <p>We will review and reply to you shortly!</p>
+              <br/>
 
               <IonLoading
                 spinner="bubbles"
                 message="Please wait ..."
                 duration={0}
-                isOpen={contactLoading}
+                isOpen={loading}
               />
 
               <IonAlert
@@ -140,15 +163,28 @@ const Login: React.FC = () => {
               <div className="">
                 <IonItem>
                   <IonLabel
-                    color={nameError ? "danger" : ""}
+                    color={firstNameError ? "danger" : ""}
                     position="floating"
                   >
-                    Name
+                    First Name
                   </IonLabel>
                   <IonInput
-                    placeholder="Your name"
-                    value={name}
-                    onIonChange={(e: any) => setName(e.target.value)}
+                    placeholder="First Name"
+                    value={firstName}
+                    onIonChange={(e: any) => setFirstName(e.target.value)}
+                  />
+                </IonItem>
+                <IonItem>
+                  <IonLabel
+                    color={lastNameError ? "danger" : ""}
+                    position="floating"
+                  >
+                    Last Name
+                  </IonLabel>
+                  <IonInput
+                    placeholder="Last Name"
+                    value={lastName}
+                    onIonChange={(e: any) => setLastName(e.target.value)}
                   />
                 </IonItem>
                 <IonItem>
@@ -165,26 +201,12 @@ const Login: React.FC = () => {
                     onIonChange={(e: any) => setEmail(e.target.value)}
                   ></IonInput>
                 </IonItem>
-                <IonItem>
-                  <IonLabel
-                    color={textError ? "danger" : ""}
-                    position="floating"
-                  >
-                    Message text
-                  </IonLabel>
-                  <IonTextarea
-                    rows={5}
-                    value={text}
-                    placeholder="Enter text here...."
-                    onIonChange={(e: any) => setText(e.target.value)}
-                  />
-                </IonItem>
                 <IonButton
                   expand="block"
-                  onClick={sendEmail}
+                  onClick={submitCreatorsApplication}
                   style={{ marginTop: "1rem" }}
                 >
-                  Send Message
+                  Submit Application
                 </IonButton>
 
               </div>
@@ -196,4 +218,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default CreatorApplicationForm;

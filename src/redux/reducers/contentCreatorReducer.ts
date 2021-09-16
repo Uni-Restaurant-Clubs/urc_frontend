@@ -6,10 +6,39 @@ const initialState = {
   getContentCreatorLoading: false,
   getContentCreatorsFail: "",
   getContentCreatorsLoading: false,
+  application: {
+    loading: false,
+    fail: false,
+  }
+
 };
 
 const contentCreatorReducer = (state = initialState, action: any): any => {
   switch (action.type) {
+    case actionTypes.SUBMIT_APPLICATION_REQUEST:
+      return {
+        ...state,
+        application: {
+          loading: true,
+          fail: false,
+        }
+      };
+    case actionTypes.SUBMIT_APPLICATION_SUCCESS:
+      return {
+        ...state,
+        application: {
+          loading: false,
+          fail: false,
+        }
+      };
+    case actionTypes.SUBMIT_APPLICATION_FAIL:
+      return {
+        ...state,
+        application: {
+          loading: false,
+          fail: action.payload,
+        }
+      };
     case actionTypes.GET_CONTENT_CREATOR_REQUEST:
       return {
         ...state,

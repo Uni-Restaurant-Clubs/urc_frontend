@@ -33,6 +33,7 @@ import Contact from "./pages/contact";
 import Home from "./pages/Home";
 import ReviewDetails from "./pages/reviews/details";
 import ContentCreatorDetails from "./pages/contentCreators/details";
+import CreatorApplicationForm from "./pages/contentCreators/applicationForm";
 import PrivateRoute from "./components/PrivateRoute";
 import Menu from './components/Menu';
 import Header from "./components/Header";
@@ -49,10 +50,11 @@ const App: React.FC = () => {
             <Menu />
             <IonRouterOutlet animated={false} id="main">
         		  <Route exact path="/reviews/:id" component={ReviewDetails} />
-        		  <Route exact path="/:public_unique_username" component={ContentCreatorDetails} />
+        		  <Route exact path="/creators/:public_unique_username" component={ContentCreatorDetails} />
         		  <AuthRoute exact path="/register" component={Login} />
         		  <AuthRoute exact path="/login" component={Login} />
         		  <Route exact path="/contact" component={Contact} />
+        		  <Route exact path="/apply" component={CreatorApplicationForm} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
         		  <AuthRoute

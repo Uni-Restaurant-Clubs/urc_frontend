@@ -40,7 +40,7 @@ const WPCard: React.FC<{person: Person, contentType: string;}> = (
   }
 
   const url = () => {
-    return "/" + person?.public_unique_username;
+    return "/creators/" + person?.public_unique_username;
   }
 
   return (

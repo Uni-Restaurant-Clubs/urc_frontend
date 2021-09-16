@@ -3,8 +3,25 @@ import * as actionTypes from "../types/contentCreatorType";
 import {
   getContentCreatorUrl,
   getContentCreatorsUrl,
+  submitApplicationUrl,
 } from "../../config/contentCreatorConfig";
 import { Storage } from "@capacitor/storage";
+
+const submitApplication = (data: any) => async (dispatch: any) => {
+  try {
+    dispatch({ type: actionTypes.SUBMIT_APPLICATION_REQUEST, payload: true });
+    let res = await axios.post(submitApplicationUrl, data);
+    dispatch({ type: actionTypes.SUBMIT_APPLICATION_SUCCESS, payload: res.data });
+    return res;
+  } catch (error) {
+    dispatch({
+      type: actionTypes.SUBMIT_APPLICATION_FAIL,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
+    });
+  }
+};
 
 const getContentCreator = (data: any) => async (dispatch: any) => {
   try {
@@ -40,6 +57,7 @@ const getContentCreators = () => async (dispatch: any) => {
 };
 
 export const contentCreatorActions = {
+  submitApplication,
   getContentCreator,
   getContentCreators,
 };

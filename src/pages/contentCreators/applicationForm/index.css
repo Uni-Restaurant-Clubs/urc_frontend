@@ -1,0 +1,26 @@
+.applicationCard {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 30px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .applicationCard {
+    margin: 0;
+    padding: 50px 0px;
+  }
+}
+
+.loaderStyle{
+  height: 9%;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.confirmButtonStyle{
+  border-radius: 10px !important;
+    color: white !important;
+    background-color: grey !important;
+    border: 1px solid grey !important;
+}
