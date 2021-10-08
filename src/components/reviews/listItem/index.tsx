@@ -31,9 +31,6 @@ const ReviewListItem: React.FC<{id: string, photo: string, name: string,
         <IonLabel className="reviewItemLabel">
           <h2>{name}</h2>
           <p>{title}</p>
-          <IonText color="danger">
-            <p>40% off</p>
-          </IonText>
         </IonLabel>
       </IonItem>
     </Link>
