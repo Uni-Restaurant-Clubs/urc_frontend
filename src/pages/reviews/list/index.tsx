@@ -64,7 +64,7 @@ const ReviewsPage: React.FC = () => {
         <Header headertitle="Reviews" />
         <IonContent>
           <IonList>
-            {reviewItems}
+            {reviewItems.reverse()}
           </IonList>
         </IonContent>
       </IonPage>
