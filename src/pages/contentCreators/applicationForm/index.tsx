@@ -62,9 +62,11 @@ const CreatorApplicationForm: React.FC = () => {
                                                   { action: 'submit' });
 
     const formData = {
-      firstName,
-      lastName,
-      email,
+      creator: {
+        firstName,
+        lastName,
+        email,
+      },
       recaptchaToken
     };
 
