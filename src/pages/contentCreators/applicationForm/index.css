@@ -1,3 +1,6 @@
+.confirmNotPaid {
+  padding-bottom: 20px;
+}
 .applicationShieldLogo::part(image){
   height: 50px;
 }

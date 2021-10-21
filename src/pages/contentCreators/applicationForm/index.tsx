@@ -8,6 +8,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
+  IonItemDivider,
   IonContent,
   IonHeader,
   IonInput,
@@ -57,6 +58,7 @@ const CreatorApplicationForm: React.FC = () => {
   const [introApplicationText, setIntroApplicationText] = useState(null);
   const [experiencesApplicationText, setExperiencesApplicationText] = useState(null);
   const [whyJoinApplicationText, setWhyJoinApplicationText] = useState(null);
+  const [confirmNotPaid, setConfirmNotPaid] = useState(null);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -155,6 +157,7 @@ const CreatorApplicationForm: React.FC = () => {
             <br/>
             <IonImg src="https://urc-public-images.s3.us-east-2.amazonaws.com/photo-1592861956120-e524fc739696.jpeg"/>
             <br/>
+            <p>NOTE: This is not a paid position although you will be given free food, experience and get to be part of an awesome club!</p>
 
             <IonLoading
               spinner="bubbles"
@@ -256,7 +259,7 @@ const CreatorApplicationForm: React.FC = () => {
                 <IonCol sizeSm="6" sizeMd="6">
                   <IonItem>
                     <IonLabel>Videographer</IonLabel>
-                    <IonCheckbox slot= "start" checked={isVideographer}
+                    <IonCheckbox slot="start" checked={isVideographer}
                         onIonChange={e => setIsVideographer(e.detail.checked)} />
                   </IonItem>
                 </IonCol>
@@ -322,6 +325,16 @@ const CreatorApplicationForm: React.FC = () => {
                   />
                 </IonItem>
               }
+              <IonList>
+                <IonItem>
+                  <IonLabel position="stacked">
+I understand this is not a paid position.</IonLabel>
+                  <IonCheckbox checked={confirmNotPaid}
+                     slot="start"
+
+                     onIonChange={e => setConfirmNotPaid(e.detail.checked)} />
+                </IonItem>
+              </IonList>
               <IonButton
                 expand="block"
                 onClick={submitCreatorsApplication}
