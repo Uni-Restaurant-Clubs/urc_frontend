@@ -31,23 +31,10 @@ import Header from "../../../components/Header";
 import airbrake from "../../../utils/airbrake";
 import useScript from '../../../hooks/useScript';
 
-interface errorHandling {
-  firstNameError: null;
-  lastNameError: null;
-  emailError: null;
-}
-
 const CreatorApplicationForm: React.FC = () => {
   useScript(process.env.REACT_APP_RECAPTCHA_URL);
   const dispatch = useDispatch();
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY
-
-  const [firstNameError, setfirstNameError] = useState<errorHandling | any>(null);
-  const [lastNameError, setLastNameError] = useState<errorHandling | any>(null);
-  const [emailError, setEmailError] = useState<errorHandling | any>(null);
-  const [isWriterError, setIsWriterError] = useState<errorHandling | any>(null);
-  const [isPhotographerError, setIsPhotographerError] = useState<errorHandling | any>(null);
-  const [isVideographerError, setIsVideographerError] = useState<errorHandling | any>(null);
 
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -58,7 +45,24 @@ const CreatorApplicationForm: React.FC = () => {
   const [introApplicationText, setIntroApplicationText] = useState(null);
   const [experiencesApplicationText, setExperiencesApplicationText] = useState(null);
   const [whyJoinApplicationText, setWhyJoinApplicationText] = useState(null);
+  const [applicationSocialMediaLinks, setApplicationSocialMediaLinks] = useState(null);
+  const [resume, setResume] = useState(null);
+  const [writingExample, setWritingExample] = useState(null);
   const [confirmNotPaid, setConfirmNotPaid] = useState(null);
+
+  const [firstNameError, setFirstNameError] = useState(null);
+  const [lastNameError, setLastNameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [isWriterError, setIsWriterError] = useState(null);
+  const [isPhotographerError, setIsPhotographerError] = useState(null);
+  const [isVideographerError, setIsVideographerError] = useState(null);
+  const [introApplicationTextError, setIntroApplicationTextError] = useState(null);
+  const [experiencesApplicationTextError, setExperiencesApplicationTextError] = useState(null);
+  const [whyJoinApplicationTextError, setWhyJoinApplicationTextError] = useState(null);
+  const [applicationSocialMediaLinksError, setApplicationSocialMediaLinksError] = useState(null);
+  const [resumeError, setResumeError] = useState(null);
+  const [writingExampleError, setWritingExampleError] = useState(null);
+  const [confirmNotPaidError, setConfirmNotPaidError] = useState(null);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -85,7 +89,14 @@ const CreatorApplicationForm: React.FC = () => {
         email,
         isWriter,
         isPhotographer,
-        isVideographer
+        isVideographer,
+        introApplicationText,
+        experiencesApplicationText,
+        whyJoinApplicationText,
+        applicationSocialMediaLinks,
+        resume,
+        writingExample,
+        confirmNotPaid
       },
       recaptchaToken
     };
@@ -244,21 +255,27 @@ const CreatorApplicationForm: React.FC = () => {
               <IonRow>
                 <IonCol sizeSm="6" sizeMd="6">
                   <IonItem>
-                    <IonLabel>Writer</IonLabel>
+                    <IonLabel
+                      color={isWriterError ? "danger" : ""}>
+                      Writer</IonLabel>
                     <IonCheckbox slot="start" checked={isWriter}
                       onIonChange={e => setIsWriter(e.detail.checked)} />
                   </IonItem>
                 </IonCol>
                 <IonCol sizeSm="6" sizeMd="6">
                   <IonItem>
-                    <IonLabel>Photographer</IonLabel>
+                    <IonLabel
+                      color={isPhotographerError ? "danger" : ""}>
+                      Photographer</IonLabel>
                     <IonCheckbox slot="start" checked={isPhotographer}
                       onIonChange={e => setIsPhotographer(e.detail.checked)} />
                   </IonItem>
                 </IonCol>
                 <IonCol sizeSm="6" sizeMd="6">
                   <IonItem>
-                    <IonLabel>Videographer</IonLabel>
+                    <IonLabel
+                      color={isVideographerError ? "danger" : ""}>
+                      Videographer</IonLabel>
                     <IonCheckbox slot="start" checked={isVideographer}
                         onIonChange={e => setIsVideographer(e.detail.checked)} />
                   </IonItem>
@@ -266,21 +283,27 @@ const CreatorApplicationForm: React.FC = () => {
               </IonRow>
               <br/>
               <IonItem>
-                <IonLabel position="floating">Tell us about yourself *</IonLabel>
+                <IonLabel
+                  color={introApplicationTextError ? "danger" : ""}
+                  position="floating">Tell us about yourself *</IonLabel>
                 <IonTextarea className="applicationTextArea" value={introApplicationText}
                     autoGrow="true"
                     onIonChange={e => setIntroApplicationText(e.detail.value!)}>
                 </IonTextarea>
               </IonItem>
               <IonItem>
-                <IonLabel position="floating">What experience do you have? *</IonLabel>
+                <IonLabel
+                  color={experiencesApplicationTextError ? "danger" : ""}
+                  position="floating">What experience do you have? *</IonLabel>
                 <IonTextarea className="applicationTextArea" value={experiencesApplicationText}
                     autoGrow="true"
                     onIonChange={e => setExperiencesApplicationText(e.detail.value!)}>
                 </IonTextarea>
               </IonItem>
               <IonItem>
-                <IonLabel position="floating">Why do you want to join? *</IonLabel>
+                <IonLabel
+                  color={whyJoinApplicationTextError ? "danger" : ""}
+                  position="floating">Why do you want to join? *</IonLabel>
                 <IonTextarea className="applicationTextArea" value={whyJoinApplicationText}
                     autoGrow="true"
                     onIonChange={e => setWhyJoinApplicationText(e.detail.value!)}>
@@ -289,45 +312,50 @@ const CreatorApplicationForm: React.FC = () => {
               <br/>
               <br/>
               <IonItem>
-                <IonLabel position="stacked">Social media/website links *</IonLabel>
-                <IonInput value={whyJoinApplicationText}
+                <IonLabel
+                  color={applicationSocialMediaLinksError ? "danger" : ""}
+                  position="stacked">Social media/website links *</IonLabel>
+                <IonInput value={applicationSocialMediaLinks}
                     placeholder="https://instagram.com/me, https://mywebsite.com etc..."
-                    onIonChange={e => setWhyJoinApplicationText(e.detail.value!)}>
+                    onIonChange={e => setApplicationSocialMediaLinks(e.detail.value!)}>
                 </IonInput>
               </IonItem>
               <br/>
               <IonItem>
                 <IonLabel
-                  color={firstNameError ? "danger" : ""}
+                  color={resumeError ? "danger" : ""}
                   position="stacked"
                 >
                 Resume
                 </IonLabel>
                 <IonInput
                   type="file"
-                  value={firstName}
-                  onIonChange={(e: any) => setFirstName(e.target.value)}
+                  value={resume}
+                  onIonChange={(e: any) => setResume(e.target.value)}
                 />
               </IonItem>
               <br/>
               { isWriter &&
                 <IonItem>
                   <IonLabel
-                    color={firstNameError ? "danger" : ""}
+                    color={writingExampleError ? "danger" : ""}
                     position="stacked"
                   >
                   Writing Example *
                   </IonLabel>
                   <IonInput
                     type="file"
-                    value={firstName}
-                    onIonChange={(e: any) => setFirstName(e.target.value)}
+                    value={writingExample}
+                    onIonChange={(e: any) => setWritingExample(e.target.value)}
                   />
                 </IonItem>
               }
               <IonList>
                 <IonItem>
-                  <IonLabel position="stacked">
+                  <IonLabel
+                    color={confirmNotPaidError ? "danger" : ""}
+                    position="stacked"
+                  >
 I understand this is not a paid position.</IonLabel>
                   <IonCheckbox checked={confirmNotPaid}
                      slot="start"
