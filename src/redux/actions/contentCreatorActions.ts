@@ -10,7 +10,14 @@ import { Storage } from "@capacitor/storage";
 const submitApplication = (data: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.SUBMIT_APPLICATION_REQUEST, payload: true });
-    let res = await axios.post(submitApplicationUrl, data);
+    let formData = new FormData();
+    Object.keys(data).forEach(key => formData.append(key, data[key]));
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }
+    let res = await axios.post(submitApplicationUrl, formData, config);
     dispatch({ type: actionTypes.SUBMIT_APPLICATION_SUCCESS, payload: res.data });
     return res;
   } catch (error) {

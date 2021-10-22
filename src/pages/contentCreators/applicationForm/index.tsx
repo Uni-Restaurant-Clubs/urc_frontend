@@ -177,7 +177,6 @@ const CreatorApplicationForm: React.FC = () => {
                                                     { action: 'submit' });
 
       const formData = {
-        creator: {
           firstName,
           lastName,
           email,
@@ -189,8 +188,7 @@ const CreatorApplicationForm: React.FC = () => {
           whyJoinApplicationText,
           applicationSocialMediaLinks,
           resume,
-          writingExample
-        },
+          writingExample,
         recaptchaToken
       };
 
