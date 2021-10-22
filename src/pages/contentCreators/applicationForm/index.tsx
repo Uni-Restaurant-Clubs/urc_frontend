@@ -1,5 +1,6 @@
 import {
   IonButton,
+  IonNote,
   IonImg,
   IonRow,
   IonCol,
@@ -53,6 +54,7 @@ const CreatorApplicationForm: React.FC = () => {
   const [firstNameError, setFirstNameError] = useState(null);
   const [lastNameError, setLastNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
+  const [positionError, setPositionError] = useState(null);
   const [isWriterError, setIsWriterError] = useState(null);
   const [isPhotographerError, setIsPhotographerError] = useState(null);
   const [isVideographerError, setIsVideographerError] = useState(null);
@@ -78,48 +80,140 @@ const CreatorApplicationForm: React.FC = () => {
     status?: number,
   }
 
+ 	const resumeChangeHandler = (event) => {
+    setResume(event.target.files[0])
+	};
+ 	const writingExampleChangeHandler = (event) => {
+    setWritingExample(event.target.files[0])
+	};
+  const applicationFormErrors = () => {
+    return (
+      <ul className="applicationFormErrors">
+        { firstNameError && <li>{firstNameError}</li>}
+        { lastNameError && <li>{lastNameError}</li>}
+        { emailError && <li>{emailError}</li>}
+        { positionError && <li>{positionError}</li>}
+        { introApplicationTextError && <li>{introApplicationTextError}</li>}
+        { experiencesApplicationTextError && <li>{experiencesApplicationTextError}</li>}
+        { whyJoinApplicationTextError && <li>{whyJoinApplicationTextError}</li>}
+        { applicationSocialMediaLinksError && <li>{applicationSocialMediaLinksError}</li>}
+        { resumeError && <li>{resumeError}</li>}
+        { writingExampleError && <li>{writingExampleError}</li>}
+        { confirmNotPaidError && <li>{confirmNotPaidError}</li>}
+      </ul>
+    )
+  }
+
+  const validateData = () => {
+    let dataValid = true;
+    //first name
+    if (!firstName || firstName.length < 2) {
+      setFirstNameError("First Name is required");
+      dataValid = false;
+    } else {
+      setFirstNameError(null);
+    }
+    if (!lastName || lastName.length < 2) {
+      setLastNameError("Last Name is required");
+      dataValid = false;
+    } else {
+      setLastNameError(null);
+    }
+    if (!email || email.length < 2) {
+      setEmailError("Valid email address is required");
+      dataValid = false;
+    } else {
+      setEmailError(null);
+    }
+    if (!isWriter && !isPhotographer && !isVideographer) {
+      setPositionError("Please select a position (writer, photographer or videographer)");
+      setIsWriterError(true);
+      setIsPhotographerError(true);
+      setIsVideographerError(true);
+      dataValid = false;
+    } else {
+      setPositionError(null);
+      setIsWriterError(null);
+      setIsPhotographerError(null);
+      setIsVideographerError(null);
+    }
+    if (!introApplicationText || introApplicationText.length < 25) {
+      setIntroApplicationTextError("At least 25 characters are needed for 'Tell us a little about yourself' field");
+      dataValid = false;
+    } else {
+      setIntroApplicationTextError(null);
+    }
+    if (!experiencesApplicationText || experiencesApplicationText.length < 25) {
+      setExperiencesApplicationTextError("At least 25 characters are needed for 'What experience do you have' field");
+      dataValid = false;
+    } else {
+      setExperiencesApplicationTextError(null);
+    }
+    if (!whyJoinApplicationText || whyJoinApplicationText.length < 25) {
+      setWhyJoinApplicationTextError("At least 25 characters are needed for 'What experience do you have' field");
+      dataValid = false;
+    } else {
+      setWhyJoinApplicationTextError(null);
+    }
+    if (!applicationSocialMediaLinks || applicationSocialMediaLinks.length < 5) {
+      setApplicationSocialMediaLinksError("Please add at least one social media link");
+      dataValid = false;
+    } else {
+      setApplicationSocialMediaLinksError(null);
+    }
+    if (!confirmNotPaid) {
+      setConfirmNotPaidError("You must agree to 'I understand this is not a paid position'");
+      dataValid = false;
+    } else {
+      setConfirmNotPaidError(null);
+    }
+    return dataValid;
+  }
+
   const submitCreatorsApplication = async () => {
-    const recaptchaToken = await grecaptcha.execute(recaptchaKey,
-                                                  { action: 'submit' });
+    const dataValid = validateData();
+    if (dataValid) {
+      const recaptchaToken = await grecaptcha.execute(recaptchaKey,
+                                                    { action: 'submit' });
 
-    const formData = {
-      creator: {
-        firstName,
-        lastName,
-        email,
-        isWriter,
-        isPhotographer,
-        isVideographer,
-        introApplicationText,
-        experiencesApplicationText,
-        whyJoinApplicationText,
-        applicationSocialMediaLinks,
-        resume,
-        writingExample,
-        confirmNotPaid
-      },
-      recaptchaToken
-    };
+      const formData = {
+        creator: {
+          firstName,
+          lastName,
+          email,
+          isWriter,
+          isPhotographer,
+          isVideographer,
+          introApplicationText,
+          experiencesApplicationText,
+          whyJoinApplicationText,
+          applicationSocialMediaLinks,
+          resume,
+          writingExample
+        },
+        recaptchaToken
+      };
 
-    grecaptcha.ready(async () => {
-      let res: any = await dispatch(
-        contentCreatorActions.submitApplication(formData)
-      );
-      if (res?.status === 200) {
-        setFirstName(null);
-        setLastName(null);
-        setEmail(null);
-        setAlertMessage("Application Sent! Thank you for applying!. We will get back to you soon.");
-        setShowAlert(true);
-      } else if (apiError) {
-        setAlertMessage("Oops looks like there was an issue. Please try again soon");
-        setShowAlert(true);
-        airbrake.notify({
-          error: apiError,
-          params: { firstName, lastName, email }
-        });
-      }
-    });
+      grecaptcha.ready(async () => {
+        let res: any = await dispatch(
+          contentCreatorActions.submitApplication(formData)
+        );
+        if (res?.status === 200) {
+          setFirstName(null);
+          setLastName(null);
+          setEmail(null);
+          setAlertMessage("Application Sent! Thank you for applying!. We will get back to you soon.");
+          setShowAlert(true);
+        } else if (apiError) {
+          setAlertMessage("Oops looks like there was an issue. Please try again soon");
+          setShowAlert(true);
+          airbrake.notify({
+            error: apiError,
+            params: { firstName, lastName, email }
+          });
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -130,7 +224,7 @@ const CreatorApplicationForm: React.FC = () => {
         });
 
         setAlertMessage(
-          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul>`
         );
         setShowAlert(true);
       } else {
@@ -138,7 +232,7 @@ const CreatorApplicationForm: React.FC = () => {
           `<ul class="errorMessageStyle"><li>${
             apiError.message ||
             "Oops looks like something went wrong. Please try again soon"
-          }</li></ul`
+          }</li></ul>`
         );
         setShowAlert(true);
       }
@@ -169,6 +263,9 @@ const CreatorApplicationForm: React.FC = () => {
             <IonImg src="https://urc-public-images.s3.us-east-2.amazonaws.com/photo-1592861956120-e524fc739696.jpeg"/>
             <br/>
             <p>NOTE: This is not a paid position although you will be given free food, experience and get to be part of an awesome club!</p>
+
+
+            {applicationFormErrors()}
 
             <IonLoading
               spinner="bubbles"
@@ -328,10 +425,10 @@ const CreatorApplicationForm: React.FC = () => {
                 >
                 Resume
                 </IonLabel>
-                <IonInput
+                <input
                   type="file"
-                  value={resume}
-                  onIonChange={(e: any) => setResume(e.target.value)}
+                  accept=".pdf"
+                  onChange={resumeChangeHandler}
                 />
               </IonItem>
               <br/>
@@ -343,10 +440,10 @@ const CreatorApplicationForm: React.FC = () => {
                   >
                   Writing Example *
                   </IonLabel>
-                  <IonInput
+                  <input
                     type="file"
-                    value={writingExample}
-                    onIonChange={(e: any) => setWritingExample(e.target.value)}
+                    accept=".pdf"
+                    onChange={writingExampleChangeHandler}
                   />
                 </IonItem>
               }
@@ -356,7 +453,7 @@ const CreatorApplicationForm: React.FC = () => {
                     color={confirmNotPaidError ? "danger" : ""}
                     position="stacked"
                   >
-I understand this is not a paid position.</IonLabel>
+* I understand this is not a paid position.</IonLabel>
                   <IonCheckbox checked={confirmNotPaid}
                      slot="start"
 
@@ -370,7 +467,7 @@ I understand this is not a paid position.</IonLabel>
               >
                 Submit Application
               </IonButton>
-
+              {applicationFormErrors()}
             </IonGrid>
           </IonCardContent>
         </IonCard>
