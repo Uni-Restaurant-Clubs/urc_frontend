@@ -1,9 +1,12 @@
+.applicationPdfUpload {
+  padding: 10px;
+}
 .applicationFormErrors {
   text-align: left;
   color: red;
 }
-.confirmNotPaid {
-  padding-bottom: 20px;
+.confirmNonPaidLabel {
+  margin-bottom: 20px;
 }
 .applicationShieldLogo::part(image){
   height: 50px;

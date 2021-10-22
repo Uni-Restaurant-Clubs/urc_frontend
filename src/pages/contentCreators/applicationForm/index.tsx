@@ -80,10 +80,10 @@ const CreatorApplicationForm: React.FC = () => {
     status?: number,
   }
 
- 	const resumeChangeHandler = (event) => {
+ 	const resumeChangeHandler = (event: any) => {
     setResume(event.target.files[0])
 	};
- 	const writingExampleChangeHandler = (event) => {
+ 	const writingExampleChangeHandler = (event: any) => {
     setWritingExample(event.target.files[0])
 	};
   const applicationFormErrors = () => {
@@ -187,10 +187,11 @@ const CreatorApplicationForm: React.FC = () => {
           experiencesApplicationText,
           whyJoinApplicationText,
           applicationSocialMediaLinks,
-          resume,
-          writingExample,
         recaptchaToken
       };
+
+      if (resume) { formData["resume"] = resume };
+      if (writingExample) { formData["writingExample"] = writingExample };
 
       grecaptcha.ready(async () => {
         let res: any = await dispatch(
@@ -252,7 +253,7 @@ const CreatorApplicationForm: React.FC = () => {
                 Writers/Photographers (Brooklyn)
               </IonCardTitle>
             </IonCardHeader>
-            <IonImg height="100" className="applicationShieldLogo" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools+(1).png"/>
+            <IonImg className="applicationShieldLogo" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools+(1).png"/>
             <br/>
             <p>Thank you for your interest!</p>
             <p>Please fill out the following fields and submit the form.</p>
@@ -382,7 +383,7 @@ const CreatorApplicationForm: React.FC = () => {
                   color={introApplicationTextError ? "danger" : ""}
                   position="floating">Tell us about yourself *</IonLabel>
                 <IonTextarea className="applicationTextArea" value={introApplicationText}
-                    autoGrow="true"
+                    autoGrow={true}
                     onIonChange={e => setIntroApplicationText(e.detail.value!)}>
                 </IonTextarea>
               </IonItem>
@@ -391,7 +392,7 @@ const CreatorApplicationForm: React.FC = () => {
                   color={experiencesApplicationTextError ? "danger" : ""}
                   position="floating">What experience do you have? *</IonLabel>
                 <IonTextarea className="applicationTextArea" value={experiencesApplicationText}
-                    autoGrow="true"
+                    autoGrow={true}
                     onIonChange={e => setExperiencesApplicationText(e.detail.value!)}>
                 </IonTextarea>
               </IonItem>
@@ -400,7 +401,7 @@ const CreatorApplicationForm: React.FC = () => {
                   color={whyJoinApplicationTextError ? "danger" : ""}
                   position="floating">Why do you want to join? *</IonLabel>
                 <IonTextarea className="applicationTextArea" value={whyJoinApplicationText}
-                    autoGrow="true"
+                    autoGrow={true}
                     onIonChange={e => setWhyJoinApplicationText(e.detail.value!)}>
                 </IonTextarea>
               </IonItem>
@@ -424,6 +425,7 @@ const CreatorApplicationForm: React.FC = () => {
                 Resume
                 </IonLabel>
                 <input
+                  className="applicationPdfUpload"
                   type="file"
                   accept=".pdf"
                   onChange={resumeChangeHandler}
@@ -439,6 +441,7 @@ const CreatorApplicationForm: React.FC = () => {
                   Writing Example *
                   </IonLabel>
                   <input
+                    className="applicationPdfUpload"
                     type="file"
                     accept=".pdf"
                     onChange={writingExampleChangeHandler}
@@ -449,12 +452,11 @@ const CreatorApplicationForm: React.FC = () => {
                 <IonItem>
                   <IonLabel
                     color={confirmNotPaidError ? "danger" : ""}
-                    position="stacked"
+                    className={`confirmNonPaidLabel ion-text-wrap`}
                   >
 * I understand this is not a paid position.</IonLabel>
                   <IonCheckbox checked={confirmNotPaid}
                      slot="start"
-
                      onIonChange={e => setConfirmNotPaid(e.detail.checked)} />
                 </IonItem>
               </IonList>
