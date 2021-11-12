@@ -40,9 +40,9 @@ const CreatorApplicationForm: React.FC = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
-  const [isWriter, setIsWriter] = useState(null);
-  const [isPhotographer, setIsPhotographer] = useState(null);
-  const [isVideographer, setIsVideographer] = useState(null);
+  const [appliedForWriter, setAppliedForWriter] = useState(null);
+  const [appliedForPhotographer, setAppliedForPhotographer] = useState(null);
+  const [appliedForVideographer, setAppliedForVideographer] = useState(null);
   const [introApplicationText, setIntroApplicationText] = useState(null);
   const [experiencesApplicationText, setExperiencesApplicationText] = useState(null);
   const [whyJoinApplicationText, setWhyJoinApplicationText] = useState(null);
@@ -55,9 +55,9 @@ const CreatorApplicationForm: React.FC = () => {
   const [lastNameError, setLastNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [positionError, setPositionError] = useState(null);
-  const [isWriterError, setIsWriterError] = useState(null);
-  const [isPhotographerError, setIsPhotographerError] = useState(null);
-  const [isVideographerError, setIsVideographerError] = useState(null);
+  const [appliedForWriterError, setAppliedForWriterError] = useState(null);
+  const [appliedForPhotographerError, setAppliedForPhotographerError] = useState(null);
+  const [appliedForVideographerError, setAppliedForVideographerError] = useState(null);
   const [introApplicationTextError, setIntroApplicationTextError] = useState(null);
   const [experiencesApplicationTextError, setExperiencesApplicationTextError] = useState(null);
   const [whyJoinApplicationTextError, setWhyJoinApplicationTextError] = useState(null);
@@ -125,17 +125,17 @@ const CreatorApplicationForm: React.FC = () => {
     } else {
       setEmailError(null);
     }
-    if (!isWriter && !isPhotographer && !isVideographer) {
+    if (!appliedForWriter && !appliedForPhotographer && !appliedForVideographer) {
       setPositionError("Please select a position (writer, photographer or videographer)");
-      setIsWriterError(true);
-      setIsPhotographerError(true);
-      setIsVideographerError(true);
+      setAppliedForWriterError(true);
+      setAppliedForPhotographerError(true);
+      setAppliedForVideographerError(true);
       dataValid = false;
     } else {
       setPositionError(null);
-      setIsWriterError(null);
-      setIsPhotographerError(null);
-      setIsVideographerError(null);
+      setAppliedForWriterError(null);
+      setAppliedForPhotographerError(null);
+      setAppliedForVideographerError(null);
     }
     if (!introApplicationText || introApplicationText.length < 25) {
       setIntroApplicationTextError("At least 25 characters are needed for 'Tell us a little about yourself' field");
@@ -180,9 +180,9 @@ const CreatorApplicationForm: React.FC = () => {
           firstName,
           lastName,
           email,
-          isWriter,
-          isPhotographer,
-          isVideographer,
+          appliedForWriter,
+          appliedForPhotographer,
+          appliedForVideographer,
           introApplicationText,
           experiencesApplicationText,
           whyJoinApplicationText,
@@ -352,28 +352,28 @@ const CreatorApplicationForm: React.FC = () => {
                 <IonCol sizeSm="6" sizeMd="6">
                   <IonItem>
                     <IonLabel
-                      color={isWriterError ? "danger" : ""}>
+                      color={appliedForWriterError ? "danger" : ""}>
                       Writer</IonLabel>
-                    <IonCheckbox slot="start" checked={isWriter}
-                      onIonChange={e => setIsWriter(e.detail.checked)} />
+                    <IonCheckbox slot="start" checked={appliedForWriter}
+                      onIonChange={e => setAppliedForWriter(e.detail.checked)} />
                   </IonItem>
                 </IonCol>
                 <IonCol sizeSm="6" sizeMd="6">
                   <IonItem>
                     <IonLabel
-                      color={isPhotographerError ? "danger" : ""}>
+                      color={appliedForPhotographerError ? "danger" : ""}>
                       Photographer</IonLabel>
-                    <IonCheckbox slot="start" checked={isPhotographer}
-                      onIonChange={e => setIsPhotographer(e.detail.checked)} />
+                    <IonCheckbox slot="start" checked={appliedForPhotographer}
+                      onIonChange={e => setAppliedForPhotographer(e.detail.checked)} />
                   </IonItem>
                 </IonCol>
                 <IonCol sizeSm="6" sizeMd="6">
                   <IonItem>
                     <IonLabel
-                      color={isVideographerError ? "danger" : ""}>
+                      color={appliedForVideographerError ? "danger" : ""}>
                       Videographer</IonLabel>
-                    <IonCheckbox slot="start" checked={isVideographer}
-                        onIonChange={e => setIsVideographer(e.detail.checked)} />
+                    <IonCheckbox slot="start" checked={appliedForVideographer}
+                        onIonChange={e => setAppliedForVideographer(e.detail.checked)} />
                   </IonItem>
                 </IonCol>
               </IonRow>
@@ -432,7 +432,7 @@ const CreatorApplicationForm: React.FC = () => {
                 />
               </IonItem>
               <br/>
-              { isWriter &&
+              { appliedForWriter &&
                 <IonItem>
                   <IonLabel
                     color={writingExampleError ? "danger" : ""}
