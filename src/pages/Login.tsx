@@ -10,8 +10,13 @@ import {
 import Header from "../components/Header";
 import SocialLoginButtons from "../components/socialLoginButtons";
 import PasswordlessLogin from "../components/auth/passwordlessEmail";
+import useAnalytics from '../hooks/useAnalytics';
 
 const Login: React.FC = () => {
+  const path = window.location.pathname;
+  const page = path == "/register" ? "Register" : "Login";
+  // TODO: Fix analytics calling twice here
+  useAnalytics(page);
   return (
     <IonPage>
       <Header />

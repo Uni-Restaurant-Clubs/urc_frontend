@@ -18,8 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import useAnalytics from '../hooks/useAnalytics';
 
 const EmailConfirmation: React.FC = () => {
+  useAnalytics("Email Confirmation");
   const dispatch = useDispatch();
   const router = useHistory();
   const signupLoading = useSelector((state: any) => state.signupLoading);

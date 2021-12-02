@@ -18,8 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../redux/actions/authActions";
 import Header from "../components/Header";
 import SocialLoginButtons from "../components/socialLoginButtons"
+import useAnalytics from '../hooks/useAnalytics';
 
 const Register: React.FC = () => {
+  useAnalytics("Register");
   const dispatch = useDispatch();
   const router = useHistory();
 

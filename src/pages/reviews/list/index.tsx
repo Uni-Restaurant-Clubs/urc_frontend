@@ -20,10 +20,12 @@ import {
 import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
 import ReviewListItem from "../../../components/reviews/listItem";
+import useAnalytics from '../../../hooks/useAnalytics';
 import "./index.css"
 
 const ReviewsPage: React.FC = () => {
 
+  useAnalytics("Reviews");
   const dispatch = useDispatch();
   interface Review {
     featured_photo: object

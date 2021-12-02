@@ -18,8 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { parseQuery } from "../utils/utils";
 import Header from "../components/Header";
+import useAnalytics from '../hooks/useAnalytics';
 
 const ResetPassword: React.FC = () => {
+  useAnalytics("Reset Password");
   const dispatch = useDispatch();
   const router = useHistory();
 

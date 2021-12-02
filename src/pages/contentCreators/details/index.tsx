@@ -23,11 +23,13 @@ import {
 import Header from "../../../components/Header";
 import SocialMediaIcons from "../../../components/contentCreators/socialMediaIcons";
 import ReviewListItem from "../../../components/reviews/listItem";
+import useAnalytics from '../../../hooks/useAnalytics';
 import "./index.css"
 
 
 const ContentCreatorPage: React.FC = () => {
 
+  useAnalytics("Creator Profile");
   const dispatch = useDispatch();
   const { public_unique_username } = useParams<{ public_unique_username: string }>();
   const creator = useSelector((state: any) => state.contentCreators.contentCreators[public_unique_username]);

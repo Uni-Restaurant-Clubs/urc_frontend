@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header";
 import airbrake from "../../utils/airbrake";
 import useScript from '../../hooks/useScript';
+import useAnalytics from '../../hooks/useAnalytics';
 
 interface errorHandling {
   nameError: null;
@@ -31,6 +32,7 @@ interface errorHandling {
 }
 
 const Login: React.FC = () => {
+  useAnalytics("Contact");
   useScript(process.env.REACT_APP_RECAPTCHA_URL);
   const dispatch = useDispatch();
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY

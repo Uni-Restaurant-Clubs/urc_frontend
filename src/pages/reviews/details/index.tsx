@@ -17,11 +17,13 @@ import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
 import ReviewArticle from "../../../components/ReviewArticle";
 import ReviewRestaurantInfo from "../../../components/ReviewRestaurantInfo";
 import WPCredits from "../../../components/reviews/writerPhotographerCredits";
+import useAnalytics from '../../../hooks/useAnalytics';
 import "./index.css"
 
 
 const ReviewPage: React.FC = () => {
 
+  useAnalytics("Review");
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
   let review = useSelector((state: any) => state.reviews.reviews[id]);

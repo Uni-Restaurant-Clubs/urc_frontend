@@ -1,9 +1,10 @@
 import axios from "axios";
 import airbrake from "./airbrake";
+import { trackUrl } from "../config/analytics"
 
 const track = async (eventName, data) => {
   try {
-    formData = {
+    const formData = {
       event: {
         event_name: eventName,
         label: data.label,
@@ -11,11 +12,11 @@ const track = async (eventName, data) => {
         properties: data.properties
       }
     }
-    await axios.post(finishPasswordlessLoginUrl, formData);
+    await axios.post(trackUrl, formData);
   } catch (error) {
     airbrake.notify({
       error: "log event could not be sent",
-      params: { formData, error }
+      params: { eventName, data, error }
     });
   }
 }
