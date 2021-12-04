@@ -23,9 +23,9 @@ import "./index.css"
 
 const ReviewPage: React.FC = () => {
 
-  useAnalytics("Review");
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
+  useAnalytics("Review", {restaurant_id: id});
   let review = useSelector((state: any) => state.reviews.reviews[id]);
 
   useEffect(() => {

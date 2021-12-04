@@ -29,9 +29,9 @@ import "./index.css"
 
 const ContentCreatorPage: React.FC = () => {
 
-  useAnalytics("Creator Profile");
   const dispatch = useDispatch();
   const { public_unique_username } = useParams<{ public_unique_username: string }>();
+  useAnalytics("Creator Profile", { public_unique_username });
   const creator = useSelector((state: any) => state.contentCreators.contentCreators[public_unique_username]);
 
   useEffect(() => {
