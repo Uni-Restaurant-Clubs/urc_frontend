@@ -58,7 +58,9 @@ const ReviewPage: React.FC = () => {
                 photographer={review?.photographer}
               />
               <div dangerouslySetInnerHTML={ {__html: iframe} } />
-              <Ad/>
+              <div className="googleAdContainer">
+                <Ad/>
+              </div>
               <br />
               <ReviewArticle title={review?.article_title} article={review?.article} />
             </IonCardContent>
