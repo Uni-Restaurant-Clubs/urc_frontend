@@ -1,9 +1,13 @@
+.topBannerAd {
+  margin-left: 20px;
+}
+
 .amazonAdContainer {
   display: flex;
 }
 
 .amazonAd {
-  margin-right: 10px;
+  margin-right: 30px;
 }
 .applicationPdfUpload {
   padding: 10px;
