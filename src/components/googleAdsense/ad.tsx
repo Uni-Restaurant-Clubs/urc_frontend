@@ -1,4 +1,9 @@
 import React, { useEffect } from "react";
+declare global {
+   interface Window {
+     adsbygoogle:any;
+   }
+}
 
 const Ad = () => {
   useEffect(() => {
