@@ -17,6 +17,7 @@ import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
 import ReviewArticle from "../../../components/ReviewArticle";
 import ReviewRestaurantInfo from "../../../components/ReviewRestaurantInfo";
 import WPCredits from "../../../components/reviews/writerPhotographerCredits";
+import Ad from "../../../components/googleAdsense/ad";
 import useAnalytics from '../../../hooks/useAnalytics';
 import "./index.css"
 
@@ -36,6 +37,7 @@ const ReviewPage: React.FC = () => {
     getReview(id);
   }, [id]);
 
+  const iframe = '<iframe f=ifr&lt1=_new src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=21&l=ur1&category=gourmet&banner=1HN0SQGXKCCJ4YE167G2&f=ifr<1=_new&linkID=69a3cd67d71f12cd5ad579d57e8f7e70&t=unirestaurant-20&tracking_id=unirestaurant-20" width="125" height="125" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>'
   return (
     <>
       <IonPage>
@@ -55,6 +57,9 @@ const ReviewPage: React.FC = () => {
                 writer={review?.writer}
                 photographer={review?.photographer}
               />
+              <div dangerouslySetInnerHTML={ {__html: iframe} } />
+              <Ad/>
+              <br />
               <ReviewArticle title={review?.article_title} article={review?.article} />
             </IonCardContent>
           </IonCard>
