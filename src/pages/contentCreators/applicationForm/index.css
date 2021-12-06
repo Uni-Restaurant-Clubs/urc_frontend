@@ -1,3 +1,10 @@
+.amazonAdContainer {
+  display: flex;
+}
+
+.amazonAd {
+  margin-right: 10px;
+}
 .applicationPdfUpload {
   padding: 10px;
 }
