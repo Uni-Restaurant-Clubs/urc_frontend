@@ -14,12 +14,12 @@ const useAnalytics = (pageName, data = {}) => {
     if (value != pageName &&
         (pageName.toLowerCase() == path ||
          (pageName == "Reviews" && path == '') ||
-         (pageName == "Creator Profile" && path == 'creators') ||
-         (pageName == "Review" && path == 'reviews'))) {
+         (pageName == "Creator Profile" && path == 'creators' && data.public_unique_username) ||
+         (pageName == "Review" && path == 'reviews' && data.restaurant_id))) {
         pageView(pageName, data)
         value = pageName;
     }
-  }, [location]);
+  }, [location, data.restaurant_id, data.creator_id]);
 }
 
 export default useAnalytics;

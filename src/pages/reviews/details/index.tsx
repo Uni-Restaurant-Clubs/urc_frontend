@@ -27,8 +27,8 @@ const ReviewPage: React.FC = () => {
 
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
-  useAnalytics("Review", {restaurant_id: id});
   let review = useSelector((state: any) => state.reviews.reviews[id]);
+  useAnalytics("Review", {restaurant_id: review?.restaurant?.id});
 
   useEffect(() => {
     const getReview = async (id: string) => {
