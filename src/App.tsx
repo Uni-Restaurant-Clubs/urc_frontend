@@ -31,6 +31,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Contact from "./pages/contact";
 
 import Home from "./pages/Home";
+import MembershipOptions from "./pages/memberships/options";
 import ReviewDetails from "./pages/reviews/details";
 import ContentCreatorDetails from "./pages/contentCreators/details";
 import CreatorApplicationForm from "./pages/contentCreators/applicationForm";
@@ -54,6 +55,7 @@ const App: React.FC = () => {
         		  <AuthRoute exact path="/register" component={Login} />
         		  <AuthRoute exact path="/login" component={Login} />
         		  <Route exact path="/contact" component={Contact} />
+        		  <Route exact path="/membership_options" component={MembershipOptions} />
         		  <Route exact path="/apply" component={CreatorApplicationForm} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
