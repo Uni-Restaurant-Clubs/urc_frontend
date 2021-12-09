@@ -1,0 +1,36 @@
+.supportLocalArtistDetails {
+  font-size: 0.65em;
+  white-space: normal;
+}
+.supportLocalRestaurantDetails {
+  font-size: 0.65em;
+  white-space: normal;
+}
+
+.charityDetails {
+  font-size: 0.65em;
+}
+
+.membershipBenefits {
+  padding: 5px 0;
+}
+
+.membershipsTitle h1 {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.membershipCard {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.benefitsContainer {
+  width: 200px;
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px grey solid;
+}
