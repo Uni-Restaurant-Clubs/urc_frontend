@@ -34,13 +34,12 @@ const MembershipOptions: React.FC = () => {
   const contactLoading = useSelector((state: any) => state.payments.getCheckoutUrlLoading);
   const apiError = useSelector((state: any) => state.payments.getCheckoutUrlFail);
 
-  const sendToCheckout = async () => {
+  const sendToCheckout = () => {
     grecaptcha.ready(async () => {
       let recaptchaToken = await grecaptcha.execute(recaptchaKey, { action: 'submit' });
-      const res: any = await dispatch(paymentActions.getCheckoutUrl({ recaptchaToken }));
-        debugger;
-      if (res?.status === 303) {
-        debugger;
+      let res: any = await dispatch(paymentActions.getCheckoutUrl({ recaptchaToken }));
+      if (res?.status === 200 && res?.data?.checkout_url) {
+        window.location.href = res.data.checkout_url;
       } else if (apiError) {
         setAlertMessage("Oops looks like there was an issue. Please try again soon");
         setShowAlert(true);

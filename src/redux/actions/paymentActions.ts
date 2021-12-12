@@ -11,9 +11,6 @@ const getCheckoutUrl = (data: any) => async (dispatch: any) => {
     const price_id = process.env.REACT_APP_STRIPE_PRICE_ID;
     const res = await axios.post(getCheckoutUrlUrl,
       { price_id, recaptcha_token: data.recaptchaToken });
-    console.info("**** RES ******")
-    console.info(res)
-    debugger;
     dispatch({ type: actionTypes.GET_CHECKOUT_URL_SUCCESS, payload: res.data });
     return res;
   } catch (error) {
