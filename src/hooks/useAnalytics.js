@@ -10,7 +10,7 @@ const useAnalytics = (pageName, data = {}) => {
   const location = useLocation();
   useEffect(async () => {
 
-    const path = window.location.pathname.split("/")[1]
+    const path = window.location.pathname.split("/")[1].split('_').join(' ');
     if (value != pageName &&
         (pageName.toLowerCase() == path ||
          (pageName == "Reviews" && path == '') ||

@@ -22,7 +22,11 @@ import { useDispatch, useSelector } from "react-redux";
 import airbrake from "../../../utils/airbrake";
 import useAnalytics from '../../../hooks/useAnalytics';
 import useScript from '../../../hooks/useScript';
+import useIsAuthenticated from '../../../hooks/useIsAuthenticated';
+import { track } from '../../../utils/analytics';
+import { Storage } from "@capacitor/storage";
 
+let connected = false;
 const MembershipOptions: React.FC = () => {
   useAnalytics("Membership Options");
   useScript(process.env.REACT_APP_RECAPTCHA_URL);
@@ -30,11 +34,14 @@ const MembershipOptions: React.FC = () => {
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  connected = useIsAuthenticated();
 
   const contactLoading = useSelector((state: any) => state.payments.getCheckoutUrlLoading);
   const apiError = useSelector((state: any) => state.payments.getCheckoutUrlFail);
 
   const sendToCheckout = () => {
+    debugger;
+    track("Button Click", {label: "Membership Purchase", category: "memberships"});
     grecaptcha.ready(async () => {
       let recaptchaToken = await grecaptcha.execute(recaptchaKey, { action: 'submit' });
       let res: any = await dispatch(paymentActions.getCheckoutUrl({ recaptchaToken }));
@@ -85,7 +92,7 @@ const MembershipOptions: React.FC = () => {
           <IonCardContent>
             <IonCardHeader>
               <IonCardTitle>
-                The Foodie
+                Foodie
               </IonCardTitle>
             </IonCardHeader>
             <IonLoading
