@@ -1,6 +1,8 @@
 import {
   IonText,
   IonList,
+  IonLoading,
+  IonAlert,
   IonListHeader,
   IonItem,
   IonLabel,
@@ -15,12 +17,63 @@ import {
 import { useState, useEffect } from "react";
 import "./index.css";
 import Header from "../../../components/Header";
+import { paymentActions } from "../../../redux/actions/paymentActions";
+import { useDispatch, useSelector } from "react-redux";
+import airbrake from "../../../utils/airbrake";
+import useAnalytics from '../../../hooks/useAnalytics';
+import useScript from '../../../hooks/useScript';
 
 const MembershipOptions: React.FC = () => {
+  useAnalytics("Membership Options");
+  useScript(process.env.REACT_APP_RECAPTCHA_URL);
+  const dispatch = useDispatch();
+  const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
-  const sendToCheckout = () => {
+  const contactLoading = useSelector((state: any) => state.payments.getCheckoutUrlLoading);
+  const apiError = useSelector((state: any) => state.payments.getCheckoutUrlFail);
 
+  const sendToCheckout = async () => {
+    grecaptcha.ready(async () => {
+      let recaptchaToken = await grecaptcha.execute(recaptchaKey, { action: 'submit' });
+      const res: any = await dispatch(paymentActions.getCheckoutUrl({ recaptchaToken }));
+        debugger;
+      if (res?.status === 303) {
+        debugger;
+      } else if (apiError) {
+        setAlertMessage("Oops looks like there was an issue. Please try again soon");
+        setShowAlert(true);
+        airbrake.notify({
+          error: apiError
+        });
+      }
+    });
   }
+
+  useEffect(() => {
+    if (apiError) {
+      if (Array.isArray(apiError.message)) {
+        let outputError = apiError.message.map((errMsg: any) => {
+          return `<li>${errMsg}</li>`;
+        });
+
+        setAlertMessage(
+          `<ul class="errorMessageStyle">${outputError.join("")}</ul`
+        );
+        setShowAlert(true);
+      } else {
+        setAlertMessage(
+          `<ul class="errorMessageStyle"><li>${
+            apiError.message ||
+            "Oops looks like something went wrong. Please try again soon"
+          }</li></ul`
+        );
+        setShowAlert(true);
+      }
+    } else {
+    }
+  }, [apiError]);
 
   return (
     <IonPage>
@@ -29,7 +82,6 @@ const MembershipOptions: React.FC = () => {
         <IonText className="membershipsTitle">
           <h1>Memberships</h1>
         </IonText>
-
         <IonCard className="membershipCard">
           <IonCardContent>
             <IonCardHeader>
@@ -37,6 +89,31 @@ const MembershipOptions: React.FC = () => {
                 The Foodie
               </IonCardTitle>
             </IonCardHeader>
+            <IonLoading
+              spinner="bubbles"
+              message="Please wait ..."
+              duration={0}
+              isOpen={contactLoading}
+            />
+
+            <IonAlert
+              isOpen={showAlert}
+              onDidDismiss={() => {
+                setShowAlert(false);
+                setAlertMessage("");
+              }}
+              header={"Alert"}
+              message={alertMessage}
+              buttons={[
+                {
+                  text: "Ok",
+                  cssClass: "confirmButtonStyle rightButton",
+                  handler: () => {
+                    setAlertMessage("");
+                  },
+                },
+              ]}
+            />
             <IonText>
               <h1>$2.99 / month</h1>
             </IonText>
@@ -65,7 +142,7 @@ const MembershipOptions: React.FC = () => {
               </IonItem>
               <IonItem>
                 <IonLabel className="membershipBenefits">
-                  Support local restaurants!
+                  Support local restaurants
                   <ul className="supportLocalRestaurantDetails">
                     <li>
                       One of our main missions is to support locals restaurant by helping people discover them.
@@ -78,7 +155,7 @@ const MembershipOptions: React.FC = () => {
               </IonItem>
               <IonItem>
                 <IonLabel className="membershipBenefits">
-                  Support local artists!
+                  Support local artists
                   <ul className="supportLocalArtistDetails">
                     <li>
                       We help local artists (writers and photographers) gain professional experience and eat gourmet food for free!
@@ -91,12 +168,11 @@ const MembershipOptions: React.FC = () => {
               </IonItem>
             </IonList>
             <br/>
-            <br/>
             <IonButton
               expand="block"
               onClick={sendToCheckout}
             >
-              Select
+              Sign Up
             </IonButton>
           </IonCardContent>
         </IonCard>

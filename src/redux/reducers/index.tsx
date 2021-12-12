@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
+import paymentReducer from './paymentReducer';
 import reviewReducer from './reviewReducer';
 import contactReducer from './contactReducer';
 import contentCreatorReducer from './contentCreatorReducer';
@@ -8,5 +9,6 @@ export default combineReducers({
   auth: authReducer,
   contact: contactReducer,
   contentCreators: contentCreatorReducer,
-  reviews: reviewReducer
+  reviews: reviewReducer,
+  payments: paymentReducer,
 });
