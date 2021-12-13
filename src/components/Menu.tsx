@@ -15,7 +15,7 @@ import {
 import { Storage } from "@capacitor/storage";
 import { useLocation } from 'react-router-dom';
 import { logInOutline, eyeOutline, speedometerOutline, newspaperOutline,
-         personAddOutline, restaurantOutline, mailOutline
+         personAddOutline, restaurantOutline, mailOutline, diamondOutline,
        } from 'ionicons/icons';
 import './Menu.css';
 import LogoutButton from "./LogoutButton";
@@ -49,6 +49,13 @@ const appPages: AppPage[] = [
     targetBlank: false,
     iosIcon: restaurantOutline,
     mdIcon: restaurantOutline
+  },
+  {
+    title: 'Memberships',
+    url: '/membership_options',
+    targetBlank: false,
+    iosIcon: diamondOutline,
+    mdIcon: diamondOutline
   },
   {
     title: 'Contact',
@@ -88,6 +95,13 @@ const loggedInAppPages: AppPage[] = [
     targetBlank: false,
     iosIcon: restaurantOutline,
     mdIcon: restaurantOutline
+  },
+  {
+    title: 'Memberships',
+    url: '/membership_options',
+    targetBlank: false,
+    iosIcon: diamondOutline,
+    mdIcon: diamondOutline
   },
   {
     title: 'Contact',

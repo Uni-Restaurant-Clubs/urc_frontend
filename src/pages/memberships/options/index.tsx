@@ -167,7 +167,7 @@ const MembershipOptions: React.FC = () => {
                   Support local artists
                   <ul className="supportLocalArtistDetails">
                     <li>
-                      We help local artists (writers and photographers) gain professional experience and eat gourmet food for free!
+                      We help local writers and photographers gain professional experience and eat great food for free!
                     </li>
                     <li>
                       By supporting us, you help us support more local artists!
