@@ -15,16 +15,17 @@ import {
   IonButton,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
+import { Storage } from "@capacitor/storage";
 import "./index.css";
 import Header from "../../../components/Header";
-import { paymentActions } from "../../../redux/actions/paymentActions";
 import { useDispatch, useSelector } from "react-redux";
 import airbrake from "../../../utils/airbrake";
 import useAnalytics from '../../../hooks/useAnalytics';
 import useScript from '../../../hooks/useScript';
 import useIsAuthenticated from '../../../hooks/useIsAuthenticated';
 import { track } from '../../../utils/analytics';
-import { Storage } from "@capacitor/storage";
+import { parseQuery } from "../../../utils/utils";
+import { goToCheckout } from "../../../utils/payments";
 
 let connected = false;
 const MembershipOptions: React.FC = () => {
@@ -39,22 +40,24 @@ const MembershipOptions: React.FC = () => {
   const contactLoading = useSelector((state: any) => state.payments.getCheckoutUrlLoading);
   const apiError = useSelector((state: any) => state.payments.getCheckoutUrlFail);
 
-  const sendToCheckout = () => {
-    debugger;
+  useEffect(() => {
+    let queryParams: any = parseQuery(window.location.search);
+    if (queryParams.already_started && connected) {
+      sendToCheckout();
+    }
+  }, [connected]);
+
+  const sendToCheckout = async () => {
     track("Button Click", {label: "Membership Purchase", category: "memberships"});
-    grecaptcha.ready(async () => {
-      let recaptchaToken = await grecaptcha.execute(recaptchaKey, { action: 'submit' });
-      let res: any = await dispatch(paymentActions.getCheckoutUrl({ recaptchaToken }));
-      if (res?.status === 200 && res?.data?.checkout_url) {
-        window.location.href = res.data.checkout_url;
-      } else if (apiError) {
-        setAlertMessage("Oops looks like there was an issue. Please try again soon");
-        setShowAlert(true);
-        airbrake.notify({
-          error: apiError
-        });
-      }
-    });
+    if (connected) {
+      goToCheckout(dispatch);
+    } else {
+      await Storage.set({
+        key: "redirectPath",
+        value: "/membership_options?already_started=true",
+      });
+      window.location.href = "/login";
+    }
   }
 
   useEffect(() => {

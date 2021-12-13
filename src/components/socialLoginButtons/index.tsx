@@ -13,6 +13,8 @@ import { isPlatform, getPlatforms } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
 import "@codetrix-studio/capacitor-google-auth";
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Storage } from "@capacitor/storage";
+import { goToCheckout } from "../../utils/payments";
 
 import "./index.css"
 
@@ -39,7 +41,20 @@ const SocialLoginButtons: React.FC = () => {
           let res = await dispatch(authActions.connectOauth(
             {provider: provider, [tokenField]: authCode}));
           if (res && res.length > 0) {
-            window.location.reload();
+            let { value } = await Storage.get({
+              key: "redirectPath",
+            });
+
+            if (value) {
+              await Storage.remove({key: "redirectPath"});
+              if (value == "/membership_options?already_started=true") {
+                goToCheckout(dispatch);
+              } else {
+                window.location.href = value;
+              }
+            } else {
+              window.location.reload();
+            }
           } else {
             setShowAlert(true);
           }

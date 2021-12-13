@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { Storage } from "@capacitor/storage";
 import {
          IonImg,
          IonThumbnail,
@@ -26,6 +27,7 @@ import {
 import "./index.css"
 import Header from "../../Header";
 import { authActions } from "../../../redux/actions/authActions";
+import { goToCheckout } from "../../../utils/payments";
 
 interface errorHandling {
   emailError: null;
@@ -89,7 +91,20 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
       { code, token }));
     if (res && res.length > 0) {
       setCode("");
-      window.location.href="/";
+      let { value } = await Storage.get({
+        key: "redirectPath",
+      });
+
+      if (value) {
+        await Storage.remove({key: "redirectPath"});
+        if (value == "/membership_options?already_started=true") {
+          goToCheckout(dispatch);
+        } else {
+          window.location.href = value;
+        }
+      } else {
+        window.location.reload();
+      }
     } else {
     }
   };
