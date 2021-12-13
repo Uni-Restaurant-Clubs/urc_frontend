@@ -42,6 +42,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 
 const App: React.FC = () => {
   const history = useHistory();
+  setupIonicReact();
 
   return (
     <ErrorBoundary>

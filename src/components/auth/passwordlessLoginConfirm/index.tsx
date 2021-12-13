@@ -24,7 +24,7 @@ import {
          IonLoading,
          IonAlert,
          IonContent } from '@ionic/react';
-import "./index.css"
+import "./index.scss"
 import Header from "../../Header";
 import { authActions } from "../../../redux/actions/authActions";
 import { goToCheckout } from "../../../utils/payments";
