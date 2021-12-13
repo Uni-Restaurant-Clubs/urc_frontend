@@ -52,6 +52,7 @@ const ReviewsPage: React.FC = () => {
     let review = reviews[key as keyof Review];
     return (
       <ReviewListItem
+        key={key}
         id={key}
         name={review?.restaurant?.name}
         title={review?.article_title}

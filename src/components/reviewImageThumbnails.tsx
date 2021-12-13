@@ -71,7 +71,7 @@ const ReviewImageThumbnails: React.FC<{featuredPhoto: Image,
           {pics}
         </IonRow>
       </IonGrid>
-      <IonModal isOpen={showModal} cssClass='imageSlider' onDidDismiss={()=>setShowModal(false)}>
+      <IonModal isOpen={showModal} className='imageSlider' onDidDismiss={()=>setShowModal(false)}>
         <IonHeader className="imageSliderHeader" translucent>
           <IonToolbar>
             <IonTitle>

@@ -110,7 +110,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
   };
 
   return (
-    <IonModal cssClass="confirmCodeModal" isOpen={showModal}>
+    <IonModal className="confirmCodeModal" isOpen={showModal}>
       <IonHeader>
         <IonToolbar>
           <IonImg className="passwordlessHeader" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools.png" />

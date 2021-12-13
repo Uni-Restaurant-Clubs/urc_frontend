@@ -28,7 +28,7 @@ const ReviewListItem: React.FC<{id: string, photo: string, name: string,
             <IonImg src={photo} />
           </IonThumbnail>
        </div>
-        <IonLabel className="reviewItemLabel">
+        <IonLabel key={id} className="reviewItemLabel">
           <h2>{name}</h2>
           <p>{title}</p>
         </IonLabel>
