@@ -50,6 +50,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
   const [code, setCode] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const confirmCodeLoading = useSelector((state: any) => {
     return state.auth.confirmPasswordlessLoginLoading;
@@ -90,6 +91,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
     let res = await dispatch(authActions.passwordlessLoginConfirm(
       { code, token }));
     if (res && res.length > 0) {
+      setLoading(true);
       setCode("");
       let { value } = await Storage.get({
         key: "redirectPath",
@@ -126,7 +128,7 @@ const PasswordlessLoginConfirm: React.FC<Props> = (
           spinner="bubbles"
           message="Please wait ..."
           duration={0}
-          isOpen={confirmCodeLoading}
+          isOpen={confirmCodeLoading || loading}
         />
 
         <IonAlert

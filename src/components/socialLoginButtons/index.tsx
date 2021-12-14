@@ -27,6 +27,7 @@ const SocialLoginButtons: React.FC = () => {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     GoogleAuth.init()
@@ -41,6 +42,7 @@ const SocialLoginButtons: React.FC = () => {
           let res = await dispatch(authActions.connectOauth(
             {provider: provider, [tokenField]: authCode}));
           if (res && res.length > 0) {
+            setLoading(true);
             let { value } = await Storage.get({
               key: "redirectPath",
             });
@@ -71,8 +73,8 @@ const SocialLoginButtons: React.FC = () => {
     <>
       <IonLoading
         spinner="bubbles"
-        message="Started connecting ..."
-        isOpen={oauthLoading}
+        message="Loading ..."
+        isOpen={oauthLoading || loading}
       />
 
       <IonAlert
