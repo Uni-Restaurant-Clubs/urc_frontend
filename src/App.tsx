@@ -33,6 +33,7 @@ import Contact from "./pages/contact";
 import Home from "./pages/Home";
 import MembershipOptions from "./pages/memberships/options";
 import ReviewDetails from "./pages/reviews/details";
+import TermsAndPolicies from "./pages/termsAndPolicies";
 import ContentCreatorDetails from "./pages/contentCreators/details";
 import CreatorApplicationForm from "./pages/contentCreators/applicationForm";
 import PrivateRoute from "./components/PrivateRoute";
@@ -58,6 +59,7 @@ const App: React.FC = () => {
         		  <Route exact path="/contact" component={Contact} />
         		  <Route exact path="/membership_options" component={MembershipOptions} />
         		  <Route exact path="/apply" component={CreatorApplicationForm} />
+        		  <Route exact path="/terms_and_policies" component={TermsAndPolicies} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
         		  <AuthRoute

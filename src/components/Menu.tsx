@@ -65,23 +65,9 @@ const appPages: AppPage[] = [
     mdIcon: mailOutline
   },
   {
-    title: 'Privacy Policy',
-    url: 'https://www.iubenda.com/privacy-policy/25768068/full-legal',
-    targetBlank: true,
-    iosIcon: eyeOutline,
-    mdIcon: eyeOutline
-  },
-  {
-    title: 'Cookie Policy',
-    url: 'https://www.iubenda.com/privacy-policy/25768068/cookie-policy',
-    targetBlank: true,
-    iosIcon: speedometerOutline,
-    mdIcon: speedometerOutline
-  },
-  {
-    title: 'Terms and Conditions',
-    url: 'https://www.iubenda.com/terms-and-conditions/25768068',
-    targetBlank: true,
+    title: 'Terms and Policies',
+    url: 'terms_and_policies',
+    targetBlank: false,
     iosIcon: newspaperOutline,
     mdIcon: newspaperOutline
   },
@@ -109,6 +95,13 @@ const loggedInAppPages: AppPage[] = [
     targetBlank: false,
     iosIcon: mailOutline,
     mdIcon: mailOutline
+  },
+  {
+    title: 'Terms and Policies',
+    url: 'terms_and_policies',
+    targetBlank: false,
+    iosIcon: newspaperOutline,
+    mdIcon: newspaperOutline
   },
 
 ]
@@ -187,8 +180,8 @@ const Menu: React.FC = () => {
                   }
                 </IonMenuToggle>
               );
-            })}
-
+            })
+          }
         </IonList>
       </IonContent>
     </IonMenu>
