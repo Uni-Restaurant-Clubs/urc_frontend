@@ -33,7 +33,6 @@ import { goToCheckout } from "../../../utils/payments";
 let connected = false;
 const MembershipOptions: React.FC = () => {
   useAnalytics("Membership Options");
-  useScript(process.env.REACT_APP_RECAPTCHA_URL);
   const dispatch = useDispatch();
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY
   const [showAlert, setShowAlert] = useState(false);
