@@ -144,8 +144,8 @@ const MembershipOptions: React.FC = () => {
                 </IonItem>
                 <IonList slot="content">
                   <IonItem>
-                    <IonLabel className="charityDetails" class="ion-text-wrap" >
-                      Enjoy viewing reviews without ads!
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
+                      Enjoy reviews without ads!
                     </IonLabel>
                   </IonItem>
                 </IonList>
@@ -154,14 +154,14 @@ const MembershipOptions: React.FC = () => {
               {/* SUPPORT A LOCAL FOOD CHARITY */}
               <IonAccordion value="Support a local food charity">
                 <IonItem slot="header">
-                  <IonLabel className="membershipBenefits">
-                    10% goes to a local food charity
+                  <IonLabel className="membershipBenefits" class="ion-text-wrap">
+                    10% goes to a food charity
                   </IonLabel>
                 </IonItem>
                 <IonList slot="content">
                   <IonItem>
-                    <IonLabel className="charityDetails" class="ion-text-wrap" >
-                      10% of your payment goes to a charity that's based on your location.
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
+                      10% of your payment goes to a food related charity that's based on your location.
                       <p> </p><a href="#">Click here for more info.</a>
                     </IonLabel>
                   </IonItem>
@@ -177,15 +177,15 @@ const MembershipOptions: React.FC = () => {
                 </IonItem>
                 <IonList slot="content">
                   <IonItem>
-                    <IonLabel className="supportLocalRestaurantDetails" class="ion-text-wrap" >
-                      One of our main missions is to support locals restaurant by helping people discover them. By supporting us, you help us support more local restaurants!
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
+                      One of our main missions is to support local restaurants by helping people discover them. By supporting us, you help us support more local restaurants!
 
                     </IonLabel>
                   </IonItem>
                 </IonList>
               </IonAccordion>
 
-              {/* SUPPORT LOCAL Artists*/}
+              {/* SUPPORT LOCAL ARTISTS*/}
               <IonAccordion value="Support local artists">
                 <IonItem slot="header">
                   <IonLabel className="membershipBenefits">
@@ -194,7 +194,7 @@ const MembershipOptions: React.FC = () => {
                 </IonItem>
                 <IonList slot="content">
                   <IonItem>
-                    <IonLabel className="supportLocalArtistDetails" class="ion-text-wrap" >
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
                       We help local writers and photographers gain professional experience and eat great food for free. By supporting us, you help us support more local artists!
 
                     </IonLabel>

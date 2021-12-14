@@ -7,12 +7,12 @@
   white-space: normal;
 }
 
-.charityDetails {
-  font-size: 0.65em;
+.memberBenefitsDetails {
+  font-size: 0.8em !important;
 }
 
 .membershipBenefits {
-  padding: 5px 0;
+  padding: 10px 0;
 }
 
 .membershipsTitle h1 {
@@ -22,7 +22,7 @@
 }
 
 .membershipCard {
-  max-width: 550px;
+  max-width: 375px;
   margin: 20px auto;
   padding: 10px 20px;
   text-align: center;
