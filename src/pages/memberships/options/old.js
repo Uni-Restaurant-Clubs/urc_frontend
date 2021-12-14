@@ -1,4 +1,4 @@
-import {
+/*import {
   IonText,
   IonList,
   IonLoading,
@@ -16,7 +16,6 @@ import {
   IonCardTitle,
   IonButton,
 } from "@ionic/react";
-import { arrowDownCircle } from 'ionicons/icons';
 import { useState, useEffect } from "react";
 import { Storage } from "@capacitor/storage";
 import "./index.css";
@@ -133,76 +132,60 @@ const MembershipOptions: React.FC = () => {
             <IonText>
               <h2>What do I get?</h2>
             </IonText>
-            <IonAccordionGroup>
-
-              {/* NO ADS */}
-              <IonAccordion value="No Ads">
+            <IonAccordianGroup>
+              <IonAccordian value="No Ads">
                 <IonItem slot="header">
                   <IonLabel className="membershipBenefits">
                     No Ads
                   </IonLabel>
                 </IonItem>
-                <IonList slot="content">
+                <IonList>
                   <IonItem>
-                    <IonLabel className="charityDetails" class="ion-text-wrap" >
-                      Enjoy viewing reviews without ads!
+                    <IonLabel class="ion-text-wrap" className="membershipBenefits">
+                      Support a local food charity
+                      <ul className="charityDetails">
+                        <li>
+                          10% of your payment goes to a charity that's based on your location.
+                        </li>
+                        <li>
+                          <a href="#">Click here for more info.</a>
+                        </li>
+                      </ul>
                     </IonLabel>
                   </IonItem>
                 </IonList>
-              </IonAccordion>
-
-              {/* SUPPORT A LOCAL FOOD CHARITY */}
-              <IonAccordion value="Support a local food charity">
-                <IonItem slot="header">
-                  <IonLabel className="membershipBenefits">
-                    10% goes to a local food charity
-                  </IonLabel>
-                </IonItem>
-                <IonList slot="content">
-                  <IonItem>
-                    <IonLabel className="charityDetails" class="ion-text-wrap" >
-                      10% of your payment goes to a charity that's based on your location.
-                      <p> </p><a href="#">Click here for more info.</a>
-                    </IonLabel>
-                  </IonItem>
-                </IonList>
-              </IonAccordion>
-
-              {/* SUPPORT LOCAL RESTAURANTS*/}
-              <IonAccordion value="Support local restaurants">
+              </IonAccordian>
+              <IonAccordian value="Support local restaurants">
                 <IonItem slot="header">
                   <IonLabel className="membershipBenefits">
                     Support local restaurants
+                    <ul className="supportLocalRestaurantDetails">
+                      <li>
+                        One of our main missions is to support locals restaurant by helping people discover them.
+                      </li>
+                      <li>
+                        By supporting us, you help us support more local restaurants!
+                      </li>
+                    </ul>
                   </IonLabel>
                 </IonItem>
-                <IonList slot="content">
-                  <IonItem>
-                    <IonLabel className="supportLocalRestaurantDetails" class="ion-text-wrap" >
-                      One of our main missions is to support locals restaurant by helping people discover them. By supporting us, you help us support more local restaurants!
-
-                    </IonLabel>
-                  </IonItem>
                 </IonList>
-              </IonAccordion>
-
-              {/* SUPPORT LOCAL Artists*/}
-              <IonAccordion value="Support local artists">
-                <IonItem slot="header">
-                  <IonLabel className="membershipBenefits">
-                    Support local artists
-                  </IonLabel>
-                </IonItem>
-                <IonList slot="content">
-                  <IonItem>
-                    <IonLabel className="supportLocalArtistDetails" class="ion-text-wrap" >
-                      We help local writers and photographers gain professional experience and eat great food for free. By supporting us, you help us support more local artists!
-
-                    </IonLabel>
-                  </IonItem>
-                </IonList>
-              </IonAccordion>
-
-            </IonAccordionGroup>
+              </IonAccordian>
+              <IonItem>
+                <IonLabel className="membershipBenefits">
+                  Support local artists
+                  <ul className="supportLocalArtistDetails">
+                    <li>
+                      We help local writers and photographers gain professional experience and eat great food for free!
+                    </li>
+                    <li>
+                      By supporting us, you help us support more local artists!
+                    </li>
+                  </ul>
+                </IonLabel>
+              </IonItem>
+            </IonList>
+            </IonAccordianGroup>
             <br/>
             <IonButton
               expand="block"
@@ -217,4 +200,4 @@ const MembershipOptions: React.FC = () => {
   );
 };
 
-export default MembershipOptions;
+export default MembershipOptions;*/
