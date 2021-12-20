@@ -31,6 +31,7 @@ import { parseQuery } from "../../../utils/utils";
 import { goToCheckout } from "../../../utils/payments";
 
 let connected = false;
+const path = window.location.pathname
 const MembershipOptions: React.FC = () => {
   useAnalytics("Membership Options");
   const dispatch = useDispatch();
@@ -48,6 +49,19 @@ const MembershipOptions: React.FC = () => {
       sendToCheckout();
     }
   }, [connected]);
+
+  useEffect(() => {
+    if (path == '/payment_success') {
+      setAlertMessage("Payment Success!");
+      setShowAlert(true);
+    }
+
+    if (path == '/payment_cancelled') {
+      setAlertMessage("Payment Cancelled");
+      setShowAlert(true);
+    }
+
+  }, [path])
 
   const sendToCheckout = async () => {
     track("Button Click", {label: "Membership Purchase", category: "memberships"});

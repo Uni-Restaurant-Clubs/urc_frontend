@@ -58,6 +58,8 @@ const App: React.FC = () => {
         		  <AuthRoute exact path="/login" component={Login} />
         		  <Route exact path="/contact" component={Contact} />
         		  <Route exact path="/membership_options" component={MembershipOptions} />
+        		  <Route exact path="/payment_cancelled" component={MembershipOptions} />
+        		  <Route exact path="/payment_success" component={MembershipOptions} />
         		  <Route exact path="/apply" component={CreatorApplicationForm} />
         		  <Route exact path="/terms_and_policies" component={TermsAndPolicies} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />

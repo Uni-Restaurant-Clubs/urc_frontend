@@ -66,7 +66,7 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Terms and Policies',
-    url: 'terms_and_policies',
+    url: '/terms_and_policies',
     targetBlank: false,
     iosIcon: newspaperOutline,
     mdIcon: newspaperOutline
@@ -98,7 +98,7 @@ const loggedInAppPages: AppPage[] = [
   },
   {
     title: 'Terms and Policies',
-    url: 'terms_and_policies',
+    url: '/terms_and_policies',
     targetBlank: false,
     iosIcon: newspaperOutline,
     mdIcon: newspaperOutline
