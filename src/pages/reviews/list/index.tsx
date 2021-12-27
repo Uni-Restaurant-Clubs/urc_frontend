@@ -48,17 +48,39 @@ const ReviewsPage: React.FC = () => {
     getReviews();
   }, []);
 
+  const featuredReviewItems = Object.keys(reviews).map((key, i) => {
+    let review = reviews[key as keyof Review];
+    if (review.featuring_info) {
+      const info = review?.featuring_info;
+      return (
+        <ReviewListItem
+          key={key}
+          id={key}
+          name={review?.restaurant?.name}
+          title={review?.article_title}
+          photo={review?.featured_photo?.photo}
+          discountType={info?.discount_type}
+          discountNumber={info?.discount_number}
+          perks={info?.perks}
+          disclaimers={info?.disclaimers}
+        />
+      )
+    }
+  })
+
   const reviewItems = Object.keys(reviews).map((key, i) => {
     let review = reviews[key as keyof Review];
-    return (
-      <ReviewListItem
-        key={key}
-        id={key}
-        name={review?.restaurant?.name}
-        title={review?.article_title}
-        photo={review?.featured_photo?.photo}
-      />
-    )
+    if (!review.featuring_info) {
+      return (
+        <ReviewListItem
+          key={key}
+          id={key}
+          name={review?.restaurant?.name}
+          title={review?.article_title}
+          photo={review?.featured_photo?.photo}
+        />
+      )
+    }
   })
 
   return (
@@ -66,7 +88,16 @@ const ReviewsPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Reviews" />
         <IonContent>
+          { featuredReviewItems.length > 0 &&
+            <IonList className="featuredRestaurantList">
+              <h5 className="featuredRestaurantLabel">Featured Restaurants</h5>
+              {featuredReviewItems.reverse()}
+            </IonList>
+          }
           <IonList>
+            { featuredReviewItems.length > 0 &&
+              <h5 className="featuredRestaurantLabel">More Restaurants</h5>
+            }
             {reviewItems.reverse()}
           </IonList>
         </IonContent>
