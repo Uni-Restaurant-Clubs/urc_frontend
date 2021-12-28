@@ -26,6 +26,7 @@ import "./index.css"
 const ReviewsPage: React.FC = () => {
 
   useAnalytics("Reviews");
+  const [hasFeaturedReviews, setHasFeaturedReviews] = useState(false);
   const dispatch = useDispatch();
   interface Review {
     featured_photo: object
@@ -51,6 +52,9 @@ const ReviewsPage: React.FC = () => {
   const featuredReviewItems = Object.keys(reviews).map((key, i) => {
     let review = reviews[key as keyof Review];
     if (review.featuring_info) {
+      if (!hasFeaturedReviews) {
+        setHasFeaturedReviews(true);
+      }
       const info = review?.featuring_info;
       return (
         <ReviewListItem
@@ -88,14 +92,14 @@ const ReviewsPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Reviews" />
         <IonContent>
-          { featuredReviewItems.length > 0 &&
+          { hasFeaturedReviews &&
             <IonList className="featuredRestaurantList">
               <h5 className="featuredRestaurantLabel">Featured Restaurants</h5>
               {featuredReviewItems.reverse()}
             </IonList>
           }
           <IonList>
-            { featuredReviewItems.length > 0 &&
+            { hasFeaturedReviews &&
               <h5 className="featuredRestaurantLabel">More Restaurants</h5>
             }
             {reviewItems.reverse()}
