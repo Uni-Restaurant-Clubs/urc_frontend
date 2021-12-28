@@ -18,6 +18,7 @@ import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
 import ReviewArticle from "../../../components/ReviewArticle";
 import ReviewRestaurantInfo from "../../../components/ReviewRestaurantInfo";
 import WPCredits from "../../../components/reviews/writerPhotographerCredits";
+import DealInfo from "../../../components/reviews/dealInfo";
 import Ad from "../../../components/googleAdsense/ad";
 import useAnalytics from '../../../hooks/useAnalytics';
 import "./index.css"
@@ -62,6 +63,9 @@ const ReviewPage: React.FC = () => {
         { review &&
           <IonCard className="reviewCard">
             <ReviewRestaurantInfo restaurant={review?.restaurant}/>
+            { review?.featuring_info &&
+              <DealInfo deal={review.featuring_info.deal} perks={review.featuring_info.perks} />
+            }
             <div className="topBannerAd">
               { isPlatform("desktop") &&
                 <div dangerouslySetInnerHTML={ {__html: iframe6} } />
@@ -82,6 +86,9 @@ const ReviewPage: React.FC = () => {
                 writer={review?.writer}
                 photographer={review?.photographer}
               />
+              { review?.featuring_info &&
+                <DealInfo deal={review.featuring_info.deal} perks={review.featuring_info.perks} />
+              }
               { isPlatform("desktop") &&
                 <div dangerouslySetInnerHTML={ {__html: iframe3} } />
               }

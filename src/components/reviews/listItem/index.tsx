@@ -18,7 +18,7 @@ import {
 import './index.css';
 
 const ReviewListItem: React.FC<{
-    id: string, photo: string, name: string, title: string, deal: string, perks: string,
+    id: string, photo: string, name: string, title: string, deal: any, perks: any,
   }> = ({ id, photo, name, title, deal, perks}) => {
     let classes = "reviewItem";
     if (deal) {

@@ -49,6 +49,8 @@ const ContentCreatorPage: React.FC = () => {
         name={item?.restaurant_name}
         title={item?.article_title}
         photo={item?.photo}
+        perks={null}
+        deal={null}
       />
     )
   })

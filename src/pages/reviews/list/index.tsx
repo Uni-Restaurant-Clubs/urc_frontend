@@ -64,7 +64,6 @@ const ReviewsPage: React.FC = () => {
           title={review?.article_title}
           photo={review?.featured_photo?.photo}
           perks={info?.perks}
-          disclaimers={info?.disclaimers}
           deal={info?.deal}
         />
       )
@@ -81,6 +80,8 @@ const ReviewsPage: React.FC = () => {
           name={review?.restaurant?.name}
           title={review?.article_title}
           photo={review?.featured_photo?.photo}
+          perks={null}
+          deal={null}
         />
       )
     }
