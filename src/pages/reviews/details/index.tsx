@@ -23,7 +23,6 @@ import Ad from "../../../components/googleAdsense/ad";
 import useAnalytics from '../../../hooks/useAnalytics';
 import "./index.css"
 
-
 const ReviewPage: React.FC = () => {
 
   const dispatch = useDispatch();
@@ -61,18 +60,23 @@ const ReviewPage: React.FC = () => {
       <IonPage>
         <Header headertitle="Review" />
         { review &&
-          <IonCard className="reviewCard">
+          <div className="reviewCard">
             <ReviewRestaurantInfo restaurant={review?.restaurant}/>
             { review?.featuring_info &&
-              <DealInfo deal={review.featuring_info.deal} perks={review.featuring_info.perks} />
+              <div className="topDealInfo">
+                <DealInfo deal={review.featuring_info.deal} perks={review.featuring_info.perks} />
+              </div>
             }
             <div className="topBannerAd">
-              { isPlatform("desktop") &&
-                <div dangerouslySetInnerHTML={ {__html: iframe6} } />
-              }
-              { isPlatform("mobile") &&
-                <div dangerouslySetInnerHTML={ {__html: iframe5} } />
-              }
+              <div className="reviewPageAds">
+                { isPlatform("desktop") &&
+                  <div dangerouslySetInnerHTML={ {__html: iframe3} } />
+                }
+                { isPlatform("mobile") &&
+                  <div dangerouslySetInnerHTML={ {__html: iframe7} } />
+                }
+                <IonButton color="danger" fill="clear" className="getDealButton">remove ads</IonButton>
+              </div>
             </div>
             <IonCardContent className="photoThumbnails">
               <ReviewImageThumbnails
@@ -86,30 +90,40 @@ const ReviewPage: React.FC = () => {
                 writer={review?.writer}
                 photographer={review?.photographer}
               />
-              { review?.featuring_info &&
-                <DealInfo deal={review.featuring_info.deal} perks={review.featuring_info.perks} />
-              }
-              { isPlatform("desktop") &&
-                <div dangerouslySetInnerHTML={ {__html: iframe3} } />
-              }
-              { isPlatform("mobile") &&
-                <div dangerouslySetInnerHTML={ {__html: iframe7} } />
-              }
+            </IonCardContent>
+            { review?.featuring_info &&
+              <DealInfo deal={review.featuring_info.deal} perks={review.featuring_info.perks} />
+            }
+            <IonCardContent className="photoThumbnails">
+              <div className="reviewPageAds">
+                { isPlatform("desktop") &&
+                  <div dangerouslySetInnerHTML={ {__html: iframe3} } />
+                }
+                { isPlatform("mobile") &&
+                  <div dangerouslySetInnerHTML={ {__html: iframe7} } />
+                }
+                <IonButton color="danger" fill="clear" className="getDealButton">remove ads</IonButton>
+              </div>
               <br />
               <br />
               <ReviewArticle title={review?.article_title} article={review?.article} />
               <br />
-              { isPlatform("mobile") &&
-                <div dangerouslySetInnerHTML={ {__html: iframe5} } />
-              }
-              { isPlatform("desktop") &&
-                <div>
-                  <br />
-                  <div dangerouslySetInnerHTML={ {__html: iframe4} } />
-                </div>
-              }
             </IonCardContent>
-          </IonCard>
+              { review?.featuring_info &&
+                <DealInfo deal={review.featuring_info.deal} perks={review.featuring_info.perks} />
+              }
+            <IonCardContent className="photoThumbnails">
+              <div className="reviewPageAds">
+                { isPlatform("desktop") &&
+                  <div dangerouslySetInnerHTML={ {__html: iframe3} } />
+                }
+                { isPlatform("mobile") &&
+                  <div dangerouslySetInnerHTML={ {__html: iframe7} } />
+                }
+                <IonButton color="danger" fill="clear" className="getDealButton">remove ads</IonButton>
+              </div>
+            </IonCardContent>
+          </div>
         }
       </IonPage>
     </>
