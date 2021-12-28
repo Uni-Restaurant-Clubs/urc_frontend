@@ -75,7 +75,7 @@ const ReviewPage: React.FC = () => {
                 { isPlatform("mobile") &&
                   <div dangerouslySetInnerHTML={ {__html: iframe7} } />
                 }
-                <IonButton color="danger" fill="clear" className="getDealButton">remove ads</IonButton>
+                <IonButton color="danger" fill="clear" className="removeAdsButton">remove ads</IonButton>
               </div>
             </div>
             <IonCardContent className="photoThumbnails">
@@ -102,7 +102,7 @@ const ReviewPage: React.FC = () => {
                 { isPlatform("mobile") &&
                   <div dangerouslySetInnerHTML={ {__html: iframe7} } />
                 }
-                <IonButton color="danger" fill="clear" className="getDealButton">remove ads</IonButton>
+                <IonButton color="danger" fill="clear" className="removeAdsButton">remove ads</IonButton>
               </div>
               <br />
               <br />
@@ -120,7 +120,7 @@ const ReviewPage: React.FC = () => {
                 { isPlatform("mobile") &&
                   <div dangerouslySetInnerHTML={ {__html: iframe7} } />
                 }
-                <IonButton color="danger" fill="clear" className="getDealButton">remove ads</IonButton>
+                <IonButton color="danger" fill="clear" className="removeAdsButton">remove ads</IonButton>
               </div>
             </IonCardContent>
           </div>
