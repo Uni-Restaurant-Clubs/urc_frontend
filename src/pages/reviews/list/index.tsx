@@ -63,10 +63,9 @@ const ReviewsPage: React.FC = () => {
           name={review?.restaurant?.name}
           title={review?.article_title}
           photo={review?.featured_photo?.photo}
-          discountType={info?.discount_type}
-          discountNumber={info?.discount_number}
           perks={info?.perks}
           disclaimers={info?.disclaimers}
+          deal={info?.deal}
         />
       )
     }

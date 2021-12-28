@@ -18,11 +18,10 @@ import {
 import './index.css';
 
 const ReviewListItem: React.FC<{
-    id: string, photo: string, name: string, title: string, discountType: string,
-    discountNumber: string, perks: string,
-  }> = ({ id, photo, name, title, discountType, discountNumber, perks}) => {
+    id: string, photo: string, name: string, title: string, deal: string, perks: string,
+  }> = ({ id, photo, name, title, deal, perks}) => {
     let classes = "reviewItem";
-    if (discountType) {
+    if (deal) {
       classes += " featuredRestaurantItem";
     }
 
@@ -37,8 +36,8 @@ const ReviewListItem: React.FC<{
         <IonLabel key={id} className="reviewItemLabel">
           <h2>{name}</h2>
           <p>{title}</p>
-          { discountType &&
-            <h2 className="discountListItem">30% off!</h2>
+          { deal &&
+            <h2 className="discountListItem">{deal} off!</h2>
           }
           { perks &&
             <h3 className="discountListItem">{perks}</h3>
