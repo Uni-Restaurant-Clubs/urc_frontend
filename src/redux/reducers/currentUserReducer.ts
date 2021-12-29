@@ -17,7 +17,7 @@ const currentUserReducer = (state = initialState, action: any): any => {
     case actionTypes.GET_CURRENT_USER_SUCCESS:
       return {
         ...state,
-        currentUser: action.payload
+        currentUser: action.payload,
         getCurrentUserLoading: false,
         getCurrentUserFail: "",
       };

@@ -20,7 +20,7 @@ const DealInfo: React.FC<{ reviewId: string, deal: string, perks: string}> = (
 
   const handleDealButtonClick = async () => {
     track("Button Click", {label: "Get Deal!", category: "deals"});
-    if (connected && member) {
+    if (connected) {
       // go to deal
     } else {
       // save deal in redirect path

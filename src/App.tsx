@@ -40,10 +40,14 @@ import PrivateRoute from "./components/PrivateRoute";
 import Menu from './components/Menu';
 import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
+import useGetCurrentUser from "./hooks/useGetCurrentUser"
+import useIsAuthenticated from "./hooks/useIsAuthenticated"
 
 const App: React.FC = () => {
   const history = useHistory();
   setupIonicReact();
+  const isAuthenticated = useIsAuthenticated();
+  useGetCurrentUser(isAuthenticated);
 
   return (
     <ErrorBoundary>

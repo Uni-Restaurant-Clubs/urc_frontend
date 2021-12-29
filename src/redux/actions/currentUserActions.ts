@@ -2,7 +2,7 @@ import axios from "axios";
 import * as actionTypes from "../types/currentUserType";
 import {
   getCurrentUserUrl,
-} from "../../config/contactConfig";
+} from "../../config/currentUserConfig";
 import { Storage } from "@capacitor/storage";
 
 const getCurrentUser = (data: any) => async (dispatch: any) => {
