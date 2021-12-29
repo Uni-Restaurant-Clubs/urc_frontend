@@ -7,9 +7,31 @@ import {
   IonCardTitle,
   IonCard,
 } from "@ionic/react";
+import { Storage } from "@capacitor/storage";
 import "./index.scss"
+import { track } from '../../../utils/analytics';
+import useIsAuthenticated from '../../../hooks/useIsAuthenticated';
+let connected = false;
 
-const DealInfo: React.FC<{ deal: string, perks: string}> = ({ deal, perks}) => {
+const DealInfo: React.FC<{ reviewId: string, deal: string, perks: string}> = (
+  { reviewId, deal, perks}) => {
+
+  connected = useIsAuthenticated();
+
+  const handleDealButtonClick = async () => {
+    track("Button Click", {label: "Get Deal!", category: "deals"});
+    if (connected && member) {
+      // go to deal
+    } else {
+      // save deal in redirect path
+      await Storage.set({
+        key: "dealReviewIdToRedirectTo",
+        value: reviewId,
+      });
+      // go to membership options page
+      window.location.href = "/membership_options";
+    }
+  }
 
   return (
     <>
