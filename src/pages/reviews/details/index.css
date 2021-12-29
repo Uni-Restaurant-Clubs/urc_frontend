@@ -3,6 +3,10 @@
   overflow: scroll;
 }
 
+.dealCard {
+  cursor: pointer;
+}
+
 .topDealInfo {
   margin-left: 5px;
 }

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   IonCardHeader,
   IonButton,
@@ -11,17 +13,18 @@ import { Storage } from "@capacitor/storage";
 import "./index.scss"
 import { track } from '../../../utils/analytics';
 import useIsAuthenticated from '../../../hooks/useIsAuthenticated';
-let connected = false;
 
 const DealInfo: React.FC<{ reviewId: string, deal: string, perks: string}> = (
   { reviewId, deal, perks}) => {
+  let history = useHistory();
+  const currentUser = useSelector((state: any) => state.currentUser.currentUser);
+  const activeSubscription = currentUser?.subscription_active;
 
-  connected = useIsAuthenticated();
 
   const handleDealButtonClick = async () => {
     track("Button Click", {label: "Get Deal!", category: "deals"});
-    if (connected) {
-      // go to deal
+    if (activeSubscription) {
+      history.push(`/getDeal?reviewId=${reviewId}`)
     } else {
       // save deal in redirect path
       await Storage.set({
@@ -29,13 +32,13 @@ const DealInfo: React.FC<{ reviewId: string, deal: string, perks: string}> = (
         value: reviewId,
       });
       // go to membership options page
-      window.location.href = "/membership_options";
+      history.push(`/membership_options`)
     }
   }
 
   return (
     <>
-      <IonCard className="dealCard">
+      <IonCard onClick={handleDealButtonClick} className="dealCard">
         <div>
           <IonCardHeader className="dealCardHeader">
             <h4 className="dealTitle">Deal {deal} off!</h4>
