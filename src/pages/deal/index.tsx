@@ -13,6 +13,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import Header from "../../components/Header";
+import CheckInButton from "../../components/checkIns/button";
 import useAnalytics from '../../hooks/useAnalytics';
 import "./index.scss";
 
@@ -37,6 +38,9 @@ const DealPage: React.FC = () => {
         <Header headertitle="Get Deal Page" />
         <IonContent>
           <h1>Get Deal</h1>
+          <p>{deal?.deal} off!</p>
+          <p>{deal?.perks}</p>
+          <CheckInButton dealId={id} />
         </IonContent>
       </IonPage>
     </>
