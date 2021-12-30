@@ -28,6 +28,7 @@ import AuthRoute from "./components/AuthRoute";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
+import Deal from "./pages/deal";
 import Contact from "./pages/contact";
 
 import Home from "./pages/Home";
@@ -73,6 +74,7 @@ const App: React.FC = () => {
           		  path="/emailConfirmation"
           		  component={EmailConfirmation}
         		  ></AuthRoute>
+        		  <PrivateRoute exact path="/deal/:id" component={Deal} />
         		  <Route exact path="/" component={Reviews} />
             </IonRouterOutlet>
           </IonSplitPane>

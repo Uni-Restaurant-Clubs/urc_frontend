@@ -49,7 +49,7 @@ const ReviewPage: React.FC = () => {
             { review?.featuring_info &&
               <div className="topDealInfo">
                 <DealInfo
-                  reviewId={id}
+                  dealId={review.featuring_info.id}
                   deal={review.featuring_info.deal}
                   perks={review.featuring_info.perks} />
               </div>
@@ -72,7 +72,7 @@ const ReviewPage: React.FC = () => {
             </IonCardContent>
             { review?.featuring_info &&
               <DealInfo
-                reviewId={id}
+                dealId={review.featuring_info.id}
                 deal={review.featuring_info.deal}
                 perks={review.featuring_info.perks} />
             }
@@ -85,7 +85,7 @@ const ReviewPage: React.FC = () => {
             </IonCardContent>
               { review?.featuring_info &&
               <DealInfo
-                reviewId={id}
+                dealId={review.featuring_info.id}
                 deal={review.featuring_info.deal}
                 perks={review.featuring_info.perks} />
               }

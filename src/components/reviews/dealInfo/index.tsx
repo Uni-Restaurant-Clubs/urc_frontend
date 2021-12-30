@@ -14,8 +14,8 @@ import "./index.scss"
 import { track } from '../../../utils/analytics';
 import useIsAuthenticated from '../../../hooks/useIsAuthenticated';
 
-const DealInfo: React.FC<{ reviewId: string, deal: string, perks: string}> = (
-  { reviewId, deal, perks}) => {
+const DealInfo: React.FC<{ dealId: string, deal: string, perks: string}> = (
+  { dealId, deal, perks}) => {
   let history = useHistory();
   const currentUser = useSelector((state: any) => state.currentUser.currentUser);
   const activeSubscription = currentUser?.subscription_active;
@@ -24,12 +24,12 @@ const DealInfo: React.FC<{ reviewId: string, deal: string, perks: string}> = (
   const handleDealButtonClick = async () => {
     track("Button Click", {label: "Get Deal!", category: "deals"});
     if (activeSubscription) {
-      history.push(`/getDeal?reviewId=${reviewId}`)
+      history.push(`/deal/${dealId}`)
     } else {
       // save deal in redirect path
       await Storage.set({
         key: "dealReviewIdToRedirectTo",
-        value: reviewId,
+        value: dealId,
       });
       // go to membership options page
       history.push(`/membership_options`)
