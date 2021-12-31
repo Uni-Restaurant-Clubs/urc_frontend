@@ -6,6 +6,7 @@ import contactReducer from './contactReducer';
 import contentCreatorReducer from './contentCreatorReducer';
 import currentUserReducer from './currentUserReducer';
 import dealReducer from './dealReducer';
+import checkInReducer from './checkInReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   payments: paymentReducer,
   currentUser: currentUserReducer,
   deals: dealReducer,
+  checkIns: checkInReducer,
 });
