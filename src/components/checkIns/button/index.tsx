@@ -21,8 +21,9 @@ import NotAtRestaurantModal from "../notAtRestaurantModal";
 import airbrake from "../../../utils/airbrake";
 import { checkInActions } from "../../../redux/actions/checkInActions";
 
-const CheckInButton: React.FC<{ setIsAtRestaurant: any, dealId: string}> = (
-  { setIsAtRestaurant, dealId}) => {
+const CheckInButton: React.FC<{
+  restaurantId: any, restaurantName: any, isetIsAtRestaurant: any, dealId: string}> = (
+  { restaurantId, restaurantName, setIsAtRestaurant, dealId}) => {
 
   const dispatch = useDispatch();
 
@@ -70,7 +71,7 @@ const CheckInButton: React.FC<{ setIsAtRestaurant: any, dealId: string}> = (
   }
   const checkUserIn = async () => {
     setFetchingCoords(true);
-    track("Button Click", {label: "Check In", category: "deals"});
+    track("Button Click", {restaurant_id: restaurantId, label: "Check In", category: "deals"});
     navigator.geolocation.getCurrentPosition(
       async (response) => {
         const data = {
@@ -82,8 +83,12 @@ const CheckInButton: React.FC<{ setIsAtRestaurant: any, dealId: string}> = (
         setFetchingCoords(false);
         if (res?.status === 200) {
           if (res?.data?.user_is_at_restaurant) {
+            track("check in at restaurant", { restaurant_id: restaurantId,
+              label: restaurantName, category: "deals"});
             setIsAtRestaurant(true);
           } else {
+            track("check in not at restaurant", { restaurant_id: restaurantId,
+              label: restaurantName, category: "deals"});
             setShowNotAtRestaurantModal(true);
           }
         } else if (apiError) {

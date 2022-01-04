@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { dealActions } from "../../redux/actions/dealActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { arrowDownOutline,
@@ -22,6 +21,8 @@ import {
 import Header from "../../components/Header";
 import CheckInButton from "../../components/checkIns/button";
 import useAnalytics from '../../hooks/useAnalytics';
+import { dealActions } from "../../redux/actions/dealActions";
+import { track } from '../../utils/analytics';
 import "./index.scss";
 
 const DealPage: React.FC = () => {
@@ -46,6 +47,9 @@ const DealPage: React.FC = () => {
 
   const resetCheckIn = () => {
     setIsAtRestaurant(false);
+    track("Button Click",
+      {restaurant_id: restaurant?.id,
+      label: "go back to Check In", category: "deals"});
   }
 
   return (
@@ -87,7 +91,10 @@ const DealPage: React.FC = () => {
                       <p className="dealPageInstructions">Instructions:</p>
                       <p className="dealPageInstructions">When at restaurant, click on button below in order to receive the discount.</p>
                       <IonIcon className="dealPageIcon" ios={arrowDownOutline} md={arrowDownOutline}></IonIcon>
-                      <CheckInButton setIsAtRestaurant={setIsAtRestaurant} dealId={id} />
+                      <CheckInButton restaurantId={restaurant?.id}
+                                     restaurantName={restaurant?.name}
+                                     setIsAtRestaurant={setIsAtRestaurant}
+                                     dealId={id} />
                       <div className="dealImage">
                         <IonImg src={photo} />
                       </div>

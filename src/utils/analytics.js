@@ -7,6 +7,7 @@ const track = async (eventName, data) => {
     const formData = {
       event: {
         event_name: eventName,
+        feature_period_id: data.feature_period_id,
         restaurant_id: data.restaurant_id,
         public_unique_username: data.public_unique_username,
         user_id: data.user_id,
