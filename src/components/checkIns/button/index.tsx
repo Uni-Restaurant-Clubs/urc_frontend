@@ -143,37 +143,38 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
         ]}
       />
 
-      <IonContent className="ion-padding bgImg ">
-        <IonLoading
-          spinner="bubbles"
-          message="Please wait ..."
-          duration={0}
-          isOpen={false}
-        />
-        <IonAlert
-          isOpen={showPrePromptMessage}
-          onDidDismiss={() => setShowPrePromptMessage(false)}
-          header={"We need your location!"}
-          message={prePromptAlertMessage}
-          buttons={[
-            {
-              text: "Ok",
-              cssClass: "confirmButtonStyle",
-              handler: () => {
-                checkUserIn();
-              },
+      <IonLoading
+        spinner="bubbles"
+        message="Please wait ..."
+        duration={0}
+        isOpen={false}
+      />
+      <IonAlert
+        isOpen={showPrePromptMessage}
+        onDidDismiss={() => setShowPrePromptMessage(false)}
+        header={"We need your location!"}
+        message={prePromptAlertMessage}
+        buttons={[
+          {
+            text: "Ok",
+            cssClass: "confirmButtonStyle",
+            handler: () => {
+              checkUserIn();
             },
-          ]}
-        />
-        <LocationDeniedModal open={showDeniedMessage} closeFunction={closeDeniedMessageModal}/>
-        { dealId &&
-          <IonButton fill="solid"
-                     disabled={fetchingCoords || createCheckInLoading}
-                     onClick={handleCheckInButtonClick}
-                     className="getDealButton"
-          >Check in to unlock deal!</IonButton>
-        }
-      </IonContent>
+          },
+        ]}
+      />
+      <LocationDeniedModal open={showDeniedMessage} closeFunction={closeDeniedMessageModal}/>
+      { dealId &&
+        <IonButton fill="solid"
+                   expand="block"
+                   size="large"
+                   color="danger"
+                   disabled={fetchingCoords || createCheckInLoading}
+                   onClick={handleCheckInButtonClick}
+                   className="getDealButton"
+        >Click here to Check In</IonButton>
+      }
     </>
   );
 };
