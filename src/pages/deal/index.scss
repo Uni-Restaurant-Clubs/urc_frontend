@@ -1,6 +1,6 @@
 .dealPageCard {
-  padding: 5px;
-  max-width: 350px;
+  padding: 0 25px;
+  max-width: 400px;
   margin: 0 auto;
   margin-top: 25px;
 }
@@ -21,7 +21,7 @@
 
 .dealDeal {
   color: #E52328;
-  font-size: 1.7em !important;
+  font-size: 1.8em !important;
 }
 
 .dealPerk {
@@ -41,5 +41,17 @@
 }
 
 .dealDealCard {
-  padding: 10px;
+  padding: 20px;
+  border: 1px solid #E52328;
+  box-shadow: 0px 3px 1px -2px #E52328;
+}
+
+@media only screen and (max-width: 600px) {
+.dealPageCard {
+  padding: 0 25px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
 }

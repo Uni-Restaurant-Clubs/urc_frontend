@@ -61,17 +61,19 @@ const DealPage: React.FC = () => {
                     <IonCardTitle>
                       <h1>Deal for {restaurant?.name}</h1>
                     </IonCardTitle>
+                    <br />
+                    <p>{restaurant?.full_address}</p>
                   </IonCardHeader>
-                  <p className="dealDeal">{deal?.deal} off!</p>
-                  <p className="dealPerk">{deal?.perks}</p>
-                  { deal?.disclaimers  &&
-                    <div className="dealPageDisclaimerContainer">
-                      <p><i className="dealPageDisclaimers">Disclaimers:</i></p>
-                      <i className="dealPageDisclaimers">{deal?.disclaimers}</i>
-                    </div>
-                  }
-                  <br />
-                  <p>{restaurant?.full_address}</p>
+                  <IonCard className="dealDealCard">
+                    <p className="dealDeal">{deal?.deal} off!</p>
+                    <p className="dealPerk">{deal?.perks}</p>
+                    { deal?.disclaimers  &&
+                      <div className="dealPageDisclaimerContainer">
+                        <p><i className="dealPageDisclaimers">Disclaimers:</i></p>
+                        <i className="dealPageDisclaimers">{deal?.disclaimers}</i>
+                      </div>
+                    }
+                  </IonCard>
                   <br />
                   <p className="dealPageInstructions">Instructions:</p>
                   <p className="dealPageInstructions">When at restaurant, click on button below in order to receive the discount.</p>

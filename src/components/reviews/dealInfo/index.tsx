@@ -38,31 +38,33 @@ const DealInfo: React.FC<{ dealId: string, deal: string, perks: string}> = (
 
   return (
     <>
-      <IonCard onClick={handleDealButtonClick} className="dealCard">
-        <div>
-          <IonCardHeader className="dealCardHeader">
-            <h4 className="dealTitle">Deal {deal} off!</h4>
-          </IonCardHeader>
-          <IonCardContent className="dealCardContent">
-            <IonLabel>
-              <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
-            </IonLabel>
+      { dealId &&
+        <IonCard onClick={handleDealButtonClick} className="dealCard">
+          <div>
+            <IonCardHeader className="dealCardHeader">
+              <h4 className="dealTitle">Deal {deal} off!</h4>
+            </IonCardHeader>
+            <IonCardContent className="dealCardContent">
+              <IonLabel>
+                <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
+              </IonLabel>
+            </IonCardContent>
+          </div>
+          <IonCardContent>
+            <IonButton fill="solid" className="getDealButton">Get Deal!</IonButton>
           </IonCardContent>
-        </div>
-        <IonCardContent>
-          <IonButton fill="solid" className="getDealButton">Get Deal!</IonButton>
-        </IonCardContent>
-        <div className="dealCardHeaderLast">
-          <IonCardHeader className="dealCardHeader">
-            <h4 className="dealTitle">Deal {deal} off!</h4>
-          </IonCardHeader>
-          <IonCardContent className="dealCardContent">
-            <IonLabel>
-              <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
-            </IonLabel>
-          </IonCardContent>
-        </div>
-      </IonCard>
+          <div className="dealCardHeaderLast">
+            <IonCardHeader className="dealCardHeader">
+              <h4 className="dealTitle">Deal {deal} off!</h4>
+            </IonCardHeader>
+            <IonCardContent className="dealCardContent">
+              <IonLabel>
+                <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
+              </IonLabel>
+            </IonCardContent>
+          </div>
+        </IonCard>
+      }
     </>
   );
 };
