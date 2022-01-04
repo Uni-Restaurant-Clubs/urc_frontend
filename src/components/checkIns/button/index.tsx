@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { isPlatform } from '@ionic/react';
+import { track } from '../../../utils/analytics';
 import {
   IonButton,
   IonLoading,
@@ -15,6 +17,7 @@ import {
 import "./index.scss";
 import { dealActions } from "../../../redux/actions/dealActions";
 import LocationDeniedModal from "../deniedModal";
+import NotAtRestaurantModal from "../notAtRestaurantModal";
 import airbrake from "../../../utils/airbrake";
 import { checkInActions } from "../../../redux/actions/checkInActions";
 
@@ -24,6 +27,7 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
 
   const [showPrePromptMessage, setShowPrePromptMessage] = useState(false);
   const [showDeniedMessage, setShowDeniedMessage] = useState(false);
+  const [showNotAtRestaurantModal, setShowNotAtRestaurantModal] = useState(false);
   const [fetchingCoords, setFetchingCoords] = useState(false);
 
   const [showAlert, setShowAlert] = useState(false);
@@ -56,7 +60,16 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
     }
   }, [apiError]);
 
+  const getButtonName = () => {
+    if (isPlatform("mobile")) {
+      return "Tap here to check in";
+    } else {
+      return "Click here to check in";
+    }
+  }
   const checkUserIn = async () => {
+    setFetchingCoords(true);
+    track("Button Click", {label: "Check In", category: "deals"});
     navigator.geolocation.getCurrentPosition(
       async (response) => {
         const data = {
@@ -67,9 +80,11 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
         let res: any = await dispatch(checkInActions.createCheckIn(data));
         setFetchingCoords(false);
         if (res?.status === 200) {
-          alert("status 200");
-          // do something after check in created
-          // check if user is at restaurant
+          if (res?.data?.user_is_at_restaurant) {
+            //handle user is at restaurant
+          } else {
+            setShowNotAtRestaurantModal(true);
+          }
         } else if (apiError) {
           setAlertMessage("Oops looks like there was an issue. Please try again soon");
           setShowAlert(true);
@@ -92,7 +107,6 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
 
   const checkLocation = () => {
     if (fetchingCoords || createCheckInLoading) {return;}
-    setFetchingCoords(true);
 
     navigator.permissions.query({'name': 'geolocation'})
       .then( permission => {
@@ -107,6 +121,10 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
 
   const closeDeniedMessageModal = () => {
     setShowDeniedMessage(false);
+  }
+
+  const closeNotAtRestaurantModal = () => {
+    setShowNotAtRestaurantModal(false);
   }
 
   const handleCheckInButtonClick = async () => {
@@ -143,12 +161,6 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
         ]}
       />
 
-      <IonLoading
-        spinner="bubbles"
-        message="Please wait ..."
-        duration={0}
-        isOpen={false}
-      />
       <IonAlert
         isOpen={showPrePromptMessage}
         onDidDismiss={() => setShowPrePromptMessage(false)}
@@ -165,6 +177,7 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
         ]}
       />
       <LocationDeniedModal open={showDeniedMessage} closeFunction={closeDeniedMessageModal}/>
+      <NotAtRestaurantModal open={showNotAtRestaurantModal} closeFunction={closeNotAtRestaurantModal}/>
       { dealId &&
         <IonButton fill="solid"
                    expand="block"
@@ -173,7 +186,7 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
                    disabled={fetchingCoords || createCheckInLoading}
                    onClick={handleCheckInButtonClick}
                    className="getDealButton"
-        >Click here to Check In</IonButton>
+        >{getButtonName()}</IonButton>
       }
     </>
   );

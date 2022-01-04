@@ -30,13 +30,14 @@ const LocationDeniedModal: React.FC<{ open: boolean, closeFunction: any}> = (
           <IonToolbar>
             <IonImg className="passwordlessHeader" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools.png" />
             <IonButtons slot="end">
-              <IonButton onClick={() =>closeFunction()}>Cancel</IonButton>
+              <IonButton onClick={() =>closeFunction()}>Close</IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
 
         <IonContent className="ion-padding locationDeniedModal">
-          <h3>📍 Oops we cannot access your location. 📍</h3>
+          <h3>📍 Oops... 📍</h3>
+          <h3>We cannot access your location</h3>
           <br />
           <p>It looks like you have denied access to your location.</p>
           <p>We need your location to verify that you are at the restaurant.</p>
