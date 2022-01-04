@@ -21,7 +21,8 @@ import NotAtRestaurantModal from "../notAtRestaurantModal";
 import airbrake from "../../../utils/airbrake";
 import { checkInActions } from "../../../redux/actions/checkInActions";
 
-const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
+const CheckInButton: React.FC<{ setIsAtRestaurant: any, dealId: string}> = (
+  { setIsAtRestaurant, dealId}) => {
 
   const dispatch = useDispatch();
 
@@ -81,7 +82,7 @@ const CheckInButton: React.FC<{ dealId: string}> = ({ dealId}) => {
         setFetchingCoords(false);
         if (res?.status === 200) {
           if (res?.data?.user_is_at_restaurant) {
-            //handle user is at restaurant
+            setIsAtRestaurant(true);
           } else {
             setShowNotAtRestaurantModal(true);
           }

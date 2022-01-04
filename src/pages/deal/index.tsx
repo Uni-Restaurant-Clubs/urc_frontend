@@ -26,6 +26,8 @@ import "./index.scss";
 
 const DealPage: React.FC = () => {
 
+  const [isAtRestaurant, setIsAtRestaurant] = useState(false);
+
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
   let deal = useSelector((state: any) => state.deals.deals[id]);
@@ -34,12 +36,17 @@ const DealPage: React.FC = () => {
   useAnalytics("Deal", {feature_period_id: id});
 
   useEffect(() => {
+    setIsAtRestaurant(false);
     const getDeal = async (id: string) => {
       return await dispatch(dealActions.getDeal({ id }));
     }
 
     getDeal(id);
   }, [id]);
+
+  const resetCheckIn = () => {
+    setIsAtRestaurant(false);
+  }
 
   return (
     <>
@@ -75,13 +82,30 @@ const DealPage: React.FC = () => {
                     }
                   </IonCard>
                   <br />
-                  <p className="dealPageInstructions">Instructions:</p>
-                  <p className="dealPageInstructions">When at restaurant, click on button below in order to receive the discount.</p>
-                  <IonIcon className="dealPageIcon" ios={arrowDownOutline} md={arrowDownOutline}></IonIcon>
-                  <CheckInButton dealId={id} />
-                  <div className="dealImage">
-                    <IonImg src={photo} />
-                  </div>
+                  { !isAtRestaurant &&
+                    <>
+                      <p className="dealPageInstructions">Instructions:</p>
+                      <p className="dealPageInstructions">When at restaurant, click on button below in order to receive the discount.</p>
+                      <IonIcon className="dealPageIcon" ios={arrowDownOutline} md={arrowDownOutline}></IonIcon>
+                      <CheckInButton setIsAtRestaurant={setIsAtRestaurant} dealId={id} />
+                      <div className="dealImage">
+                        <IonImg src={photo} />
+                      </div>
+                    </>
+                  }
+                  { isAtRestaurant &&
+                    <>
+                      <h3 className="checkedInTitle">Welcome and Enjoy!</h3>
+                      <p className="">Show this image to your waiter</p>
+                      <IonIcon className="dealPageIcon" ios={arrowDownOutline} md={arrowDownOutline}></IonIcon>
+                      <div className="isAtRestaurantImage">
+                        <IonImg src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools+(1).png" />
+                      </div>
+                      <IonButton fill="outline"
+                                 className="resetCheckInButton"
+                                 onClick={resetCheckIn}>Go back</IonButton>
+                    </>
+                  }
                 </>
               }
             </IonCardContent>
