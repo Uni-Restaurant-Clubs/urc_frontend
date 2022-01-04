@@ -1,8 +1,9 @@
 .dealPageCard {
   padding: 0 25px;
+  height: 100%;
   max-width: 400px;
   margin: 0 auto;
-  margin-top: 25px;
+  margin-top: 0px;
 }
 
 .dealPageCardContent {
@@ -16,7 +17,7 @@
 .dealImage {
   max-width: 400px;
   margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .dealDeal {
@@ -47,11 +48,12 @@
 }
 
 @media only screen and (max-width: 600px) {
-.dealPageCard {
-  padding: 0 25px;
-  max-width: 400px;
-  margin: 0 auto;
-  margin-top: 5px;
-}
+  .dealPageCard {
+    margin-top: 0px;
+  }
+
+  .dealImage {
+    margin-bottom: 10px;
+  }
 
 }
