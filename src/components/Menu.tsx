@@ -16,6 +16,7 @@ import { Storage } from "@capacitor/storage";
 import { useLocation } from 'react-router-dom';
 import { logInOutline, eyeOutline, speedometerOutline, newspaperOutline,
          personAddOutline, restaurantOutline, mailOutline, diamondOutline,
+         earthOutline, accessibilityOutline
        } from 'ionicons/icons';
 import './Menu.css';
 import LogoutButton from "./LogoutButton";
@@ -44,7 +45,7 @@ const appPages: AppPage[] = [
     mdIcon: logInOutline
   },
   {
-    title: 'Reviews',
+    title: 'Restaurants',
     url: '/',
     targetBlank: false,
     iosIcon: restaurantOutline,
@@ -56,6 +57,13 @@ const appPages: AppPage[] = [
     targetBlank: false,
     iosIcon: diamondOutline,
     mdIcon: diamondOutline
+  },
+  {
+    title: 'Charities',
+    url: '/charities',
+    targetBlank: false,
+    iosIcon: accessibilityOutline,
+    mdIcon: accessibilityOutline
   },
   {
     title: 'Contact',
@@ -76,7 +84,7 @@ const appPages: AppPage[] = [
 
 const loggedInAppPages: AppPage[] = [
   {
-    title: 'Reviews',
+    title: 'Restaurants',
     url: '/',
     targetBlank: false,
     iosIcon: restaurantOutline,
@@ -88,6 +96,13 @@ const loggedInAppPages: AppPage[] = [
     targetBlank: false,
     iosIcon: diamondOutline,
     mdIcon: diamondOutline
+  },
+  {
+    title: 'Charities',
+    url: '/charities',
+    targetBlank: false,
+    iosIcon: accessibilityOutline,
+    mdIcon: accessibilityOutline
   },
   {
     title: 'Contact',

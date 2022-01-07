@@ -35,6 +35,7 @@ import Home from "./pages/Home";
 import MembershipOptions from "./pages/memberships/options";
 import ReviewDetails from "./pages/reviews/details";
 import TermsAndPolicies from "./pages/termsAndPolicies";
+import Charities from "./pages/charities";
 import ContentCreatorDetails from "./pages/contentCreators/details";
 import CreatorApplicationForm from "./pages/contentCreators/applicationForm";
 import PrivateRoute from "./components/PrivateRoute";
@@ -66,6 +67,7 @@ const App: React.FC = () => {
         		  <Route exact path="/payment_cancelled" component={MembershipOptions} />
         		  <Route exact path="/payment_success" component={MembershipOptions} />
         		  <Route exact path="/apply" component={CreatorApplicationForm} />
+        		  <Route exact path="/charities" component={Charities} />
         		  <Route exact path="/terms_and_policies" component={TermsAndPolicies} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />

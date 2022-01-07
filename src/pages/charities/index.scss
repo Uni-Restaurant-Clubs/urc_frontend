@@ -1,0 +1,15 @@
+.charityLogo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 250px;
+}
+
+.charityContainer {
+  padding: 30px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .charityContainer {
+    padding: 5px !important;
+  }
+}

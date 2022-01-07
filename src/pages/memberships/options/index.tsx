@@ -177,8 +177,10 @@ const MembershipOptions: React.FC = () => {
                 <IonList slot="content">
                   <IonItem>
                     <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
-                      10% of your payment goes to a food related charity that's based on your location.
-                      <p> </p><a href="#">Click here for more info.</a>
+                      <span>10% of your payment goes to a food related charity that's based on your location. </span>
+                      <Link className="membershipsCharitiesLink" to="/charities" target="_blank">
+                        Click here for more info.
+                      </Link>
                     </IonLabel>
                   </IonItem>
                 </IonList>
