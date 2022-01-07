@@ -22,7 +22,8 @@ const DealInfo: React.FC<{ dealId: string, deal: string, perks: string}> = (
 
 
   const handleDealButtonClick = async () => {
-    track("Button Click", {label: "Get Deal!", category: "deals"});
+    track("Button Click", {feature_period_id: dealId,
+      label: "Get Deal!", category: "deals"});
     if (activeSubscription) {
       history.push(`/deal/${dealId}`)
     } else {
