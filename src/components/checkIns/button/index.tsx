@@ -22,7 +22,7 @@ import airbrake from "../../../utils/airbrake";
 import { checkInActions } from "../../../redux/actions/checkInActions";
 
 const CheckInButton: React.FC<{
-  restaurantId: any, restaurantName: any, isetIsAtRestaurant: any, dealId: string}> = (
+  restaurantId: any, restaurantName: any, setIsAtRestaurant: any, dealId: string}> = (
   { restaurantId, restaurantName, setIsAtRestaurant, dealId}) => {
 
   const dispatch = useDispatch();

@@ -17,6 +17,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import { arrowDownCircle } from 'ionicons/icons';
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Storage } from "@capacitor/storage";
 import "./index.css";
@@ -39,6 +40,8 @@ const MembershipOptions: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   connected = useIsAuthenticated();
+  const currentUser = useSelector((state: any) => state.currentUser.currentUser);
+  const activeSubscription = currentUser?.subscription_active;
 
   const contactLoading = useSelector((state: any) => state.payments.getCheckoutUrlLoading);
   const apiError = useSelector((state: any) => state.payments.getCheckoutUrlFail);
@@ -217,14 +220,31 @@ const MembershipOptions: React.FC = () => {
 
             </IonAccordionGroup>
             <br/>
-            <IonButton
-              expand="block"
-              onClick={sendToCheckout}
-            >
-              Sign Up
-            </IonButton>
+            { activeSubscription &&
+              <IonButton
+                expand="block"
+              >
+                Currently Subscribed
+              </IonButton>
+            }
+            { !activeSubscription &&
+              <IonButton
+                expand="block"
+                onClick={sendToCheckout}
+              >
+                Sign Up
+              </IonButton>
+            }
           </IonCardContent>
         </IonCard>
+        { !currentUser &&
+          <IonText className="membershipsLoginTitle">
+            <p>Already a member?</p>
+            <Link className="membershipsLoginLink" to="/login">
+              Login here
+            </Link>
+          </IonText>
+        }
       </IonContent>
     </IonPage>
   );

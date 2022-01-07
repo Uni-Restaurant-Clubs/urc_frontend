@@ -21,6 +21,21 @@
   text-align: center;
 }
 
+.membershipsLoginTitle {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.membershipsLoginTitle p {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.membershipsLoginLink {
+  font-size: 0.8em;
+  text-align: center;
+}
+
 .membershipCard {
   max-width: 375px;
   margin: 20px auto;
