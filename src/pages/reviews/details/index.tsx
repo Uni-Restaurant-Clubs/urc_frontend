@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { isPlatform } from '@ionic/react';
 import {
   IonButton,
+  IonItem,
   IonContent,
   IonCard,
   IonHeader,
@@ -54,9 +55,7 @@ const ReviewPage: React.FC = () => {
                   perks={review.featuring_info.perks} />
               </div>
             }
-            <div className="topBannerAd">
-              <Ads />
-            </div>
+            <IonItem><div className="reviewsPageAd"><Ads /></div></IonItem>
             <IonCardContent className="photoThumbnails">
               <ReviewImageThumbnails
                 title={review?.article_title}
@@ -76,9 +75,9 @@ const ReviewPage: React.FC = () => {
                 deal={review.featuring_info.deal}
                 perks={review.featuring_info.perks} />
             }
+            <br />
+            <IonItem><div className="reviewsPageAd"><Ads /></div></IonItem>
             <IonCardContent className="photoThumbnails">
-              <Ads />
-              <br />
               <br />
               <ReviewArticle title={review?.article_title} article={review?.article} />
               <br />
@@ -89,9 +88,7 @@ const ReviewPage: React.FC = () => {
                 deal={review.featuring_info.deal}
                 perks={review.featuring_info.perks} />
               }
-            <IonCardContent className="photoThumbnails">
-              <Ads />
-            </IonCardContent>
+            <IonItem><div className="reviewsPageAd"><Ads /></div></IonItem>
           </div>
         }
       </IonPage>

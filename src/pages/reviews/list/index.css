@@ -3,4 +3,11 @@
   color: #E52328;
 }
 
+.reviewsPageAd {
+  padding: 5px 0 !important;
+}
+
+.reviewsPageAd .removeAdsButton {
+  margin-left: 0px;
+}
 

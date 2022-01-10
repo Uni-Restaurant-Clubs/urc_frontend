@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import Header from "../../../components/Header";
 import ReviewListItem from "../../../components/reviews/listItem";
 import useAnalytics from '../../../hooks/useAnalytics';
+import Ads from "../../../components/ads";
 import "./index.css"
 
 const ReviewsPage: React.FC = () => {
@@ -50,43 +51,59 @@ const ReviewsPage: React.FC = () => {
     getReviews();
   }, []);
 
-  const featuredReviewItems = reviews.map((review, i) => {
-    let key = review?.id;
-    if (review.featuring_info) {
-      if (!hasFeaturedReviews) {
-        setHasFeaturedReviews(true);
+  const featuredReviewItems = () => {
+    let list = [];
+    reviews.forEach((review, i) => {
+      if (i != 0 && i%5 == 0) {
+        list.push((<IonItem><div className="reviewsPageAd"><Ads /></div></IonItem>));
       }
-      const info = review?.featuring_info;
-      return (
-        <ReviewListItem
-          key={key}
-          id={key}
-          name={review?.restaurant?.name}
-          title={review?.article_title}
-          photo={review?.featured_photo?.photo}
-          perks={info?.perks}
-          deal={info?.deal}
-        />
-      )
-    }
-  })
+      let key = review?.id;
+      if (review.featuring_info) {
+        if (!hasFeaturedReviews) {
+          setHasFeaturedReviews(true);
+        }
+        const info = review?.featuring_info;
+        let item = (
+          <ReviewListItem
+            key={key}
+            id={key}
+            name={review?.restaurant?.name}
+            title={review?.article_title}
+            photo={review?.featured_photo?.photo}
+            perks={info?.perks}
+            deal={info?.deal}
+          />
+        )
+        list.push(item)
+      }
+    })
+    return list;
+  }
 
-  const reviewItems = reviews.map((review, i) => {
-    let key = review?.id;
-    if (!review.featuring_info) {
-      return (
-        <ReviewListItem
-          key={key}
-          id={key}
-          name={review?.restaurant?.name}
-          title={review?.article_title}
-          photo={review?.featured_photo?.photo}
-          perks={null}
-          deal={null}
-        />
-      )
-    }
-  })
+  const reviewItems = () => {
+    let list = [];
+    reviews.forEach((review, i) => {
+      if (i != 0 && i%5 == 0) {
+        list.push((<IonItem className="reviewsPageAd"><Ads /></IonItem>));
+      }
+      let key = review?.id;
+      if (!review.featuring_info) {
+        let item = (
+          <ReviewListItem
+            key={key}
+            id={key}
+            name={review?.restaurant?.name}
+            title={review?.article_title}
+            photo={review?.featured_photo?.photo}
+            perks={null}
+            deal={null}
+          />
+        )
+        list.push(item)
+      }
+    })
+    return list;
+  }
 
   return (
     <>
@@ -96,14 +113,14 @@ const ReviewsPage: React.FC = () => {
           { hasFeaturedReviews &&
             <IonList className="featuredRestaurantList">
               <h5 className="featuredRestaurantLabel">Featured Restaurants</h5>
-              {featuredReviewItems}
+              {featuredReviewItems()}
             </IonList>
           }
           <IonList>
             { hasFeaturedReviews &&
               <h5 className="featuredRestaurantLabel">More Restaurants</h5>
             }
-            {reviewItems}
+            {reviewItems()}
           </IonList>
         </IonContent>
       </IonPage>

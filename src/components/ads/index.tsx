@@ -44,15 +44,20 @@ const Ads: React.FC = () => {
   // 728 X 90
   const iframe6 = '<iframe src="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=gourmet&banner=0DSWRZ5A2FXV23WJNK02&f=ifr&linkID=d17358e0245dd0df87dbf40be51977c6&t=unirestaurant-20&tracking_id=unirestaurant-20" width="728" height="90" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>'
 
+  const small = [iframe5, iframe7];
+  const medium = [iframe3, iframe4];
+  const getRandom = (list) => {
+    return list[Math.floor((Math.random()*list.length))];
+  }
   return (
     <>
       { !activeSubscription &&
         <div className="reviewPageAds">
           { isPlatform("desktop") &&
-            <div dangerouslySetInnerHTML={ {__html: iframe3} } />
+            <div dangerouslySetInnerHTML={ {__html: getRandom(medium)} } />
           }
           { isPlatform("mobile") &&
-            <div dangerouslySetInnerHTML={ {__html: iframe7} } />
+            <div dangerouslySetInnerHTML={ {__html: getRandom(small)} } />
           }
           <IonButton onClick={handleRemoveAdButtonClick}
                      color="danger" fill="clear"
