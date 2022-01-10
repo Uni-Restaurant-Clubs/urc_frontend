@@ -29,6 +29,8 @@ const ReviewsPage: React.FC = () => {
   useAnalytics("Reviews");
   const [hasFeaturedReviews, setHasFeaturedReviews] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const currentUser = useSelector((state: any) => state.currentUser.currentUser);
+  const activeSubscription = currentUser?.subscription_active;
   const dispatch = useDispatch();
   interface Review {
     featured_photo: object
@@ -54,7 +56,7 @@ const ReviewsPage: React.FC = () => {
   const featuredReviewItems = () => {
     let list = [];
     reviews.forEach((review, i) => {
-      if (i != 0 && i%5 == 0) {
+      if (!activeSubscription && i != 0 && i%5 == 0) {
         list.push((<IonItem><div className="reviewsPageAd"><Ads /></div></IonItem>));
       }
       let key = review?.id;
@@ -83,7 +85,7 @@ const ReviewsPage: React.FC = () => {
   const reviewItems = () => {
     let list = [];
     reviews.forEach((review, i) => {
-      if (i != 0 && i%5 == 0) {
+      if (!activeSubscription && i != 0 && i%5 == 0) {
         list.push((<IonItem className="reviewsPageAd"><Ads /></IonItem>));
       }
       let key = review?.id;
