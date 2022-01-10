@@ -255,7 +255,7 @@ const CreatorApplicationForm: React.FC = () => {
                 Writers/Photographers (Brooklyn)
               </IonCardTitle>
             </IonCardHeader>
-            <IonImg className="applicationShieldLogo" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools+(1).png"/>
+            <IonImg className="applicationShieldLogo" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools+(1).png?versionId=SchD4XB1FRH2gVCH3PikJsQD1Y2rRmYl"/>
             <br/>
             <p>Thank you for your interest!</p>
             <p>Please fill out the following fields and submit the form.</p>
