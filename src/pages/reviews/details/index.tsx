@@ -60,6 +60,7 @@ const ReviewPage: React.FC = () => {
               <ReviewImageThumbnails
                 title={review?.article_title}
                 photos={review?.photos}
+                thumbnailPhotos={review?.thumbnail_photos}
                 featuredPhoto={review?.featured_photo}
               />
               <br />

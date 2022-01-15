@@ -31,9 +31,10 @@ interface Props {
 }
 
 const ReviewImageThumbnails: React.FC<{featuredPhoto: Image,
-   photos: Image[], title: string;}> = (
-  { featuredPhoto, photos, title }) => {
+   photos: Image[], thumbnailPhotos: Image[], title: string;}> = (
+  { featuredPhoto, photos, thumbnailPhotos, title }) => {
   photos = photos || [];
+  thumbnailPhotos = thumbnailPhotos || [];
 
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -52,7 +53,7 @@ const ReviewImageThumbnails: React.FC<{featuredPhoto: Image,
     })
   }
 
-  const pics = photos.map((image, i) =>
+  const pics = thumbnailPhotos.map((image, i) =>
     <IonThumbnail key={image.name}
                   onClick={(e) => handleImageClick(e, i)}
                   className="reviewPhotoThumbnail">
