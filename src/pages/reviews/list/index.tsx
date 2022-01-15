@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { reviewActions } from "../../../redux/actions/reviewActions";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  IonLoading,
   IonButton,
   IonText,
   IonLabel,
@@ -31,6 +32,7 @@ const ReviewsPage: React.FC = () => {
   const [reviews, setReviews] = useState([]);
   const currentUser = useSelector((state: any) => state.currentUser.currentUser);
   const activeSubscription = currentUser?.subscription_active;
+  const [loading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   interface Review {
     featured_photo: object
@@ -47,8 +49,10 @@ const ReviewsPage: React.FC = () => {
 
   useEffect(() => {
     async function getReviews() {
+      setIsLoading(true);
       let res:any = await dispatch(reviewActions.getReviews());
       setReviews(res?.data);
+      setIsLoading(false);
     }
     getReviews();
   }, []);
@@ -110,6 +114,12 @@ const ReviewsPage: React.FC = () => {
   return (
     <>
       <IonPage>
+        <IonLoading
+          spinner="bubbles"
+          message="Loading ..."
+          duration={0}
+          isOpen={loading}
+        />
         <Header headertitle="Reviews" />
         <IonContent>
           { hasFeaturedReviews &&
