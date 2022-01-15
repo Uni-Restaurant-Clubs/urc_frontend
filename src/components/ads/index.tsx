@@ -4,6 +4,7 @@ import { isPlatform } from '@ionic/react';
 import { useHistory } from "react-router-dom";
 import {
   IonButton,
+  IonItem,
   IonContent,
   IonCard,
   IonHeader,
@@ -52,17 +53,19 @@ const Ads: React.FC = () => {
   return (
     <>
       { !activeSubscription &&
-        <div className="reviewPageAds">
-          { isPlatform("desktop") &&
-            <div dangerouslySetInnerHTML={ {__html: getRandom(medium)} } />
-          }
-          { isPlatform("mobile") &&
-            <div dangerouslySetInnerHTML={ {__html: getRandom(small)} } />
-          }
-          <IonButton onClick={handleRemoveAdButtonClick}
-                     color="danger" fill="clear"
-                     className="removeAdsButton">remove ads</IonButton>
-        </div>
+        <IonItem>
+          <div className="reviewPageAds">
+            { isPlatform("desktop") &&
+              <div dangerouslySetInnerHTML={ {__html: getRandom(medium)} } />
+            }
+            { isPlatform("mobile") &&
+              <div dangerouslySetInnerHTML={ {__html: getRandom(small)} } />
+            }
+            <IonButton onClick={handleRemoveAdButtonClick}
+                       color="danger" fill="clear"
+                       className="removeAdsButton">remove ads</IonButton>
+          </div>
+        </IonItem>
       }
     </>
   );

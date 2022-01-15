@@ -57,7 +57,7 @@ const ReviewsPage: React.FC = () => {
     let list = [];
     reviews.forEach((review, i) => {
       if (!activeSubscription && i != 0 && i%5 == 0) {
-        list.push((<IonItem><div className="reviewsPageAd"><Ads /></div></IonItem>));
+        list.push((<div className="reviewsPageAd"><Ads /></div>));
       }
       let key = review?.id;
       if (review.featuring_info) {
@@ -86,7 +86,7 @@ const ReviewsPage: React.FC = () => {
     let list = [];
     reviews.forEach((review, i) => {
       if (!activeSubscription && i != 0 && i%5 == 0) {
-        list.push((<IonItem className="reviewsPageAd"><Ads /></IonItem>));
+        list.push((<div className="reviewsPageAd"><Ads /></div>));
       }
       let key = review?.id;
       if (!review.featuring_info) {
