@@ -13,6 +13,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  IonLoading,
 } from "@ionic/react";
 import Header from "../../../components/Header";
 import ReviewImageThumbnails from "../../../components/reviewImageThumbnails";
@@ -30,11 +31,14 @@ const ReviewPage: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
   let review = useSelector((state: any) => state.reviews.reviews[id]);
+  const [loading, setIsLoading] = useState(false);
   useAnalytics("Review", {restaurant_id: review?.restaurant?.id});
 
   useEffect(() => {
     const getReview = async (id: string) => {
-      return await dispatch(reviewActions.getReview({ id }));
+      setIsLoading(true);
+      await dispatch(reviewActions.getReview({ id }));
+      setIsLoading(false);
     }
 
     getReview(id);
@@ -43,8 +47,15 @@ const ReviewPage: React.FC = () => {
   return (
     <>
       <IonPage>
+        <IonLoading
+          spinner="bubbles"
+          message="Loading ..."
+          duration={0}
+          isOpen={loading}
+        />
+
         <Header headertitle="Review" />
-        { review &&
+        { review && review.writer &&
           <div className="reviewCard">
             <ReviewRestaurantInfo restaurant={review?.restaurant}/>
             { review?.featuring_info &&
