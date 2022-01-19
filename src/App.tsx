@@ -38,6 +38,7 @@ import TermsAndPolicies from "./pages/termsAndPolicies";
 import Charities from "./pages/charities";
 import ContentCreatorDetails from "./pages/contentCreators/details";
 import CreatorApplicationForm from "./pages/contentCreators/applicationForm";
+import ReviewSchedulingForm from "./pages/reviews/schedule";
 import PrivateRoute from "./components/PrivateRoute";
 import Menu from './components/Menu';
 import Header from "./components/Header";
@@ -69,6 +70,7 @@ const App: React.FC = () => {
         		  <Route exact path="/apply" component={CreatorApplicationForm} />
         		  <Route exact path="/charities" component={Charities} />
         		  <Route exact path="/terms_and_policies" component={TermsAndPolicies} />
+        		  <Route exact path="/reviews/scheduling_info_form" component={ReviewSchedulingForm} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
         		  <AuthRoute

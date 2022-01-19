@@ -1,0 +1,40 @@
+.reviewSchedulingErrors {
+  text-align: left;
+  color: red;
+}
+.confirmSampleDishesLabel {
+  margin-bottom: 20px;
+}
+.schedulingInfoFormShieldLogo::part(image){
+  height: 50px;
+}
+
+.schedulingFormText {
+  text-align: left;
+  padding: 20px 0 0 25px;
+}
+
+.applicationTextArea {
+  min-height: 60px;
+}
+
+.schedulingInfoCard {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 30px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .schedulingInfoCard {
+    margin: 0;
+    padding: 50px 0px;
+  }
+}
+
+.schedulingConfirmButtonStyle {
+  border-radius: 10px !important;
+    color: white !important;
+    background-color: grey !important;
+    border: 1px solid grey !important;
+}
