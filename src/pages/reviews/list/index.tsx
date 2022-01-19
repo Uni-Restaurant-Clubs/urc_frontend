@@ -59,7 +59,7 @@ const ReviewsPage: React.FC = () => {
 
   const featuredReviewItems = () => {
     let list = [];
-    reviews.forEach((review, i) => {
+    reviews?.forEach((review, i) => {
       if (!activeSubscription && i != 0 && i%5 == 0) {
         list.push((<div className="reviewsPageAd"><Ads /></div>));
       }
@@ -88,7 +88,7 @@ const ReviewsPage: React.FC = () => {
 
   const reviewItems = () => {
     let list = [];
-    reviews.forEach((review, i) => {
+    reviews?.forEach((review, i) => {
       if (!activeSubscription && i != 0 && i%5 == 0) {
         list.push((<div className="reviewsPageAd"><Ads /></div>));
       }
