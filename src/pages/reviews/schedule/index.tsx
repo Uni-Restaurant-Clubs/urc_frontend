@@ -1,5 +1,8 @@
 import {
   IonButton,
+  IonDatetime,
+  IonIcon,
+  IonPopover,
   IonNote,
   IonImg,
   IonRow,
@@ -29,6 +32,7 @@ import "./index.scss";
 import { reviewActions } from "../../../redux/actions/reviewActions";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../../components/Header";
+import DateTimeField from "../../../components/reviews/dateTimeField";
 import airbrake from "../../../utils/airbrake";
 import useScript from '../../../hooks/useScript';
 import useAnalytics from '../../../hooks/useAnalytics';
@@ -39,9 +43,9 @@ const ReviewSchedulingForm: React.FC = () => {
   const dispatch = useDispatch();
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY
 
-  const [optionOne, setOptionOne] = useState(null);
-  const [optionTwo, setOptionTwo] = useState(null);
-  const [optionThree, setOptionThree] = useState(null);
+  const [optionOne, setOptionOne] = useState('');
+  const [optionTwo, setOptionTwo] = useState('');
+  const [optionThree, setOptionThree] = useState('');
   const [confirmSampleDishes, setConfirmSampleDishes] = useState(null);
   const [confirmNoCharge, setConfirmNoCharge] = useState(null);
 
@@ -192,11 +196,11 @@ const ReviewSchedulingForm: React.FC = () => {
                 Scheduling Info Form
               </IonCardTitle>
             </IonCardHeader>
-            <IonImg className="schedulingInfoFormShieldLogo" src="https://urc-public-images.s3.us-east-2.amazonaws.com/output-onlinepngtools+(1).png?versionId=SchD4XB1FRH2gVCH3PikJsQD1Y2rRmYl"/>
             <br/>
             <p>Thank you for your interest!</p>
+            <br/>
             <p>To get started, we just need a little info from you.</p>
-            <p>With this info we will be able to coordinate with our photographers and writers to confirm an exact time with you.</p>
+            <p>Then we will be able to coordinate with our photographers and writers to confirm an exact time for you.</p>
             <br/>
             <IonImg src="https://urc-public-images.s3.us-east-2.amazonaws.com/photo-1592861956120-e524fc739696.jpeg"/>
             <br/>
@@ -230,94 +234,62 @@ const ReviewSchedulingForm: React.FC = () => {
             />
 
             <p className="schedulingFormText">* Required</p>
-            <IonGrid>
-              <IonRow>
-                <IonCol sizeSm="12" sizeMd="6">
-                  <IonItem>
-                    <IonLabel
-                      color={optionOneError ? "danger" : ""}
-                      position="floating"
-                    >
-                      Best time option *
-                    </IonLabel>
-                    <IonInput
-                      placeholder="Best time option"
-                      value={optionOne}
-                      onIonChange={(e: any) => setOptionOne(e.target.value)}
-                    />
-                  </IonItem>
-                </IonCol>
-                <IonCol sizeSm="12" sizeMd="6">
-                  <IonItem>
-                    <IonLabel
-                      color={optionTwoError ? "danger" : ""}
-                      position="floating"
-                    >
-                      2nd best time option *
-                    </IonLabel>
-                    <IonInput
-                      placeholder="2nd best time option"
-                      value={optionTwo}
-                      onIonChange={(e: any) => setOptionTwo(e.target.value)}
-                    />
-                  </IonItem>
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol sizeSm="12" sizeMd="6">
-                  <IonItem>
-                    <IonLabel
-                      color={optionThreeError ? "danger" : ""}
-                      position="floating"
-                    >
-                      3rd best time option *
-                    </IonLabel>
-                    <IonInput
-                      placeholder="3rd best date time option"
-                      value={optionThree}
-                      required={true}
-                      onIonChange={(e: any) => setOptionThree(e.target.value)}
-                    ></IonInput>
-                  </IonItem>
-                </IonCol>
-              </IonRow>
-              <br/>
-              <IonList>
-                <IonItem>
-                  <IonLabel
-                    color={confirmSampleDishesError ? "danger" : ""}
-                    className={`confirmSampleDishesLabel ion-text-wrap`}
-                  >
+            <DateTimeField
+              value={optionOne}
+              setValueFunction={setOptionOne}
+              valueError={optionOneError}
+              text={"Best time option"}
+            />
+            <br/>
+            <DateTimeField
+              value={optionTwo}
+              setValueFunction={setOptionTwo}
+              valueError={optionTwoError}
+              text={"2nd best time option"}
+            />
+            <br/>
+            <DateTimeField
+              value={optionThree}
+              setValueFunction={setOptionThree}
+              valueError={optionThreeError}
+              text={"3rd best time option"}
+            />
+            <br/>
+            <IonList>
+              <IonItem>
+                <IonLabel
+                  color={confirmSampleDishesError ? "danger" : ""}
+                  className={`confirmSampleDishesLabel ion-text-wrap`}
+                >
 * I agree to offer the writer and photographer free sample dishes for them to taste, experience, write about and take photos of.</IonLabel>
-                  <IonCheckbox checked={confirmSampleDishes}
-                     slot="start"
-                     onIonChange={e => setConfirmSampleDishes(e.detail.checked)} />
-                </IonItem>
-              </IonList>
-              <br/>
-              <IonList>
-                <IonItem>
-                  <IonLabel
-                    color={confirmNoChargeError ? "danger" : ""}
-                    className={`confirmSampleDishesLabel ion-text-wrap`}
-                  >
+                <IonCheckbox checked={confirmSampleDishes}
+                   slot="start"
+                   onIonChange={e => setConfirmSampleDishes(e.detail.checked)} />
+              </IonItem>
+            </IonList>
+            <br/>
+            <IonList>
+              <IonItem>
+                <IonLabel
+                  color={confirmNoChargeError ? "danger" : ""}
+                  className={`confirmSampleDishesLabel ion-text-wrap`}
+                >
 * I agree to not charge the photographers or writers for any of the sample food or drinks that are offered to them.</IonLabel>
-                  <IonCheckbox checked={confirmNoCharge}
-                     slot="start"
-                     onIonChange={e => setConfirmNoCharge(e.detail.checked)} />
-                </IonItem>
-              </IonList>
-              <IonButton
-                expand="block"
-                onClick={submitSchedulingInfoForm}
-                style={{ marginTop: "1rem" }}
-              >
-                Submit Scheduling Info
-              </IonButton>
-              {schedulingInfoFormErrors() &&
-                <p>See errors above!</p>
-              }
-            </IonGrid>
+                <IonCheckbox checked={confirmNoCharge}
+                   slot="start"
+                   onIonChange={e => setConfirmNoCharge(e.detail.checked)} />
+              </IonItem>
+            </IonList>
+            <IonButton
+              expand="block"
+              onClick={submitSchedulingInfoForm}
+              style={{ marginTop: "1rem" }}
+            >
+              Submit Scheduling Info
+            </IonButton>
+            {schedulingInfoFormErrors() &&
+              <p>See errors above!</p>
+            }
           </IonCardContent>
         </IonCard>
       </IonContent>
