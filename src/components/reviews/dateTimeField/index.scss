@@ -19,6 +19,13 @@
   margin: auto;
 }
 
+.dateTimeInputField {
+  margin-top: 10px;
+}
+
+ion-popover {
+  --offset-y: 0 !important;
+}
 .dateTimeModalContainer {
   padding: 60px;
   padding-bottom: 80px;

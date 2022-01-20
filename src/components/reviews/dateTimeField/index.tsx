@@ -55,13 +55,14 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
           position="floating"
         >
           <IonIcon
-          className="dateTimeFieldLabelIcon"
-          icon={calendarOutline} />
+            className="dateTimeFieldLabelIcon"
+            icon={calendarOutline} />
           <span className="dateTimeFieldLabelText">
             {"   "+ text} *
           </span>
         </IonLabel>
         <IonInput
+          className="dateTimeInputField"
           value={formatDate(value)}
           onClick={(e: any) => setModalOpen(true)}
         />
