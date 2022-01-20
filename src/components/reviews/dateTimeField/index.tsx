@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { calendarOutline } from 'ionicons/icons';
 import { format, parseISO } from 'date-fns';
+import * as moment from 'moment';
 import {
   IonIcon,
   IonModal,
@@ -29,6 +30,10 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
     }
   };
 
+  const minimumStartDate = () => {
+   return moment().add(7, 'days').format();
+  }
+
   const closeButtonText = () => {
     return value ? "Close and submit" : "Close";
   }
@@ -39,6 +44,8 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
                 onDidDismiss={() => setModalOpen(false)}>
         <div className="dateTimeModalContainer">
           <IonDatetime
+            min={minimumStartDate()}
+            value={value}
             className="dateTimeComponent"
             onIonChange={ev => setValueFunction(ev.detail.value!)}
           />
