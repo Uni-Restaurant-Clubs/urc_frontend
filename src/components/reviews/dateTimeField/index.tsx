@@ -22,7 +22,11 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
   const [modalOpen, setModalOpen] = useState(false);
 
   const formatDate = (value: string) => {
-    return format(parseISO(value), 'MMM dd yyyy');
+    if (value) {
+      return format(parseISO(value), 'MMM dd yyyy h:mm aaaa');
+    } else {
+      return "";
+    }
   };
 
   const closeButtonText = () => {
@@ -36,7 +40,7 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
         <div className="dateTimeModalContainer">
           <IonDatetime
             className="dateTimeComponent"
-            onIonChange={ev => setValueFunction(formatDate(ev.detail.value!))}
+            onIonChange={ev => setValueFunction(ev.detail.value!)}
           />
           <IonButton className="dateTimeModalCloseButton"
                      color="danger"
@@ -58,7 +62,7 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
           </span>
         </IonLabel>
         <IonInput
-          value={value}
+          value={formatDate(value)}
           onClick={(e: any) => setModalOpen(true)}
         />
       </IonItem>
