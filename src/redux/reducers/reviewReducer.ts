@@ -8,10 +8,32 @@ const initialState = {
   getReviewsLoading: false,
   sendScheduleInfoLoading: false,
   sendScheduleInfoFail: false,
+  infoForSchedulingForm: {},
+  infoForSchedulingFormLoading: false,
+  infoForSchedulingFormFail: "",
 };
 
 const reviewReducer = (state = initialState, action: any): any => {
   switch (action.type) {
+    case actionTypes.GET_INFO_FOR_SCHEDULING_FORM_REQUEST:
+      return {
+        ...state,
+        infoForSchedulingFormLoading: true,
+        infoForSchedulingFormFail: "",
+      };
+    case actionTypes.GET_INFO_FOR_SCHEDULING_FORM_SUCCESS:
+      return {
+        ...state,
+        infoForSchedulingForm: action.payload,
+        infoForSchedulingFormLoading: false,
+        infoForSchedulingFormFail: "",
+      };
+    case actionTypes.GET_INFO_FOR_SCHEDULING_FORM_FAIL:
+      return {
+        ...state,
+        infoForSchedulingFormFail: action.payload,
+        infoForSchedulingFormLoading: false,
+      };
     case actionTypes.SUBMIT_SCHEDULING_INFO_REQUEST:
       return {
         ...state,

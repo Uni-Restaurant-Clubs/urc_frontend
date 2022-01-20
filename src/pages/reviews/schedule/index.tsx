@@ -1,36 +1,14 @@
 import {
-  IonButton,
-  IonDatetime,
-  IonIcon,
-  IonPopover,
-  IonNote,
-  IonImg,
-  IonRow,
-  IonCol,
-  IonGrid,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonItemDivider,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonCheckbox,
-  IonList,
-  IonItem,
-  IonTextarea,
-  IonLabel,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonLoading,
-  IonAlert,
+  IonButton, IonDatetime, IonIcon, IonPopover, IonNote, IonImg, IonRow, IonCol,
+  IonGrid, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItemDivider,
+  IonContent, IonHeader, IonInput, IonCheckbox, IonList, IonItem, IonTextarea,
+  IonLabel, IonPage, IonTitle, IonToolbar, IonLoading, IonAlert,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
 import "./index.scss";
 import { reviewActions } from "../../../redux/actions/reviewActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Header from "../../../components/Header";
 import DateTimeField from "../../../components/reviews/dateTimeField";
 import airbrake from "../../../utils/airbrake";
@@ -41,8 +19,11 @@ const ReviewSchedulingForm: React.FC = () => {
   useAnalytics("Review Scheduling Form");
   useScript(process.env.REACT_APP_RECAPTCHA_URL);
   const dispatch = useDispatch();
+  const { token } = useParams<{ token: string }>();
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA_KEY
+  let restaurantInfo = useSelector((state: any) => state.reviews?.infoForSchedulingForm);
 
+  const [loading, setLoading] = useState(false);
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
   const [optionThree, setOptionThree] = useState('');
@@ -58,12 +39,21 @@ const ReviewSchedulingForm: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const loading = useSelector((state: any) => {
-    return state.reviews?.sendScheduleInfoLoading;
-  });
   const apiError = useSelector((state: any) => {
     return state.reviews?.sendScheduleInfoFail;
   });
+
+  useEffect(() => {
+    const getRestaurantInfo = async (token: string) => {
+      setLoading(true);
+      await dispatch(reviewActions.getInfoForSchedulingForm({ token }));
+      setLoading(false);
+    }
+
+    if (token) {
+      getRestaurantInfo(token);
+    }
+  }, [token]);
 
   interface Response {
     status?: number,
@@ -138,9 +128,11 @@ const ReviewSchedulingForm: React.FC = () => {
       };
 
       grecaptcha.ready(async () => {
+        setLoading(true);
         let res: any = await dispatch(
           reviewActions.submitSchedulingInfo(formData)
         );
+        setLoading(false);
         if (res?.status === 200) {
           setOptionOne(null);
           setOptionTwo(null);
@@ -193,7 +185,9 @@ const ReviewSchedulingForm: React.FC = () => {
           <IonCardContent>
             <IonCardHeader>
               <IonCardTitle>
-                Scheduling Info Form
+                { restaurantInfo &&
+                  "Hello " + restaurantInfo?.name + "!"
+                }
               </IonCardTitle>
             </IonCardHeader>
             <br/>

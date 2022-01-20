@@ -70,7 +70,7 @@ const App: React.FC = () => {
         		  <Route exact path="/apply" component={CreatorApplicationForm} />
         		  <Route exact path="/charities" component={Charities} />
         		  <Route exact path="/terms_and_policies" component={TermsAndPolicies} />
-        		  <Route exact path="/reviews/scheduling_info_form" component={ReviewSchedulingForm} />
+        		  <Route exact path="/reviews/scheduling_info_form/:token" component={ReviewSchedulingForm} />
         		  <AuthRoute exact path="/enter_new_password" component={ResetPassword} />
         		  <AuthRoute exact path="/forgotPassword" component={ForgotPassword} />
         		  <AuthRoute
