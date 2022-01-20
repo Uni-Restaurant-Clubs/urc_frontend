@@ -9,5 +9,30 @@
   padding-bottom: 5px;
  }
 
+.dateTimeModalCloseButton {
+  width: 320px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.dateTimeComponent {
+  margin: auto;
+}
+
+.dateTimeModalContainer {
+  padding: 60px;
+  padding-bottom: 80px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 700px) {
+  .dateTimeModalContainer {
+    padding: 30px;
+  }
+}
+
 
 

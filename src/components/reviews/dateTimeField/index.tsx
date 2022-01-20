@@ -8,6 +8,11 @@ import {
   IonLabel,
   IonItem,
   IonInput,
+  IonButtons,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonImg,
 } from "@ionic/react";
 import "./index.scss"
 
@@ -20,12 +25,25 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
     return format(parseISO(value), 'MMM dd yyyy');
   };
 
+  const closeButtonText = () => {
+    return value ? "Close and submit" : "Close";
+  }
+
   return (
     <>
-      <IonModal isOpen={modalOpen}>
-        <IonDatetime
-          onIonChange={ev => setValueFunction(formatDate(ev.detail.value!))}
-        />
+      <IonModal isOpen={modalOpen} className="dateTimeModal"
+                onDidDismiss={() => setModalOpen(false)}>
+        <div className="dateTimeModalContainer">
+          <IonDatetime
+            className="dateTimeComponent"
+            onIonChange={ev => setValueFunction(formatDate(ev.detail.value!))}
+          />
+          <IonButton className="dateTimeModalCloseButton"
+                     color="danger"
+                     onClick={() =>setModalOpen(false)}>
+            {closeButtonText()}
+          </IonButton>
+        </div>
       </IonModal>
       <IonItem>
         <IonLabel
