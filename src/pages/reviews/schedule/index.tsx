@@ -185,7 +185,7 @@ const ReviewSchedulingForm: React.FC = () => {
           <IonCardContent>
             <IonCardHeader>
               <IonCardTitle>
-                { restaurantInfo &&
+                { restaurantInfo?.name &&
                   "Hello " + restaurantInfo?.name + "!"
                 }
               </IonCardTitle>
