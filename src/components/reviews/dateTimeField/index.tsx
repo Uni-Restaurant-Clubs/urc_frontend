@@ -31,7 +31,7 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
   };
 
   const minimumStartDate = () => {
-   return moment().add(7, 'days').format();
+   return moment.default().add(7, 'days').format();
   }
 
   const closeButtonText = () => {
