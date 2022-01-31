@@ -43,12 +43,16 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
       <IonModal isOpen={modalOpen} className="dateTimeModal"
                 onDidDismiss={() => setModalOpen(false)}>
         <div className="dateTimeModalContainer">
+          <small>Note: First available dates are <strong>7 days</strong> from now</small>
+          <br/>
           <IonDatetime
             min={minimumStartDate()}
             value={value}
             className="dateTimeComponent"
             onIonChange={ev => setValueFunction(ev.detail.value!)}
           />
+          <br/>
+          <small>Please remember to select a date and a <strong>time (hour)</strong> also!</small>
           <IonButton className="dateTimeModalCloseButton"
                      color="danger"
                      onClick={() =>setModalOpen(false)}>

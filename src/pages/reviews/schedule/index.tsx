@@ -5,6 +5,7 @@ import {
   IonLabel, IonPage, IonTitle, IonToolbar, IonLoading, IonAlert,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
+import { isPlatform } from '@ionic/react';
 import "./index.scss";
 import { reviewActions } from "../../../redux/actions/reviewActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -190,14 +191,12 @@ const ReviewSchedulingForm: React.FC = () => {
                 }
               </IonCardTitle>
             </IonCardHeader>
-            <br/>
             <p>Thank you for your interest!</p>
             <br/>
             <p>To get started, we just need a little info from you.</p>
             <p>Then we will be able to coordinate with our photographers and writers to confirm an exact time for you.</p>
             <br/>
             <IonImg src="https://urc-public-images.s3.us-east-2.amazonaws.com/photo-1592861956120-e524fc739696.jpeg"/>
-            <br/>
 
             {schedulingInfoFormErrors()}
 
@@ -228,6 +227,9 @@ const ReviewSchedulingForm: React.FC = () => {
             />
 
             <p className="schedulingFormText">* Required</p>
+            <br/>
+            <h2>Please select 3 best time options for us to send a photographer and writer to your restaurant.</h2>
+            <br/>
             <DateTimeField
               value={optionOne}
               setValueFunction={setOptionOne}
@@ -249,13 +251,20 @@ const ReviewSchedulingForm: React.FC = () => {
               text={"3rd best time option"}
             />
             <br/>
+            <br/>
+            <h2>Sample dishes and no charge confirmation</h2>
+            <br/>
+            <div className="schedulingNoChargeSection">
+              <p>The only thing we ask from you is if you can <strong>please offer the photographer and writer some sample dishes</strong> that they can taste, write about and take photos of, then that will really help us create a great positive review for you!</p>
+              <p>Just to avoid any confusion, we do need a confirmation that the photographer and writer will receive sample dishes and that at the end of the review, the writer and photographer will not be asked to pay for any of the sample food or drinks that you give to them when they come down to review.</p>
+            </div>
             <IonList>
               <IonItem>
                 <IonLabel
                   color={confirmSampleDishesError ? "danger" : ""}
                   className={`confirmSampleDishesLabel ion-text-wrap`}
                 >
-* I agree to offer the writer and photographer free sample dishes for them to taste, experience, write about and take photos of.</IonLabel>
+* I agree to offer the writer and photographer free sample dishes.</IonLabel>
                 <IonCheckbox checked={confirmSampleDishes}
                    slot="start"
                    onIonChange={e => setConfirmSampleDishes(e.detail.checked)} />
@@ -276,11 +285,21 @@ const ReviewSchedulingForm: React.FC = () => {
             </IonList>
             <IonButton
               expand="block"
+              size="large"
+              color="danger"
               onClick={submitSchedulingInfoForm}
               style={{ marginTop: "1rem" }}
             >
               Submit Scheduling Info
             </IonButton>
+            <div className="notReadyToScheduleText">
+              <br/>
+              <p><strong>Still not ready to schedule?</strong></p>
+              <p>If you have any questions or concerns, then please email us at <a href="mailto:hello@unirestaurantclub.com">hello@unirestaurantclub.com</a> and we will respond right away!</p>
+              <p>We could even hop on a quick phone call with you to discuss details.</p>
+              <br/>
+              <br/>
+            </div>
             {schedulingInfoFormErrors() &&
               <p>See errors above!</p>
             }
