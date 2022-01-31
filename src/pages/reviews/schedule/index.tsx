@@ -122,6 +122,7 @@ const ReviewSchedulingForm: React.FC = () => {
                                                     { action: 'submit' });
 
       const formData = {
+          token,
           optionOne,
           optionTwo,
           optionThree,

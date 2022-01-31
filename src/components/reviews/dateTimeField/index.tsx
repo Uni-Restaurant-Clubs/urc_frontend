@@ -31,7 +31,11 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
   };
 
   const minimumStartDate = () => {
-   return moment.default().add(7, 'days').format();
+   return moment.default().set({'hour': 18, 'minute': 0}).add(7, 'days').format();
+  }
+
+  const maxDate = () => {
+   return moment.default().add(45, 'days').format();
   }
 
   const closeButtonText = () => {
@@ -43,16 +47,19 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
       <IonModal isOpen={modalOpen} className="dateTimeModal"
                 onDidDismiss={() => setModalOpen(false)}>
         <div className="dateTimeModalContainer">
-          <small>Note: First available dates are <strong>7 days</strong> from now</small>
+          <small className="leftAlign">Note: First available dates are <strong>7 days</strong> from now</small>
           <br/>
           <IonDatetime
             min={minimumStartDate()}
-            value={value}
+            max={maxDate()}
+            showDefaultButtons="false"
+            minuteValues="15,30,45,0"
+            value={value || minimumStartDate()}
             className="dateTimeComponent"
             onIonChange={ev => setValueFunction(ev.detail.value!)}
           />
           <br/>
-          <small>Please remember to select a date and a <strong>time (hour)</strong> also!</small>
+          <small className="leftAlign">Please remember to select a date and a <strong>time (hour)</strong> also!</small>
           <IonButton className="dateTimeModalCloseButton"
                      color="danger"
                      onClick={() =>setModalOpen(false)}>
