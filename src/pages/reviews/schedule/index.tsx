@@ -28,6 +28,8 @@ const ReviewSchedulingForm: React.FC = () => {
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
   const [optionThree, setOptionThree] = useState('');
+  const [schedulingPhoneNumber, setSchedulingPhoneNumber] = useState('');
+  const [schedulingNotes, setSchedulingNotes] = useState('');
   const [confirmSampleDishes, setConfirmSampleDishes] = useState(null);
   const [confirmNoCharge, setConfirmNoCharge] = useState(null);
 
@@ -36,6 +38,8 @@ const ReviewSchedulingForm: React.FC = () => {
   const [optionThreeError, setOptionThreeError] = useState(null);
   const [confirmSampleDishesError, setConfirmSampleDishesError] = useState(null);
   const [confirmNoChargeError, setConfirmNoChargeError] = useState(null);
+  const [schedulingPhoneNumberError, setSchedulingPhoneNumberError] = useState('');
+  const [schedulingNotesError, setSchedulingNotesError] = useState('');
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -122,10 +126,12 @@ const ReviewSchedulingForm: React.FC = () => {
                                                     { action: 'submit' });
 
       const formData = {
-          token,
-          optionOne,
-          optionTwo,
-          optionThree,
+        token,
+        optionOne,
+        optionTwo,
+        optionThree,
+        schedulingPhoneNumber,
+        schedulingNotes,
         recaptchaToken
       };
 
@@ -251,12 +257,36 @@ const ReviewSchedulingForm: React.FC = () => {
               valueError={optionThreeError}
               text={"3rd best time option"}
             />
+            <br />
+            <br />
+            <h2>Contact Info</h2>
+            <IonItem>
+              <IonLabel
+                color={schedulingPhoneNumberError ? "danger" : ""}
+                position="stacked">Phone number</IonLabel>
+              <IonInput value={schedulingPhoneNumber}
+                  placeholder="Phone number we can reach you at..."
+                  onIonChange={e => setSchedulingPhoneNumber(e.detail.value!)}>
+              </IonInput>
+            </IonItem>
+            <br />
+            <br />
+            <h2>Questions or comments</h2>
+            <IonItem>
+              <IonLabel
+                color={schedulingNotesError ? "danger" : ""}
+                position="stacked">Anything you want us to know?</IonLabel>
+              <IonTextarea className="schedulingTextArea" value={schedulingNotes}
+                  autoGrow={true}
+                  onIonChange={e => setSchedulingNotes(e.detail.value!)}>
+              </IonTextarea>
+            </IonItem>
             <br/>
             <br/>
             <h2>Sample dishes and no charge confirmation</h2>
             <br/>
             <div className="schedulingNoChargeSection">
-              <p>The only thing we ask from you is if you can <strong>please offer the photographer and writer some sample dishes</strong> that they can taste, write about and take photos of, then that will really help us create a great positive review for you!</p>
+              <p>The only thing we ask from you is if you can <strong>please offer the photographer and writer some sample dishes</strong> that they can taste, write about and take photos of. That will really help us create a great positive review for you!</p>
               <p>Just to avoid any confusion, we do need a confirmation that the photographer and writer will receive sample dishes and that at the end of the review, the writer and photographer will not be asked to pay for any of the sample food or drinks that you give to them when they come down to review.</p>
             </div>
             <IonList>
