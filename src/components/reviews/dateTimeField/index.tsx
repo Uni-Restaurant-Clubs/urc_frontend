@@ -52,7 +52,6 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
           <IonDatetime
             min={minimumStartDate()}
             max={maxDate()}
-            showDefaultButtons="false"
             minuteValues="15,30,45,0"
             value={value || minimumStartDate()}
             className="dateTimeComponent"
