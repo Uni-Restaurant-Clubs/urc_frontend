@@ -110,6 +110,14 @@ const MembershipOptions: React.FC = () => {
         <IonText className="membershipsTitle">
           <h1>Memberships</h1>
         </IonText>
+        { !currentUser &&
+          <IonText className="membershipsLoginTitle">
+            <p>Already a member?</p>
+            <Link className="membershipsLoginLink" to="/login">
+              Login here
+            </Link>
+          </IonText>
+        }
         <IonCard className="membershipCard">
           <IonCardContent>
             <IonCardHeader>
@@ -151,11 +159,42 @@ const MembershipOptions: React.FC = () => {
             </IonText>
             <IonAccordionGroup>
 
+              {/* DEALS */}
+              <IonAccordion value="Deals">
+                <IonItem slot="header">
+                  <IonLabel className="membershipBenefits">
+                    Great deals and experiences!
+                  </IonLabel>
+                </IonItem>
+                <IonList slot="content">
+                  <IonItem>
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
+                      20-60% off *
+                    </IonLabel>
+                  </IonItem>
+                  <IonItem>
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
+                      Free items *
+                    </IonLabel>
+                  </IonItem>
+                  <IonItem>
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
+                      Special treatment and restaurant experiences such as cooking with the chef, getting a tour of the restaurant, learning the history and more! *
+                    </IonLabel>
+                  </IonItem>
+                  <IonItem>
+                    <IonLabel className="memberBenefitsDetails" class="ion-text-wrap" >
+                      * Deals, items and experiences differ depending on the restaurant and what they are currently offering.
+                    </IonLabel>
+                  </IonItem>
+                </IonList>
+              </IonAccordion>
+
               {/* NO ADS */}
               <IonAccordion value="No Ads">
                 <IonItem slot="header">
                   <IonLabel className="membershipBenefits">
-                    No Ads
+                    No ads
                   </IonLabel>
                 </IonItem>
                 <IonList slot="content">
@@ -239,14 +278,8 @@ const MembershipOptions: React.FC = () => {
             }
           </IonCardContent>
         </IonCard>
-        { !currentUser &&
-          <IonText className="membershipsLoginTitle">
-            <p>Already a member?</p>
-            <Link className="membershipsLoginLink" to="/login">
-              Login here
-            </Link>
-          </IonText>
-        }
+        <br/>
+        <br/>
       </IonContent>
     </IonPage>
   );

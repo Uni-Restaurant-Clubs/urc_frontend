@@ -14,7 +14,7 @@ import "./index.scss"
 import { track } from '../../../utils/analytics';
 import useIsAuthenticated from '../../../hooks/useIsAuthenticated';
 
-const DealInfo: React.FC<{ dealId: string, deal: string, perks: string}> = (
+const DealInfo: React.FC<{ dealId: string, deal: string, perks: any}> = (
   { dealId, deal, perks}) => {
   let history = useHistory();
   const currentUser = useSelector((state: any) => state.currentUser.currentUser);
@@ -45,11 +45,13 @@ const DealInfo: React.FC<{ dealId: string, deal: string, perks: string}> = (
             <IonCardHeader className="dealCardHeader">
               <h4 className="dealTitle">Deal {deal} off!</h4>
             </IonCardHeader>
-            <IonCardContent className="dealCardContent">
-              <IonLabel>
-                <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
-              </IonLabel>
-            </IonCardContent>
+            { perks &&
+              <IonCardContent className="dealCardContent">
+                <IonLabel>
+                  <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
+                </IonLabel>
+              </IonCardContent>
+            }
           </div>
           <IonCardContent>
             <IonButton fill="solid" className="getDealButton">Get Deal!</IonButton>
@@ -58,11 +60,13 @@ const DealInfo: React.FC<{ dealId: string, deal: string, perks: string}> = (
             <IonCardHeader className="dealCardHeader">
               <h4 className="dealTitle">Deal {deal} off!</h4>
             </IonCardHeader>
-            <IonCardContent className="dealCardContent">
-              <IonLabel>
-                <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
-              </IonLabel>
-            </IonCardContent>
+            { perks &&
+              <IonCardContent className="dealCardContent">
+                <IonLabel>
+                  <div><h3 className="dealItem">plus a {perks.toLowerCase()}!</h3></div>
+                </IonLabel>
+              </IonCardContent>
+            }
           </div>
         </IonCard>
       }
