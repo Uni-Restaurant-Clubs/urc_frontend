@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { calendarOutline } from 'ionicons/icons';
 import { format, parseISO } from 'date-fns';
+// or @mui/lab/Adapter{Dayjs,Luxon,Moment} or any valid date-io adapter
+import AdapterMoment from '@mui/lab/AdapterMoment';
+import TextField from '@mui/material/TextField';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import StaticDateTimePicker from '@mui/lab/StaticDateTimePicker';
+import DateTimePicker from '@mui/lab/DateTimePicker';
 import * as moment from 'moment';
 import {
   IonIcon,
@@ -17,25 +23,29 @@ import {
 } from "@ionic/react";
 import "./index.scss"
 
-const DateTimeField: React.FC<{ value: string, setValueFunction: any,
+const DateTimeField: React.FC<{ value: any, setValueFunction: any,
    valueError: any, text: string}> = (
      { value, setValueFunction, valueError, text }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const formatDate = (value: string) => {
+  const formatDate = (value: any) => {
     if (value) {
-      return format(parseISO(value), 'MMM dd yyyy h:mm aaaa');
+      if (typeof value === 'string')
+        return format(parseISO(value), 'MMM dd yyyy h:mm aaaa');
+      else {
+        return format(parseISO(value.toISOString()), 'MMM dd yyyy h:mm aaaa');
+      }
     } else {
       return "";
     }
   };
 
   const minimumStartDate = () => {
-   return moment.default().set({'hour': 18, 'minute': 0}).add(7, 'days').format();
+   return moment.default().set({'hour': 18, 'minute': 0}).add(7, 'days');
   }
 
   const maxDate = () => {
-   return moment.default().add(45, 'days').format();
+   return moment.default().add(45, 'days');
   }
 
   const closeButtonText = () => {
@@ -47,22 +57,27 @@ const DateTimeField: React.FC<{ value: string, setValueFunction: any,
       <IonModal isOpen={modalOpen} className="dateTimeModal"
                 onDidDismiss={() => setModalOpen(false)}>
         <div className="dateTimeModalContainer">
+          <br/>
           <small className="leftAlign">Note: First available dates are <strong>7 days</strong> from now</small>
-          <br/>
-          <IonDatetime
-            min={minimumStartDate()}
-            max={maxDate()}
-            minuteValues="15,30,45,0"
-            value={value || minimumStartDate()}
-            className="dateTimeComponent"
-            onIonChange={ev => setValueFunction(ev.detail.value!)}
-          />
-          <br/>
-          <small className="leftAlign">Please remember to select a date and a <strong>time (hour)</strong> also!</small>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <StaticDateTimePicker
+              displayStaticWrapperAs="mobile"
+              // @ts-ignore
+              minutesStep="15"
+              renderInput={(props) => <TextField {...props} />}
+              minDate={minimumStartDate()}
+              maxDate={maxDate()}
+              value={value}
+              onChange={(newValue) => {
+                setValueFunction(newValue);
+              }}
+            />
+          </LocalizationProvider>
           <IonButton className="dateTimeModalCloseButton"
                      color="danger"
+                     size="small"
                      onClick={() =>setModalOpen(false)}>
-            {closeButtonText()}
+            {"Close"}
           </IonButton>
         </div>
       </IonModal>

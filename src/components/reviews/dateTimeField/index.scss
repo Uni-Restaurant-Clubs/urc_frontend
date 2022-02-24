@@ -1,3 +1,24 @@
+.grecaptcha-badge {
+  display: none;
+}
+.MuiIconButton-sizeMedium {
+  margin-left: 100px !important;
+  margin-right: 100px !important;
+}
+
+/*.css-173nj1u-MuiButtonBase-root-MuiIconButton-root, .css-1t8wyba-MuiButtonBase-root-MuiIconButton-root {
+  margin-left: 100px !important;
+  margin-right: 100px !important;
+}
+
+.css-13go44a-MuiButtonBase-root-MuiIconButton-root, .css-1khl9uc-MuiButtonBase-root-MuiIconButton-root {
+  margin-right: 100px !important;
+  margin-left: 100px !important;
+}*/
+
+.PrivateDateTimePickerToolbar-penIcon {
+  display: none !important;
+}
 
 .dateTimeFieldLabelIcon {
   font-size: 1.5em;
@@ -11,8 +32,8 @@
  }
 
 .dateTimeModalCloseButton {
-  width: 320px;
   margin: auto;
+  width: 100px;
   margin-top: 40px;
 }
 
@@ -27,8 +48,10 @@
 ion-popover {
   --offset-y: 0 !important;
 }
+.dateTimeModal {
+}
 .dateTimeModalContainer {
-  padding: 60px;
+  padding: 0 60px;
   padding-bottom: 80px;
   text-align: center;
   display: flex;
@@ -38,7 +61,7 @@ ion-popover {
 
 @media only screen and (max-width: 700px) {
   .dateTimeModalContainer {
-    padding: 30px;
+    padding: 0 30px;
   }
 }
 

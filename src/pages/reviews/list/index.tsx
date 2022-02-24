@@ -28,8 +28,9 @@ import "./index.css"
 const ReviewsPage: React.FC = () => {
 
   useAnalytics("Reviews");
-  const [hasFeaturedReviews, setHasFeaturedReviews] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [featuredReviews, setFeaturedReviews] = useState([]);
+  const [nonFeaturedReviews, setNonFeaturedReviews] = useState([]);
   const currentUser = useSelector((state: any) => state.currentUser.currentUser);
   const activeSubscription = currentUser?.subscription_active;
   const [loading, setIsLoading] = useState(false);
@@ -46,28 +47,17 @@ const ReviewsPage: React.FC = () => {
     }
   }
 
-
-  useEffect(() => {
-    async function getReviews() {
-      setIsLoading(true);
-      let res:any = await dispatch(reviewActions.getReviews());
-      setReviews(res?.data);
-      setIsLoading(false);
-    }
-    getReviews();
-  }, []);
-
   const featuredReviewItems = () => {
     let list = [];
+    let featuredReviewCount = 0;
     reviews?.forEach((review, i) => {
-      if (!activeSubscription && i != 0 && i%5 == 0) {
+      if (!activeSubscription && featuredReviewCount != 0 &&
+        featuredReviewCount%5 == 0) {
         list.push((<div className="reviewsPageAd"><Ads /></div>));
       }
       let key = review?.id;
       if (review.featuring_info) {
-        if (!hasFeaturedReviews) {
-          setHasFeaturedReviews(true);
-        }
+        featuredReviewCount++;
         const info = review?.featuring_info;
         let item = (
           <ReviewListItem
@@ -111,6 +101,16 @@ const ReviewsPage: React.FC = () => {
     return list;
   }
 
+  useEffect(() => {
+    async function getReviews() {
+      setIsLoading(true);
+      let res:any = await dispatch(reviewActions.getReviews());
+      setReviews(res?.data);
+      setIsLoading(false);
+    }
+    getReviews();
+  }, []);
+
   return (
     <>
       <IonPage>
@@ -122,14 +122,14 @@ const ReviewsPage: React.FC = () => {
         />
         <Header headertitle="Reviews" />
         <IonContent>
-          { hasFeaturedReviews &&
+          { featuredReviewItems().length > 0 &&
             <IonList className="featuredRestaurantList">
               <h5 className="featuredRestaurantLabel">Featured Restaurants</h5>
               {featuredReviewItems()}
             </IonList>
           }
           <IonList>
-            { hasFeaturedReviews &&
+            { featuredReviewItems().length > 0 &&
               <h5 className="featuredRestaurantLabel">More Restaurants</h5>
             }
             {reviewItems()}

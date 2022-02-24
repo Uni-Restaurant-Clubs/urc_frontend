@@ -191,148 +191,158 @@ const ReviewSchedulingForm: React.FC = () => {
       <IonContent>
         <IonCard className="schedulingInfoCard">
           <IonCardContent>
-            <IonCardHeader>
-              <IonCardTitle>
-                { restaurantInfo?.name &&
-                  "Hello " + restaurantInfo?.name + "!"
-                }
-              </IonCardTitle>
-            </IonCardHeader>
-            <p>Thank you for your interest!</p>
-            <br/>
-            <p>To get started, we just need a little info from you.</p>
-            <p>Then we will be able to coordinate with our photographers and writers to confirm an exact time for you.</p>
-            <br/>
-            <IonImg src="https://urc-public-images.s3.us-east-2.amazonaws.com/photo-1592861956120-e524fc739696.jpeg"/>
+            { !restaurantInfo?.name && loading &&
+              <p>Loading...</p>
+            }
+            { !restaurantInfo?.name && !loading &&
+              <p>Form no longer available</p>
+            }
+            { restaurantInfo?.name &&
+              <>
+                <IonCardHeader>
+                  <IonCardTitle>
+                    { restaurantInfo?.name &&
+                      "Hello " + restaurantInfo?.name + "!"
+                    }
+                  </IonCardTitle>
+                </IonCardHeader>
+                <p>Thank you for your interest!</p>
+                <br/>
+                <p>To get started, we just need a little info from you.</p>
+                <p>Then we will be able to coordinate with our photographers and writers to confirm an exact time for you.</p>
+                <br/>
+                <IonImg src="https://urc-public-images.s3.us-east-2.amazonaws.com/photo-1592861956120-e524fc739696.jpeg"/>
 
-            {schedulingInfoFormErrors()}
+                {schedulingInfoFormErrors()}
 
-            <IonLoading
-              spinner="bubbles"
-              message="Please wait ..."
-              duration={0}
-              isOpen={loading}
-            />
+                <IonLoading
+                  spinner="bubbles"
+                  message="Please wait ..."
+                  duration={0}
+                  isOpen={loading}
+                />
 
-            <IonAlert
-              isOpen={showAlert}
-              onDidDismiss={() => {
-                setShowAlert(false);
-                setAlertMessage("");
-              }}
-              header={"Alert"}
-              message={alertMessage}
-              buttons={[
-                {
-                  text: "Ok",
-                  cssClass: "schedulingConfirmButtonStyle rightButton",
-                  handler: () => {
+                <IonAlert
+                  isOpen={showAlert}
+                  onDidDismiss={() => {
+                    setShowAlert(false);
                     setAlertMessage("");
-                  },
-                },
-              ]}
-            />
+                  }}
+                  header={"Alert"}
+                  message={alertMessage}
+                  buttons={[
+                    {
+                      text: "Ok",
+                      cssClass: "schedulingConfirmButtonStyle rightButton",
+                      handler: () => {
+                        setAlertMessage("");
+                      },
+                    },
+                  ]}
+                />
 
-            <p className="schedulingFormText">* Required</p>
-            <br/>
-            <h2>Please select 3 best time options for us to send a photographer and writer to your restaurant.</h2>
-            <br/>
-            <DateTimeField
-              value={optionOne}
-              setValueFunction={setOptionOne}
-              valueError={optionOneError}
-              text={"Best time option"}
-            />
-            <br/>
-            <DateTimeField
-              value={optionTwo}
-              setValueFunction={setOptionTwo}
-              valueError={optionTwoError}
-              text={"2nd best time option"}
-            />
-            <br/>
-            <DateTimeField
-              value={optionThree}
-              setValueFunction={setOptionThree}
-              valueError={optionThreeError}
-              text={"3rd best time option"}
-            />
-            <br />
-            <br />
-            <h2>Contact Info</h2>
-            <IonItem>
-              <IonLabel
-                color={schedulingPhoneNumberError ? "danger" : ""}
-                position="stacked">Phone number</IonLabel>
-              <IonInput value={schedulingPhoneNumber}
-                  placeholder="Phone number we can reach you at..."
-                  onIonChange={e => setSchedulingPhoneNumber(e.detail.value!)}>
-              </IonInput>
-            </IonItem>
-            <br />
-            <br />
-            <h2>Questions or comments</h2>
-            <IonItem>
-              <IonLabel
-                color={schedulingNotesError ? "danger" : ""}
-                position="stacked">Anything you want us to know?</IonLabel>
-              <IonTextarea className="schedulingTextArea" value={schedulingNotes}
-                  autoGrow={true}
-                  onIonChange={e => setSchedulingNotes(e.detail.value!)}>
-              </IonTextarea>
-            </IonItem>
-            <br/>
-            <br/>
-            <h2>Sample dishes and no charge confirmation</h2>
-            <br/>
-            <div className="schedulingNoChargeSection">
-              <p>The only thing we ask from you is if you can <strong>please offer the photographer and writer some sample dishes</strong> that they can taste, write about and take photos of. That will really help us create a great positive review for you!</p>
-              <p>Just to avoid any confusion, we do need a confirmation that the photographer and writer will receive sample dishes and that at the end of the review, the writer and photographer will not be asked to pay for any of the sample food or drinks that you give to them when they come down to review.</p>
-            </div>
-            <IonList>
-              <IonItem>
-                <IonLabel
-                  color={confirmSampleDishesError ? "danger" : ""}
-                  className={`confirmSampleDishesLabel ion-text-wrap`}
+                <p className="schedulingFormText">* Required</p>
+                <br/>
+                <h2>Please select 3 best time options for us to send a photographer and writer to your restaurant.</h2>
+                <br/>
+                <DateTimeField
+                  value={optionOne}
+                  setValueFunction={setOptionOne}
+                  valueError={optionOneError}
+                  text={"Best time option"}
+                />
+                <br/>
+                <DateTimeField
+                  value={optionTwo}
+                  setValueFunction={setOptionTwo}
+                  valueError={optionTwoError}
+                  text={"2nd best time option"}
+                />
+                <br/>
+                <DateTimeField
+                  value={optionThree}
+                  setValueFunction={setOptionThree}
+                  valueError={optionThreeError}
+                  text={"3rd best time option"}
+                />
+                <br />
+                <br />
+                <h2>Contact Info</h2>
+                <IonItem>
+                  <IonLabel
+                    color={schedulingPhoneNumberError ? "danger" : ""}
+                    position="stacked">Phone number</IonLabel>
+                  <IonInput value={schedulingPhoneNumber}
+                      placeholder="Phone number we can reach you at..."
+                      onIonChange={e => setSchedulingPhoneNumber(e.detail.value!)}>
+                  </IonInput>
+                </IonItem>
+                <br />
+                <br />
+                <h2>Questions or comments</h2>
+                <IonItem>
+                  <IonLabel
+                    color={schedulingNotesError ? "danger" : ""}
+                    position="stacked">Anything you want us to know?</IonLabel>
+                  <IonTextarea className="schedulingTextArea" value={schedulingNotes}
+                      autoGrow={true}
+                      onIonChange={e => setSchedulingNotes(e.detail.value!)}>
+                  </IonTextarea>
+                </IonItem>
+                <br/>
+                <br/>
+                <h2>Sample dishes and no charge confirmation</h2>
+                <br/>
+                <div className="schedulingNoChargeSection">
+                  <p>The only thing we ask from you is if you can <strong>please offer the photographer and writer some sample dishes</strong> that they can taste, write about and take photos of. That will really help us create a great positive review for you!</p>
+                  <p>Just to avoid any confusion, we do need a confirmation that the photographer and writer will receive sample dishes and that at the end of the review, the writer and photographer will not be asked to pay for any of the sample food or drinks that you give to them when they come down to review.</p>
+                </div>
+                <IonList>
+                  <IonItem>
+                    <IonLabel
+                      color={confirmSampleDishesError ? "danger" : ""}
+                      className={`confirmSampleDishesLabel ion-text-wrap`}
+                    >
+    * I agree to offer the writer and photographer free sample dishes.</IonLabel>
+                    <IonCheckbox checked={confirmSampleDishes}
+                       slot="start"
+                       onIonChange={e => setConfirmSampleDishes(e.detail.checked)} />
+                  </IonItem>
+                </IonList>
+                <br/>
+                <IonList>
+                  <IonItem>
+                    <IonLabel
+                      color={confirmNoChargeError ? "danger" : ""}
+                      className={`confirmSampleDishesLabel ion-text-wrap`}
+                    >
+    * I agree to not charge the photographers or writers for any of the sample food or drinks that are offered to them.</IonLabel>
+                    <IonCheckbox checked={confirmNoCharge}
+                       slot="start"
+                       onIonChange={e => setConfirmNoCharge(e.detail.checked)} />
+                  </IonItem>
+                </IonList>
+                <IonButton
+                  expand="block"
+                  size="large"
+                  color="danger"
+                  onClick={submitSchedulingInfoForm}
+                  style={{ marginTop: "1rem" }}
                 >
-* I agree to offer the writer and photographer free sample dishes.</IonLabel>
-                <IonCheckbox checked={confirmSampleDishes}
-                   slot="start"
-                   onIonChange={e => setConfirmSampleDishes(e.detail.checked)} />
-              </IonItem>
-            </IonList>
-            <br/>
-            <IonList>
-              <IonItem>
-                <IonLabel
-                  color={confirmNoChargeError ? "danger" : ""}
-                  className={`confirmSampleDishesLabel ion-text-wrap`}
-                >
-* I agree to not charge the photographers or writers for any of the sample food or drinks that are offered to them.</IonLabel>
-                <IonCheckbox checked={confirmNoCharge}
-                   slot="start"
-                   onIonChange={e => setConfirmNoCharge(e.detail.checked)} />
-              </IonItem>
-            </IonList>
-            <IonButton
-              expand="block"
-              size="large"
-              color="danger"
-              onClick={submitSchedulingInfoForm}
-              style={{ marginTop: "1rem" }}
-            >
-              Submit Scheduling Info
-            </IonButton>
-            <div className="notReadyToScheduleText">
-              <br/>
-              <p><strong>Still not ready to schedule?</strong></p>
-              <p>If you have any questions or concerns, then please email us at <a href="mailto:hello@unirestaurantclub.com">hello@unirestaurantclub.com</a> and we will respond right away!</p>
-              <p>We could even hop on a quick phone call with you to discuss details.</p>
-              <br/>
-              <br/>
-            </div>
-            {schedulingInfoFormErrors() &&
-              <p>See errors above!</p>
+                  Submit Scheduling Info
+                </IonButton>
+                <div className="notReadyToScheduleText">
+                  <br/>
+                  <p><strong>Still not ready to schedule?</strong></p>
+                  <p>If you have any questions or concerns, then please email us at <a href="mailto:hello@unirestaurantclub.com">hello@unirestaurantclub.com</a> and we will respond right away!</p>
+                  <p>We could even hop on a quick phone call with you to discuss details.</p>
+                  <br/>
+                  <br/>
+                </div>
+                {schedulingInfoFormErrors() &&
+                  <p>See errors above!</p>
+                }
+              </>
             }
           </IonCardContent>
         </IonCard>
