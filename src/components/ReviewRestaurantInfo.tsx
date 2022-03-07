@@ -11,22 +11,36 @@ import {
          IonButton,
          IonHeader,
          IonContent } from '@ionic/react';
-import './ReviewArticle.css';
+import './ReviewRestaurantInfo.css';
 
 interface Restaurant {
   name: string,
+  address: string,
+  description: string,
+  yelp_url: string
 }
 
 const ReviewRestaurantInfo: React.FC<{restaurant: Restaurant}> = ({ restaurant }) => {
-  restaurant = restaurant || { name: "" };
+  restaurant = restaurant || { name: "", address: "", description: "", yelp_url: "" };
 
   return (
     <>
       <IonCardHeader>
         <IonCardTitle className="articleTitle">
-          {restaurant.name}
+          { restaurant.name }
         </IonCardTitle>
+
       </IonCardHeader>
+      <IonCardContent className="restaurantInfoContent">
+        <ul className="restaurantInfoList">
+          { restaurant?.address &&
+            <li>{ restaurant.address }</li>
+          }
+          { restaurant?.yelp_url &&
+            <li><a href={restaurant.yelp_url} target="_blank">View on Yelp</a></li>
+          }
+        </ul>
+      </IonCardContent>
     </>
   );
 };

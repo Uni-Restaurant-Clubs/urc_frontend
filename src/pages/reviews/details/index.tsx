@@ -66,7 +66,7 @@ const ReviewPage: React.FC = () => {
                   perks={review.featuring_info.perks} />
               </div>
             }
-            <div className="reviewsPageAd"><Ads /></div>
+            <Ads />
             <IonCardContent className="photoThumbnails">
               <ReviewImageThumbnails
                 title={review?.article_title}
@@ -88,7 +88,7 @@ const ReviewPage: React.FC = () => {
                 perks={review.featuring_info.perks} />
             }
             <br />
-            <div className="reviewsPageAd"><Ads /></div>
+            <Ads />
             <IonCardContent className="photoThumbnails">
               <br />
               <ReviewArticle title={review?.article_title} article={review?.article} />
@@ -100,7 +100,7 @@ const ReviewPage: React.FC = () => {
                 deal={review.featuring_info.deal}
                 perks={review.featuring_info.perks} />
               }
-            <div className="reviewsPageAd"><Ads /></div>
+            <Ads />
           </div>
         }
       </IonPage>

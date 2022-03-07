@@ -53,7 +53,7 @@ const Ads: React.FC = () => {
   return (
     <>
       { !activeSubscription &&
-        <IonItem>
+        <IonItem className="reviewsPageAd">
           <div className="reviewPageAds">
             { isPlatform("desktop") &&
               <div dangerouslySetInnerHTML={ {__html: getRandom(medium)} } />
