@@ -157,7 +157,7 @@ const MembershipOptions: React.FC = () => {
             <br/>
             <IonText>
               <h3>After pay only</h3>
-              <h1>$2.99 / month</h1>
+              <h1>$4.99 / month</h1>
             </IonText>
             <br/>
             <IonText>
