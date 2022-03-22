@@ -150,12 +150,18 @@ const MembershipOptions: React.FC = () => {
                 },
               ]}
             />
+            <IonText className="thirtyDaysFree">
+              <h1>30 days free!</h1>
+              <h3>Cancel any time</h3>
+            </IonText>
+            <br/>
             <IonText>
+              <h3>After pay only</h3>
               <h1>$2.99 / month</h1>
             </IonText>
             <br/>
             <IonText>
-              <h2>What do I get?</h2>
+              <h2>Includes...</h2>
             </IonText>
             <IonAccordionGroup>
 
