@@ -37,7 +37,7 @@ const ReviewListItem: React.FC<{
           <h2>{name}</h2>
           <p>{title}</p>
           { deal &&
-            <h2 className="discountListItem">{deal} off!</h2>
+            <h2 className="discountListItem">{deal}</h2>
           }
           { perks &&
             <h3 className="discountListItem">{perks}</h3>

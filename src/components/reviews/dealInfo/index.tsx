@@ -43,7 +43,7 @@ const DealInfo: React.FC<{ dealId: string, deal: string, perks: any}> = (
         <IonCard onClick={handleDealButtonClick} className="dealCard">
           <div>
             <IonCardHeader className="dealCardHeader">
-              <h4 className="dealTitle">Deal {deal} off!</h4>
+              <h4 className="dealTitle">Deal {deal}</h4>
             </IonCardHeader>
             { perks &&
               <IonCardContent className="dealCardContent">
@@ -58,7 +58,7 @@ const DealInfo: React.FC<{ dealId: string, deal: string, perks: any}> = (
           </IonCardContent>
           <div className="dealCardHeaderLast">
             <IonCardHeader className="dealCardHeader">
-              <h4 className="dealTitle">Deal {deal} off!</h4>
+              <h4 className="dealTitle">Deal {deal}</h4>
             </IonCardHeader>
             { perks &&
               <IonCardContent className="dealCardContent">

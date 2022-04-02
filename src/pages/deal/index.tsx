@@ -76,7 +76,7 @@ const DealPage: React.FC = () => {
                     <p>{restaurant?.full_address}</p>
                   </IonCardHeader>
                   <IonCard className="dealDealCard">
-                    <p className="dealDeal">{deal?.deal} off!</p>
+                    <p className="dealDeal">{deal?.deal}</p>
                     <p className="dealPerk">{deal?.perks}</p>
                     { deal?.disclaimers  &&
                       <div className="dealPageDisclaimerContainer">
