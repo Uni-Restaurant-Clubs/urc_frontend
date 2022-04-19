@@ -8,7 +8,7 @@ import { Storage } from "@capacitor/storage";
 const sendIsInterested = (data: any) => async (dispatch: any) => {
   try {
     dispatch({ type: actionTypes.SEND_IS_INTERESTED_REQUEST });
-    let res = await axios.post(isInterestedUrl,data);
+    let res = await axios.post(isInterestedUrl, data);
     dispatch({ type: actionTypes.SEND_IS_INTERESTED_SUCCESS, payload: res.data });
     return res;
   } catch (error) {

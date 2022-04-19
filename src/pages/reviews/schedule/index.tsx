@@ -123,7 +123,8 @@ const ReviewSchedulingForm: React.FC = () => {
 
   const submitSchedulingInfoForm = async () => {
     const dataValid = validateData();
-    if (dataValid) {
+    //if (dataValid) {
+    if (true) {
       const recaptchaToken = await grecaptcha.execute(recaptchaKey,
                                                     { action: 'submit' });
 
@@ -149,8 +150,8 @@ const ReviewSchedulingForm: React.FC = () => {
           setOptionThree(null);
           setConfirmSampleDishes(false);
           setConfirmNoCharge(false);
-          const promotionToken = res.data.promotionToken;
-          router.push(`/promotion_form_intro?promotionToken=${promotionToken}`)
+          const token = res.data.promotionToken;
+          router.push(`/promotion_form_intro/${token}`)
 
           setAlertMessage("Your available time options were sent! We will now coordinate with our writers and photographers and get back to you soon. We have also sent an email. If you did not receive it, please check your spam folder. Thank you!");
           setShowAlert(true);

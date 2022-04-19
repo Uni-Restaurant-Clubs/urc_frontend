@@ -22,6 +22,8 @@ const PromotionsIntroForm: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const { token } = useParams<{ token: string }>();
+  console.log("TOKEN********");
+  console.log(token);
 
   const apiError = useSelector((state: any) => {
     return state.promotions?.isInterestedFail;
@@ -45,7 +47,7 @@ const PromotionsIntroForm: React.FC = () => {
       setAlertMessage("Oops looks like there was an issue. Please try again soon");
       setShowAlert(true);
       airbrake.notify({
-        error: apiError,
+        error: "promotion form selected is interested didn't work",
         params: formData
       });
     }
