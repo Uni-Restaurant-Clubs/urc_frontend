@@ -1,0 +1,13 @@
+.promotionsIntroCard {
+  max-width: 600px;
+  margin: 15px auto;
+  padding: 30px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .promotionsIntroCard {
+    margin: 0;
+    padding: 15px 0px;
+  }
+}

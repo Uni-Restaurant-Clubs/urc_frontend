@@ -7,6 +7,7 @@ import contentCreatorReducer from './contentCreatorReducer';
 import currentUserReducer from './currentUserReducer';
 import dealReducer from './dealReducer';
 import checkInReducer from './checkInReducer';
+import promotionReducer from './promotionReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   currentUser: currentUserReducer,
   deals: dealReducer,
   checkIns: checkInReducer,
+  promotions: promotionReducer
 });

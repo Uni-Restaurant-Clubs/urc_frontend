@@ -6,6 +6,7 @@ import {
 } from "@ionic/react";
 import { useState, useEffect } from "react";
 import { isPlatform } from '@ionic/react';
+import { useHistory } from "react-router-dom";
 import "./index.scss";
 import { reviewActions } from "../../../redux/actions/reviewActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,7 @@ import useScript from '../../../hooks/useScript';
 import useAnalytics from '../../../hooks/useAnalytics';
 
 const ReviewSchedulingForm: React.FC = () => {
+  const router = useHistory();
   useAnalytics("Review Scheduling Form");
   useScript(process.env.REACT_APP_RECAPTCHA_URL);
   const dispatch = useDispatch();
@@ -147,6 +149,9 @@ const ReviewSchedulingForm: React.FC = () => {
           setOptionThree(null);
           setConfirmSampleDishes(false);
           setConfirmNoCharge(false);
+          const promotionToken = res.data.promotionToken;
+          router.push(`/promotion_form_intro?promotionToken=${promotionToken}`)
+
           setAlertMessage("Your available time options were sent! We will now coordinate with our writers and photographers and get back to you soon. We have also sent an email. If you did not receive it, please check your spam folder. Thank you!");
           setShowAlert(true);
         } else if (apiError) {
