@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as actionTypes from "../types/reviewType";
+import * as actionTypes from "../types/promotionType";
 import {
   isInterestedUrl
 } from "../../config/promotionConfig";
@@ -22,5 +22,5 @@ const sendIsInterested = (data: any) => async (dispatch: any) => {
 };
 
 export const promotionActions = {
-  interestedInPromotion
+  sendIsInterested
 };

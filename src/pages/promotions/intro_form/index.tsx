@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { isPlatform } from '@ionic/react';
 import { useHistory } from "react-router-dom";
 import "./index.scss";
-import { restaurantActions } from "../../../redux/actions/restaurantActions";
+import { promotionActions } from "../../../redux/actions/promotionActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../../../components/Header";
@@ -16,11 +16,16 @@ import useAnalytics from '../../../hooks/useAnalytics';
 
 const PromotionsIntroForm: React.FC = () => {
 
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   const { token } = useParams<{ token: string }>();
+
+  const apiError = useSelector((state: any) => {
+    return state.promotions?.isInterestedFail;
+  });
 
   const userClickedIsInterested = async () => {
     setLoading(true);
