@@ -39,5 +39,6 @@ const sendIsInterested = (data: any) => async (dispatch: any) => {
 };
 
 export const promotionActions = {
-  sendIsInterested
+  sendIsInterested,
+  sendNotInterested,
 };
