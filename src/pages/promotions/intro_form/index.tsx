@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../../../components/Header";
 import PromotionInterestedButton from "../../../components/promotions/interestedButton";
+import PromotionNotInterestedButton from "../../../components/promotions/notInterestedButton";
 import airbrake from "../../../utils/airbrake";
 import useScript from '../../../hooks/useScript';
 import useAnalytics from '../../../hooks/useAnalytics';
@@ -65,6 +66,12 @@ const PromotionsIntroForm: React.FC = () => {
               </IonCardTitle>
             </IonCardHeader>
             <PromotionInterestedButton
+              token={token}
+              setLoading={setLoading}
+              setAlertMessage={setAlertMessage}
+              setShowAlert={setShowAlert}
+            />
+            <PromotionNotInterestedButton
               token={token}
               setLoading={setLoading}
               setAlertMessage={setAlertMessage}

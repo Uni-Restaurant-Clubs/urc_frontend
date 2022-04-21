@@ -11,18 +11,18 @@ import airbrake from "../../../utils/airbrake";
 import useScript from '../../../hooks/useScript';
 import useAnalytics from '../../../hooks/useAnalytics';
 
-const PromotionsInterestedButton: React.FC<{token: string, setLoading: any,
+const PromotionsNotInterestedButton: React.FC<{token: string, setLoading: any,
 setAlertMessage, setShowAlert: any}> = ({token, setLoading,
 setAlertMessage, setShowAlert}) => {
 
   const dispatch = useDispatch();
 
-  const userClickedIsInterested = async () => {
+  const userClickedNotInterested = async () => {
     setLoading(true);
     const formData = { token };
 
     let res: any = await dispatch(
-      promotionActions.sendIsInterested(formData)
+      promotionActions.sendNotInterested(formData)
     );
     setLoading(false);
     if (res?.status === 200) {
@@ -42,12 +42,13 @@ setAlertMessage, setShowAlert}) => {
   return (
     <IonButton
       expand="block"
-      onClick={userClickedIsInterested}
+      color="danger"
+      onClick={userClickedNotInterested}
       style={{ marginTop: "1rem" }}
     >
-      I'm interested. Tell me more!
+     I do not want to be promoted
     </IonButton>
   );
 };
 
-export default PromotionsInterestedButton;
+export default PromotionsNotInterestedButton;
