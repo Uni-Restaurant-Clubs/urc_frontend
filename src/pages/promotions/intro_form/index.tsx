@@ -10,6 +10,7 @@ import { promotionActions } from "../../../redux/actions/promotionActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../../../components/Header";
+import PromotionInterestedButton from "../../../components/promotions/interestedButton";
 import airbrake from "../../../utils/airbrake";
 import useScript from '../../../hooks/useScript';
 import useAnalytics from '../../../hooks/useAnalytics';
@@ -22,36 +23,10 @@ const PromotionsIntroForm: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState("");
 
   const { token } = useParams<{ token: string }>();
-  console.log("TOKEN********");
-  console.log(token);
 
   const apiError = useSelector((state: any) => {
     return state.promotions?.isInterestedFail;
   });
-
-  const userClickedIsInterested = async () => {
-    setLoading(true);
-    const formData = {
-      token,
-     };
-
-    let res: any = await dispatch(
-      promotionActions.sendIsInterested(formData)
-    );
-    setLoading(false);
-    if (res?.status === 200) {
-      debugger;
-      //const promotionToken = res.data.promotionToken;
-      //router.push(`/promotion_form_intro?promotionToken=${promotionToken}`)
-    } else {
-      setAlertMessage("Oops looks like there was an issue. Please try again soon");
-      setShowAlert(true);
-      airbrake.notify({
-        error: "promotion form selected is interested didn't work",
-        params: formData
-      });
-    }
-  }
 
   return (
     <IonPage>
@@ -89,16 +64,12 @@ const PromotionsIntroForm: React.FC = () => {
                 Want to be promoted?
               </IonCardTitle>
             </IonCardHeader>
-            <IonButton
-              expand="block"
-              size="large"
-              color="danger"
-              onClick={userClickedIsInterested}
-              style={{ marginTop: "1rem" }}
-            >
-              I'm interested. Tell me more!
-            </IonButton>
-
+            <PromotionInterestedButton
+              token={token}
+              setLoading={setLoading}
+              setAlertMessage={setAlertMessage}
+              setShowAlert={setShowAlert}
+            />
           </IonCardContent>
         </IonCard>
       </IonContent>
