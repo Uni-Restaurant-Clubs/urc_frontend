@@ -5,10 +5,33 @@ const initialState = {
   isInterestedLoading: false,
   notInterestedFail: "",
   notInterestedLoading: false,
+  infoForForm: {},
+  infoForFormLoading: false,
+  infoForFormFail: "",
+
 };
 
 const promotionReducer = (state = initialState, action: any): any => {
   switch (action.type) {
+    case actionTypes.GET_INFO_FOR_FORM_REQUEST:
+      return {
+        ...state,
+        infoForFormLoading: true,
+        infoForFormFail: "",
+      };
+    case actionTypes.GET_INFO_FOR_FORM_SUCCESS:
+      return {
+        ...state,
+        infoForForm: action.payload,
+        infoForFormLoading: false,
+        infoForFormFail: "",
+      };
+    case actionTypes.GET_INFO_FOR_FORM_FAIL:
+      return {
+        ...state,
+        infoForFormFail: action.payload,
+        infoForFormLoading: false,
+      };
     case actionTypes.SEND_NOT_INTERESTED_REQUEST:
       return {
         ...state,

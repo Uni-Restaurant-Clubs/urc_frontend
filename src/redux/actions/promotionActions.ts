@@ -3,8 +3,25 @@ import * as actionTypes from "../types/promotionType";
 import {
   isInterestedUrl,
   notInterestedUrl,
+  getInfoForFormUrl
 } from "../../config/promotionConfig";
 import { Storage } from "@capacitor/storage";
+
+const getInfoForForm = (data: any) => async (dispatch: any) => {
+  try {
+    dispatch({ type: actionTypes.GET_INFO_FOR_FORM_REQUEST });
+    let res = await axios.get(getInfoForFormUrl + data.token)
+    dispatch({ type: actionTypes.GET_INFO_FOR_FORM_SUCCESS, payload: res.data });
+    return res;
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_INFO_FOR_FORM_FAIL,
+      payload: error?.response?.data || {
+        message: "Oops looks like something went wrong. Please try again soon",
+      },
+    });
+  }
+};
 
 const sendNotInterested = (data: any) => async (dispatch: any) => {
   try {
@@ -41,4 +58,5 @@ const sendIsInterested = (data: any) => async (dispatch: any) => {
 export const promotionActions = {
   sendIsInterested,
   sendNotInterested,
+  getInfoForForm
 };
