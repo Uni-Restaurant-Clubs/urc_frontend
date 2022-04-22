@@ -23,7 +23,7 @@ import "./gobal-style/global.css";
 import EmailConfirmation from "./pages/EmailConfirmation";
 import ResetPassword from "./pages/ResetPassword";
 import Reviews from "./pages/reviews/list";
-import PromotionsIntroForm from "./pages/promotions/intro_form";
+import PromotionsForm from "./pages/promotions/form";
 import Main from "./pages/Main";
 import AuthRoute from "./components/AuthRoute";
 import Login from "./pages/Login";
@@ -65,7 +65,7 @@ const App: React.FC = () => {
         		  <AuthRoute exact path="/register" component={Login} />
         		  <AuthRoute exact path="/login" component={Login} />
         		  <Route exact path="/contact" component={Contact} />
-        		  <Route exact path="/promotion_form_intro/:token" component={PromotionsIntroForm} />
+        		  <Route exact path="/promotion_form/:token" component={PromotionsForm} />
         		  <Route exact path="/membership_options" component={MembershipOptions} />
         		  <Route exact path="/payment_cancelled" component={MembershipOptions} />
         		  <Route exact path="/payment_success" component={MembershipOptions} />
