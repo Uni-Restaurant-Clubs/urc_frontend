@@ -17,6 +17,8 @@ const PromotionsForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [restaurantName, setRestaurantName] = useState("");
+  const [formStep, setFormStep] = useState("");
   let promotionInfo = useSelector((state: any) => state.promotions?.infoForForm);
 
   const { token } = useParams<{ token: string }>();
@@ -24,8 +26,10 @@ const PromotionsForm: React.FC = () => {
   useEffect(() => {
     const getPromotionInfo = async (token: string) => {
       setLoading(true);
-      await dispatch(promotionActions.getInfoForForm({ token }));
+      const res:any = await dispatch(promotionActions.getInfoForForm({ token }));
       setLoading(false);
+      setFormStep(res.data.form_step);
+      setRestaurantName(res.data.restaurant_name);
     }
 
     if (token) {
@@ -63,13 +67,16 @@ const PromotionsForm: React.FC = () => {
           },
         ]}
       />
-      <Intro
-        token={token}
-        dispatch={dispatch}
-        setLoading={setLoading}
-        setAlertMessage={setAlertMessage}
-        setShowAlert={setShowAlert}
-      />
+      {formStep == "one" &&
+        <Intro
+          token={token}
+          dispatch={dispatch}
+          setLoading={setLoading}
+          setAlertMessage={setAlertMessage}
+          setShowAlert={setShowAlert}
+          restaurantName={restaurantName}
+        />
+      }
     </>
   );
 };
