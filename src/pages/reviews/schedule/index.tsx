@@ -123,8 +123,7 @@ const ReviewSchedulingForm: React.FC = () => {
 
   const submitSchedulingInfoForm = async () => {
     const dataValid = validateData();
-    //if (dataValid) {
-    if (true) {
+    if (dataValid) {
       const recaptchaToken = await grecaptcha.execute(recaptchaKey,
                                                     { action: 'submit' });
 

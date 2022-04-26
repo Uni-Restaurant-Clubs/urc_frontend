@@ -26,9 +26,8 @@ setAlertMessage, setShowAlert}) => {
     );
     setLoading(false);
     if (res?.status === 200) {
-      debugger;
-      //const promotionToken = res.data.promotionToken;
-      //router.push(`/promotion_form_intro?promotionToken=${promotionToken}`)
+      setAlertMessage("We're excited to hear that you're interested! We will contact you soon. Thank you.");
+      setShowAlert(true);
     } else {
       setAlertMessage("Oops looks like there was an issue. Please try again soon");
       setShowAlert(true);
