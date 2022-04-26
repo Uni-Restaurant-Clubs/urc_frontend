@@ -29,8 +29,8 @@ const PromotionsForm: React.FC = () => {
       const res:any = await dispatch(promotionActions.getInfoForForm({ token }));
       setLoading(false);
       if (res?.data) {
+        setFormStep(res.data.form_step);
         setRestaurantName(res.data.restaurant_name);
-        debugger;
       } else {
         setAlertMessage("Oops this link is no longer valid");
         setShowAlert(true);
