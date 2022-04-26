@@ -1,13 +1,37 @@
 .promotionsIntroCard {
   max-width: 600px;
   margin: 15px auto;
-  padding: 30px;
+  padding: 0 30px 30px 30px;
   text-align: center;
+}
+
+.introFormTextContainer {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  img {
+    margin-bottom: 20px;
+  }
+  h2 {
+    line-height: 1.8em;
+    font-weight: bold;
+  }
+}
+
+.benefitText {
+  margin-top: 20px;
+}
+
+.introFormPromotionBenefitsText {
+  margin-top: 30px;
+
+  b {
+    color: red;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   .promotionsIntroCard {
     margin: 0;
-    padding: 15px 0px;
+    padding: 0 15px 15px 15px;
   }
 }

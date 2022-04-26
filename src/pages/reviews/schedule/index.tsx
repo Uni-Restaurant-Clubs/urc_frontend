@@ -151,9 +151,9 @@ const ReviewSchedulingForm: React.FC = () => {
           setConfirmSampleDishes(false);
           setConfirmNoCharge(false);
           const token = res.data.promotionToken;
-          router.push(`/promotion_form_intro/${token}`)
+          router.push(`/promotion_form/${token}`)
 
-          setAlertMessage("Your available time options were sent! We will now coordinate with our writers and photographers and get back to you soon. We have also sent an email. If you did not receive it, please check your spam folder. Thank you!");
+          setAlertMessage("We will contact you soon. Click next to learn how we can feature you at the top of our list!");
           setShowAlert(true);
         } else if (apiError) {
           setAlertMessage("Oops looks like there was an issue. Please try again soon");
@@ -234,11 +234,11 @@ const ReviewSchedulingForm: React.FC = () => {
                     setShowAlert(false);
                     setAlertMessage("");
                   }}
-                  header={"Alert"}
+                  header={"Info received!"}
                   message={alertMessage}
                   buttons={[
                     {
-                      text: "Ok",
+                      text: "Next",
                       cssClass: "schedulingConfirmButtonStyle rightButton",
                       handler: () => {
                         setAlertMessage("");

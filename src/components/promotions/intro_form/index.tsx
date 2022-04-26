@@ -32,16 +32,29 @@ setAlertMessage, setShowAlert, restaurantName}) => {
           <IonCardContent>
             <IonCardHeader>
               <IonCardTitle>
-                Want {restaurantName} to be at the top of the list?
+                Want to be promoted at the top of the list??
               </IonCardTitle>
             </IonCardHeader>
-            <p>It's free for you!</p>
-            <p>All we need is a discount and we will...</p>
-            <ul>
-              <li>Highlight you and add you to the top of our restaurant list</li>
-              <li>Spend more than $200 in instagram ads to promote your restaurant</li>
-              <li>Focus on your restaurant in our social media accounts and newsletters</li>
-            </ul>
+            <div className="introFormTextContainer">
+              <img src="https://urc-public-images.s3.us-east-2.amazonaws.com/promotion-email-banner-1.png"/>
+              <h2>It's free for you!</h2>
+              <h2>All we need is a discount to get our members excited</h2>
+              <div className="introFormPromotionBenefitsText">
+                <p>We will..</p>
+                <div className="benefitText">
+                  <p>Add you to our <b>featured section</b></p>
+                  <small>(highlighted at the top of our list)</small>
+                </div>
+                <div className="benefitText">
+                  <p>Spend more than <b>$200 in instagram ads</b></p>
+                  <small>(to promote your restaurant alone)</small>
+                </div>
+                <div className="benefitText">
+                  <p><b>Social media accounts and newsletters</b></p>
+                  <small>(We focus on your restaurant)</small>
+                </div>
+              </div>
+            </div>
             <PromotionInterestedButton
               token={token}
               setLoading={setLoading}
