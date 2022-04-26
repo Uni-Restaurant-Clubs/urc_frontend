@@ -27,9 +27,8 @@ setAlertMessage, setShowAlert}) => {
     );
     setLoading(false);
     if (res?.status === 200) {
-      debugger;
-      //const promotionToken = res.data.promotionToken;
-      //router.push(`/promotion_form_intro?promotionToken=${promotionToken}`)
+      setAlertMessage("Got it! We have marked you as not interested :(");
+      setShowAlert(true);
     } else {
       setAlertMessage("Oops looks like there was an issue. Please try again soon");
       setShowAlert(true);
@@ -47,18 +46,18 @@ setAlertMessage, setShowAlert}) => {
         onDidDismiss={() => {
           setShowConfirm(false);
         }}
-        header={"Alert"}
-        message={"Are you sure you are not interested in being promoted for free?"}
+        header={"You sure?"}
+        message={"You do not want to be promoted for free?"}
         buttons={[
           {
-            text: "Go back",
+            text: "Oops go back",
             cssClass: "schedulingConfirmButtonStyle rightButton",
             handler: () => {
               setShowConfirm(false);
             },
           },
           {
-            text: "I am not interested",
+            text: "I'm Sure",
             cssClass: "schedulingConfirmButtonStyle rightButton",
             handler: () => {
               userClickedNotInterested();
@@ -69,8 +68,10 @@ setAlertMessage, setShowAlert}) => {
       <IonButton
         expand="block"
         color="danger"
-        onClick={setShowConfirm(true)}
-        style={{ marginTop: "1rem" }}
+    onClick={() => {
+        setShowConfirm(true);
+      }}
+      style={{ marginTop: "1rem" }}
       >
        I do not want to be promoted
       </IonButton>
