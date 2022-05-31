@@ -25,6 +25,7 @@ const ReviewSchedulingForm: React.FC = () => {
   let restaurantInfo = useSelector((state: any) => state.reviews?.infoForSchedulingForm);
 
   const [loading, setLoading] = useState(false);
+  const [discount, setDiscount] = useState('');
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
   const [optionThree, setOptionThree] = useState('');
@@ -33,6 +34,7 @@ const ReviewSchedulingForm: React.FC = () => {
   const [confirmSampleDishes, setConfirmSampleDishes] = useState(null);
   const [confirmNoCharge, setConfirmNoCharge] = useState(null);
 
+  const [discountError, setDiscountError] = useState(null);
   const [optionOneError, setOptionOneError] = useState(null);
   const [optionTwoError, setOptionTwoError] = useState(null);
   const [optionThreeError, setOptionThreeError] = useState(null);
@@ -65,10 +67,11 @@ const ReviewSchedulingForm: React.FC = () => {
   }
 
   const schedulingInfoFormErrors = () => {
-    if (optionOneError || optionTwoError || optionThreeError ||
+    if (discountError || optionOneError || optionTwoError || optionThreeError ||
       confirmSampleDishesError || confirmNoChargeError) {
       return (
         <ul className="reviewSchedulingErrors">
+          { discountError && <li>{discountError}</li>}
           { optionOneError && <li>{optionOneError}</li>}
           { optionTwoError && <li>{optionTwoError}</li>}
           { optionThreeError && <li>{optionThreeError}</li>}
@@ -84,6 +87,13 @@ const ReviewSchedulingForm: React.FC = () => {
   const validateData = () => {
     let dataValid = true;
     // OPTION ONE
+    if (!discount) {
+      setDiscountError("Please enter a discount");
+      dataValid = false;
+    } else {
+      setDiscountError(null);
+    }
+
     if (!optionOne) {
       setOptionOneError("Best time option is required");
       dataValid = false;
@@ -127,6 +137,7 @@ const ReviewSchedulingForm: React.FC = () => {
 
       const formData = {
         token,
+        discount,
         optionOne,
         optionTwo,
         optionThree,
@@ -142,12 +153,13 @@ const ReviewSchedulingForm: React.FC = () => {
         );
         setLoading(false);
         if (res?.status === 200) {
+          setDiscount(null);
           setOptionOne(null);
           setOptionTwo(null);
           setOptionThree(null);
           setConfirmSampleDishes(false);
           setConfirmNoCharge(false);
-          setAlertMessage("Your available time options were sent! We will now coordinate with our writers and photographers and get back to you soon. We have also sent an email. If you did not receive it, please check your spam folder. Thank you!");
+          setAlertMessage("We will now coordinate with our writers and photographers and get back to you soon. We have also sent an email. If you did not receive it, please check your spam folder. Thank you!");
           setShowAlert(true);
         } else if (apiError) {
           setAlertMessage("Oops looks like there was an issue. Please try again soon");
@@ -228,7 +240,7 @@ const ReviewSchedulingForm: React.FC = () => {
                     setShowAlert(false);
                     setAlertMessage("");
                   }}
-                  header={"Alert"}
+                  header={"Info Submitted!"}
                   message={alertMessage}
                   buttons={[
                     {
@@ -242,6 +254,21 @@ const ReviewSchedulingForm: React.FC = () => {
                 />
 
                 <p className="schedulingFormText">* Required</p>
+                <br/>
+                <div className="discountText">
+                  <h2>Please enter a discount percent that you can offer our members.</h2>
+                </div>
+                <br/>
+                <IonItem>
+                  <IonLabel
+                    color={discountError ? "danger" : ""}
+                    position="stacked">Discount Percent *</IonLabel>
+                  <IonInput value={discount}
+                      placeholder="40% for example..."
+                      onIonChange={e => setDiscount(e.detail.value!)}>
+                  </IonInput>
+                </IonItem>
+                <br/>
                 <br/>
                 <h2>Please select 3 best time options for us to send a photographer and writer to your restaurant.</h2>
                 <br/>
